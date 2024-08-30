@@ -281,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_LCTL,    _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,    _RJ,  KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
           LT(_BRACES, Backspace), LT(_NUMBER, Space),  KC_LSFT,    LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                           DRGSCRL, KC_LGUI,             KC_LCTL
+                                           Tab, KC_LGUI,             KC_LCTL
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -371,7 +371,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _,       _,       DRGSCRL, SNIPING, _,       _,          _,       _,       SNIPING, DRGSCRL, _,       _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                   KC_BTN2, KC_BTN1, KC_BTN3,    KC_BTN3, KC_BTN1,
-                                           _,       KC_BTN2,    KC_BTN2
+                                           DRGSCRL, SNIPING,    KC_BTN2
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 };
