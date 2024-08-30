@@ -86,7 +86,7 @@ enum my_keycodes {
 #define _Y KC_Y
 #define _N SFT_T(KC_N)
 #define _R KC_R
-#define _S CTL_T(KC_S)
+#define _S LT(LAYER_POINTER, KC_S)
 #define _T CMD_T(KC_T)
 #define _G KC_G
 #define _M KC_M
@@ -226,7 +226,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _T:
         case _A:
-        case _S:
+        // case _S:
         case _E:
         case _D:
         case _H:
@@ -281,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_LCTL,    _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,    _RJ,  KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
           LT(_BRACES, Backspace), LT(_NUMBER, Space),  KC_LSFT,    LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                           _, KC_LGUI,             KC_LCTL
+                                           DRGSCRL, KC_LGUI,             KC_LCTL
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
