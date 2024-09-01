@@ -226,7 +226,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _T:
         case _A:
-        // case _S:
+        case _S:
         case _E:
         case _D:
         case _H:
@@ -280,8 +280,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_LCTL,    _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,    _RJ,  KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-          LT(_BRACES, Backspace), LT(_NUMBER, Space),  KC_LSFT,    LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                           Tab, KC_LGUI,             KC_LCTL
+          LT(_BRACES, Backspace), LT(_NUMBER, Space),  Tab,     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                          KC_LSFT, KC_LGUI,     KC_LCTL
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
