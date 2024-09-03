@@ -65,10 +65,7 @@ enum my_keycodes {
 
 #undef _______
 #define _ KC_NO
-#define __ KC_NO
-#define ____ KC_NO
 #define _______ KC_NO
-#define ________________ KC_NO
 
 #define _Q KC_Q
 #define _W KC_W
@@ -91,7 +88,7 @@ enum my_keycodes {
 #define _O SFT_T(KC_O)
 #define _Z KC_Z
 #define _X KC_X
-#define _C KC_C
+#define _C CTL_T(KC_C)
 #define _D ALT_T(KC_D)
 #define _V KC_V
 #define _K KC_K
@@ -116,23 +113,13 @@ enum my_keycodes {
 #define SCUp LSFT(LCTL(Up))
 #define SCDown LSFT(LCTL(Down))
 
-#define LeftClick KC_BTN1
-#define RightClick KC_BTN2
-#define MUp KC_MS_UP
-#define MDown KC_MS_DOWN
-#define MLeft KC_MS_LEFT
-#define MRight KC_MS_RIGHT
-#define MSpeed0 KC_MS_ACCEL0
-#define MSpeed1 KC_MS_ACCEL1
-#define MSpeed2 KC_MS_ACCEL2
-
 #define Space KC_SPC
 #define Backspace KC_BSPC
 #define Delete KC_DEL
-#define Command KC_LCMD
+#define Cmd KC_LCMD
 #define NextWindow LCMD(KC_GRV)
 #define Lang LSFT(KC_CAPS)
-#define Control KC_LCTL
+#define Ctrl KC_LCTL
 #define Alt KC_LALT
 #define Shift KC_LSFT
 #define Enter KC_ENT
@@ -190,10 +177,7 @@ enum my_keycodes {
 
 #define Menu HYPR(Space)
 #define Buffer HYPR(KC_V)
-// #define Pass HYPR(KC_F)
 #define Commands HYPR(KC_O)
-#define FPiP LCTL(LSFT(KC_RBRC)) // Firefox. Picture-in-Picture
-#define MPiP LCAG(KC_X) // mpv float
 
 #define Browser HYPR(KC_R)
 #define Term HYPR(KC_S)
@@ -218,6 +202,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case _T:
         case _A:
         case _S:
+        case _C:
         case _E:
         case _D:
         case _H:
@@ -272,7 +257,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,     _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
 LT(_APP, Backspace), LT(_NUMBER, Space),  LT(_BRACES, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                          KC_LSFT, KC_LGUI,     KC_LCTL
+                                                Shift, Cmd,     Ctrl
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -308,7 +293,7 @@ LT(_APP, Backspace), LT(_NUMBER, Space),  LT(_BRACES, Tab),     LT(_SYMBOL, Esc)
 
   [_APP] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
+       KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,       _,       Rec,     _,       _,          _,         PrntSc1, PrntSc2,PrntSc3,_,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -357,12 +342,12 @@ LT(_APP, Backspace), LT(_NUMBER, Space),  LT(_BRACES, Tab),     LT(_SYMBOL, Esc)
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,       _,       _,       _,       _,          _,       DPI_MOD, DPI_RMOD,S_D_MOD, S_D_RMOD,_,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       _,       _,       _,       _,       _,       _,          _,       KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _,
+       _,       _,       _,       _,       KC_BTN1, _,          _,       Cmd, Ctrl, Alt, Shift, _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       _,       _,       _,       _,       _,       _,          _,       _,       _,       _,       _,       _,
+       _,       _,       _,       _,       KC_BTN2, _,          _,       _,       _,       _,       _,       _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  DRG_TOG, KC_BTN1, KC_BTN2,    _,       _,
-                                           KC_BTN3,       _,          _
+                                  KC_BTN3, DRG_TOG, _,    _,       _,
+                                           _,       _,          _
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 };
