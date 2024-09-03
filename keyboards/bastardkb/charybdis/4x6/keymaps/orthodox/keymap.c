@@ -27,11 +27,11 @@ enum charybdis_keymap_layers {
     _NAVIGATION,
     _APP,
     _BRACES,
-    LAYER_POINTER,
+    _POINTER,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_POINTER
+#define CHARYBDIS_AUTO_SNIPING_ON_LAYER _POINTER
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 static uint16_t auto_pointer_layer_timer = 0;
@@ -44,11 +44,6 @@ static uint16_t auto_pointer_layer_timer = 0;
 #        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
 #    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
-#define LOWER MO(LAYER_LOWER)
-#define RAISE MO(LAYER_RAISE)
-#define PT_Z LT(LAYER_POINTER, KC_Z)
-#define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -78,7 +73,7 @@ enum my_keycodes {
 #define _Y KC_Y
 #define _N SFT_T(KC_N)
 #define _R KC_R
-#define _S LT(LAYER_POINTER, KC_S)
+#define _S LT(_POINTER, KC_S)
 #define _T CMD_T(KC_T)
 #define _G KC_G
 #define _M KC_M
@@ -336,7 +331,7 @@ LT(_APP, Backspace), LT(_NUMBER, Space),  LT(_BRACES, Tab),     LT(_SYMBOL, Esc)
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
-  [LAYER_POINTER] = LAYOUT(
+  [_POINTER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        QK_BOOT,  EE_CLR, _,       _,       _,       _,          _,       _,       _,       _,       EE_CLR,  QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -358,7 +353,7 @@ LT(_APP, Backspace), LT(_NUMBER, Space),  LT(_BRACES, Tab),     LT(_SYMBOL, Esc)
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
-            layer_on(LAYER_POINTER);
+            layer_on(_POINTER);
 #        ifdef RGB_MATRIX_ENABLE
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
@@ -372,7 +367,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 void matrix_scan_user(void) {
     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
         auto_pointer_layer_timer = 0;
-        layer_off(LAYER_POINTER);
+        layer_off(_POINTER);
 #        ifdef RGB_MATRIX_ENABLE
         rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
 #        endif // RGB_MATRIX_ENABLE
