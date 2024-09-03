@@ -112,7 +112,6 @@ enum my_keycodes {
 #define Backspace KC_BSPC
 #define Delete KC_DEL
 #define Cmd KC_LCMD
-#define NextWindow LCMD(KC_GRV)
 #define Lang LSFT(KC_CAPS)
 #define Ctrl KC_LCTL
 #define Alt KC_LALT
@@ -168,29 +167,17 @@ enum my_keycodes {
 #define Rec HYPR(KC_5)
 #define Restart HYPR(KC_7)
 
-#define NewLine LSFT(Enter)
-
 #define Menu HYPR(Space)
 #define Buffer HYPR(KC_V)
 #define Commands HYPR(KC_O)
 
-#define Browser HYPR(KC_R)
-#define Term HYPR(KC_S)
-#define Chat HYPR(KC_T)
-
-#define WS_1 HYPR(KC_X)
-#define WS_2 HYPR(KC_C)
-#define WS_3 HYPR(KC_D)
-
+#define WS1 HYPR(KC_R)
+#define WS2 HYPR(KC_S)
+#define WS3 HYPR(KC_T)
+#define WS4 HYPR(KC_D)
 #define PrevApp LALT(KC_TAB)
-
+#define NextWindow LCMD(KC_GRV)
 #define Tmux LCTL(KC_A)
-
-#define MakeFloat LCAG(KC_C)
-#define MoveFloat LCAG(KC_D)
-#define ScratchpadMove LCAG(KC_S)
-#define ScratchpadShow LCAG(KC_T)
-#define Fullscreen KC_F11
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -324,7 +311,7 @@ LT(_APP, Backspace), LT(_NUMBER, Space),  LT(_BRACES, Tab),     LT(_SYMBOL, Esc)
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,       _,      Left,     Right,   _,          _,      PrevApp, NextWindow, Tmux, _,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       _,       _,       _,      _,        Lang,    KC_CAPS,    _,      Browser, Chat,       Term, WS_3,    _,
+       _,       _,       _,      _,        Lang,    KC_CAPS,    _,      WS1,     WS3,        WS2, WS4,    _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                 DELETE_LINE,   Delete,    _,    _,       _,
                                                    _,     _,    _
