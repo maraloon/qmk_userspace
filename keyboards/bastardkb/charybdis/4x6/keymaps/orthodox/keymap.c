@@ -374,3 +374,18 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 #endif
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+            uint8_t index = g_led_config.matrix_co[row][col];
+
+                if (row == 9 || row == 10) {
+                    rgb_matrix_set_color(index, 40, 0, 40);
+                } else {
+                    rgb_matrix_set_color(index, 60, 20, 0);
+                }
+        }
+    }
+    return true;
+}
