@@ -380,10 +380,14 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-                if (row == 9 || row == 10) {
-                    rgb_matrix_set_color(index, 40, 0, 40);
+                if (row == 5) {
+                    rgb_matrix_set_color(index, 5, 0, 5);
                 } else {
-                    rgb_matrix_set_color(index, 120, 20, 0);
+                    if (col == 0) {
+                        rgb_matrix_set_color(index, 5, 0, 5);
+                    } else {
+                        rgb_matrix_set_color(index, 160, 20, 0);
+                    }
                 }
         }
     }
