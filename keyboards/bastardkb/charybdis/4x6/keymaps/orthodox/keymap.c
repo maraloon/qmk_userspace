@@ -64,26 +64,32 @@ enum my_keycodes {
 
 #define _Q KC_Q
 #define _W KC_W
-#define _F SFT_T(KC_F)
-#define _P SFT_T(KC_P)
+// #define _F SFT_T(KC_F)
+#define _F KC_F
+#define _P KC_P
 #define _B KC_B
 #define _J KC_J
-#define _L SFT_T(KC_L)
-#define _U SFT_T(KC_U)
+#define _L KC_L
+// #define _U SFT_T(KC_U)
+#define _U KC_U
 #define _Y KC_Y
-#define _N SFT_T(KC_N)
+#define _N KC_N
 #define _R KC_R
 #define _S LT(_POINTER, KC_S)
-#define _T CMD_T(KC_T)
+// #define _T CMD_T(KC_T)
+#define _T KC_T
 #define _G KC_G
 #define _M KC_M
-#define _A CMD_T(KC_A)
-#define _E CTL_T(KC_E)
+// #define _A CMD_T(KC_A)
+#define _A KC_A
+// #define _E CTL_T(KC_E)
+#define _E KC_E
 #define _I KC_I
-#define _O SFT_T(KC_O)
+#define _O KC_O
 #define _Z KC_Z
 #define _X KC_X
-#define _C CTL_T(KC_C)
+// #define _C CTL_T(KC_C)
+#define _C KC_C
 #define _D ALT_T(KC_D)
 #define _V KC_V
 #define _K KC_K
@@ -181,19 +187,15 @@ enum my_keycodes {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case _T:
-        case _A:
+        // case _T:
+        // case _A:
         case _S:
-        case _C:
-        case _E:
+        // case _C:
+        // case _E:
         case _D:
         case _H:
-        case _F:
-        case _P:
-        case _L:
-        case _U:
-        case _N:
-        case _O:
+        // case _F:
+        // case _U:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
@@ -234,11 +236,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        _,        _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,      _,
+        Tab,      _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,      _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,     _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Alt),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                                 Shift, Cmd,     Ctrl
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
