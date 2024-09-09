@@ -232,15 +232,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        RGB_TOG,RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,    RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,   _,    RGB_TOG,
+        RGB_TOG,   _,       _,       _,  EE_CLR, QK_BOOT,       QK_BOOT, EE_CLR,     _,       _,        _, RGB_TOG,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        Tab,      _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,      _,
+        _,        _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,      _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,     _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Alt),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                                 Shift, Cmd,     Ctrl
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -251,7 +251,7 @@ LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Alt),     LT(_SYMBOL, Esc)
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,       _,      _0,       _,       _,          _,         _,       _9,      _,     _,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       _,       _,       _1,      _2,      _3,      _,          _,         _5,      _6,      _8,    _,       _,
+       _,       _,       _1,      _2,      _3,      _,          _,         _5,      _6,      _8,    Up,      _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,        _,       _,      _4,      _,          _,         _7,      _,       _,     _,       _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -382,16 +382,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-                rgb_matrix_set_color(index, 0, 0, 0);
-                // if (row == 5) {
-                //     rgb_matrix_set_color(index, 5, 0, 5);
-                // } else {
-                //     if (col == 0) {
-                //         rgb_matrix_set_color(index, 5, 0, 5);
-                //     } else {
-                //         rgb_matrix_set_color(index, 160, 20, 0);
-                //     }
-                // }
+                // rgb_matrix_set_color(index, 0, 0, 0);
+                if (row == 5) {
+                    rgb_matrix_set_color(index, 5, 0, 5);
+                } else {
+                    if (col == 0) {
+                        rgb_matrix_set_color(index, 5, 0, 5);
+                    } else {
+                        rgb_matrix_set_color(index, 160, 20, 0);
+                    }
+                }
         }
     }
     return true;
