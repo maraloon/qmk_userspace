@@ -240,8 +240,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,     _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                                Shift, Cmd,     Ctrl
+   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                        LT(_APP, Tab), Cmd,     Ctrl
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -382,7 +382,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-                rgb_matrix_set_color(index, 120, 15, 0);
+                rgb_matrix_set_color(index, 80, 10, 0);
                 // if (row == 5) {
                 //     rgb_matrix_set_color(index, 5, 0, 5);
                 // } else {
