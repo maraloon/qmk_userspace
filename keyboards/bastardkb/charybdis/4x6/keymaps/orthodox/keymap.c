@@ -229,7 +229,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMBER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
+       RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,       _,      _0,       _,       _,          _,         _,       _9,      _,     _,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -359,6 +359,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void rgb_matrix_update_pwm_buffers(void);
 #endif
 
+/*
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
@@ -378,3 +379,4 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
     return true;
 }
+*/
