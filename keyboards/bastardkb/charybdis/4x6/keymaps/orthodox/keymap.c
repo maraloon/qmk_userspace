@@ -156,8 +156,7 @@ enum my_keycodes {
 #define Restart HYPR(KC_7)
 
 #define Menu HYPR(Space)
-#define Buffer HYPR(KC_V)
-#define Commands HYPR(KC_O)
+#define Commands HYPR(KC_V)
 
 #define WS1 HYPR(KC_R)
 #define WS2 HYPR(KC_S)
@@ -223,7 +222,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,     _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                        LT(_APP, _), _,     Ctrl
+                                  LT(_APP, _), LT(_APP, _),     Ctrl
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -263,7 +262,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,       _,       Rec,     _,       _,          _,         PrntSc1, PrntSc2,PrntSc3,_,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       _,  AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,         Menu,    Buffer,  Commands,Vpn,   _,
+       _,  AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,         Menu,    Commands,  _,     Vpn,   _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,  _,            _,         _,     _,       _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
