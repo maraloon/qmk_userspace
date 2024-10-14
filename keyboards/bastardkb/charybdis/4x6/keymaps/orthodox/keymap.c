@@ -164,7 +164,7 @@ enum my_keycodes {
 #define WS4 HYPR(KC_D)
 #define PrevApp LALT(KC_TAB)
 #define NextWindow LCMD(KC_GRV)
-#define Tmux LCTL(KC_A)
+#define Tmux LCTL(KC_Z)
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
