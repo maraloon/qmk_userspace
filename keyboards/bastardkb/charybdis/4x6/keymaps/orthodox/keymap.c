@@ -214,12 +214,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        _,        _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,      _,
+        QK_REP,   _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,    QK_REP,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,TG(_POINTER),
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                        _,     LT(_APP, _),     _
+                                        _,     LT(_APP, _),     QK_REP
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -315,25 +315,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 };
-
-uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
-    bool shifted = (mods & MOD_MASK_SHIFT);  // Was Shift held?
-    switch (keycode) {
-        case KC_TAB:
-            if (shifted) {        // If the last key was Shift + Tab,
-                return KC_TAB;    // ... the reverse is Tab.
-            } else {              // Otherwise, the last key was Tab,
-                return S(KC_TAB); // ... and the reverse is Shift + Tab.
-            }
-    }
-
-    switch (keycode) {
-        case KC_P: return KC_D;
-        case KC_D: return KC_P;
-
-
-    return KC_TRNS;
-}
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
