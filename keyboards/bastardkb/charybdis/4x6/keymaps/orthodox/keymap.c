@@ -210,11 +210,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        QK_BOOT, EE_CLR,    _,       _,       _,       _,          _,       _,     _,       _, EE_CLR,    QK_BOOT,
+        QK_BOOT, EE_CLR,    _,  QK_REP, QK_AREP,       _,          _,       _,     QK_REP,    _,   EE_CLR, QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        QK_REP,   _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,    QK_REP,
+        _,        _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,      _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,TG(_POINTER),
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -225,11 +225,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMBER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,
+       /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
+       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,        _,      _0,       _,       _,          _,         _,       _9,      _,     _,       _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       _,       _,       _1,      _2,      _3,      _,          _,         _5,      _6,      _8,    Up,      _,
+       _,   RGB_TOG,       _1,      _2,      _3,      _,          _,         _5,      _6,      _8,    Up,      _,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        _,       _,        _,       _,      _4,      _,          _,         _7,       _,       _,    _,       _,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -314,7 +315,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 };
-// clang-format on
+
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    bool shifted = (mods & MOD_MASK_SHIFT);  // Was Shift held?
+    switch (keycode) {
+        case KC_TAB:
+            if (shifted) {        // If the last key was Shift + Tab,
+                return KC_TAB;    // ... the reverse is Tab.
+            } else {              // Otherwise, the last key was Tab,
+                return S(KC_TAB); // ... and the reverse is Shift + Tab.
+            }
+    }
+
+    switch (keycode) {
+        case KC_P: return KC_D;
+        case KC_D: return KC_P;
+
+
+    return KC_TRNS;
+}
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
