@@ -48,20 +48,17 @@ enum my_keycodes {
 
 #define _Q KC_Q
 #define _W KC_W
-// #define _F SFT_T(KC_F)
 #define _F KC_F
 #define _P KC_P
 #define _B KC_B
 #define _J KC_J
 #define _L KC_L
-// #define _U SFT_T(KC_U)
 #define _U KC_U
 #define _Y KC_Y
 #define _N KC_N
 #define _R KC_R
 #define _S LT(_POINTER, KC_S)
 #define _T CTL_T(KC_T)
-// #define _T KC_T
 #define _G KC_G
 #define _M KC_M
 #define _A CMD_T(KC_A)
@@ -70,8 +67,7 @@ enum my_keycodes {
 #define _O KC_O
 #define _Z KC_Z
 #define _X KC_X
-// #define _C CTL_T(KC_C)
-#define _C LT(_BRACES, KC_C)
+#define _C KC_C
 #define _D ALT_T(KC_D)
 #define _V KC_V
 #define _K KC_K
@@ -218,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU,   _RJ,TG(_POINTER),
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                Backspace, LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                         _,     LT(_APP, _),     QK_REP
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
