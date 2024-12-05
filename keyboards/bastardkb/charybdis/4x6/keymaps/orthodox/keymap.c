@@ -243,9 +243,9 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
-       _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, _,     _,       _,
+       _,       _,       _,       _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
-       _,       _,       _,       _,       _,       _,          _,         KC_LCBR, KC_RCBR, CODE_TO,CODE_ARRAY,_,
+       _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
   ),
