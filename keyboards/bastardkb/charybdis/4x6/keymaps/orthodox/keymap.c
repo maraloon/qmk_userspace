@@ -6,6 +6,7 @@
 
 enum charybdis_keymap_layers {
     _ALPHA = 0,
+    _QWERTY,
     _SYMBOL,
     _NUMBER,
     _NAVIGATION,
@@ -207,9 +208,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
 QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
-        _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    _,
+        _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    TG(_QWERTY),
         QK_REP,   _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,    QK_REP,
         _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU, _RJ, TG(_POINTER),
+   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                        _,     LT(_APP, _),     _
+  ),
+
+  [_QWERTY] = LAYOUT(
+QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
+        _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
+        QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
+        _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                         _,     LT(_APP, _),     _
   ),
