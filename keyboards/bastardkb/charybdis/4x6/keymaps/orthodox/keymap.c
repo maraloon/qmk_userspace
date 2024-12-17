@@ -7,6 +7,7 @@
 enum charybdis_keymap_layers {
     _ALPHA = 0,
     _QWERTY,
+    _GAME,
     _SYMBOL,
     _NUMBER,
     _NAVIGATION,
@@ -208,9 +209,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
 QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
-        _,        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,      _RZ,    TG(_QWERTY),
-        QK_REP,   _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,     _O,    QK_REP,
-        _,        _Z,      _X,      _C,      _D,      _V,         _K,      _H,      _RB,     _RYU, _RJ, TG(_POINTER),
+        TG(_GAME),        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,   TG(_QWERTY),
+        QK_REP,   _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,   QK_REP,
+        _,_Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,   TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                         _,     LT(_APP, _),     _
   ),
@@ -222,6 +223,15 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
         _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                         _,     LT(_APP, _),     _
+  ),
+
+  [_GAME] = LAYOUT(
+_, AudioMicMute, Mute,MuteNotify, NoNotify,_,          _, LightDec,LightInc,SoundDec,SoundInc, _,
+        TG(_GAME),         _,      KC_Q,      KC_W,      KC_E,      _R,         _Y,      _U,      _I,      _O,      _P,    _,
+        _,   Shift,      KC_A,      KC_S,      KC_D,      KC_G,         _H,      KC_BTN1,      KC_BTN2,      _L,     _RZ,    _,
+        _,_,   KC_X,      KC_C,      KC_C,      KC_B,         KC_N,      KC_BTN1,      KC_BTN2,     _RYU, _RJ, _,
+                                     KC_C, Space,  _,              _, _C,
+                                      _, LT(_APP, _),            _
   ),
 
   [_NUMBER] = LAYOUT(
