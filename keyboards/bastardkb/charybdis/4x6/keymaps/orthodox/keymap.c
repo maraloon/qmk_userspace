@@ -226,7 +226,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
   ),
 
   [_GAME] = LAYOUT(
-_, AudioMicMute, Mute,MuteNotify, NoNotify,_,          _, LightDec,LightInc,SoundDec,SoundInc, _,
+        _, _, _,_, _,_,          _, _,_,_,_, _,
         TG(_GAME),         _,      KC_Q,      KC_W,      KC_E,      _R,         _Y,      _U,      _I,      _O,      _P,    _,
         _,   Shift,      KC_A,      KC_S,      KC_D,      KC_G,         _H,      KC_BTN1,      KC_BTN2,      _L,     _RZ,    _,
         _,_,   KC_X,      KC_C,      KC_C,      KC_B,         KC_N,      KC_BTN1,      KC_BTN2,     _RYU, _RJ, _,
