@@ -236,9 +236,9 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
-       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
+       RGB_TOG, _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
-       _,   RGB_TOG,     _1,      _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
+       _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
        _,       _,       _,       _,       _4,      _,          _,        _7,       _,       _,    _,        _,
                                   _,       _,       _,          _,        Down,
                                            _,       _,          _
