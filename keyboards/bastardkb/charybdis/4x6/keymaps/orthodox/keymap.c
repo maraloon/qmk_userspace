@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
         TG(_GAME),        _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,   TG(_QWERTY),
         QK_REP,   _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,   QK_REP,
-        _,_Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,   TG(_POINTER),
+       TG(_GAME), _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,   TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
                                         _,     LT(_APP, _),     _
   ),
