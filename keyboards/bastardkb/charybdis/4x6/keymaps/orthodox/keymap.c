@@ -149,6 +149,7 @@ enum my_keycodes {
 #define Vpn HYPR(KC_4)
 #define Rec HYPR(KC_5)
 #define Restart HYPR(KC_7)
+#define Sleep HYPR(KC_9)
 
 #define Menu HYPR(Space)
 #define Commands HYPR(KC_V)
@@ -236,7 +237,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
-       RGB_TOG, _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
+       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
        _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
        _,       _,       _,       _,       _4,      _,          _,        _7,       _,       _,    _,        _,
@@ -255,8 +256,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_APP] = LAYOUT(
        KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,
-       _,       _,       _,       Rec,     _,       _,          _,         PrntSc1, PrntSc2,PrntSc3,_,       _,
-       _,  AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,         Menu,    _,       _, ModeControl, _,
+       Sleep,     _,       _,       Rec,     _,       _,          _,         PrntSc1, PrntSc2,PrntSc3,_,       _,
+       RGB_TOG, AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,         Menu,    _,       _, ModeControl, _,
        _,  _,            _,    Commands,   Vpn,     _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,
                                          _,   _,    _,          _,         _,
                                            _,       _,          _
