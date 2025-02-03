@@ -322,6 +322,15 @@ void matrix_scan_user(void) {
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {
     charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
+
+    switch (get_highest_layer(state)) {
+    case _NUMBER:
+        charybdis_set_pointer_dragscroll_enabled(true);
+        break;
+    default:
+        charybdis_set_pointer_dragscroll_enabled(false);
+        break;
+    }
     return state;
 }
 #    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
