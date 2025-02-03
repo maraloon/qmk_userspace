@@ -284,8 +284,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
   [_POINTER] = LAYOUT(
        QK_BOOT,  EE_CLR, _,       _,       _,       _,          _,       _,       _,       _,       EE_CLR,  QK_BOOT,
        _,       _,       _,       _,       _,       _,          _,       DPI_MOD, DPI_RMOD,S_D_MOD, S_D_RMOD,_,
-       _,       _,       _,       _,       _,       _,          _,       _, Ctrl, _, _, _,
-       _,       _,       _,       _,       _,       _,          _,       KC_BTN1, DRGSCRL,KC_BTN2, _, TG(_POINTER),
+       _,       _,       _,       _,       KC_BTN1, _,          _,       _, Ctrl, _, _, _,
+       _,       _,       _,       _,       KC_BTN2, _,          _,       KC_BTN1, DRGSCRL,KC_BTN2, _, TG(_POINTER),
                                   _,       DRGSCRL, KC_BTN3,    _,       DRG_TOG,
                                            _,       _,          _
   ),
