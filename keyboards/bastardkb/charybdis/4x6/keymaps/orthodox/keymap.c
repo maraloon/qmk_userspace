@@ -214,7 +214,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
         _,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
        TG(_GAME), _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                       DRGSCRL, SFT_T(KC_BTN1),     SFT_T(KC_BTN2)
+                                            _, SFT_T(KC_BTN1),     SFT_T(KC_BTN2)
   ),
 
   [_QWERTY] = LAYOUT(
@@ -286,7 +286,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
        _,       _,       _,       _,       _,       _,          _,       DPI_MOD, DPI_RMOD,S_D_MOD, S_D_RMOD,_,
        _,       _,       _,       _,       KC_BTN1, _,          _,       _, Ctrl, _, _, _,
        _,       _,       _,       _,       KC_BTN2, _,          _,       KC_BTN1, DRGSCRL,KC_BTN2, _, TG(_POINTER),
-                                  _,       DRGSCRL, KC_BTN3,    _,       DRG_TOG,
+                                  _,       _,       KC_BTN3,    _,       DRG_TOG,
                                            _,       _,          _
   ),
 
