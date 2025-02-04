@@ -214,7 +214,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
         _,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
         _, _Z,   _X,      _C,      _D,      _V,      _K,         _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                            _, SFT_T(KC_BTN1),     SFT_T(KC_BTN2)
+                                  ModeControl, SFT_T(KC_BTN1),     SFT_T(KC_BTN2)
   ),
 
   [_QWERTY] = LAYOUT(
@@ -256,9 +256,9 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_APP] = LAYOUT(
        KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,
-       Sleep,     _,       _,       Rec,     _,       _,          _,         PrntSc1, PrntSc2,PrntSc3,_,       _,
-       RGB_TOG, AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,         Menu,    _,       _, ModeControl, _,
-       _,  _,            _,    Commands,   Vpn,     _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,
+       Sleep,     _,       _,       Rec,     _,       _,          _,       PrntSc1, PrntSc2,PrntSc3,_,       _,
+       RGB_TOG, AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,    Menu, Commands,       _, _, _,
+       _,  _,            _,    _,          Vpn,     _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,
                                          _,   _,    _,          _,         _,
                                            _,       _,          _
   ),
