@@ -11,7 +11,7 @@ enum charybdis_keymap_layers {
     _SYMBOL,
     _NUMBER,
     _NAVIGATION,
-    _APP,
+    /*_APP,*/
     _BRACES,
     _POINTER,
 };
@@ -143,16 +143,16 @@ enum my_keycodes {
 #define MuteNotify HYPR(KC_0)
 #define NoNotify HYPR(KC_6)
 
-#define PrntSc1 HYPR(KC_1)
-#define PrntSc2 HYPR(KC_2)
-#define PrntSc3 HYPR(KC_3)
-#define Vpn HYPR(KC_4)
-#define Rec HYPR(KC_5)
-#define Restart HYPR(KC_7)
-#define Sleep HYPR(KC_9)
+/*#define PrntSc1 HYPR(KC_1)*/
+/*#define PrntSc2 HYPR(KC_2)*/
+/*#define PrntSc3 HYPR(KC_3)*/
+/*#define Vpn HYPR(KC_4)*/
+/*#define Rec HYPR(KC_5)*/
+/*#define Restart HYPR(KC_7)*/
+/*#define Sleep HYPR(KC_9)*/
 
-#define Menu HYPR(Space)
-#define Commands HYPR(KC_V)
+/*#define Menu HYPR(Space)*/
+/*#define Commands HYPR(KC_V)*/
 #define ModeControl HYPR(KC_8)
 
 #define WS1 HYPR(KC_R)
@@ -161,7 +161,7 @@ enum my_keycodes {
 #define WS4 HYPR(KC_D)
 #define PrevApp LALT(KC_TAB)
 #define NextWindow LCMD(KC_GRV)
-#define Tmux LCTL(KC_Z)
+/*#define Tmux LCTL(KC_Z)*/
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -209,12 +209,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
+QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundDec,SoundInc,LightDec,LightInc, QK_BOOT,
    TG(_GAME),    _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
-        _,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
+  RGB_TOG,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
         _, _Z,   _X,      _C,      _D,      _V,      _K,         _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space),  LT(_APP, Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                  ModeControl, SFT_T(KC_BTN1),     SFT_T(KC_BTN2)
+   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSL(_BRACES),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                  ModeControl, SFT_T(Tab),       SFT_T(KC_BTN2)
   ),
 
   [_QWERTY] = LAYOUT(
@@ -223,7 +223,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
         QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
         _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                        _,     LT(_APP, _),     _
+                                        _,     _,     _
   ),
 
   [_GAME] = LAYOUT(
@@ -232,7 +232,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
         Tab,   Shift,      KC_A,      KC_S,      KC_D,      KC_G,         _H,      KC_BTN1,      KC_BTN2,      _L,     _RZ,    _,
         _,_,   KC_X,      KC_C,      KC_C,      KC_B,         KC_N,      KC_BTN1,      KC_BTN2,     _RYU, _RJ, _,
                                      KC_C, Space,  _,              _, _C,
-                                      _, LT(_APP, _),            _
+                                      _, _,            _
   ),
 
   [_NUMBER] = LAYOUT(
@@ -253,15 +253,15 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
                                   _,       _,       _,          _,         _,
                                            _,       _,          _
   ),
-
-  [_APP] = LAYOUT(
-       KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,
-       Sleep,     _,       _,       Rec,     _,       _,          _,       PrntSc1, PrntSc2,PrntSc3,_,       _,
-       RGB_TOG, AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,    Menu, Commands,       _, _, _,
-       _,  _,            _,    _,          Vpn,     _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,
-                                         _,   _,    _,          _,         _,
-                                           _,       _,          _
-  ),
+/*TODO: delete layer*/
+  /*[_APP] = LAYOUT(*/
+  /*     KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,*/
+  /*     Sleep,     _,       _,       Rec,     _,       _,          _,       PrntSc1, PrntSc2,PrntSc3,_,       _,*/
+  /*     RGB_TOG, AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,    Menu, Commands,       _, _, _,*/
+  /*     _,  _,            _,    _,          Vpn,     _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,*/
+  /*                                       _,   _,    _,          _,         _,*/
+  /*                                         _,       _,          _*/
+  /*),*/
 
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
@@ -275,7 +275,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
   [_NAVIGATION] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,       _,       _,       _,     _,       _,
        _,       Home,    End,    PgUp,       PgDn,  _,          _,      _,       _,          _,   _,       _,
-       _,       Equal,   _,      Left,     Right,   _,          _,      PrevApp, NextWindow, Tmux, _,      _,
+       _,       Equal,   _,      Left,     Right,   _,          _,      PrevApp, NextWindow, _, _,      _,
        _,       _,       _RT,     _RF,      Lang,   KC_CAPS,    _,      WS1,     WS3,        WS2, WS4,    _,
                                 Plus,   Minus,      Delete,     _,       _,
                                         _,     DELETE_LINE,     _
