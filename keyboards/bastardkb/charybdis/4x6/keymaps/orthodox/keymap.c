@@ -61,11 +61,14 @@ enum my_keycodes {
 #define _R KC_R
 /*#define _S LT(_POINTER, KC_S)*/
 #define _S KC_S
-#define _T CTL_T(KC_T)
+/*#define _T CTL_T(KC_T)*/
+#define _T KC_T
 #define _G KC_G
 #define _M KC_M
-#define _A CMD_T(KC_A)
-#define _E CTL_T(KC_E)
+/*#define _A CMD_T(KC_A)*/
+#define _A KC_A
+/*#define _E CTL_T(KC_E)*/
+#define _E KC_E
 #define _I KC_I
 #define _O KC_O
 #define _Z KC_Z
@@ -167,11 +170,11 @@ enum my_keycodes {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _T:
-        case _A:
+        /*case _A:*/
         /*case _S:*/
         // case _C:
-        case _E:
-        case _D:
+        /*case _E:*/
+        /*case _D:*/
         case _H:
         // case _F:
         // case _U:
@@ -214,8 +217,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundD
    TG(_GAME),    _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
   RGB_TOG,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
         _, _Z,   _X,      _C,      _D,      _V,      _K,         _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space), MO(_BRACES),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                     Leader, SFT_T(Tab),         Cmd
+   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LCTL),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                     Leader, SFT_T(Tab),         OSM(MOD_LGUI)
   ),
 
   [_QWERTY] = LAYOUT(
@@ -277,7 +280,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       PgUp,    Home,    _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       End,     PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
-       _,       _,       _RT,     _RF,     Lang,    KC_CAPS,    _,      WS1, WS3, WS2, WS4, _,
+       _,       _,       _RT,     _RF,     Lang,    KC_CAPS,    _,      WS1, WS2, WS3, WS4, _,
                                          DELETE_LINE,   _,      _,     _,       _,
                                               KC_DEL,   _,      _
   ),
