@@ -93,7 +93,6 @@ enum my_keycodes {
 
 #define Space KC_SPC
 #define Backspace KC_BSPC
-#define Delete KC_DEL
 #define Cmd KC_LCMD
 #define Lang LSFT(KC_CAPS)
 #define Ctrl KC_LCTL
@@ -140,8 +139,8 @@ enum my_keycodes {
 #define SoundInc KC_VOLU
 #define Mute KC_KB_MUTE
 #define AudioMicMute KC_F20
-#define MuteNotify HYPR(KC_0)
-#define NoNotify HYPR(KC_6)
+#define MuteNotify HYPR(KC_M)
+#define NoNotify HYPR(KC_N)
 
 /*#define PrntSc1 HYPR(KC_1)*/
 /*#define PrntSc2 HYPR(KC_2)*/
@@ -153,12 +152,13 @@ enum my_keycodes {
 
 /*#define Menu HYPR(Space)*/
 /*#define Commands HYPR(KC_V)*/
-#define ModeControl HYPR(KC_8)
+#define Leader HYPR(KC_L)
 
-#define WS1 HYPR(KC_R)
-#define WS2 HYPR(KC_S)
-#define WS3 HYPR(KC_T)
-#define WS4 HYPR(KC_D)
+#define WS1 HYPR(KC_1)
+#define WS2 HYPR(KC_2)
+#define WS3 HYPR(KC_3)
+#define WS4 HYPR(KC_4)
+#define WS5 HYPR(KC_5)
 #define PrevApp LALT(KC_TAB)
 #define NextWindow LCMD(KC_GRV)
 /*#define Tmux LCTL(KC_Z)*/
@@ -213,8 +213,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundD
    TG(_GAME),    _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
   RGB_TOG,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
         _, _Z,   _X,      _C,      _D,      _V,      _K,         _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space),        _,         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                  ModeControl, SFT_T(Tab),       Cmd
+   LT(_BRACES, Backspace), LT(_NUMBER, Space), MO(_BRACES),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                     Leader, SFT_T(Tab),         Cmd
   ),
 
   [_QWERTY] = LAYOUT(
@@ -240,7 +240,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
        _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
-       _,       _,       _,       _,       _4,      _,          _,        _7,       _,       _,    _,        _,
+       _,       _,      KC_BTN1, KC_BTN2,  _4,      _,          _,        _7,       Left, Right,   _,        _,
                                   _,       _,       _,          _,        Down,
                                            _,       _,          _
   ),
@@ -253,7 +253,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
                                   _,       _,       _,          _,         _,
                                            _,       _,          _
   ),
-/*TODO: delete layer*/
+
   /*[_APP] = LAYOUT(*/
   /*     KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,*/
   /*     Sleep,     _,       _,       Rec,     _,       _,          _,       PrntSc1, PrntSc2,PrntSc3,_,       _,*/
@@ -266,19 +266,19 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
-       _,       _,       _,       _,       _,       _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
+       _,       _,       _,  KC_BTN1, KC_BTN2,      _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
        _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
   ),
 
   [_NAVIGATION] = LAYOUT(
-       _,       _,       _,       _,       _,       _,          _,       _,       _,       _,     _,       _,
-       _,       Home,    End,    PgUp,       PgDn,  _,          _,      _,       _,          _,   _,       _,
-       _,       Equal,   _,      Left,     Right,   _,          _,      PrevApp, NextWindow, _, _,      _,
-       _,       _,       _RT,     _RF,      Lang,   KC_CAPS,    _,      WS1,     WS3,        WS2, WS4,    _,
-                                Plus,   Minus,      Delete,     _,       _,
-                                        _,     DELETE_LINE,     _
+       _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
+       _,       _,       _,       Home,    PgUp,    _,          _,      _,       _,       _,     _,       _,
+       _,       _,       _,       End,     PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
+       _,       _,       _RT,     _RF,     Lang,    KC_CAPS,    _,      WS1, WS3, WS2, WS4, _,
+                                         DELETE_LINE,   _,      _,     _,       _,
+                                              KC_DEL,   _,      _
   ),
 
   [_POINTER] = LAYOUT(
