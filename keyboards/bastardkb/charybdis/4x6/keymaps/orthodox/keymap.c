@@ -143,8 +143,8 @@ enum my_keycodes {
 #define SoundInc KC_VOLU
 #define Mute KC_KB_MUTE
 #define AudioMicMute KC_F20
-#define MuteNotify HYPR(KC_M)
-#define NoNotify HYPR(KC_N)
+#define MuteNotify LCMD(KC_M)
+#define NoNotify LCMD(KC_N)
 
 /*#define PrntSc1 HYPR(KC_1)*/
 /*#define PrntSc2 HYPR(KC_2)*/
@@ -156,13 +156,13 @@ enum my_keycodes {
 
 /*#define Menu HYPR(Space)*/
 /*#define Commands HYPR(KC_V)*/
-#define Leader HYPR(KC_L)
+#define Leader LCMD(KC_L)
 
-#define WS1 HYPR(KC_1)
-#define WS2 HYPR(KC_2)
-#define WS3 HYPR(KC_3)
-#define WS4 HYPR(KC_4)
-#define WS5 HYPR(KC_5)
+#define WS1 LCMD(KC_1)
+#define WS2 LCMD(KC_2)
+#define WS3 LCMD(KC_3)
+#define WS4 LCMD(KC_4)
+#define WS5 LCMD(KC_5)
 #define PrevApp LALT(KC_TAB)
 #define NextWindow LCMD(KC_GRV)
 /*#define Tmux LCTL(KC_Z)*/
@@ -174,7 +174,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         /*case _S:*/
         // case _C:
         /*case _E:*/
-        /*case _D:*/
+        case _D:
         case _H:
         // case _F:
         // case _U:
