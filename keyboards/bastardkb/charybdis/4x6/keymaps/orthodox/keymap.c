@@ -59,7 +59,8 @@ enum my_keycodes {
 #define _Y KC_Y
 #define _N KC_N
 #define _R KC_R
-#define _S LT(_POINTER, KC_S)
+/*#define _S LT(_POINTER, KC_S)*/
+#define _S KC_S
 #define _T CTL_T(KC_T)
 #define _G KC_G
 #define _M KC_M
@@ -167,7 +168,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _T:
         case _A:
-        case _S:
+        /*case _S:*/
         // case _C:
         case _E:
         case _D:
