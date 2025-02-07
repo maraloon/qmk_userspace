@@ -146,16 +146,6 @@ enum my_keycodes {
 #define MuteNotify LCMD(KC_M)
 #define NoNotify LCMD(KC_N)
 
-/*#define PrntSc1 HYPR(KC_1)*/
-/*#define PrntSc2 HYPR(KC_2)*/
-/*#define PrntSc3 HYPR(KC_3)*/
-/*#define Vpn HYPR(KC_4)*/
-/*#define Rec HYPR(KC_5)*/
-/*#define Restart HYPR(KC_7)*/
-/*#define Sleep HYPR(KC_9)*/
-
-/*#define Menu HYPR(Space)*/
-/*#define Commands HYPR(KC_V)*/
 #define Leader LCMD(KC_L)
 
 #define WS1 LCMD(KC_1)
@@ -165,19 +155,11 @@ enum my_keycodes {
 #define WS5 LCMD(KC_5)
 #define PrevApp LALT(KC_TAB)
 #define NextWindow LCMD(KC_GRV)
-/*#define Tmux LCTL(KC_Z)*/
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case _T:
-        /*case _A:*/
-        /*case _S:*/
-        // case _C:
-        /*case _E:*/
         case _D:
         case _H:
-        // case _F:
-        // case _U:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
