@@ -97,6 +97,7 @@ enum my_keycodes {
 
 #define Space KC_SPC
 #define Backspace KC_BSPC
+#define DelWord LCTL(Backspace)
 #define Cmd KC_LCMD
 #define Lang LSFT(KC_CAPS)
 #define Ctrl KC_LCTL
@@ -199,8 +200,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundD
       TG(_GAME), _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
         Tab,     _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
         RGB_TOG, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LCTL),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                     Leader,   OSM(MOD_LSFT),         OSM(MOD_LGUI)
+   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                     Leader,   OSM(MOD_LCTL),         OSM(MOD_LGUI)
   ),
 
   [_QWERTY] = LAYOUT(
@@ -263,7 +264,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
        _,       _,       _,       PgUp,    Home,    _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       End,     PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
        _,       _,       _RT,     _RF,     Lang,    KC_CAPS,    _,      WS1, WS2, WS3, WS4, _,
-                                         DELETE_LINE,   _,      _,     _,       _,
+                                   DelWord,   DELETE_LINE,      _,     _,       _,
                                               KC_DEL,   _,      _
   ),
 /*TODO: delete layer*/
