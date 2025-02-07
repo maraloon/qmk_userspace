@@ -196,11 +196,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
 QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundDec,SoundInc,LightDec,LightInc, QK_BOOT,
-   TG(_GAME),    _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
-  RGB_TOG,       _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
-        _, _Z,   _X,      _C,      _D,      _V,      _K,         _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
+      TG(_GAME), _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
+        Tab,     _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     _,
+        RGB_TOG, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LCTL),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                     Leader, SFT_T(Tab),         OSM(MOD_LGUI)
+                                     Leader,   OSM(MOD_LSFT),         OSM(MOD_LGUI)
   ),
 
   [_QWERTY] = LAYOUT(
@@ -266,7 +266,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
                                          DELETE_LINE,   _,      _,     _,       _,
                                               KC_DEL,   _,      _
   ),
-
+/*TODO: delete layer*/
   [_POINTER] = LAYOUT(
        QK_BOOT,  EE_CLR, _,       _,       _,       _,          _,       _,       _,       _,       EE_CLR,  QK_BOOT,
        _,       _,       _,       _,       _,       _,          _,       DPI_MOD, DPI_RMOD,S_D_MOD, S_D_RMOD,_,
