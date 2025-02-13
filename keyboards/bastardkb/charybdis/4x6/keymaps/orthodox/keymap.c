@@ -267,7 +267,6 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
                                    DelWord,   DELETE_LINE,      _,     _,       _,
                                               KC_DEL,   _,      _
   ),
-/*TODO: delete layer*/
   [_POINTER] = LAYOUT(
        QK_BOOT,  EE_CLR, _,       _,       _,       _,          _,       _,       _,       _,       EE_CLR,  QK_BOOT,
        _,       _,       _,       _,       _,       _,          _,       DPI_MOD, DPI_RMOD,S_D_MOD, S_D_RMOD,_,
