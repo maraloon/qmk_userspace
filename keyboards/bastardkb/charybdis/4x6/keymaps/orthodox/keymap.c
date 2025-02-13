@@ -59,8 +59,7 @@ enum my_keycodes {
 #define _Y KC_Y
 #define _N KC_N
 #define _R KC_R
-/*#define _S LT(_POINTER, KC_S)*/
-#define _S KC_S
+#define _S LT(_POINTER, KC_S)
 /*#define _T CTL_T(KC_T)*/
 #define _T KC_T
 #define _G KC_G
@@ -159,6 +158,7 @@ enum my_keycodes {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case _S:
         case _D:
         case _H:
             // Do not select the hold action when another key is pressed.
@@ -227,7 +227,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
        _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
-       _,       _,      KC_BTN1, KC_BTN2,  _4,      _,          _,        _7,       Left, Right,   _,        _,
+       _,       _,      _,        _,       _4,      _,          _,        _7,       Left, Right,   _,        _,
                                   _,       _,       _,          _,        Down,
                                            _,       _,          _
   ),
@@ -253,7 +253,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
-       _,       _,       _,  KC_BTN1, KC_BTN2,      _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
+       _,       _,       _,       _,       _,       _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
        _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
@@ -261,7 +261,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_NAVIGATION] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       _,       _,    KC_BTN1, KC_BTN2,    _,          _,      _,       _,       _,     _,       _,
+       _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       Home,    End,    PgUp,     PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
        _,       _,       _RT,     _RF,     Lang,    KC_CAPS,    _,      WS1, WS2, WS3, WS4, _,
                                    DelWord,   DELETE_LINE,      _,     _,       _,
