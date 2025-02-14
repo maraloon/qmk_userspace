@@ -201,7 +201,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundD
         CARRETM, _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     Tab,
         RGB_TOG, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                     Leader,   OSM(MOD_LCTL),         OSM(MOD_LGUI)
+                                     Leader,   OSM(MOD_LCTL),         LCTL(KC_Z)
   ),
 
   [_QWERTY] = LAYOUT(
