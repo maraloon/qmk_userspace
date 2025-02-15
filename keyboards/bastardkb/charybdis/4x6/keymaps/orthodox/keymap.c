@@ -73,10 +73,12 @@ enum my_keycodes {
 #define _Z KC_Z
 #define _X KC_X
 #define _C KC_C
-#define _D ALT_T(KC_D)
+/*#define _D ALT_T(KC_D)*/
+#define _D KC_D
 #define _V KC_V
 #define _K KC_K
-#define _H ALT_T(KC_H)
+/*#define _H ALT_T(KC_H)*/
+#define _H KC_H
 
 #define _0 KC_0
 #define _1 KC_1
@@ -159,8 +161,6 @@ enum my_keycodes {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _S:
-        case _D:
-        case _H:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
@@ -201,7 +201,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundD
         CARRETM, _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     Tab,
         RGB_TOG, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
    LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                     Leader,   OSM(MOD_LCTL),         LCTL(KC_Z)
+                                     Leader,   OSM(MOD_LCTL),         OSM(MOD_LALT)
   ),
 
   [_QWERTY] = LAYOUT(
