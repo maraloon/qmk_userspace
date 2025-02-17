@@ -197,10 +197,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
 QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundDec,SoundInc,LightDec,LightInc, QK_BOOT,
-      TG(_GAME), _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     TG(_QWERTY),
-        CARRETM, _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     Tab,
-        RGB_TOG, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+      _, _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     _,
+        Tab, _N,      _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     Enter,
+        _, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    _,
+   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_SYMBOL, Esc), LT(_NAVIGATION, _),
                                      Leader,   OSM(MOD_LCTL),         OSM(MOD_LALT)
   ),
 
@@ -252,8 +252,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
-       _,       _,       _,       _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
-       _,       _,       _,       _,       _,       _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
+       _, TG(_QWERTY),   _,       _,  TG(_POINTER), _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
+       _,       _,       RGB_TOG, _,       _,       TG(_GAME),  _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
        _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
