@@ -36,10 +36,9 @@
 #endif // POINTING_DEVICE_ENABLE
 
 #define TAPPING_TERM 150
-#define TAPPING_TERM_PER_KEY
+/*#define TAPPING_TERM_PER_KEY*/
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-
-#define QUICK_TAP_TERM 0
+/*#define QUICK_TAP_TERM 0*/
 
 #define ONESHOT_TAP_TOGGLE 2  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 1000  /* Time (in ms) before the one shot key is released */
