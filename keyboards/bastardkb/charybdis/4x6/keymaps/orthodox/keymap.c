@@ -261,8 +261,8 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
 
   [_NAVIGATION] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       Home,    End,    PgUp,     PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
+       _,       _,       _,       Left,    Right,   _,          _,      _,       _,       _,     _,       _,
+       _,       Home,    End,     PgUp,    PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
        _,       _,       _RT,     _RF,     Lang,    KC_CAPS,    _,      WS1, WS2, WS3, WS4, _,
                                    DelWord,   DELETE_LINE,      _,     _,       _,
                                               KC_DEL,   _,      _
