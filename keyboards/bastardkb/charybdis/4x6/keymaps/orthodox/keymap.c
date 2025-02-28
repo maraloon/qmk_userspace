@@ -234,8 +234,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
        _,       _,       RGB_TOG, _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
-       _,       Home,    End,     PgUp,    PgDn,    _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
-       _,       _,       _,       NextWindow, PrevApp, _,       _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
+       _,       Home,    End,     NextWindow, PrevApp, _,       _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
+       _,       _,       _,       PgUp,    PgDn, _,             _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
   ),
