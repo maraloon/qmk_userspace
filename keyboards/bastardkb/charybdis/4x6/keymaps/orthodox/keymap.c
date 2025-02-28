@@ -96,6 +96,15 @@ enum my_keycodes {
 #define Left KC_LEFT
 #define Right KC_RIGHT
 
+#define BracketL KC_LPRN
+#define BracketR KC_RPRN
+#define BorrowL KC_LCBR
+#define BorrowR KC_RCBR
+#define ArrayL KC_LBRC
+#define ArrayR KC_RBRC
+#define TagL KC_LT
+#define TagR KC_GT
+
 #define Space KC_SPC
 #define Backspace KC_BSPC
 #define DelWord LCTL(Backspace)
@@ -233,18 +242,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*),*/
 
   [_BRACES] = LAYOUT(
-          BraceL KC_LPRN
-          BraceR KC_RPRN
-          ArrayL KC_LCBR
-          ArrayR KC_RCBR
-          BorrowL KC_LBRC
-          BorrowR KC_LBRC
-          TagL KC_LT
-          TagR KC_RT
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
-       _,       _,       RGB_TOG, _,       _,       _,          _,         KC_LBRC, KC_RBRC, _,     _,       _,
-       _,       Home,    End,     PgUp,    PgDn,    _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
-       _,       _,       _,       PgUp,    PgDn, _,             _,         KC_LCBR, KC_RCBR, CODE_TO,CODE_ARRAY,_,
+       _,       _,       RGB_TOG, _,       _,       _,          _,         ArrayL, ArrayR, _,     _,       _,
+       _,       Home,    End,     PgUp,    PgDn,    _,          _,         BracketL, BracketR, TagL, TagR,   _,
+       _,       _,       _,       PgUp,    PgDn, _,             _,         BorrowL, BorrowR, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
   ),
