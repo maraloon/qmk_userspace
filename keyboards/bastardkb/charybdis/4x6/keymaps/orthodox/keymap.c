@@ -199,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _,          _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       Lang,       _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _,          _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_NAVIGATION, Esc), LT(_SYMBOL, Enter),
                                      Leader,   OSM(MOD_LCTL),         OSM(MOD_LALT)
   ),
 
@@ -236,8 +236,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _,    Plus,     BackSlash, Slash, Asterisk,  _,          _,         Exlm,   Question, Underscore, _,  _,
        _,   Minus,     Tilda,   Caret,   Dollar, Ampersand,     _,         Dot,     Comma,   Quote, DQuote,  _,
        _,   Equal,       Percent, Hash,    At,   Pipe,          _,         Colon,   Semicolon,Grave,_,       _,
-                                  _,       _,       _,          _,         _,
-                                           _,       _,          _
+                                   DelWord,   DELETE_LINE,      _,     _,       _,
+                                              KC_DEL,   _,      _
   ),
 
   [_BRACES] = LAYOUT(
@@ -254,8 +254,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       Home,    End,     PgUp,    PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
        _,       _,       _RT,     _RF,     _,       KC_CAPS,    _,      WS1, WS2, WS3, WS4, _,
-                                   DelWord,   DELETE_LINE,      _,     _,       _,
-                                              KC_DEL,   _,      _
+                                  _,       _,       _,          _,         _,
+                                           _,       _,          _
   ),
   [_POINTER] = LAYOUT(
        QK_BOOT,  EE_CLR, _,       _,       _,       _,          _,       _,       _,       _,       EE_CLR,  QK_BOOT,
