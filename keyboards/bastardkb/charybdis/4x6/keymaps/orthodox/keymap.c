@@ -195,35 +195,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-      QK_BOOT,  _,       _,       _, ARM_MICRO, EE_CLR,            EE_CLR,   _,       _,       _,       _, QK_BOOT,
-      _,          _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
+      _,           _,       _,       _, ARM_MICRO,     _,           _,       _,       _,       _,       _,     _,
+      _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       Lang,       _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
-      _,          _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
+      _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
    LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_NAVIGATION, Esc), LT(_SYMBOL, Enter),
                                      Leader,   OSM(MOD_LCTL),         OSM(MOD_LALT)
   ),
 
-  [_QWERTY] = LAYOUT(
-        QK_BOOT,  _,       _,       _, ARM_MICRO, EE_CLR,        EE_CLR,   _,       _,       _,       _, QK_BOOT,
-        _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
-        QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
-        _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
-                                        _,     _,     _
-  ),
-
-  [_GAME] = LAYOUT(
-        _, KC_1, KC_2, KC_3, KC_4, KC_5,          _, _,_,_,_, _,
-        TG(_GAME),         KC_F,      KC_Q,      KC_W,      KC_E,      _R,         _Y,      _U,      _I,      _O,      _P,    _,
-        Tab,   Shift,      KC_A,      KC_S,      KC_D,      KC_G,         _H,      KC_BTN1,      KC_BTN2,      _L,     _RZ,    _,
-        _,_,   KC_X,      KC_C,      KC_C,      KC_B,         KC_N,      KC_BTN1,      KC_BTN2,     _RYU, _RJ, _,
-                                     KC_C, Space,  _,              _, _C,
-                                      _, _,            _
-  ),
-
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
-       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
+      QK_BOOT,  _,       _,       _,        _, EE_CLR,         EE_CLR,     _,       _,       _,       _, QK_BOOT,
        _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
        _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
        _,       _,      Left,     Right,   _4,      _,          _,        _7,       Left, Right,   _,        _,
@@ -232,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SYMBOL] = LAYOUT(
-       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
+      QK_BOOT,  _,       _,       _,        _, EE_CLR,         EE_CLR,     _,       _,       _,       _, QK_BOOT,
        _,    Plus,     BackSlash, Slash, Asterisk,  _,          _,         Exlm,   Question, Underscore, _,  _,
        _,   Minus,     Tilda,   Caret,   Dollar, Ampersand,     _,         Dot,     Comma,   Quote, DQuote,  _,
        _,   Equal,       Percent, Hash,    At,   Pipe,          _,         Colon,   Semicolon,Grave,_,       _,
@@ -253,19 +235,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       Home,    End,     PgUp,    PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
-       _,       _,       _RT,     _RF,     _,       KC_CAPS,    _,      WS1, WS2, WS3, WS4, _,
+       _,       _,       _,       _,       _,       _,          _,      WS1, WS2, WS3, WS4, _,
                                   _,       _,       _,          _,         _,
                                            _,       _,          _
   ),
   [_POINTER] = LAYOUT(
-       QK_BOOT,  EE_CLR, _,       _,       _,       _,          _,       _,       _,       _,       EE_CLR,  QK_BOOT,
-       _,       _,       _,       _,       _,       _,          _,       DPI_MOD, DPI_RMOD,S_D_MOD, S_D_RMOD,_,
-       _,       _,       _, _,       KC_BTN1, _,          _,       _, Ctrl, _, _, _,
+       _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
+       _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
+       _,       _,       _,       _,       KC_BTN1, _,          _,       _, _, _, _, _,
        _,       _,       _,       _,       KC_BTN2, _,          _,       KC_BTN1, DRGSCRL,KC_BTN2, _, TG(_POINTER),
                                   _,       CARRETM,       KC_BTN3,    _,       DRG_TOG,
                                            _,       _,          _
   ),
 
+
+
+
+  [_QWERTY] = LAYOUT(
+        QK_BOOT,  _,       _,       _, ARM_MICRO, EE_CLR,        EE_CLR,   _,       _,       _,       _, QK_BOOT,
+        _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
+        QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
+        _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
+   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+                                        _,     _,     _
+  ),
+
+  [_GAME] = LAYOUT(
+        _, KC_1, KC_2, KC_3, KC_4, KC_5,          _, _,_,_,_, _,
+        TG(_GAME),         KC_F,      KC_Q,      KC_W,      KC_E,      _R,         _Y,      _U,      _I,      _O,      _P,    _,
+        Tab,   Shift,      KC_A,      KC_S,      KC_D,      KC_G,         _H,      KC_BTN1,      KC_BTN2,      _L,     _RZ,    _,
+        _,_,   KC_X,      KC_C,      KC_C,      KC_B,         KC_N,      KC_BTN1,      KC_BTN2,     _RYU, _RJ, _,
+                                     KC_C, Space,  _,              _, _C,
+                                      _, _,            _
+  ),
 };
 
 #ifdef POINTING_DEVICE_ENABLE
