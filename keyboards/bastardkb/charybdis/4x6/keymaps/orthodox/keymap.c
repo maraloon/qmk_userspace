@@ -199,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       Lang,       _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-   LT(_BRACES, Backspace), LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_NAVIGATION, Esc), LT(_SYMBOL, Enter),
+                Backspace, LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_BRACES, Esc), LT(_SYMBOL, Enter),
                                      Leader,   OSM(MOD_LCTL),         OSM(MOD_LALT)
   ),
 
@@ -222,15 +222,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                               KC_DEL,   _,      _
   ),
 
+  /*[_BRACES] = LAYOUT(*/
+  /*     _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,*/
+  /*     _, TG(_QWERTY),   _,       _,  TG(_POINTER), _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,*/
+  /*     _,       _,       RGB_TOG, _,       _,       TG(_GAME),  _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,*/
+  /*     _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,*/
+  /*                                       _,   _,    _,          _,       _,*/
+  /*                                         _,       _,          _*/
+  /*),*/
+
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
-       _, TG(_QWERTY),   _,       _,  TG(_POINTER), _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
-       _,       _,       RGB_TOG, _,       _,       TG(_GAME),  _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
-       _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
+       _,       _,       RGB_TOG, _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
+       _,       Home,    End,     PgUp,    PgDn,    _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
+       _,       _,       _,       NextWindow, PrevApp, _,       _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
   ),
 
+  /*TODO: delete if not used*/
   [_NAVIGATION] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
