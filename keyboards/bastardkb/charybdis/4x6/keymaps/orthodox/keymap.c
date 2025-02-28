@@ -11,7 +11,6 @@ enum charybdis_keymap_layers {
     _SYMBOL,
     _NUMBER,
     _NAVIGATION,
-    /*_APP,*/
     _BRACES,
     _POINTER,
 };
@@ -240,15 +239,6 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightD
                                   _,       _,       _,          _,         _,
                                            _,       _,          _
   ),
-
-  /*[_APP] = LAYOUT(*/
-  /*     KC_KB_POWER,Restart,_,     _,       _,       _,          _,         _,       _,       _,     _,       _,*/
-  /*     Sleep,     _,       _,       Rec,     _,       _,          _,       PrntSc1, PrntSc2,PrntSc3,_,       _,*/
-  /*     RGB_TOG, AudioMicMute,Mute,MuteNotify,   NoNotify,_,          _,    Menu, Commands,       _, _, _,*/
-  /*     _,  _,            _,    _,          Vpn,     _,          _,         LightDec,LightInc,SoundDec,SoundInc,_,*/
-  /*                                       _,   _,    _,          _,         _,*/
-  /*                                         _,       _,          _*/
-  /*),*/
 
   [_BRACES] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
