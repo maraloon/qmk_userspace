@@ -39,6 +39,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 enum my_keycodes {
   CODE_ARRAY = SAFE_RANGE,
+  ARM_MICRO,
   CODE_TO,
   DELETE_LINE,
 };
@@ -143,9 +144,9 @@ enum my_keycodes {
 #define SoundDec KC_VOLD
 #define SoundInc KC_VOLU
 #define Mute KC_KB_MUTE
-#define AudioMicMute KC_F20
-#define MuteNotify LCMD(KC_M)
-#define NoNotify LCMD(KC_N)
+#define MicMute KC_F20
+#define DismissNots LCMD(KC_M)
+#define HideNots LCMD(KC_N)
 
 #define Leader LCMD(KC_L)
 
@@ -171,6 +172,13 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 uint16_t change_app_timer = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case ARM_MICRO:
+      if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_F20));
+      } else {
+          SEND_STRING(SS_TAP(X_F20));
+      }
+      return false;
     case CODE_ARRAY:
       if (record->event.pressed) { SEND_STRING(" => "); } return false;
     case CODE_TO:
@@ -195,7 +203,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundDec,SoundInc,LightDec,LightInc, QK_BOOT,
+QK_BOOT,  _,       _,       _, ARM_MICRO, EE_CLR,        EE_CLR,   _,       _,       _,       _, QK_BOOT,
       _, _Q,      _W,      _F,      _P,      _B,         _J,      _L,      _U,      _Y,     _RZ,     _,
       Lang, _N,   _R,      _S,      _T,      _G,         _M,      _A,      _E,      _I,      _O,     Tab,
       _, _Z,      _X,      _C,      _D,      _V,         _K,      _H,     _RB,    _RYU,     _RJ,    _,
@@ -204,7 +212,7 @@ QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, SoundD
   ),
 
   [_QWERTY] = LAYOUT(
-QK_BOOT, AudioMicMute, Mute,MuteNotify, NoNotify,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
+QK_BOOT, MicMute, Mute,DismissNots, HideNots,EE_CLR,          EE_CLR, LightDec,LightInc,SoundDec,SoundInc, QK_BOOT,
         _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
         QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
         _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
