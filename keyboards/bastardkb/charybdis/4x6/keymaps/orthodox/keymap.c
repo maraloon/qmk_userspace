@@ -142,6 +142,7 @@ enum my_keycodes {
 
 #define Leader LCMD(KC_L)
 
+/*TODO: delete if not used*/
 #define WS1 LCMD(KC_1)
 #define WS2 LCMD(KC_2)
 #define WS3 LCMD(KC_3)
@@ -232,10 +233,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*),*/
 
   [_BRACES] = LAYOUT(
+          BraceL KC_LPRN
+          BraceR KC_RPRN
+          ArrayL KC_LCBR
+          ArrayR KC_RCBR
+          BorrowL KC_LBRC
+          BorrowR KC_LBRC
+          TagL KC_LT
+          TagR KC_RT
        _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,
-       _,       _,       RGB_TOG, _,       _,       _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,
-       _,       Home,    End,     NextWindow, PrevApp, _,       _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
-       _,       _,       _,       PgUp,    PgDn, _,             _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,
+       _,       _,       RGB_TOG, _,       _,       _,          _,         KC_LBRC, KC_RBRC, _,     _,       _,
+       _,       Home,    End,     PgUp,    PgDn,    _,          _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,
+       _,       _,       _,       PgUp,    PgDn, _,             _,         KC_LCBR, KC_RCBR, CODE_TO,CODE_ARRAY,_,
                                          _,   _,    _,          _,       _,
                                            _,       _,          _
   ),
