@@ -151,11 +151,11 @@ enum my_keycodes {
 
 #define Leader LCMD(KC_L)
 
+#define WS0 LCMD(KC_0)
 #define WS1 LCMD(KC_1)
 #define WS2 LCMD(KC_2)
 #define WS3 LCMD(KC_3)
 #define WS4 LCMD(KC_4)
-#define WS5 LCMD(KC_5)
 #define WSP LALT(KC_TAB)
 #define NextWin LCMD(KC_GRV)
 
@@ -241,19 +241,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*),*/
 
   [_BRACES] = LAYOUT(
-RGB_TOG, _, _, _, _, _,       _, _, _, _, _, _,
-_, _, _, WS0, _, _,           _, ArrayL, ArrayR, _, _, _,
-_, PgUp, WS1, WS2, WS3, NextWin,  _, BracketL, BracketR, _, _, _,
-_, _, TagL, TagR, WSP, _,     _, BorrowL, BorrowR, _, _, _,
-            _, PgDn, _,       _, _,
-                  _, _,       _
+RGB_TOG, _, _, _, _, _,           _, _, _, _, _, _,
+_, _, _, PgDn, PgUp, _,           _, ArrayL, ArrayR, _, _, _,
+_, WS0, WS1, WS2, WS3, NextWin,   _, BracketL, BracketR, _, _, _,
+_, _, TagL, TagR, WS4, _,         _, BorrowL, BorrowR, _, _, _,
+            _, WSP, _,           _, _,
+                  _, _,           _
   ),
 
   /*TODO: delete if not used*/
   [_NAVIGATION] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       Home,    End,     PgUp,    PgDn,    WS5,        _,      WSP, NextWin, _, _,      _,
+       _,       Home,    End,     PgUp,    PgDn,    WS0,        _,      WSP, NextWin, _, _,      _,
        _,       _,       _,       _,       _,       _,          _,      WS1, WS2, WS3, WS4, _,
                                   _,       _,       _,          _,         _,
                                            _,       _,          _
