@@ -151,14 +151,13 @@ enum my_keycodes {
 
 #define Leader LCMD(KC_L)
 
-/*TODO: delete if not used*/
 #define WS1 LCMD(KC_1)
 #define WS2 LCMD(KC_2)
 #define WS3 LCMD(KC_3)
 #define WS4 LCMD(KC_4)
 #define WS5 LCMD(KC_5)
-#define PrevApp LALT(KC_TAB)
-#define NextWindow LCMD(KC_GRV)
+#define WSP LALT(KC_TAB)
+#define NextWin LCMD(KC_GRV)
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -218,7 +217,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       QK_BOOT,  _,       _,       _,        _, EE_CLR,         EE_CLR,     _,       _,       _,       _, QK_BOOT,
        _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
        _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
-       _,       _,      Left,     Right,   _4,      _,          _,        _7,       Left, Right,   _,        _,
+       _,       _,       _,        _,      _4,      _,          _,        _7,       Left, Right,   _,        _,
                                   _,       _,       _,          _,        Down,
                                            _,       _,          _
   ),
@@ -242,19 +241,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*),*/
 
   [_BRACES] = LAYOUT(
-       _,       _,       _,       _,       _,       _,          _,         _,       _,       _,       _,      _,
-       _,       _,       RGB_TOG, _,       _,       _,          _,         _,        TagL,     TagR,  _,      _,
-       _,       Home,    End,     PgUp,    PgDn,    _,          _,         BracketL, BracketR, _,     _,      _,
-       _,       _,       _,       ArrayL, ArrayR,   _,          _,         BorrowL,  BorrowR, CODE_TO,CODE_ARRAY,_,
-                                         _,   _,    _,          _,       _,
-                                           _,       _,          _
+RGB_TOG, _, _, _, _, _,       _, _, _, _, _, _,
+_, _, _, WS0, _, _,           _, ArrayL, ArrayR, _, _, _,
+_, PgUp, WS1, WS2, WS3, NextWin,  _, BracketL, BracketR, _, _, _,
+_, _, TagL, TagR, WSP, _,     _, BorrowL, BorrowR, _, _, _,
+            _, PgDn, _,       _, _,
+                  _, _,       _
   ),
 
   /*TODO: delete if not used*/
   [_NAVIGATION] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
        _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       Home,    End,     PgUp,    PgDn,    WS5,        _,      PrevApp, NextWindow, _, _,      _,
+       _,       Home,    End,     PgUp,    PgDn,    WS5,        _,      WSP, NextWin, _, _,      _,
        _,       _,       _,       _,       _,       _,          _,      WS1, WS2, WS3, WS4, _,
                                   _,       _,       _,          _,         _,
                                            _,       _,          _
