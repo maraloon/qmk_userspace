@@ -73,12 +73,12 @@ enum my_keycodes {
 #define _Z KC_Z
 #define _X KC_X
 #define _C KC_C
-/*#define _D ALT_T(KC_D)*/
-#define _D KC_D
+#define _D ALT_T(KC_D)
+/*#define _D KC_D*/
 #define _V KC_V
 #define _K KC_K
-/*#define _H ALT_T(KC_H)*/
-#define _H KC_H
+#define _H ALT_T(KC_H)
+/*#define _H KC_H*/
 
 #define _0 KC_0
 #define _1 KC_1
@@ -162,6 +162,8 @@ enum my_keycodes {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _S:
+        case _H:
+        case _D:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
@@ -253,7 +255,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, _,
 _, _, TagL, _, TagR, _,                       _, _, WS0, _, _, _,
 _, ArrayL, _, BracketL, BorrowL, ArrayR,     _, WS1, WS2, WS3, WS4, _,
-_, _, _, BorrowR, BracketR, _,                 _, WSP, NextWin, _, _, _,
+_, _, _, BorrowR, BracketR, _,                 _, NextWin, WSP, _, _, _,
            PgUp, PgDn, _,                     _, _,
                     _, _,                     _
   ),
