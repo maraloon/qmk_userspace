@@ -10,7 +10,6 @@ enum charybdis_keymap_layers {
     _GAME,
     _SYMBOL,
     _NUMBER,
-    _NAVIGATION,
     _BRACES,
     _POINTER,
 };
@@ -233,24 +232,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                               KC_DEL,   _,      _
   ),
 
-  /*[_BRACES] = LAYOUT(*/
-  /*     _,       _,       _,       _,       _,       _,          _,         _,       _,       _,     _,       _,*/
-  /*     _, TG(_QWERTY),   _,       _,  TG(_POINTER), _,          _,         KC_LCBR, KC_RCBR, _,     _,       _,*/
-  /*     _,       _,       RGB_TOG, _,       _,       TG(_GAME),  _,         KC_LPRN, KC_RPRN, KC_LT, KC_GT,   _,*/
-  /*     _,       _,       _,       _,       _,       _,          _,         KC_LBRC, KC_RBRC, CODE_TO,CODE_ARRAY,_,*/
-  /*                                       _,   _,    _,          _,       _,*/
-  /*                                         _,       _,          _*/
-  /*),*/
-
-/*  [_BRACES] = LAYOUT(*/
-/*RGB_TOG, _, _, _, _, _,       _, _, _, _, _, _,*/
-/*_, _, _, WS0, _, _,           _, ArrayL, ArrayR, _, _, _,*/
-/*_, WSP, WS1, WS2, WS3, _,     _, BracketL, BracketR, TagL, TagR, _,*/
-/*_, _, _, NextWin, WS4, _,     _, BorrowL, BorrowR, CODE_TO, CODE_ARRAY, _,*/
-/*           PgUp, PgDn, _,     _, _,*/
-/*                    _, _,     _*/
-/*  ),*/
-
   [_BRACES] = LAYOUT(
 RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, _,
 _, _, TagL, _, TagR, _,                       _, _, WS0, _, _, _,
@@ -260,14 +241,6 @@ _, _, _, BorrowR, BracketR, _,                 _, NextWin, WSP, _, _, _,
                     _, _,                     _
   ),
 
-  /*TODO: delete if not used*/
-  [_NAVIGATION] = LAYOUT(
-       _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       _,       _,       _,       _,       _,          _,      _,       _,       _,     _,       _,
-       _,       Home,    End,     PgUp,    PgDn,    WS0,        _,      WSP, NextWin, _, _,      _,
-       _,       _,       _,       _,       _,       _,          _,      WS1, WS2, WS3, WS4, _,
-                                  _,       _,       _,          _,         _,
-                                           _,       _,          _
   ),
   [_POINTER] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
@@ -286,7 +259,7 @@ _, _, _, BorrowR, BracketR, _,                 _, NextWin, WSP, _, _, _,
         _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
         QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
         _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), LT(_NAVIGATION, Enter),
+   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), Enter,
                                         _,     _,     _
   ),
 
