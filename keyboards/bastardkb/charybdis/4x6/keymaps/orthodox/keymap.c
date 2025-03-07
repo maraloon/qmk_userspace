@@ -234,9 +234,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BRACES] = LAYOUT(
 RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, _,
-_, _, TagL, PgUp, TagR, _,                       _, _, WS0, _, _, _,
-_, ArrayL, PgDn, BracketL, BorrowL, ArrayR,     _, WS1, WS2, WS3, WS4, _,
-_, _, _, BorrowR, BracketR, _,                 _, NextWin, WSP, _, _, _,
+_, _, TagL, PgUp, TagR, _,                       _, _, WS0, WS4, _, _,
+_, ArrayL, PgDn, BracketL, BorrowL, ArrayR,     _, WS1, WS2, WS3, NextWin, _,
+_, _, _, BorrowR, BracketR, _,                 _, WSP, _, _, _, _,
            _, _, _,                     _, _,
                     _, _,                     _
   ),
