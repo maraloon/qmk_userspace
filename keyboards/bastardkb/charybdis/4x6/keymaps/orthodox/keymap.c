@@ -209,8 +209,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       Lang,       _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-                Backspace, LT(_NUMBER, Space), OSM(MOD_LSFT),         LT(_BRACES, Esc), LT(_SYMBOL, Enter),
-                                     Leader,   OSM(MOD_LCTL),         OSM(MOD_LALT)
+                Backspace, LT(_NUMBER, Space), OSM(MOD_LCTL),         LT(_BRACES, Esc), LT(_SYMBOL, Enter),
+                                     Leader,   OSM(MOD_LSFT),         OSM(MOD_LALT)
   ),
 
   [_NUMBER] = LAYOUT(
