@@ -216,9 +216,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
-_, _, BracketL, _0, BracketR, _, _, BorrowL, _9, BorrowR, _, _,
+_, BorrowL, BracketL, _0, BracketR, BorrowR, _, _, _9, _, _, _,
 _, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
-_, _, Left, Right, _4, _, _, _7, TagL, TagR, _, _,
+_, TagL, Left, Right, _4, TagR, _, _7, PgUp, PgDn, _, _,
 _, _, _, _, Down,
 _, _, _
   ),
@@ -234,9 +234,9 @@ _, _, _
 
   [_BRACES] = LAYOUT(
 RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, _,
-_, _, TagL, PgUp, TagR, _,                       _, _, _, _, _, _,
-_, ArrayL, PgDn, BracketL, BorrowL, ArrayR,     _, WSP, NextWin, WS0, WS4, _,
-_, _, _, BorrowR, BracketR, _,                 _, WS1, WS2, WS3, _, _,
+_, _, _, _, _, _,                       _, _, _, _, _, _,
+_, _, _, _, _, _,     _, WSP, NextWin, WS0, WS4, _,
+_, _, _, _, _, _,                 _, WS1, WS2, WS3, _, _,
            _, _, _,                     _, _,
                     _, _,                     _
   ),
