@@ -215,12 +215,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
-      QK_BOOT,  _,       _,       _,        _, EE_CLR,         EE_CLR,     _,       _,       _,       _, QK_BOOT,
-       _,       _,       _,       _0,       _,      _,          _,         _,       _9,      _,     _,       _,
-       _,       _,      _1,       _2,      _3,      _,          _,        _5,       _6,     _8,    Up,       _,
-       _,       _,       _,        _,      _4,      _,          _,        _7,       Left, Right,   _,        _,
-                                  _,       _,       _,          _,        Down,
-                                           _,       _,          _
+QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
+_, _, BracketL, _0, BracketR, _, _, BorrowL, _9, BorrowR, _, _,
+_, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
+_, _, Left, Right, _4, _, _, _7, TagL, TagR, _, _,
+_, _, _, _, Down,
+_, _, _
   ),
 
   [_SYMBOL] = LAYOUT(
