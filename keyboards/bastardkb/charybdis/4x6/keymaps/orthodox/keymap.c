@@ -49,12 +49,12 @@ enum my_keycodes {
 
 #define _Q KC_Q
 #define _W KC_W
-#define _F KC_F
+#define _F SFT_T(KC_F)
 #define _P KC_P
 #define _B KC_B
 #define _J KC_J
 #define _L KC_L
-#define _U KC_U
+#define _U SFT_T(KC_U)
 #define _Y KC_Y
 #define _N KC_N
 #define _R KC_R
@@ -63,7 +63,6 @@ enum my_keycodes {
 #define _G KC_G
 #define _M KC_M
 #define _A CTL_T(KC_A)
-#define _A KC_A
 #define _E KC_E
 #define _I KC_I
 #define _O KC_O
@@ -156,6 +155,8 @@ enum my_keycodes {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case _F:
+        case _U:
         case _A:
         case _T:
         case _S:
@@ -223,9 +224,9 @@ _, _, _
 
   [_SYMBOL] = LAYOUT(
       QK_BOOT,  _,       _,       _,        _, EE_CLR,         EE_CLR,     _,       _,       _,       _, QK_BOOT,
-       _,    Plus,     BackSlash, Slash, Asterisk,  _,          _,         Exlm,   Question, Underscore, _,  _,
-       _,   Minus,     Tilda,   Caret,   Dollar, Ampersand,     _,         Dot,     Comma,   Quote, DQuote,  _,
-       _,   Equal,       Percent, Hash,    At,   Pipe,          _,         Colon,   Semicolon,Grave,_,       _,
+       _,    Plus,     BackSlash, Slash, Asterisk,  _,          _,         Exlm,   Question, Underscore, Pipe,  _,
+       _,   Minus,     Tilda,   Caret,   Dollar, _,     _,         Dot,     Comma,   Quote, DQuote,  _,
+       _,   Equal,       Percent, Hash,    At,   _,          _,         Colon,   Semicolon,Grave, Ampersand,       _,
                                    DelWord,   DELETE_LINE,      _,     _,       _,
                                               KC_DEL,   _,      _
   ),
