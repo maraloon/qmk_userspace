@@ -10,7 +10,7 @@ enum charybdis_keymap_layers {
     _GAME,
     _SYMBOL,
     _NUMBER,
-    _BRACES,
+    _APP,
     _POINTER,
 };
 
@@ -208,17 +208,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       Lang,       _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-                Backspace, LT(_NUMBER, Space), OSM(MOD_LCTL),         LT(_BRACES, Esc), LT(_SYMBOL, Enter),
+                Backspace, LT(_NUMBER, Space), _,                     LT(_APP, Esc), LT(_SYMBOL, Enter),
                                      Leader,   OSM(MOD_LSFT),         OSM(MOD_LALT)
   ),
 
+  // TODO: delete left, rigth doubles
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
 _, BorrowL, BracketL, _0, BracketR, BorrowR, _, _, _9, _, _, _,
-_, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
+_, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, Right,
 _, TagL, Left, Right, _4, TagR, _, _7, PgUp, PgDn, _, _,
-_, _, _, _, Down,
+_, _, _, Left, Down,
 _, _, _
   ),
 
@@ -231,7 +232,8 @@ _, _, _
                                               KC_DEL,   _,      _
   ),
 
-  [_BRACES] = LAYOUT(
+  // TODO: delete doubles
+  [_APP] = LAYOUT(
 RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, _,
 _, _, _, WS0, _, _,                       _, _, _, _, _, _,
 _, NextWin, WS1, WS2, WS3, _,     _, WSP, NextWin, _, WSP, _,
@@ -257,7 +259,7 @@ _, _, _, _, WS4, _,                 _, _, _, _, _, _,
         _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
         QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
         _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
-   LT(_BRACES, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), Enter,
+   LT(_APP, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), Enter,
                                         _,     _,     _
   ),
 
