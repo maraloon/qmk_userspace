@@ -218,7 +218,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
 _, BorrowL, BracketL, _0, BracketR, BorrowR, _, _, _9, _, _, _,
 _, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, Right,
-_, TagL, Left, Right, _4, TagR, _, _7, PgUp, PgDn, _, _,
+_, TagL, _, _, _4, TagR, _, _7, PgUp, PgDn, _, _,
 _, _, _, Left, Down,
 _, _, _
   ),
@@ -234,7 +234,7 @@ _, _, _
 
   // TODO: delete doubles
   [_APP] = LAYOUT(
-RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, _,
+RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, TG(_GAME),
 _, _, _, WS0, _, _,                       _, _, _, _, _, _,
 _, NextWin, WS1, WS2, WS3, _,     _, WSP, NextWin, _, WSP, _,
 _, _, _, _, WS4, _,                 _, _, _, _, _, _,
