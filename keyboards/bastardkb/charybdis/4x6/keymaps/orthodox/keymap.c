@@ -206,19 +206,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
       _,           _,       _,       _, ARM_MICRO,     _,           _,       _,       _,       _,       _,     _,
       _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
-      Lang,       _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
+      _,          _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-                Backspace, LT(_NUMBER, Space), _,                     LT(_APP, Esc), LT(_SYMBOL, Enter),
-                                     Leader,   OSM(MOD_LSFT),         Leader
+                Backspace, LT(_NUMBER, Space), Lang,               LT(_APP, Esc), LT(_SYMBOL, Enter),
+                              Lang,   OSM(MOD_LSFT),               Leader
   ),
 
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
 _, BorrowL, BracketL, _0, BracketR, BorrowR, _, Left, _9, Right, _, _,
-_, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, Right,
+_, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
 _, TagL, Left, Right, _4, TagR, _, _7, PgUp, PgDn, _, _,
-_, _, _,                           Left, Down,
+_, _, _,                           _, Down,
 _, _, _
   ),
 
@@ -233,12 +233,12 @@ _, _, _
 
   // TODO: delete doubles
   [_APP] = LAYOUT(
-RGB_TOG, _, _, _, _, _,                       _, _, _, _, _, TG(_GAME),
-_, _, _, WS0, _, _,                       _, _, _, _, _, _,
-_, NextWin, WS1, WS2, WS3, _,     _, WSP, NextWin, _, WSP, _,
+RGB_TOG, _, _, _, _, _,             _, _, _, _, _, TG(_GAME),
+_, _, _, WS0, _, _,                 _, _, _, _, _, _,
+_, _, WS1, WS2, WS3, _,             _, WSP, NextWin, _, _, _,
 _, _, _, _, WS4, _,                 _, _, _, _, _, _,
-           _, WSP, _,                     _, _,
-                    _, _,                     _
+           _, _, _,                 _, _,
+              _, _,                 _
   ),
 
   [_POINTER] = LAYOUT(
