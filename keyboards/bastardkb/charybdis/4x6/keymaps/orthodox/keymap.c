@@ -103,7 +103,6 @@ enum my_keycodes {
 #define Backspace KC_BSPC
 #define DelWord LCTL(Backspace)
 #define Cmd KC_LCMD
-#define Lang LSFT(KC_CAPS)
 #define Ctrl KC_LCTL
 #define Alt KC_LALT
 #define Shift KC_LSFT
@@ -208,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       _,          _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-                Backspace, LT(_NUMBER, Space), Lang,               LT(_APP, Esc), LT(_SYMBOL, Enter),
+                Backspace, LT(_NUMBER, Space), _,                   LT(_APP, Esc), LT(_SYMBOL, Enter),
                                  _,   SFT_T(KC_CAPS),               Leader
   ),
 
@@ -217,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
 _, BorrowL, BracketL, _0, BracketR, BorrowR, _, BackSlash, _9, Slash, _, _,
 _, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
-_, TagL, Left, Right, _4, TagR, _, _7, PgUp, PgDn, _, _,
+_, TagL, _, _, _4, TagR, _, _7, PgUp, PgDn, _, _,
 _, _, _,                           _, Down,
 _, _, _
   ),
@@ -231,7 +230,6 @@ _, _, _
                                               KC_DEL,   _,      _
   ),
 
-  // TODO: delete doubles
   [_APP] = LAYOUT(
 _, _, _, _, _, _,             _, _, _, _, _, TG(_GAME),
 _, _, _, WS0, _, _,                 _, _, _, _, _, _,
