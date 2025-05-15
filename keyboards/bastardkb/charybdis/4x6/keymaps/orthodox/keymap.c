@@ -212,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
-_, BorrowL, BracketL, _0, BracketR, BorrowR, _, BackSlash, _9, Slash, _, _,
+_, BorrowL, BracketL, _0, BracketR, BorrowR, _, _, _9, _, _, _,
 _, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
 _, TagL, _, _, _4, TagR, _, _7, PgUp, PgDn, _, _,
 _, _, _,                           _, Down,
@@ -220,10 +220,10 @@ _, _, _
   ),
 
   [_SYMBOL] = LAYOUT(
-      QK_BOOT,  RGB_TOG,       _,       _,        _, EE_CLR,         EE_CLR,     _,       _,       _,       RGB_TOG, QK_BOOT,
-       _,    Plus,     Asterisk, Caret,   Dollar,  _,          _,         Exlm,   Question, Underscore, Pipe,  _,
-       _,   Minus,     Tilda,   Left,   Right, _,     _,         Dot,     Comma,   Quote, DQuote,  _,
-       _,   Equal,       Percent, Hash,    At,   _,          _,         Colon,   Semicolon,Grave, Ampersand,       _,
+      QK_BOOT,  RGB_TOG, _, BackSlash, Slash, EE_CLR,                     EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
+       _,   Plus,     Asterisk, Caret,   Dollar,  _,          _,          Exlm,   Question, Underscore, Pipe,  _,
+       _,   Minus,     Tilda,   Left,   Right, _,     _,                  Dot,     Comma,   Quote, DQuote,  _,
+       _,   Equal,       Percent, Hash,    At,   _,          _,           Colon,   Semicolon,Grave, Ampersand,       _,
                                    DelWord,   DELETE_LINE,      _,     _,       _,
                                               KC_DEL,   _,      _
   ),
