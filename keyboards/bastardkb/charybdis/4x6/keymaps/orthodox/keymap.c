@@ -6,8 +6,6 @@
 
 enum charybdis_keymap_layers {
     _ALPHA = 0,
-    _QWERTY,
-    _GAME,
     _SYMBOL,
     _NUMBER,
     _APP,
@@ -231,7 +229,7 @@ _, _, _
   ),
 
   [_APP] = LAYOUT(
-_, _, _, _, _, _,             _, _, _, _, _, TG(_GAME),
+_, _, _, _, _, _,             _, _, _, _, _, _,
 _, _, _, WS0, _, _,                 _, _, _, _, _, _,
 _, _, WS1, WS2, WS3, _,             _, WSP, NextWin, _, _, _,
 _, _, _, _, WS4, _,                 _, _, _, _, _, _,
@@ -246,27 +244,6 @@ _, _, _, _, WS4, _,                 _, _, _, _, _, _,
        _,       _,       _,       _,       KC_BTN2, _,          _,       KC_BTN1, DRGSCRL,KC_BTN2, _, TG(_POINTER),
                                   _,       CARRETM,       KC_BTN3,    _,       DRG_TOG,
                                            _,       _,          _
-  ),
-
-
-
-
-  [_QWERTY] = LAYOUT(
-        QK_BOOT,  _,       _,       _, ARM_MICRO, EE_CLR,        EE_CLR,   _,       _,       _,       _, QK_BOOT,
-        _,        _Q,      _W,      _E,      _R,      _T,         _Y,      _U,      _I,      _O,      _P,    TG(_QWERTY),
-        QK_REP,   _A,      _S,      _D,      _F,      _G,         _H,      _J,      _K,      _L,     _RZ,    QK_REP,
-        _,        _Z,      _X,      _C,      _V,      _B,         _N,      _M,      _RB,     _RYU, _RJ, TG(_POINTER),
-   LT(_APP, Backspace), LT(_NUMBER, Space),  SFT_T(Tab),     LT(_SYMBOL, Esc), Enter,
-                                        _,     _,     _
-  ),
-
-  [_GAME] = LAYOUT(
-        _, KC_1, KC_2, KC_3, KC_4, KC_5,          _, _,_,_,_, _,
-        TG(_GAME),         KC_F,      KC_Q,      KC_W,      KC_E,      _R,         _Y,      _U,      _I,      _O,      _P,    _,
-        Tab,   Shift,      KC_A,      KC_S,      KC_D,      KC_G,         _H,      KC_BTN1,      KC_BTN2,      _L,     _RZ,    _,
-        _,_,   KC_X,      KC_C,      KC_C,      KC_B,         KC_N,      KC_BTN1,      KC_BTN2,     _RYU, _RJ, _,
-                                     KC_C, Space,  _,              _, _C,
-                                      _, _,            _
   ),
 };
 
