@@ -56,7 +56,8 @@ enum my_keycodes {
 #define _Y KC_Y
 #define _N KC_N
 #define _R KC_R
-#define _S LT(_POINTER, KC_S)
+// #define _S LT(_POINTER, KC_S)
+#define _S KC_S
 #define _T CTL_T(KC_T)
 #define _G KC_G
 #define _M KC_M
@@ -201,7 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-      _,           _,       _,       _, ARM_MICRO,     _,           _,       _,       _,       _,       _,     _,
+      _,           _,       _,      KC_BTN1, KC_BTN2,     _,           _,       _,       _,       _,       _,     _,
       _RF,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       _,          _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _RT,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
