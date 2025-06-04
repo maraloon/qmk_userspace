@@ -203,11 +203,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-      _,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,       _,     _RT,       _,     _,
+          // TODO: temp Backspace здесь для переучивания
+      Backspace,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,       _,     _RT,       _,     _,
       _,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       _,          _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-                Backspace, LT(_NUMBER, Space), _,                   LT(_APP, Esc), LT(_SYMBOL, Enter),
+                DelWord, LT(_NUMBER, Space), _,                   LT(_APP, Esc), LT(_SYMBOL, Enter),
                                  _,   SFT_T(KC_CAPS),               Leader
   ),
 
@@ -226,8 +227,8 @@ _, _, _
        _,   Plus,     Asterisk, Caret,   Dollar,  _,          _,          Exlm,   Question, Underscore, Pipe,  _,
        _,   Minus,     Tilda,   Left,   Right, _,     _,                  Dot,     Comma,   Quote, DQuote,  _,
        _,   Equal,       Percent, Hash,    At,   _,          _,           Colon,   Semicolon,Grave, Ampersand,       _,
-                                   DelWord,   DELETE_LINE,      _,     _,       _,
-                                              KC_DEL,   _,      _
+                 DELETE_LINE, _, KC_DEL,       _,      _,
+                              _,  _,            _
   ),
 
   [_APP] = LAYOUT(
