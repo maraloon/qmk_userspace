@@ -57,8 +57,8 @@ enum my_keycodes {
 #define _N KC_N
 #define _R KC_R
 // #define _S LT(_POINTER, KC_S)
-// TODO: shift on S
-#define _S KC_S
+// #define _S KC_S
+#define _S SFT_T(KC_S)
 #define _T CTL_T(KC_T)
 #define _G KC_G
 #define _M KC_M
