@@ -203,34 +203,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-          // TODO: temp Backspace здесь для переучивания
-      Backspace,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,       _,     _RT,       _,     _,
+      _,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,       _,     _RT,       _,     _,
       _,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
-      _,          _N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
+      Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,     Tab,
       _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,     _RB,    _RYU,     _RJ,    _,
-                DelWord, LT(_NUMBER, Space), _,                   LT(_APP, Esc), LT(_SYMBOL, Enter),
-                                 _,   SFT_T(KC_CAPS),               Leader
+                DelWord, LT(_NUMBER, Space), _,                  Esc, LT(_SYMBOL, Enter),
+                                 _,   SFT_T(KC_CAPS),            Leader
   ),
 
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
-QK_BOOT, _, _, _, _, EE_CLR, EE_CLR, _, _, _, _, QK_BOOT,
-_, BorrowL, BracketL, _0, BracketR, BorrowR, _, _, _9, _, _, _,
-_, ArrayL, _1, _2, _3, ArrayR, _, _5, _6, _8, Up, _,
-_, TagL, _, _, _4, TagR, _, _7, PgUp, PgDn, _, _,
-_, _, _,                           _, Down,
-_, _, _
+QK_BOOT, _, _, _, _, EE_CLR,                        EE_CLR, _, _, _, _, QK_BOOT,
+_, BorrowL, BracketL, _0, BracketR, BorrowR,        _, _, _9, _, _, _,
+_, ArrayL, _1, _2, _3, ArrayR,                      _, _5, _6, _8, Up, _,
+_, TagL, _, _, _4, TagR,                            _, _7, PgUp, PgDn, _, _,
+_, _, _,                                            _, Down,
+_, _,                                               _
   ),
 
   [_SYMBOL] = LAYOUT(
       QK_BOOT,  RGB_TOG, _, BackSlash, Slash, EE_CLR,                     EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
        _,   Plus,     Asterisk, Caret,   Dollar,  _,          _,          Exlm,   Question, Underscore, Pipe,  _,
-       _,   Minus,     Tilda,   Left,   Right, _,     _,                  Dot,     Comma,   Quote, DQuote,  _,
+       _,   Minus,     Tilda,   Left,   Right, _,     _,                  Dot,     Comma,   Quote, DQuote,  NextWin,
        _,   Equal,       Percent, Hash,    At,   _,          _,           Colon,   Semicolon,Grave, Ampersand,       _,
-                 DELETE_LINE, _, KC_DEL,       _,      _,
-                              _,  _,            _
+                 WS1, WS2, WS3,       _,      _,
+                 WS0,  WS4,           _
   ),
-
+// TODO: maybe delete
   [_APP] = LAYOUT(
 _, _, _, _, _, _,             _, _, _, _, _, _,
 _, _, _, WS0, _, _,                 _, _, _, _, _, _,
@@ -239,7 +238,7 @@ _, _, _, _, WS4, _,                 _, _, _, _, _, _,
            _, _, _,                 _, _,
               _, _,                 _
   ),
-
+// TODO: maybe delete
   [_POINTER] = LAYOUT(
        _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
        _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
