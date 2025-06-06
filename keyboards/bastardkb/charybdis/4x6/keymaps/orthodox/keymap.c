@@ -217,17 +217,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR,                        EE_CLR, _, _, _, _, QK_BOOT,
 _, BorrowL, BracketL, _0, BracketR, BorrowR,        _, BSlash, _9, Slash, _, _,
-_, ArrayL, _1, _2, _3, ArrayR,                      _, _5, _6, _8, Up, _,
-_, TagL, Home, End, _4, TagR,                            _, _7, PgUp, PgDn, _, _,
+_, ArrayL, _1, _2, _3, ArrayR,                      WS2, _5, _6, _8, Up, _,
+_, TagL, Home, End, _4, TagR,                       WS4, _7, PgUp, PgDn, _, _,
 _, _, _,                                            _, Down,
 _, _,                                               _
   ),
 
   [_SYMBOL] = LAYOUT(
       QK_BOOT,  RGB_TOG, _, _, _, EE_CLR,             EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
-       _,   Ampersand, Asterisk, Caret, Dollar, _,    _, Exlm,   Question, Pipe, Percent,  _,
-       _,   Hash, At,            Left,  Right,  _,    _, Dot,    Comma,   Quote, DQuote,  NextWin,
-       _,   Equal, Plus, Underscore, Dash,      _,    _, Colon,  Semicolon, Grave, Tilda,       _,
+       _,   Ampersand, Asterisk, Caret, Dollar, WS0,    _, Exlm,   Question, Pipe, Percent,  _,
+       _,   Hash, At,            Left,  Right,  WS1,    _, Dot,    Comma,   Quote, DQuote,  NextWin,
+       _,   Equal, Plus, Underscore, Dash,      WS3,    _, Colon,  Semicolon, Grave, Tilda,       _,
                  WS1, WS2, WS3,       _,      _,
                  WS0,  WS4,           _
   ),
