@@ -115,7 +115,7 @@ enum my_keycodes {
 #define Home KC_HOME
 #define End KC_END
 
-#define BackSlash KC_BSLS
+#define BSlash KC_BSLS
 #define Percent KC_PERC
 #define Asterisk KC_ASTR
 #define At KC_AT
@@ -124,7 +124,7 @@ enum my_keycodes {
 #define Grave KC_GRV
 #define Equal KC_EQL
 #define Underscore KC_UNDS
-#define Minus KC_MINS
+#define Dash KC_MINS
 #define Plus KC_PLUS
 
 #define Exlm KC_EXLM
@@ -214,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR,                        EE_CLR, _, _, _, _, QK_BOOT,
-_, BorrowL, BracketL, _0, BracketR, BorrowR,        _, _, _9, _, _, _,
+_, BorrowL, BracketL, _0, BracketR, BorrowR,        _, BSlash, _9, Slash, _, _,
 _, ArrayL, _1, _2, _3, ArrayR,                      _, _5, _6, _8, Up, _,
 _, TagL, _, _, _4, TagR,                            _, _7, PgUp, PgDn, _, _,
 _, _, _,                                            _, Down,
@@ -222,13 +222,14 @@ _, _,                                               _
   ),
 
   [_SYMBOL] = LAYOUT(
-      QK_BOOT,  RGB_TOG, _, BackSlash, Slash, EE_CLR,                     EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
-       _,   Plus,     Asterisk, Caret,   Dollar,  _,          _,          Exlm,   Question, Underscore, Pipe,  _,
-       _,   Minus,     Tilda,   Left,   Right, _,     _,                  Dot,     Comma,   Quote, DQuote,  NextWin,
-       _,   Equal,       Percent, Hash,    At,   _,          _,           Colon,   Semicolon,Grave, Ampersand,       _,
+      QK_BOOT,  RGB_TOG, _, _, _, EE_CLR,             EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
+       _,   Ampersand, Asterisk, Caret, Dollar, _,    _, Exlm,   Question, Pipe, Percent,  _,
+       _,   Hash, At,            Left,  Right,  _,    _, Dot,    Comma,   Quote, DQuote,  NextWin,
+       _,   Equal, Plus, Underscore, Dash,      _,    _, Colon,  Semicolon, Grave, Tilda,       _,
                  WS1, WS2, WS3,       _,      _,
                  WS0,  WS4,           _
   ),
+
 // TODO: maybe delete
   [_APP] = LAYOUT(
 _, _, _, _, _, _,             _, _, _, _, _, _,
