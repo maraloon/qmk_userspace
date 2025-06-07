@@ -153,6 +153,7 @@ enum my_keycodes {
 #define NextWin LCMD(KC_GRV)
 #define OS OSM(MOD_LSFT)
 #define OC OSM(MOD_LCTL)
+#define OA OSM(MOD_LALT)
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -206,9 +207,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
       _,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,    _RYU,     _RT,     _RJ,     _,
-      _,        _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
-      Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   Tab,
-      _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,      OS,      OC,     _RB,     _,
+      Tab,      _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
+      Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   _RB,
+      _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,      OS,      OC,      OA,     _,
                 DelWord, LT(_NUMBER, Space), _,                  Esc, LT(_SYMBOL, Enter),
                                  _,   SFT_T(KC_CAPS),            Leader
   ),
