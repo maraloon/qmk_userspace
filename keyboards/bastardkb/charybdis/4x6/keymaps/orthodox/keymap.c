@@ -36,8 +36,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 enum my_keycodes {
   CODE_ARRAY = SAFE_RANGE,
-  ARM_MICRO,
   CODE_TO,
+  ARM_MICRO,
   DELETE_LINE,
 };
 
@@ -225,9 +225,9 @@ _, _,                                               _
 
   [_SYMBOL] = LAYOUT(
       QK_BOOT,  RGB_TOG, _, _, _, EE_CLR,             EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
-       _,   Ampersand, Asterisk, Caret, Dollar, WS0,    _, Exlm,   Question, Pipe, Percent,  _,
-       _,   Hash, At,            Left,  Right,  WS1,    _, Dot,    Comma,   Quote, DQuote,  NextWin,
-       _,   Equal, Plus, Underscore, Dash,      WS3,    _, Colon,  Semicolon, Grave, Tilda,       _,
+       _,   Ampersand, Asterisk, Caret, Dollar, _,    _, Exlm,   Question, Pipe, Percent,  _,
+       _,   Hash, At,            Left,  Right,  _,    _, Dot,    Comma,   Quote, DQuote,  NextWin,
+       _,   Equal, Plus, Underscore, Dash,      _,    _, Colon,  Semicolon, Grave, Tilda,       _,
                  WS1, WS2, WS3,       _,      _,
                  WS0,  WS4,           _
   ),
