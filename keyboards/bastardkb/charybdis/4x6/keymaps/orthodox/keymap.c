@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   _RB,
       _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,      OC,      OS,      OA,     _,
                 DelWord, LT(_NUMBER, Space), _,                  LT(_APP, Esc), LT(_SYMBOL, Enter),
-                                 _,   SFT_T(KC_CAPS),            Leader
+                                 _,   KC_CAPS,                   Leader
   ),
 
   [_NUMBER] = LAYOUT(
