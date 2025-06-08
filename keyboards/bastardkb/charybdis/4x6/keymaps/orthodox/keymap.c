@@ -143,6 +143,7 @@ enum my_keycodes {
 
 
 #define Leader LCMD(KC_L)
+#define Leader2 LCMD(KC_S)
 
 #define WS0 LCMD(KC_0)
 #define WS1 LCMD(KC_1)
@@ -210,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       Tab,      _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
       Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   _RB,
       _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,      OC,      OS,      OA,     _,
-                DelWord, LT(_NUMBER, Space), _,                  LT(_APP, Esc), LT(_SYMBOL, Enter),
+                DelWord, LT(_NUMBER, Space), Leader2,            LT(_APP, Esc), LT(_SYMBOL, Enter),
                                  _,   KC_CAPS,                   Leader
   ),
 
