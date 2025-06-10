@@ -201,7 +201,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define _RJ KC_KP_2  // ж
 #define _RZ KC_KP_3  // з
 #define _RT KC_KP_4  // ъ
-#define _RB KC_KP_5  // б
+#define _RH KC_KP_5  // х
 #define _RYU KC_KP_6 // ю
 
 // clang-format off
@@ -209,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
       _,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,    _RYU,     _RT,     _RJ,     _,
       Tab,      _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
-      Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   _RB,
+      Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   _RH,
       _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,      OC,      OS,      OA,     _,
                 DelWord, LT(_NUMBER, Space), Leader2,            LT(_APP, Esc), LT(_SYMBOL, Enter),
                                  _,   KC_CAPS,                   Leader
