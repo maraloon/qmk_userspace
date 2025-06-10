@@ -214,7 +214,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 DelWord, LT(_NUMBER, Space), Leader2,            LT(_APP, Esc), LT(_SYMBOL, Enter),
                                  _,   KC_CAPS,                   Leader
   ),
-
   [_NUMBER] = LAYOUT(
        /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
 QK_BOOT, _, _, _, _, EE_CLR,                        EE_CLR, _, _, _, _, QK_BOOT,
