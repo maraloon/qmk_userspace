@@ -57,9 +57,8 @@ enum my_keycodes {
 #define _N KC_N
 #define _R KC_R
 // #define _S LT(_POINTER, KC_S)
-// #define _S KC_S
-#define _S SFT_T(KC_S)
-#define _T CTL_T(KC_T)
+#define _S KC_S
+#define _T KC_T
 #define _G KC_G
 #define _M KC_M
 #define _A CTL_T(KC_A)
@@ -151,6 +150,10 @@ enum my_keycodes {
 #define WS3 LCMD(KC_3)
 #define WS4 LCMD(KC_4)
 #define WSP LALT(KC_TAB)
+
+#define WS12 LCMD(KC_1)
+#define WS04 LCMD(KC_0)
+
 #define NextWin LCMD(KC_GRV)
 #define OS OSM(MOD_LSFT)
 #define OC OSM(MOD_LCTL)
@@ -226,11 +229,11 @@ _, _,                                               _
 
   [_SYMBOL] = LAYOUT(
       QK_BOOT,  RGB_TOG, _, _, _, EE_CLR,             EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
-       _,   Ampersand, Asterisk, Caret, Dollar, _,    _, Exlm,   Question, Pipe, Percent,  _,
-       _,   Hash, At,            Left,  Right,  _,    _, Dot,    Comma,   Quote, DQuote,  NextWin,
-       _,   Equal, Plus, Underscore, Dash,      _,    _, Colon,  Semicolon, Grave, Tilda,       _,
-                 WS1, WS2, WS3,       _,      _,
-                 WS0,  WS4,           _
+       _,   Ampersand, Asterisk, Caret, Dollar, _,    _, Exlm,   Question, Pipe, Percent, _,
+       _,   Hash, At,            Left,  Right,  _,    _, Dot,    Comma,   Quote, DQuote,  _,
+       _,   Equal, Plus, Underscore, Dash,      _,    _, Colon,  Semicolon, Grave, Tilda, _,
+                               NextWin, WS12, WS3,    _,      _,
+                                         _,  WS04,    _
   ),
 
 // TODO: maybe delete
