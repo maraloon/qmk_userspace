@@ -56,8 +56,8 @@ enum my_keycodes {
 #define _Y KC_Y
 #define _N KC_N
 #define _R KC_R
-// #define _S LT(_POINTER, KC_S)
-#define _S KC_S
+#define _S LT(_POINTER, KC_S)
+// #define _S KC_S
 #define _T KC_T
 #define _G KC_G
 #define _M KC_M
@@ -160,17 +160,8 @@ enum my_keycodes {
 #define OA OSM(MOD_LALT)
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    return true;
-
-    // TODO: remove this block
     switch (keycode) {
-        case _F:
-        case _E:
-        case _A:
-        case _T:
         case _S:
-        case _H:
-        case _D:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
