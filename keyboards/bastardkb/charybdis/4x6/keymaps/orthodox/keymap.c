@@ -47,7 +47,7 @@ enum my_keycodes {
 
 #define _Q KC_Q
 #define _W KC_W
-#define _F SFT_T(KC_F)
+#define _F KC_F
 #define _P KC_P
 #define _B KC_B
 #define _J KC_J
@@ -61,17 +61,17 @@ enum my_keycodes {
 #define _T KC_T
 #define _G KC_G
 #define _M KC_M
-#define _A CTL_T(KC_A)
-#define _E SFT_T(KC_E)
+#define _A KC_A
+#define _E KC_E
 #define _I KC_I
 #define _O KC_O
 #define _Z KC_Z
 #define _X KC_X
 #define _C KC_C
-#define _D ALT_T(KC_D)
+#define _D KC_D
 #define _V KC_V
 #define _K KC_K
-#define _H ALT_T(KC_H)
+#define _H KC_H
 
 #define _0 KC_0
 #define _1 KC_1
@@ -160,6 +160,9 @@ enum my_keycodes {
 #define OA OSM(MOD_LALT)
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    return true;
+
+    // TODO: remove this block
     switch (keycode) {
         case _F:
         case _E:
