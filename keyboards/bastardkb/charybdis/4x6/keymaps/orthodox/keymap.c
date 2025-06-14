@@ -1,77 +1,48 @@
 #include QMK_KEYBOARD_H
 
-#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-#    include "timer.h"
-#endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
 enum charybdis_keymap_layers {
-    _ALPHA = 0,
-    _SYMBOL,
-    _NUMBER,
-    _APP,
-    _POINTER,
-};
-
-/** \brief Automatically enable sniping-mode on the pointer layer. */
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER _POINTER
-
-#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-static uint16_t auto_pointer_layer_timer = 0;
-
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
-#    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
-#    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
-#ifndef POINTING_DEVICE_ENABLE
-#    define DRGSCRL KC_NO
-#    define DPI_MOD KC_NO
-#    define S_D_MOD KC_NO
-#    define SNIPING KC_NO
-#endif // !POINTING_DEVICE_ENABLE
-
-enum my_keycodes {
-  CODE_ARRAY = SAFE_RANGE,
-  CODE_TO,
-  ARM_MICRO,
-  DELETE_LINE,
+    _ABC = 0,
+    _SYM,
+    _NUM,
+    _PNTR,
 };
 
 #undef _______
 #define _ KC_NO
 #define _______ KC_NO
 
-#define _Q KC_Q
-#define _W KC_W
-#define _F KC_F
-#define _P KC_P
-#define _B KC_B
-#define _J KC_J
-#define _L KC_L
-#define _U KC_U
-#define _Y KC_Y
-#define _N KC_N
-#define _R KC_R
-#define _S LT(_POINTER, KC_S)
-// #define _S KC_S
-#define _T KC_T
-#define _G KC_G
-#define _M KC_M
-#define _A KC_A
-#define _E KC_E
-#define _I KC_I
-#define _O KC_O
-#define _Z KC_Z
-#define _X KC_X
-#define _C KC_C
-#define _D KC_D
-#define _V KC_V
-#define _K KC_K
-#define _H KC_H
+// WARN: danger
+#undef G
+#undef A
+#undef X
+#undef C
+
+#define Q KC_Q
+#define W KC_W
+#define F KC_F
+#define P KC_P
+#define B KC_B
+#define J KC_J
+#define L KC_L
+#define U KC_U
+#define Y KC_Y
+#define N KC_N
+#define R KC_R
+#define S_PTR LT(_PNTR, KC_S)
+#define T KC_T
+#define G KC_G
+#define M KC_M
+#define A KC_A
+#define E KC_E
+#define I KC_I
+#define O KC_O
+#define Z KC_Z
+#define X KC_X
+#define C KC_C
+#define D KC_D
+#define V KC_V
+#define K KC_K
+#define H KC_H
 
 #define _0 KC_0
 #define _1 KC_1
@@ -89,25 +60,29 @@ enum my_keycodes {
 #define Left KC_LEFT
 #define Right KC_RIGHT
 
-#define BracketL KC_LPRN
-#define BracketR KC_RPRN
-#define BorrowL KC_LCBR
-#define BorrowR KC_RCBR
-#define ArrayL KC_LBRC
-#define ArrayR KC_RBRC
-#define TagL KC_LT
-#define TagR KC_GT
+#define Bracket KC_LPRN
+#define bracket KC_RPRN
+#define Borrow KC_LCBR
+#define borrow KC_RCBR
+#define Array KC_LBRC
+#define array KC_RBRC
+#define Tag KC_LT
+#define tag KC_GT
 
 #define Space KC_SPC
-#define Backspace KC_BSPC
-#define DelWord LCTL(Backspace)
-#define Cmd KC_LCMD
-#define Ctrl KC_LCTL
-#define Alt KC_LALT
-#define Shift KC_LSFT
+#define BSpace KC_BSPC
+#define DelWord LCTL(KC_BSPC)
 #define Enter KC_ENT
 #define Esc KC_ESC
 #define Tab KC_TAB
+
+// #define Cmd KC_LCMD
+// #define Ctrl KC_LCTL
+// #define Alt KC_LALT
+// #define Shift KC_LSFT
+#define Shift OSM(MOD_LSFT)
+#define Ctrl OSM(MOD_LCTL)
+#define Alt OSM(MOD_LALT)
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -140,28 +115,80 @@ enum my_keycodes {
 #define Caret KC_CIRC
 #define Dollar KC_DLR
 
-
 #define Leader LCMD(KC_L)
-#define Leader2 LCMD(KC_S)
-
-#define WS0 LCMD(KC_0)
-#define WS1 LCMD(KC_1)
-#define WS2 LCMD(KC_2)
-#define WS3 LCMD(KC_3)
-#define WS4 LCMD(KC_4)
-#define WSP LALT(KC_TAB)
-
 #define WS12 LCMD(KC_1)
 #define WS04 LCMD(KC_0)
-
+// #define WS0 LCMD(KC_0)
+// #define WS1 LCMD(KC_1)
+// #define WS2 LCMD(KC_2)
+#define WS3 LCMD(KC_3)
+// #define WS4 LCMD(KC_4)
+#define WSP LALT(KC_TAB)
 #define NextWin LCMD(KC_GRV)
-#define OS OSM(MOD_LSFT)
-#define OC OSM(MOD_LCTL)
-#define OA OSM(MOD_LALT)
+
+#define rF KC_KP_1  // ф
+#define rJ KC_KP_2  // ж
+#define rZ KC_KP_3  // з
+#define rT KC_KP_4  // ъ
+#define rH KC_KP_5  // х
+#define rU KC_KP_6  // ю
+
+#define Space_NUM LT(_NUM, Space)
+#define Enter_SYM LT(_SYM, Enter)
+
+// clang-format off
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [_ABC] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,    rF,    rU,    rT,    rJ,    _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
+    _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,    _,
+
+                   DelWord, Space_NUM, _,            Esc, Enter_SYM,
+                         BSpace, KC_CAPS,            Leader
+  ),
+
+  [_NUM] = LAYOUT(
+    //   {   (    0   )   }
+    //   [   1    2   3   ]
+    //   <   home end 4   >
+    _,      _,       _,   _,       _,      _,        _,      _,    _,     _, _,  _,
+    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, _,  _,
+    _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
+    _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,  PgDn, _,  _,
+
+                                     _, _, _,        _, Down,
+                                        _, _,        _
+  ),
+
+  [_SYM] = LAYOUT(
+    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
+    _, Ampersand, Asterisk, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Percent, _,
+    _, Hash,      At,       Left,       Right,  _,        _, Dot,    Comma,     Quote, DQuote,  _,
+    _, Equal,     Plus,     Underscore, Dash,   _,        _, Colon,  Semicolon, Grave, Tilda,   _,
+
+    //   &   *   ^   $        !   ?   |   %
+    //   #   @                .   ,   '   "
+    //   =   +   _   -        :   ;   `   ~
+
+                               NextWin, WS12, WS3,    _,      _,
+                                         _,  WS04,    _
+  ),
+
+  [_PNTR] = LAYOUT(
+    _, _, _, _, _, _,          _, _, _, _, _, _,
+    _, _, _, _, KC_BTN3, _,    _, _, _, _, _, _,
+    _, _, _, _, KC_BTN1, _,    _, _, _, _, _, _,
+    _, _, _, _, KC_BTN2, _,    _, _, _, _, _, _,
+
+             _, CARRETM, _,    _, _,
+                      _, _,    _
+  ),
+};
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case _S:
+        case S_PTR:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
@@ -169,6 +196,13 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
             return true;
     }
 }
+
+enum my_keycodes {
+  CODE_ARRAY = SAFE_RANGE,
+  CODE_TO,
+  ARM_MICRO,
+  DELETE_LINE,
+};
 
 uint16_t change_app_timer = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -194,68 +228,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
-#define _RF KC_KP_1  // ф
-#define _RJ KC_KP_2  // ж
-#define _RZ KC_KP_3  // з
-#define _RT KC_KP_4  // ъ
-#define _RH KC_KP_5  // х
-#define _RYU KC_KP_6 // ю
 
-// clang-format off
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_ALPHA] = LAYOUT(
-      _,         _, SNIPING,  KC_BTN1, KC_BTN2,      _,           _,     _RF,    _RYU,     _RT,     _RJ,     _,
-      Tab,      _Q,      _W,      _F,      _P,      _B,          _J,      _L,      _U,      _Y,     _RZ,     _,
-      Backspace,_N,      _R,      _S,      _T,      _G,          _M,      _A,      _E,      _I,      _O,   _RH,
-      _,        _Z,      _X,      _C,      _D,      _V,          _K,      _H,      OC,      OS,      OA,     _,
-                DelWord, LT(_NUMBER, Space), Leader2,            Esc, LT(_SYMBOL, Enter),
-                                 _,   KC_CAPS,                   Leader
-  ),
-  [_NUMBER] = LAYOUT(
-       /*RGB_TOG, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_M_P,   RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD,  RGB_MOD, RGB_RMOD,*/
-QK_BOOT, _, _, _, _, EE_CLR,                        EE_CLR, _, _, _, _, QK_BOOT,
-_, BorrowL, BracketL, _0, BracketR, BorrowR,        _, BSlash, _9, Slash, _, _,
-_, ArrayL, _1, _2, _3, ArrayR,                      _, _5, _6, _8, Up, _,
-_, TagL, Home, End, _4, TagR,                       _, _7, PgUp, PgDn, _, _,
-_, _, _,                                            _, Down,
-_, _,                                               _
-  ),
+#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+#    include "timer.h"
+#endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-  [_SYMBOL] = LAYOUT(
-      QK_BOOT,  RGB_TOG, _, _, _, EE_CLR,             EE_CLR, _, _, _, RGB_TOG, QK_BOOT,
-       _,   Ampersand, Asterisk, Caret, Dollar, _,    _, Exlm,   Question, Pipe, Percent, _,
-       _,   Hash, At,            Left,  Right,  _,    _, Dot,    Comma,   Quote, DQuote,  _,
-       _,   Equal, Plus, Underscore, Dash,      _,    _, Colon,  Semicolon, Grave, Tilda, _,
-                               NextWin, WS12, WS3,    _,      _,
-                                         _,  WS04,    _
-  ),
+/** \brief Automatically enable sniping-mode on the pointer layer. */
+#define CHARYBDIS_AUTO_SNIPING_ON_LAYER _PNTR
 
-// TODO: maybe delete
-  [_APP] = LAYOUT(
-_, _, _, _, _, _,             _, _, _, _, _, _,
-_, _, _, WS0, _, _,                 _, _, _, _, _, _,
-_, _, WS1, WS2, WS3, _,             _, _, NextWin, _, _, _,
-_, _, _, _, WS4, _,                 _, _, _, _, _, _,
-           _, _, _,                 _, _,
-              _, _,                 _
-  ),
-// TODO: maybe delete
-  [_POINTER] = LAYOUT(
-       _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
-       _,       _,       _,       _,       _,       _,          _,       _,       _,       _,            _,        _,
-       _,       _,       _,       _,       KC_BTN1, _,          _,       _, _, _, _, _,
-       _,       _,       _,       _,       KC_BTN2, _,          _,       KC_BTN1, DRGSCRL,KC_BTN2, _, TG(_POINTER),
-                                  _,       CARRETM,       KC_BTN3,    _,       DRG_TOG,
-                                           _,       _,          _
-  ),
-};
+#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+static uint16_t auto_pointer_layer_timer = 0;
+
+#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
+#    endif
+
+#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
+#    endif
+#endif
+
+#ifndef POINTING_DEVICE_ENABLE
+#    define DRGSCRL KC_NO
+#    define DPI_MOD KC_NO
+#    define S_D_MOD KC_NO
+#    define SNIPING KC_NO
+#endif
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
-            layer_on(_POINTER);
+            layer_on(_PNTR);
 #        ifdef RGB_MATRIX_ENABLE
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
@@ -269,7 +274,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 void matrix_scan_user(void) {
     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
         auto_pointer_layer_timer = 0;
-        layer_off(_POINTER);
+        layer_off(_PNTR);
 #        ifdef RGB_MATRIX_ENABLE
         rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
 #        endif // RGB_MATRIX_ENABLE
@@ -280,7 +285,7 @@ void matrix_scan_user(void) {
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {
     charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, _NUMBER));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, _NUM));
     return state;
 }
 #    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
