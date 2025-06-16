@@ -149,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
 
                  DelWord, Space_NUM, Tab,            Esc, Enter_SYM,
-                                 _, Lang,            Leader
+                             Shift, Lang,            Leader
   ),
 
   [_NUM] = LAYOUT(
@@ -166,14 +166,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SYM] = LAYOUT(
+    //   &   *   ^   $        !   ?   |   %
+    //   #   @                .   ,   '   "
+    //   =   +   _   -        :   ;   `   ~
+
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
     _, Ampersand, Asterisk, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Percent, _,
     _, Hash,      At,       Left,       Right,  _,        _, Dot,    Comma,     Quote, DQuote,  _,
     _, Equal,     Plus,     Underscore, Dash,   _,        _, Colon,  Semicolon, Grave, Tilda,   _,
-
-    //   &   *   ^   $        !   ?   |   %
-    //   #   @                .   ,   '   "
-    //   =   +   _   -        :   ;   `   ~
 
                                NextWin, WS12, WS3,    _,      _,
                                          _,  WS04,    _
