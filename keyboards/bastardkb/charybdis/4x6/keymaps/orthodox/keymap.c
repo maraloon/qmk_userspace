@@ -81,6 +81,7 @@ enum charybdis_keymap_layers {
 // #define Alt KC_LALT
 // #define Shift KC_LSFT
 #define Shift OSM(MOD_LSFT)
+#define SpaceShift SFT_T(KC_SPC)
 #define Ctrl OSM(MOD_LCTL)
 #define Alt OSM(MOD_LALT)
 
@@ -149,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
 
                  DelWord, Space_NUM, Tab,            Esc, Enter_SYM,
-                             Shift, Lang,            Leader
+                        SpaceShift, Lang,            Leader
   ),
 
   [_NUM] = LAYOUT(
