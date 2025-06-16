@@ -138,8 +138,9 @@ enum charybdis_keymap_layers {
 #define rH KC_KP_5  // х
 #define rU KC_KP_6  // ю
 
-#define Space_NUM LT(_NUM, Space)
-#define Enter_SYM LT(_SYM, Enter)
+#define Space_NUM LT(_NUM, KC_SPC)
+// #define Enter_SYM LT(_SYM, KC_ENT)
+#define Esc_SYM LT(_SYM, KC_ESC)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -149,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rJ,    N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
     _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
 
-                 DelWord, Space_NUM, Tab,            Esc, Enter_SYM,
+                 DelWord, Space_NUM, Tab,            Enter, Esc_SYM,
                         SpaceShift, Lang,            Leader
   ),
 
