@@ -117,6 +117,7 @@ enum charybdis_keymap_layers {
 
 #define VolUp KC_KB_VOLUME_UP
 #define VolDn KC_KB_VOLUME_DOWN
+#define Lang KC_CAPS
 
 #define Leader LCMD(KC_L)
 #define WS12 LCMD(KC_1)
@@ -142,13 +143,13 @@ enum charybdis_keymap_layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
-    _,     _,     _, VolDn, VolUp,     _,            _,    rF,    rU,    rT,     _,    _,
+    _,     _,     _, VolDn, VolUp,     _,            _,    rF,     _,    rT,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
     rJ,    N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
     _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
 
                  DelWord, Space_NUM, Tab,            Esc, Enter_SYM,
-                         BSpace, KC_CAPS,            Leader
+                            BSpace, Lang,            Leader
   ),
 
   [_NUM] = LAYOUT(
