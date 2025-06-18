@@ -173,11 +173,21 @@ void switch_to_russian(void) {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  // [_ABC] = LAYOUT(
+  //   _,     _,     _, VolDn, VolUp,     _,            _,    rF,     _,    rT,     _,    _,
+  //   _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
+  //   rJ,    N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
+  //   Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
+  //
+  //                DelWord, Space_NUM, Tab,            Enter, Esc_SYM,
+  //                       SpaceShift, LANG,            Leader
+  // ),
+
   [_ABC] = LAYOUT(
-    _,     _,     _, VolDn, VolUp,     _,            _,    rF,     _,    rT,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
-    rJ,    N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
-    Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
+    _,     _,     _, VolDn, VolUp,     _,            _,     _,     _,     _,     _,    _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,   Alt,    _,
+    _,     N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
+    Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,     _,    _,
 
                  DelWord, Space_NUM, Tab,            Enter, Esc_SYM,
                         SpaceShift, LANG,            Leader
