@@ -2,6 +2,7 @@
 
 enum charybdis_keymap_layers {
     _ABC = 0,
+    _RUS,
     _SYM,
     _NUM,
     _PNTR,
@@ -142,16 +143,57 @@ enum charybdis_keymap_layers {
 // #define Enter_SYM LT(_SYM, KC_ENT)
 #define Esc_SYM LT(_SYM, KC_ESC)
 
+enum my_keycodes {
+  CODE_ARRAY = SAFE_RANGE,
+  CODE_TO,
+  ARM_MICRO,
+  DELETE_LINE,
+  LANG,
+};
+
+void switch_to_english(void) {
+  uint8_t mod_state = get_mods();
+  clear_mods();
+  SEND_STRING(SS_TAP(X_CAPS));
+  layer_move(_ABC);
+  set_mods(mod_state);
+};
+
+
+void switch_to_russian(void) {
+  // if (get_highest_layer(layer_state) == _RUS) {
+  //   switch_to_english();
+  // } else {
+    uint8_t mod_state = get_mods();
+    clear_mods();
+    SEND_STRING(SS_TAP(X_CAPS));
+    layer_move(_RUS);
+    set_mods(mod_state);
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
     _,     _,     _, VolDn, VolUp,     _,            _,    rF,     _,    rT,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
     rJ,    N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
-    _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
+    Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
 
                  DelWord, Space_NUM, Tab,            Enter, Esc_SYM,
-                        SpaceShift, Lang,            Leader
+                        SpaceShift, LANG,            Leader
+  ),
+
+  [_RUS] = LAYOUT(
+    _,     _,     _, VolDn, VolUp,     _,            _,     _,     _,     _,     _,    _,
+    //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
+    //     Щ      Ы      В      А      П             Р      О      Л      Д      Ж
+    _,     N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rJ,    _,
+    //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Х
+    _,     Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rH,    _,
+
+                                 _, _, _,            rF, SpaceShift,
+                                    _, _,            rT
   ),
 
   [_NUM] = LAYOUT(
@@ -203,13 +245,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-enum my_keycodes {
-  CODE_ARRAY = SAFE_RANGE,
-  CODE_TO,
-  ARM_MICRO,
-  DELETE_LINE,
-};
-
 uint16_t change_app_timer = 0;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -227,6 +262,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DELETE_LINE:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
+      }
+      return false;
+    case LANG:
+      if (record->event.pressed) {
+          switch_to_russian();
+      } else {
+          switch_to_english();
       }
       return false;
     default:
