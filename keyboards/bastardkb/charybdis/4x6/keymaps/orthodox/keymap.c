@@ -132,12 +132,12 @@ enum charybdis_keymap_layers {
 #define WSP LALT(KC_TAB)
 #define NextWin LCMD(KC_GRV)
 
-#define rF KC_KP_1  // ф
-#define rJ KC_KP_2  // ж
-#define rZ KC_KP_3  // з
-#define rT KC_KP_4  // ъ
-#define rH KC_KP_5  // х
-#define rU KC_KP_6  // ю
+#define rF KC_KP_1 // ф
+#define rJ KC_KP_2 // ж
+#define rZ KC_KP_3 // з
+#define rT KC_KP_4 // ъ
+#define rH KC_KP_5 // х
+#define rU KC_KP_6 // ю
 
 #define Space_NUM LT(_NUM, KC_SPC)
 // #define Enter_SYM LT(_SYM, KC_ENT)
@@ -145,26 +145,25 @@ enum charybdis_keymap_layers {
 #define EnterCmd MT(MOD_LGUI, KC_ENT)
 
 enum my_keycodes {
-  CODE_ARRAY = SAFE_RANGE,
-  CODE_TO,
-  ARM_MICRO,
-  DELETE_LINE,
-  LANG,
+    CODE_ARRAY = SAFE_RANGE,
+    CODE_TO,
+    ARM_MICRO,
+    DELETE_LINE,
+    LANG,
 };
 
 void switch_to_english(void) {
-  uint8_t mod_state = get_mods();
-  clear_mods();
-  SEND_STRING(SS_TAP(X_CAPS));
-  layer_move(_ABC);
-  set_mods(mod_state);
+    uint8_t mod_state = get_mods();
+    clear_mods();
+    SEND_STRING(SS_TAP(X_CAPS));
+    layer_move(_ABC);
+    set_mods(mod_state);
 };
 
-
 void switch_to_russian(void) {
-  // if (get_highest_layer(layer_state) == _RUS) {
-  //   switch_to_english();
-  // } else {
+    // if (get_highest_layer(layer_state) == _RUS) {
+    //   switch_to_english();
+    // } else {
     uint8_t mod_state = get_mods();
     clear_mods();
     SEND_STRING(SS_TAP(X_CAPS));
@@ -244,6 +243,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _, _,    _
   ),
 };
+// clang-format on
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -257,36 +257,41 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 uint16_t change_app_timer = 0;
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case ARM_MICRO:
-      if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_F20));
-      } else {
-          SEND_STRING(SS_TAP(X_F20));
-      }
-      return false;
-    case CODE_ARRAY:
-      if (record->event.pressed) { SEND_STRING(" => "); } return false;
-    case CODE_TO:
-      if (record->event.pressed) { SEND_STRING("->"); } return false;
-    case DELETE_LINE:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
-      }
-      return false;
-    case LANG:
-      if (record->event.pressed) {
-          switch_to_russian();
-      } else {
-          switch_to_english();
-      }
-      return false;
-    default:
-      return true; // Process all other keycodes normally
-  }
+bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ARM_MICRO:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_F20));
+            } else {
+                SEND_STRING(SS_TAP(X_F20));
+            }
+            return false;
+        case CODE_ARRAY:
+            if (record->event.pressed) {
+                SEND_STRING(" => ");
+            }
+            return false;
+        case CODE_TO:
+            if (record->event.pressed) {
+                SEND_STRING("->");
+            }
+            return false;
+        case DELETE_LINE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
+            }
+            return false;
+        case LANG:
+            if (record->event.pressed) {
+                switch_to_russian();
+            } else {
+                switch_to_english();
+            }
+            return false;
+        default:
+            return true; // Process all other keycodes normally
+    }
 }
-
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
@@ -360,16 +365,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-                rgb_matrix_set_color(index, 100, 10, 0);
-                // if (row == 5) {
-                //     rgb_matrix_set_color(index, 5, 0, 5);
-                // } else {
-                //     if (col == 0) {
-                //         rgb_matrix_set_color(index, 5, 0, 5);
-                //     } else {
-                //         rgb_matrix_set_color(index, 160, 20, 0);
-                //     }
-                // }
+            rgb_matrix_set_color(index, 100, 10, 0);
+            // if (row == 5) {
+            //     rgb_matrix_set_color(index, 5, 0, 5);
+            // } else {
+            //     if (col == 0) {
+            //         rgb_matrix_set_color(index, 5, 0, 5);
+            //     } else {
+            //         rgb_matrix_set_color(index, 160, 20, 0);
+            //     }
+            // }
         }
     }
     return true;
