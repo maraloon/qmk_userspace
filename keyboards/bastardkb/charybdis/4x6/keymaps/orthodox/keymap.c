@@ -142,6 +142,7 @@ enum charybdis_keymap_layers {
 #define Space_NUM LT(_NUM, KC_SPC)
 // #define Enter_SYM LT(_SYM, KC_ENT)
 #define Esc_SYM LT(_SYM, KC_ESC)
+#define EnterCmd MT(MOD_LGUI, KC_ENT)
 
 enum my_keycodes {
   CODE_ARRAY = SAFE_RANGE,
@@ -189,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
 
-                 DelWord, Space_NUM, Tab,            Enter, Esc_SYM,
+                 DelWord, Space_NUM, Tab,            EnterCmd, Esc_SYM,
                            _, SpaceShift,            LANG
   ),
 
