@@ -197,10 +197,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,    _,     _,     _,            _,     _,     _,     _,     _,    _,
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
     Enter, Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,   _,
-    //     Щ      Ы      В      А      П             Р      О      Л      Д      Ж
-    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rJ,  rT,
-    //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Х
-    Exlm,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rH, Question,
+    //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
+    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  rT,
+    //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
+    Exlm,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ, Question,
 
                   Comma, SpaceShift, Dot,            _, _,
                         Dash, SpaceShift,            _
