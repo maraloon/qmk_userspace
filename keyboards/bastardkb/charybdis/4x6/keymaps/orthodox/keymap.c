@@ -3,10 +3,12 @@
 enum charybdis_keymap_layers {
     _ABC = 0,
     _RUS,
-    _SYM,
     _NUM,
+    _SYM,
     _PNTR,
 };
+
+bool trackball_volume = false;
 
 #undef _______
 #define _ KC_NO
@@ -150,6 +152,7 @@ enum my_keycodes {
     ARM_MICRO,
     DELETE_LINE,
     LANG,
+    VOLTR,
 };
 
 void switch_to_english(void) {
@@ -184,13 +187,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ),
 
   [_ABC] = LAYOUT(
-    _,     _,     _, VolDn, VolUp,     _,            _,     _,     _,     _,     _,    _,
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,   Alt,    _,
     _,     N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
 
                  DelWord, Space_NUM, Tab,            EnterCmd, Esc_SYM,
-                           _, SpaceShift,            LANG
+                       VOLTR, SpaceShift,            LANG
   ),
 
   [_RUS] = LAYOUT(
@@ -288,6 +291,14 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch_to_english();
             }
             return false;
+        // TODO: make it work on holding `SpaceShift`
+        case VOLTR:
+            if (record->event.pressed) {
+                trackball_volume = true;
+            } else {
+                trackball_volume = false;
+            }
+            return false;
         default:
             return true; // Process all other keycodes normally
     }
@@ -378,4 +389,33 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
     return true;
+}
+
+// ✅ Control volume using the trackball (Works only in Layer 3)
+static int volume_accumulator = 0; // Accumulate trackball movement for volume control
+#define SCROLL_DIVIDER 15          // 🔥 Higher values slow down volume change (increase for more sensitivity)
+// WARN: function already used
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    // if (get_highest_layer(layer_state) == 3) {
+    if (trackball_volume) {
+        volume_accumulator += mouse_report.y; // 🔥 Accumulate trackball movement
+
+        while (abs(volume_accumulator) >= SCROLL_DIVIDER) { // 🔥 Change volume only when movement exceeds threshold
+            if (volume_accumulator > 0) {
+                tap_code(VolDn); // Scroll down decreases volume
+                volume_accumulator -= SCROLL_DIVIDER;
+            } else {
+                tap_code(VolUp); // Scroll up increases volume
+                volume_accumulator += SCROLL_DIVIDER;
+            }
+        }
+
+        // Block normal trackball input
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+        mouse_report.h = 0;
+        mouse_report.v = 0;
+    }
+
+    return mouse_report;
 }
