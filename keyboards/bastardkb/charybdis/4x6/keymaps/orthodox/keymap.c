@@ -8,6 +8,15 @@ enum charybdis_keymap_layers {
     _PNTR,
 };
 
+enum my_keycodes {
+    CODE_ARRAY = SAFE_RANGE,
+    CODE_TO,
+    ARM_MICRO,
+    DELETE_LINE,
+    LANG,
+    VOLTR,
+};
+
 bool trackball_volume = false;
 
 #undef _______
@@ -146,46 +155,8 @@ bool trackball_volume = false;
 #define Esc_SYM LT(_SYM, KC_ESC)
 #define EnterCmd MT(MOD_LGUI, KC_ENT)
 
-enum my_keycodes {
-    CODE_ARRAY = SAFE_RANGE,
-    CODE_TO,
-    ARM_MICRO,
-    DELETE_LINE,
-    LANG,
-    VOLTR,
-};
-
-void switch_to_english(void) {
-    uint8_t mod_state = get_mods();
-    clear_mods();
-    SEND_STRING(SS_TAP(X_CAPS));
-    layer_move(_ABC);
-    set_mods(mod_state);
-};
-
-void switch_to_russian(void) {
-    // if (get_highest_layer(layer_state) == _RUS) {
-    //   switch_to_english();
-    // } else {
-    uint8_t mod_state = get_mods();
-    clear_mods();
-    SEND_STRING(SS_TAP(X_CAPS));
-    layer_move(_RUS);
-    set_mods(mod_state);
-};
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  // [_ABC] = LAYOUT(
-  //   _,     _,     _, VolDn, VolUp,     _,            _,    rF,     _,    rT,     _,    _,
-  //   _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,    _,
-  //   rJ,    N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,   rH,
-  //   Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift,   Alt,   rU,
-  //
-  //                DelWord, Space_NUM, Tab,            Enter, Esc_SYM,
-  //                       SpaceShift, LANG,            Leader
-  // ),
-
   [_ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,   Alt,    _,
@@ -247,6 +218,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format on
+
+void switch_to_english(void) {
+    uint8_t mod_state = get_mods();
+    clear_mods();
+    SEND_STRING(SS_TAP(X_CAPS));
+    layer_move(_ABC);
+    set_mods(mod_state);
+};
+
+void switch_to_russian(void) {
+    // if (get_highest_layer(layer_state) == _RUS) {
+    //   switch_to_english();
+    // } else {
+    uint8_t mod_state = get_mods();
+    clear_mods();
+    SEND_STRING(SS_TAP(X_CAPS));
+    layer_move(_RUS);
+    set_mods(mod_state);
+};
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
