@@ -369,7 +369,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             if (row == 5 || col == 0) {
                 rgb_matrix_set_color(index, 100, 0, 100);
             } else {
-                rgb_matrix_set_color(index, 160, 20, 0);
+                rgb_matrix_set_color(index, 100, 12, 0);
             }
         }
     }
