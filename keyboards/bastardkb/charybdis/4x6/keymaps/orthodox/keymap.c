@@ -153,17 +153,18 @@ bool trackball_volume = false;
 #define Space_NUM LT(_NUM, KC_SPC)
 // #define Enter_SYM LT(_SYM, KC_ENT)
 #define Esc_SYM LT(_SYM, KC_ESC)
-#define EnterCmd MT(MOD_LGUI, KC_ENT)
+// #define EnterCmd MT(MOD_LGUI, KC_ENT)
+#define EnterCtrl MT(MOD_LCTL, KC_ENT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,   Alt,    _,
-   BSpace , N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
+    Tab,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,   Alt,    _,
+   BSpace, N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
 
-                 DelWord, Space_NUM, Tab,            EnterCmd, Esc_SYM,
+                 DelWord, Space_NUM, Alt,            EnterCtrl, Esc_SYM,
                             VOLTR, Shift,            LANG
   ),
 
@@ -222,7 +223,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void switch_to_english(void) {
     uint8_t mod_state = get_mods();
     clear_mods();
-    SEND_STRING(SS_TAP(X_CAPS));
+    SEND_STRING(SS_LGUI(SS_TAP(X_Q)));
     layer_move(_ABC);
     set_mods(mod_state);
 };
@@ -233,7 +234,7 @@ void switch_to_russian(void) {
     // } else {
     uint8_t mod_state = get_mods();
     clear_mods();
-    SEND_STRING(SS_TAP(X_CAPS));
+    SEND_STRING(SS_LGUI(SS_TAP(X_Z)));
     layer_move(_RUS);
     set_mods(mod_state);
 };
