@@ -200,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //   =   +   _   -        :   ;   `   ~
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
-    _, Ampersand, Asterisk, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Percent, _,
+    _, Asterisk, Ampersand, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Percent, _,
     _, Hash,      At,       Left,       Right,  _,        _, Dot,    Comma,     Quote, DQuote,  _,
     _, Equal,     Plus,     Underscore, Dash,   _,        _, Colon,  Semicolon, Grave, Tilda,   _,
 
