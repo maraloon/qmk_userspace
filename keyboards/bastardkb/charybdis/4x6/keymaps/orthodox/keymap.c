@@ -160,7 +160,7 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Tab,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,     _,    _,
+    Tab,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,     Alt,  _,
    BSpace, N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
 
