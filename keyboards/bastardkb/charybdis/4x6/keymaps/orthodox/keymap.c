@@ -154,17 +154,17 @@ bool trackball_volume = false;
 // #define Enter_SYM LT(_SYM, KC_ENT)
 #define Esc_SYM LT(_SYM, KC_ESC)
 // #define EnterCmd MT(MOD_LGUI, KC_ENT)
-#define EnterCtrl MT(MOD_LCTL, KC_ENT)
+#define EnterAlt MT(MOD_LALT, KC_ENT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Tab,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,   Alt,    _,
+    Tab,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,     _,    _,
    BSpace, N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
 
-                 DelWord, Space_NUM, Alt,            EnterCtrl, Esc_SYM,
+                 DelWord, Space_NUM, Alt,            EnterAlt, Esc_SYM,
                             VOLTR, Shift,            LANG
   ),
 
