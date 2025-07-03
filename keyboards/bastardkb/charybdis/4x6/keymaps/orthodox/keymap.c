@@ -130,7 +130,6 @@ bool trackball_volume = false;
 
 #define VolUp KC_KB_VOLUME_UP
 #define VolDn KC_KB_VOLUME_DOWN
-#define Lang KC_CAPS
 
 #define Leader LCMD(KC_L)
 #define WS12 LCMD(KC_1)
@@ -158,10 +157,10 @@ bool trackball_volume = false;
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Tab,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,     _,    _,
-   BSpace, N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
-    Lang,  Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
+   BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,     _,    _,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
+    _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
 
                  DelWord, Space_NUM, Alt,            EnterCmd , Esc_SYM,
                             VOLTR, Shift,            LANG
