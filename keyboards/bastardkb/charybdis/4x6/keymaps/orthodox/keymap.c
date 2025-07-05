@@ -1,10 +1,13 @@
 #include QMK_KEYBOARD_H
 
+#include "oneshot.h"
+
 enum charybdis_keymap_layers {
     _ABC = 0,
     _RUS,
     _NUM,
     _SYM,
+    _NAV,
     _PNTR,
 };
 
@@ -15,6 +18,11 @@ enum my_keycodes {
     DELETE_LINE,
     LANG,
     VOLTR,
+
+    OS_SHFT,
+    OS_CTRL,
+    OS_ALT,
+    OS_CMD,
 };
 
 bool trackball_volume = false;
@@ -88,14 +96,10 @@ bool trackball_volume = false;
 #define Esc KC_ESC
 #define Tab KC_TAB
 
-// #define Cmd KC_LCMD
-// #define Ctrl KC_LCTL
-// #define Alt KC_LALT
-// #define Shift KC_LSFT
-#define Shift OSM(MOD_LSFT)
+#define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
-#define Ctrl OSM(MOD_LCTL)
-#define Alt OSM(MOD_LALT)
+#define Ctrl OS_CTRL
+#define Alt OS_ALT
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -132,15 +136,17 @@ bool trackball_volume = false;
 #define VolDn KC_KB_VOLUME_DOWN
 
 #define Leader LCMD(KC_L)
-#define WS12 LCMD(KC_1)
-#define WS04 LCMD(KC_0)
-// #define WS0 LCMD(KC_0)
-// #define WS1 LCMD(KC_1)
-// #define WS2 LCMD(KC_2)
+// #define WS12 LCMD(KC_1)
+// #define WS04 LCMD(KC_0)
+
+#define WS0 LCMD(KC_0)
+#define WS1 LCMD(KC_1)
+#define WS2 LCMD(KC_2)
 #define WS3 LCMD(KC_3)
-// #define WS4 LCMD(KC_4)
+#define WS4 LCMD(KC_4)
 #define WSP LALT(KC_TAB)
 #define NextWin LCMD(KC_GRV)
+#define NextWinStack LCMD(KC_TILD)
 
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
@@ -150,19 +156,19 @@ bool trackball_volume = false;
 #define rU KC_KP_6 // ю
 
 #define Space_NUM LT(_NUM, KC_SPC)
-// #define Enter_SYM LT(_SYM, KC_ENT)
 #define Esc_SYM LT(_SYM, KC_ESC)
-#define EnterCmd MT(MOD_LGUI, KC_ENT)
+#define Enter_NAV LT(_NAV, KC_ENT)
+#define CtrlZ LCTL(KC_Z)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,     Tab,  _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
-    _,     Z,     X,     C,     D,     V,            K,     H,  Ctrl, Shift, Leader,   _,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                 DelWord, Space_NUM, Alt,            EnterCmd , Esc_SYM,
+                   DelWord, Space_NUM, _,            Enter_NAV, Esc_SYM,
                             VOLTR, Shift,            LANG
   ),
 
@@ -184,9 +190,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //   [   1    2   3   ]
     //   <   home end 4   >
     _,      _,       _,   _,       _,      _,        _,      _,    _,     _, _,  _,
-    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, _,  _,
+    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Quote,  _,
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
-    _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,  PgDn, _,  _,
+    _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
                                      _, _, _,        _, Down,
                                         _, _,        _
@@ -198,12 +204,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //   =   +   _   -        :   ;   `   ~
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
-    _, Asterisk, Ampersand, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Percent, _,
-    _, Hash,      At,       Left,       Right,  _,        _, Dot,    Comma,     Quote, DQuote,  _,
-    _, Equal,     Plus,     Underscore, Dash,   _,        _, Colon,  Semicolon, Grave, Tilda,   _,
 
-                               NextWin, WS12, WS3,    _,      _,
-                                         _,  WS04,    _
+    _, Asterisk, Ampersand, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Grave,   _,
+    _, Hash,      At,       Left,       Right,  _,        _, Alt, Ctrl,   CtrlZ, _, _,
+    _, Equal,     Plus,     Underscore, Dash,   _,        _, Shift, Colon, Semicolon, Tilda,   _,
+
+                                    _, Shift, _,    _,      _,
+                                            _,  _,    _
+  ),
+
+  [_NAV] = LAYOUT(
+    _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
+    _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
+    _, WS0,    WS1,     WS2,    WS3,    WS4,         _, WSP,   NextWin, NextWinStack, _, _,
+    _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
+
+                                  _, _, _,           _, _,
+                                    _,  _,           _
   ),
 
   [_PNTR] = LAYOUT(
@@ -217,6 +234,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format on
+
+bool is_oneshot_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+        case Esc_SYM:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool is_oneshot_ignored_key(uint16_t keycode) {
+    switch (keycode) {
+        case LANG:
+        case Esc_SYM:
+        case Space_NUM:
+        case Enter_NAV:
+        case OS_SHFT:
+        case OS_CTRL:
+        case OS_ALT:
+        case OS_CMD:
+            return true;
+        default:
+            return false;
+    }
+}
+
+oneshot_state os_shft_state = os_up_unqueued;
+oneshot_state os_ctrl_state = os_up_unqueued;
+oneshot_state os_alt_state  = os_up_unqueued;
+oneshot_state os_cmd_state  = os_up_unqueued;
 
 void switch_to_english(void) {
     uint8_t mod_state = get_mods();
@@ -250,6 +297,11 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
+    update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
+    update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
+    update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
+    update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
+
     switch (keycode) {
         case ARM_MICRO:
             if (record->event.pressed) {
