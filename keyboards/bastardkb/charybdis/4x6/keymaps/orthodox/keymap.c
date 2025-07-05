@@ -3,12 +3,12 @@
 #include "oneshot.h"
 
 enum charybdis_keymap_layers {
-    _ABC = 0,
-    _RUS,
-    _NUM,
-    _SYM,
-    _NAV,
-    _PNTR,
+    ABC = 0,
+    RUS,
+    NUM,
+    SYM,
+    NAV,
+    PNTR,
 };
 
 enum my_keycodes {
@@ -48,7 +48,7 @@ bool trackball_volume = false;
 #define Y KC_Y
 #define N KC_N
 #define R KC_R
-#define S_PTR LT(_PNTR, KC_S)
+#define S_PTR LT(PNTR, KC_S)
 #define T KC_T
 #define G KC_G
 #define M KC_M
@@ -155,24 +155,24 @@ bool trackball_volume = false;
 #define rH KC_KP_5 // х
 #define rU KC_KP_6 // ю
 
-#define Space_NUM LT(_NUM, KC_SPC)
-#define Esc_SYM LT(_SYM, KC_ESC)
-#define Enter_NAV LT(_NAV, KC_ENT)
+#define SpaceNUM LT(NUM, KC_SPC)
+#define EscSYM LT(SYM, KC_ESC)
+#define EnterNAV LT(NAV, KC_ENT)
 #define CtrlZ LCTL(KC_Z)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_ABC] = LAYOUT(
+  [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                   DelWord, Space_NUM, _,            Enter_NAV, Esc_SYM,
-                            VOLTR, Shift,            LANG
+                    DelWord, SpaceNUM, _,            EnterNAV, EscSYM,
+                                VOLTR, _,            LANG
   ),
 
-  [_RUS] = LAYOUT(
+  [RUS] = LAYOUT(
     _,     _,     _,    _,     _,     _,            _,     _,     _,     _,     _,    _,
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
     Enter, Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,   _,
@@ -185,12 +185,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  Dash, _,            _
   ),
 
-  [_NUM] = LAYOUT(
-    //   {   (    0   )   }
-    //   [   1    2   3   ]
-    //   <   home end 4   >
-    _,      _,       _,   _,       _,      _,        _,      _,    _,     _, _,  _,
-    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Quote,  _,
+  [NUM] = LAYOUT(
+
+    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
+
+    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Grave,  _,
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
     _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
@@ -198,14 +197,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _, _,        _
   ),
 
-  [_SYM] = LAYOUT(
-    //   &   *   ^   $        !   ?   |   %
-    //   #   @                .   ,   '   "
-    //   =   +   _   -        :   ;   `   ~
+  [SYM] = LAYOUT(
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
 
-    _, Asterisk, Ampersand, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Grave,   _,
+    _, Asterisk, Ampersand, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Quote,   _,
     _, Hash,      At,       Left,       Right,  _,        _, Alt, Ctrl,   CtrlZ, _, _,
     _, Equal,     Plus,     Underscore, Dash,   _,        _, Shift, Colon, Semicolon, Tilda,   _,
 
@@ -213,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _,  _,    _
   ),
 
-  [_NAV] = LAYOUT(
+  [NAV] = LAYOUT(
     _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
     _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
     _, WS0,    WS1,     WS2,    WS3,    WS4,         _, WSP,   NextWin, NextWinStack, _, _,
@@ -223,7 +219,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _,  _,           _
   ),
 
-  [_PNTR] = LAYOUT(
+  [PNTR] = LAYOUT(
     _, _, _, _, _, _,          _, _, _, _, _, _,
     _, _, _, _, KC_BTN3, _,    _, _, _, _, _, _,
     _, _, _, _, KC_BTN1, _,    _, _, _, _, _, _,
@@ -237,7 +233,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case Esc_SYM:
+        case EscSYM:
             return true;
         default:
             return false;
@@ -247,9 +243,9 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
         case LANG:
-        case Esc_SYM:
-        case Space_NUM:
-        case Enter_NAV:
+        case EscSYM:
+        case SpaceNUM:
+        case EnterNAV:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
@@ -269,18 +265,15 @@ void switch_to_english(void) {
     uint8_t mod_state = get_mods();
     clear_mods();
     SEND_STRING(SS_LGUI(SS_TAP(X_Q)));
-    layer_move(_ABC);
+    layer_move(ABC);
     set_mods(mod_state);
 };
 
 void switch_to_russian(void) {
-    // if (get_highest_layer(layer_state) == _RUS) {
-    //   switch_to_english();
-    // } else {
     uint8_t mod_state = get_mods();
     clear_mods();
     SEND_STRING(SS_LGUI(SS_TAP(X_Z)));
-    layer_move(_RUS);
+    layer_move(RUS);
     set_mods(mod_state);
 };
 
@@ -332,7 +325,6 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch_to_english();
             }
             return false;
-        // TODO: make it work on holding `SpaceShift`
         case VOLTR:
             if (record->event.pressed) {
                 trackball_volume = true;
@@ -350,7 +342,7 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER _PNTR
+#define CHARYBDIS_AUTO_SNIPING_ON_LAYER PNTR
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 static uint16_t auto_pointer_layer_timer = 0;
@@ -376,7 +368,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
-            layer_on(_PNTR);
+            layer_on(PNTR);
 #        ifdef RGB_MATRIX_ENABLE
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
@@ -390,7 +382,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 void matrix_scan_user(void) {
     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
         auto_pointer_layer_timer = 0;
-        layer_off(_PNTR);
+        layer_off(PNTR);
 #        ifdef RGB_MATRIX_ENABLE
         rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
 #        endif // RGB_MATRIX_ENABLE
@@ -401,7 +393,7 @@ void matrix_scan_user(void) {
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {
     charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, _NUM));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
     return state;
 }
 #    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
