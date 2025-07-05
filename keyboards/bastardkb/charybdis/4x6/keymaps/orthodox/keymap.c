@@ -18,6 +18,7 @@ enum my_keycodes {
     DELETE_LINE,
     LANG,
     VOLTR,
+
     CommaS,
     DotNS,
     QuesNS,
@@ -112,27 +113,27 @@ bool trackball_volume = false;
 
 #define BSlash KC_BSLS
 #define Percent KC_PERC
-#define Asterisk KC_ASTR
+#define Star KC_ASTR
 #define At KC_AT
 #define Hash KC_HASH
 #define Tilda KC_TILD
 #define Grave KC_GRV
 #define Equal KC_EQL
-#define Underscore KC_UNDS
+#define UnScore KC_UNDS
 #define Dash KC_MINS
 #define Plus KC_PLUS
 
 #define Exlm KC_EXLM
-#define Question KC_QUES
+#define Quest KC_QUES
 #define Slash KC_PSLS
-#define Ampersand KC_AMPR
+#define Amp KC_AMPR
 #define Dot KC_DOT
 #define Comma KC_COMM
 #define Quote KC_QUOT
 #define DQuote KC_DQUO
 #define Pipe KC_PIPE
-#define Colon KC_COLN
-#define Semicolon KC_SCLN
+#define DDot KC_COLN
+#define DComm KC_SCLN
 #define Caret KC_CIRC
 #define Dollar KC_DLR
 
@@ -203,14 +204,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
 
-    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
+    QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _, Asterisk, Ampersand, Caret,      Dollar, _,        _, Exlm,   Question,  Pipe,  Quote,   _,
-    _, Hash,      At,       Left,       Right,  _,        _, Alt, Ctrl,   CtrlZ, _, _,
-    _, Equal,     Plus,     Underscore, Dash,   _,        _, Shift, Colon, Semicolon, Tilda,   _,
+    _,     Star,  Amp,  Caret, Dollar, _,            _,     Exlm,  Quest, Pipe,  Quote, _,
+    _,     Hash,  At,    Left,  Right, _,            _,     Alt,   Ctrl,  CtrlZ, _,     _,
+    _,     Equal, Plus, UnScore, Dash, _,            _,     Shift, DDot,  DComm, Tilda, _,
 
-                                    _, Shift, _,    _,      _,
-                                            _,  _,    _
+                             _, Shift, _,            _, _,
+                                   _,  _,            _
   ),
 
   [NAV] = LAYOUT(
