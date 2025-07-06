@@ -103,6 +103,7 @@ bool trackball_volume = false;
 #define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
 #define Ctrl OS_CTRL
+#define Cmd OS_CMD
 #define Alt OS_ALT
 
 #define PgDn KC_PGDN
@@ -205,8 +206,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Star,  Amp,   Caret, Dollar, _,           _,     Exlm, Quest,  Pipe, Quote, _,
-    _,     Hash,   At,    Left,  Right, _,           _,      Alt,  Ctrl, CtrlZ,     _, _,
+    _,     Star,  Amp,   Caret, Dollar, _,           _,     Exlm, Quest, Pipe,  Quote, _,
+    _,     Hash,   At,    Left,  Right, _,           _,      Alt,  Ctrl, Cmd, Percent, _,
     _,    Equal, Plus, UnScore,   Dash, _,           _,    Shift,  DDot, DComm, Tilda, _,
 
                              _, Shift, _,            _, _,
@@ -284,10 +285,14 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
-    update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
-    update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
-    update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
-    update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
+    // clang-format off
+    if (!update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record)
+     || !update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record)
+     || !update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record)
+     || !update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record)) {
+        return false;
+    }
+    // clang-format on
 
     switch (keycode) {
         case ARM_MICRO:
