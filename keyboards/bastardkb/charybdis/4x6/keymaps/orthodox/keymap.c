@@ -7,7 +7,6 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
-    NAV,
     PNTR,
 };
 
@@ -162,7 +161,7 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 #define EscSYM LT(SYM, KC_ESC)
-#define EnterNAV LT(NAV, KC_ENT)
+#define EnterCmd MT(MOD_LGUI, KC_ENT)
 #define CtrlZ LCTL(KC_Z)
 
 // clang-format off
@@ -173,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            EnterNAV, EscSYM,
+                DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
                                 VOLTR, _,            LANG
   ),
 
@@ -214,16 +213,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                    _,  _,            _
   ),
 
-  [NAV] = LAYOUT(
-    _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
-    _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
-    _, WS0,    WS1,     WS2,    WS3,    WS4,         _, WSP,   NextWin, NextWinStack, _, _,
-    _, _,      _,       _,      _,      _,           _, _,      _,       _,     _,       _,
-
-                                  _, _, _,           _, _,
-                                    _,  _,           _
-  ),
-
   [PNTR] = LAYOUT(
     _, _, _, _, _, _,          _, _, _, _, _, _,
     _, _, _, _, KC_BTN3, _,    _, _, _, _, _, _,
@@ -250,7 +239,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         case LANG:
         case EscSYM:
         case SpaceNUM:
-        case EnterNAV:
+        case EnterCmd:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
