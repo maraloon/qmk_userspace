@@ -1,4 +1,3 @@
-#include <sys/cdefs.h>
 #include QMK_KEYBOARD_H
 
 #include "oneshot.h"
@@ -120,8 +119,8 @@ bool trackball_volume = false;
 #define Tilda KC_TILD
 #define Grave KC_GRV
 #define Equal KC_EQL
-#define Unds KC_UNDS
-#define Minus KC_MINS
+#define UnScore KC_UNDS
+#define Dash KC_MINS
 #define Plus KC_PLUS
 
 #define Exlm KC_EXLM
@@ -171,10 +170,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
-    _,     N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            Cmd, MO(SYM),
+                DelWord, SpaceNUM, DotNS,            UndsCmd, DashSYM,
                                 VOLTR, _,            LANG
   ),
 
@@ -188,16 +187,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ExlmNS,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   _,
 
                CommaS, SpaceShift, DotNS,            Enter, _,
-                           Minus, QuesNS,            _
+                            Dash, QuesNS,            _
   ),
 
   [NUM] = LAYOUT(
 
-    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,      EE_CLR, _, Home, End, RGB_TOG, QK_BOOT,
+    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
 
-    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Grave, _,
-    _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up,    _,
-    _,    Tag,   Equal, Plus,     _4,    tag,        _,     _7, PgUp,  PgDn,  _,    _,
+    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Grave,  _,
+    _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
+    _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
                                      _, _, _,        MO(SYM), Down,
                                         _, _,        _
@@ -207,9 +206,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Star,   Amp,  Caret, Dollar, _,           _,     Exlm, Quest, Pipe,  Quote, _,
-    _,     Hash,    At,   Left,  Right, _,           _,      Alt,  Ctrl, CtrlZ, Percent, _,
-    _,     Unds, Minus,    Esc,  Enter, _,           _,      Tab,  DDot, DComm, Tilda, _,
+    _,     Star,  Amp,   Caret, Dollar, _,           _,     Exlm, Quest, Pipe,  Quote, _,
+    _,     Hash,   At,    Left,  Right, _,           _,      Alt,  Ctrl, CtrlZ, Percent, _,
+    _,    Equal, Plus,     Esc,  Enter, _,           _,    Shift,  DDot, DComm, Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
