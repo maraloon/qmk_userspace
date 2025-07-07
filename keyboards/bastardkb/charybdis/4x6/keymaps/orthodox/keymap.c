@@ -161,8 +161,8 @@ bool trackball_volume = false;
 #define rU KC_KP_6 // ю
 
 #define SpaceNUM LT(NUM, KC_SPC)
-#define EscSYM LT(SYM, KC_ESC)
-#define EnterCmd MT(MOD_LGUI, KC_ENT)
+#define DashSYM LT(SYM, KC_MINS)
+#define UndsCmd MT(MOD_LGUI, KC_UNDS)
 #define CtrlZ LCTL(KC_Z)
 
 // clang-format off
@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
+                DelWord, SpaceNUM, DotNS,            UndsCmd, DashSYM,
                                 VOLTR, _,            LANG
   ),
 
@@ -198,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
     _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
-                                     _, _, _,        _, Down,
+                                     _, _, _,        MO(SYM), Down,
                                         _, _,        _
   ),
 
@@ -208,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _,     Star,  Amp,   Caret, Dollar, _,           _,     Exlm, Quest, Pipe,  Quote, _,
     _,     Hash,   At,    Left,  Right, _,           _,      Alt,  Ctrl, CtrlZ, Percent, _,
-    _,    Equal, Plus, UnScore,   Dash, _,           _,    Shift,  DDot, DComm, Tilda, _,
+    _,    Equal, Plus,     Esc,  Enter, _,           _,    Shift,  DDot, DComm, Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
@@ -228,7 +228,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case EscSYM:
+        case Esc:
             return true;
         default:
             return false;
@@ -238,9 +238,8 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
         case LANG:
-        case EscSYM:
-        case SpaceNUM:
-        case EnterCmd:
+        case DashSYM:
+        case UndsCmd:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
