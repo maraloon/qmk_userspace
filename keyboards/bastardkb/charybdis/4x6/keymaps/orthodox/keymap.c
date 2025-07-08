@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            Cmd, MO(SYM),
+                      _, SpaceNUM, DotNS,            Cmd, EscSYM,
                                 VOLTR, _,            LANG
   ),
 
@@ -196,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Grave,  _,
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
-    _,    Tag,    UnScore, Dash,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
+    _,    Tag,       _,   _,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
                                      _, _, _,        _, Down,
                                         _, _,        _
@@ -206,9 +206,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Star,  Amp,   Caret, Dollar, _,           _,     Exlm, Quest, Pipe,  Quote, _,
-    _,     Hash,   At,    Left,  Right, _,           _,      Alt,  Ctrl, CtrlZ, Percent, _,
-    _,    Equal, Plus,     Esc,  Enter, _,           _,    Shift,  DDot, DComm, Tilda, _,
+    _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest,    Pipe,   Quote, _,
+    _,     Hash,   At,    Left,  Right, _,           _,    Alt,  Dash, UnScore, Percent, _,
+    _,    Equal, Plus, DelWord,  Enter, _,           _,   Ctrl,  DDot,   DComm,   Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
@@ -228,7 +228,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case Esc:
+        case EscSYM:
             return true;
         default:
             return false;
@@ -239,7 +239,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
         case LANG:
         case SpaceNUM:
-        case MO(SYM):
+        case EscSYM:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
