@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
+                DelWord, SpaceNUM, DotNS,            Cmd, MO(SYM),
                                 VOLTR, _,            LANG
   ),
 
@@ -192,11 +192,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUM] = LAYOUT(
 
-    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _,      RGB_TOG,  QK_BOOT,
+    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
     _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Grave,  _,
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
-    _,    Tag,    Home, End,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
+    _,    Tag,    UnScore, Dash,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
                                      _, _, _,        _, Down,
                                         _, _,        _
@@ -208,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _,     Star,  Amp,   Caret, Dollar, _,           _,     Exlm, Quest, Pipe,  Quote, _,
     _,     Hash,   At,    Left,  Right, _,           _,      Alt,  Ctrl, CtrlZ, Percent, _,
-    _,    Equal, Plus, UnScore,   Dash, _,           _,    Shift,  DDot, DComm, Tilda, _,
+    _,    Equal, Plus,     Esc,  Enter, _,           _,    Shift,  DDot, DComm, Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
@@ -228,7 +228,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case EscSYM:
+        case Esc:
             return true;
         default:
             return false;
