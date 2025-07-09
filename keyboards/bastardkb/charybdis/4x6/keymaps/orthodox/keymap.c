@@ -170,10 +170,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
-    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
+    _,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                      _, SpaceNUM, DotNS,            Cmd, EscSYM,
+                DelWord, SpaceNUM, DotNS,            Cmd, EscSYM,
                                 VOLTR, _,            LANG
   ),
 
@@ -207,8 +207,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
     _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest,    Pipe,   Quote, _,
-    _,     Hash,   At,    Left,  Right, _,           _,    Alt,  Dash, UnScore, Percent, _,
-    _,    Equal, Plus, DelWord,  Enter, _,           _,   Ctrl,  DDot,   DComm,   Tilda, _,
+    _,     Hash,   At,    Left,  Right, _,           _,    Alt, UnScore,   Tab, Percent, _,
+    _,    Equal, Plus,    Dash,  Enter, _,           _,   Ctrl,  DDot,   DComm,   Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
