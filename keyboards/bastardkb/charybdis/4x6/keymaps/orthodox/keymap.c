@@ -227,12 +227,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-        case EscSYM:
-            return true;
-        default:
-            return false;
-    }
+    return false;
 }
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
