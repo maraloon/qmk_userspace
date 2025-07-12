@@ -207,8 +207,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
     _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest,    Pipe,   Grave, _,
-    _,     Hash,   At,    Left,  Right, _,           _,    Alt, Dash,   UnScore, Percent, _,
-    _,    Equal, Plus,       _,  Enter, _,           _,   Ctrl,  DDot,   DComm,   Tilda, _,
+    _,     Hash,   At,    Left,  Right, _,           _,    Alt, Dash,        _, Percent, _,
+    _,    Equal, Plus, UnScore,  Enter, _,           _,   Ctrl,  DDot,   DComm,   Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
