@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            Cmd, EscSYM,
-                                VOLTR, _,            LANG
+                            VOLTR, Shift,            LANG
   ),
 
   [RUS] = LAYOUT(
