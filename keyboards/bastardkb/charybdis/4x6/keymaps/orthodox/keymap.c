@@ -1,6 +1,12 @@
 #include QMK_KEYBOARD_H
 
-#include "oneshot.h"
+// Represents the four states a oneshot key can be in
+typedef enum {
+    os_up_unqueued,
+    os_up_queued,
+    os_down_unused,
+    os_down_used,
+} oneshot_state;
 
 enum charybdis_keymap_layers {
     ABC = 0,
@@ -27,9 +33,14 @@ enum my_keycodes {
     OS_CTRL,
     OS_ALT,
     OS_CMD,
+    ESC_OS,
 };
 
 bool trackball_volume = false;
+bool is_alt_hold      = false;
+bool is_ctrl_hold     = false;
+bool is_shift_hold    = false;
+bool is_cmd_hold      = false;
 
 #undef _______
 #define _ KC_NO
@@ -170,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
-    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            Cmd, EscSYM,
@@ -227,7 +238,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
-    return false;
+    switch (keycode) {
+        case ESC_OS:
+            return true;
+        default:
+            return false;
+    }
 }
 
 bool is_oneshot_ignored_key(uint16_t keycode) {
@@ -275,6 +291,121 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
             // Immediately select the hold action when another key is pressed.
             return true;
     }
+}
+
+bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16_t keycode, keyrecord_t *record) {
+    if (keycode == trigger) {
+        if (record->event.pressed) {
+            // Trigger keydown
+            if (*state == os_up_unqueued) {
+                register_code(mod);
+                switch (mod) {
+                    case KC_LALT:
+                        is_alt_hold = true;
+                        break;
+                    case KC_LCTL:
+                        is_ctrl_hold = true;
+                        break;
+                    case KC_LSFT:
+                        is_shift_hold = true;
+                        break;
+                    case KC_LCMD:
+                        is_cmd_hold = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            *state = os_down_unused;
+        } else {
+            // Trigger keyup
+            switch (*state) {
+                case os_down_unused:
+                    // If we didn't use the mod while trigger was held, queue it.
+                    *state = os_up_queued;
+                    break;
+                case os_down_used:
+                    // If we did use the mod while trigger was held, unregister it.
+                    *state = os_up_unqueued;
+                    unregister_code(mod);
+                    switch (mod) {
+                        case KC_LALT:
+                            is_alt_hold = false;
+                            break;
+                        case KC_LCTL:
+                            is_ctrl_hold = false;
+                            break;
+                        case KC_LSFT:
+                            is_shift_hold = false;
+                            break;
+                        case KC_LCMD:
+                            is_cmd_hold = false;
+                            break;
+                        default:
+                            break;
+                    }
+                default:
+                    break;
+            }
+        }
+    } else {
+        if (record->event.pressed) {
+            if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
+                // Cancel oneshot on designated cancel keydown.
+                *state = os_up_unqueued;
+                unregister_code(mod);
+                switch (mod) {
+                    case KC_LALT:
+                        is_alt_hold = false;
+                        break;
+                    case KC_LCTL:
+                        is_ctrl_hold = false;
+                        break;
+                    case KC_LSFT:
+                        is_shift_hold = false;
+                        break;
+                    case KC_LCMD:
+                        is_cmd_hold = false;
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        } else {
+            if (!is_oneshot_ignored_key(keycode)) {
+                // On non-ignored keyup, consider the oneshot used.
+                switch (*state) {
+                    case os_down_unused:
+                        *state = os_down_used;
+                        break;
+                    case os_up_queued:
+                        *state = os_up_unqueued;
+                        unregister_code(mod);
+                        switch (mod) {
+                            case KC_LALT:
+                                is_alt_hold = false;
+                                break;
+                            case KC_LCTL:
+                                is_ctrl_hold = false;
+                                break;
+                            case KC_LSFT:
+                                is_shift_hold = false;
+                                break;
+                            case KC_LCMD:
+                                is_cmd_hold = false;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    return true;
 }
 
 uint16_t change_app_timer = 0;
@@ -421,19 +552,35 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    for (uint8_t i = led_min; i < led_max; i++) {
-        switch(get_highest_layer(layer_state|default_layer_state)) {
-            case 2:
-                rgb_matrix_set_color(i, RGB_BLUE);
-                break;
-            case 1:
-                rgb_matrix_set_color(i, RGB_YELLOW);
-                break;
-            default:
-                break;
+    // for (uint8_t i = led_min; i < led_max; i++) {
+    //     if (is_alt == true) {
+    //         rgb_matrix_set_color(i, RGB_RED);
+    //     } else {
+    //         rgb_matrix_set_color(i, 0, 0, 0);
+    //     }
+    // }
+    // return false;
+
+    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+            uint8_t index = g_led_config.matrix_co[row][col];
+
+            rgb_matrix_set_color(index, 0, 0, 0);
+            if (is_alt_hold == true && row == 7 && col == 4) {
+                rgb_matrix_set_color(index, 100, 12, 0);
+            }
+            if (is_ctrl_hold == true && row == 8 && col == 4) {
+                rgb_matrix_set_color(index, 12, 100, 0);
+            }
+            if (is_shift_hold == true && row == 9 && col == 3) {
+                rgb_matrix_set_color(index, 100, 12, 0);
+            }
+            if (is_cmd_hold == true && row == 9 && col == 1) {
+                rgb_matrix_set_color(index, 100, 12, 0);
+            }
         }
     }
-    return false;
+    return true;
 
     // for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
     //     for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
