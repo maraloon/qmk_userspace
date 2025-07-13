@@ -1,11 +1,14 @@
 #include "oneshot.h"
 
+bool is_alt = false;
+
 bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16_t keycode, keyrecord_t *record) {
     if (keycode == trigger) {
         if (record->event.pressed) {
             // Trigger keydown
             if (*state == os_up_unqueued) {
                 register_code(mod);
+                is_alt = true;
             }
             *state = os_down_unused;
         } else {
@@ -19,6 +22,7 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     // If we did use the mod while trigger was held, unregister it.
                     *state = os_up_unqueued;
                     unregister_code(mod);
+                    is_alt = true;
                     break;
                 default:
                     break;
