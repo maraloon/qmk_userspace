@@ -184,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            Cmd, EscSYM,
+                DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
                             VOLTR, Shift,            LANG
   ),
 
@@ -209,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
     _,    Tag,       _,   _,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
 
-                                     _, _, _,        _, Down,
+                                     _, _, _,        Enter, Down,
                                         _, _,        _
   ),
 
@@ -251,6 +251,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         case LANG:
         case SpaceNUM:
         case EscSYM:
+        case EnterCmd:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
