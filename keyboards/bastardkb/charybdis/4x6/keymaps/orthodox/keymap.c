@@ -421,18 +421,32 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-            uint8_t index = g_led_config.matrix_co[row][col];
-
-            if (row == 5 || col == 0) {
-                rgb_matrix_set_color(index, 100, 0, 100);
-            } else {
-                rgb_matrix_set_color(index, 100, 12, 0);
-            }
+    for (uint8_t i = led_min; i < led_max; i++) {
+        switch(get_highest_layer(layer_state|default_layer_state)) {
+            case 2:
+                rgb_matrix_set_color(i, RGB_BLUE);
+                break;
+            case 1:
+                rgb_matrix_set_color(i, RGB_YELLOW);
+                break;
+            default:
+                break;
         }
     }
-    return true;
+    return false;
+
+    // for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+    //     for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+    //         uint8_t index = g_led_config.matrix_co[row][col];
+    //
+    //         if (row == 5 || col == 0) {
+    //             rgb_matrix_set_color(index, 100, 0, 100);
+    //         } else {
+    //             rgb_matrix_set_color(index, 100, 12, 0);
+    //         }
+    //     }
+    // }
+    // return true;
 }
 
 // ✅ Control volume using the trackball (Works only in Layer 3)
