@@ -119,8 +119,8 @@ bool trackball_volume = false;
 #define Tilda KC_TILD
 #define Grave KC_GRV
 #define Equal KC_EQL
-#define UnScore KC_UNDS
-#define Dash KC_MINS
+#define Unds KC_UNDS
+#define Minus KC_MINS
 #define Plus KC_PLUS
 
 #define Exlm KC_EXLM
@@ -187,7 +187,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ExlmNS,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   _,
 
                CommaS, SpaceShift, DotNS,            Enter, _,
-                            Dash, QuesNS,            _
+                            Minus, QuesNS,            _
   ),
 
   [NUM] = LAYOUT(
@@ -206,9 +206,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest,    Pipe,   Grave, _,
-    _,     Hash,   At,    Left,  Right, _,           _,    Alt, Dash,        _, Percent, _,
-    _,    Equal, Plus, UnScore,  Enter, _,           _,   Ctrl,  DDot,   DComm,   Tilda, _,
+    _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest, Pipe,   Grave, _,
+    _,     Hash,   At,    Left,  Right, _,           _,    Alt,  Unds,    _, Percent, _,
+    _,    Equal, Plus,   Minus,  Enter, _,           _,   Ctrl,  DDot,DComm,   Tilda, _,
 
                              _, Shift, _,            _, _,
                                    _,  _,            _
