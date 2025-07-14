@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
                             VOLTR, Shift,            LANG
@@ -198,16 +198,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ExlmNS,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   _,
 
                CommaS, SpaceShift, DotNS,            Enter, _,
-                            Minus, QuesNS,            _
+                           Minus, QuesNS,            _
   ),
 
   [NUM] = LAYOUT(
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Quote,  _,
-    _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8, Up, _,
-    _,    Tag,       _,   _,      _4,    tag,        _,     _7, PgUp,    PgDn, _,  _,
+    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Quote, _,
+    _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8,    Up, _,
+    _,      _,       _,   _,      _4,      _,        _,     _7, PgUp,  PgDn,     _, _,
 
                                      _, _, _,        Enter, Down,
                                         _, _,        _
@@ -218,10 +218,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
     _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest, Pipe,   Grave, _,
-    _,     Hash,   At,    Left,  Right, _,           _,    Alt,  Unds,    _, Percent, _,
-    _,    Equal, Plus,   Minus,  Enter, _,           _,   Ctrl,  DDot,DComm,   Tilda, _,
+    _,     Hash,   At,    Left,  Right, _,           _,    Alt, _,        _, Percent, _,
+    _,    Equal, Plus,   Minus,   Unds, _,           _,   Ctrl, DComm, DDot,   Tilda, _,
 
-                             _, Shift, _,            _, _,
+                                  _, _, _,           _, _,
                                    _,  _,            _
   ),
 
