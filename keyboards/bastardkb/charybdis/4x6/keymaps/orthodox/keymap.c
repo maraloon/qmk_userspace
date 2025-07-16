@@ -180,7 +180,7 @@ bool is_cmd_hold      = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,  DQuote,  _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, Quote,  _,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
@@ -205,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, Quote, _,
+    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, DQuote, _,
     _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8,    Up, _,
     _,      _,       _,   _,      _4,      _,        _,     _7, PgUp,  PgDn,     _, _,
 
