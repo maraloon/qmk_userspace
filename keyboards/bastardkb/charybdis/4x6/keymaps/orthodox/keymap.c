@@ -205,8 +205,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _, Borrow, Bracket,  _0, bracket, borrow,        _, BSlash,   _9, Slash, DQuote, _,
-    _,  Array,      _1,  _2,      _3,  array,        _,     _5,   _6,    _8,    Up, _,
+    _,     _,     _,     _0,   _,    _,        _, _,   _9, Slash, DQuote, _,
+    _,     _,    _1,     _2,  _3,    _,        _,     _5,   _6,    _8,    Up, _,
     _,      _,       _,   _,      _4,      _,        _,     _7, PgUp,  PgDn,     _, _,
 
                                      _, _, _,        Enter, Down,
@@ -217,11 +217,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Star,  Amp,   Caret, Dollar, _,           _,   Exlm, Quest, Pipe,   Grave, _,
-    _,     Hash,   At,    Left,  Right, _,           _,    Alt, _,        _, Percent, _,
-    _,    Equal, Plus,    Unds,  Minus, _,           _,   Ctrl, DComm, DDot,   Tilda, _,
+    BSlash,     Star,  Amp,   Caret, Dollar, _,            _,   Bracket, bracket, Borrow,   borrow, Grave,
+    Percent,     Hash,   At,    Left,  Right, _,           _,    Alt, Array, array, Quest, Pipe,
+    Tilda,    Equal, Plus,    Unds,  Minus, _,             _,   Ctrl, DComm, DDot,   Exlm _,
 
-                                  _, _, _,           _, _,
+                                  _, Tag, tag,           _, _,
                                    _,  _,            _
   ),
 
