@@ -178,6 +178,27 @@ bool is_cmd_hold      = false;
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
+// WARN: DON'T TOUCH TILL 22 JUNE 2026
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, Quote,  _,
@@ -217,7 +238,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Slash, Star, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow, Grave,
+    _,     Star, Slash, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow, Grave,
     BSlash, Hash,   At,  Left,  Right,     Amp,     _,     Alt,   Array,  array,  Quest,  Pipe,
     _,     Equal, Plus,  Unds,  Minus,   Tilda,     _,    Ctrl,   DComm,   DDot,   Exlm,     _,
 
@@ -567,17 +588,17 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
             rgb_matrix_set_color(index, 0, 0, 0);
-            if (is_alt_hold == true && row == 7 && col == 4) {
-                rgb_matrix_set_color(index, 100, 12, 0);
+            if (is_alt_hold == true && row == 7) {
+                rgb_matrix_set_color(index, 150, 0, 0);
             }
-            if (is_ctrl_hold == true && row == 8 && col == 4) {
-                rgb_matrix_set_color(index, 12, 100, 0);
+            if (is_ctrl_hold == true && row == 8) {
+                rgb_matrix_set_color(index, 150, 0, 0);
             }
-            if (is_shift_hold == true && row == 9 && col == 3) {
-                rgb_matrix_set_color(index, 100, 12, 0);
+            if (is_shift_hold == true && row >= 9) {
+                rgb_matrix_set_color(index, 150, 0, 0);
             }
             if (is_cmd_hold == true && row == 9 && col == 1) {
-                rgb_matrix_set_color(index, 100, 12, 0);
+                rgb_matrix_set_color(index, 150, 0, 0);
             }
         }
     }
