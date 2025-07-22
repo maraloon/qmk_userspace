@@ -226,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     _,     _,     _0,   _,    _,              _,      _,   _9,     _, DQuote, _,
+    _,     _,     W,     _0,   _,    B,              _,      _,   _9,     _, DQuote, _,
     _,     _,    _1,     _2,  _3,    _,              _,     _5,   _6,    _8,     Up, _,
     _,     _,     _,      _,  _4,    _,              _,     _7, PgUp,  PgDn,      _, _,
 
