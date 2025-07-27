@@ -583,34 +583,51 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // }
     // return false;
 
+    // for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+    //     for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+    //         uint8_t index = g_led_config.matrix_co[row][col];
+    //
+    //         if (row == 5 || col == 0) {
+    //             rgb_matrix_set_color(index, 250, 0, 250);
+    //         } else {
+    //             rgb_matrix_set_color(index, 250, 30, 0);
+    //         }
+    //     }
+    // }
+
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (row == 5 || col == 0) {
-                rgb_matrix_set_color(index, 250, 0, 250);
+            if (is_alt_hold || is_ctrl_hold || is_shift_hold || is_cmd_hold) {
+                rgb_matrix_set_color(index, 0, 0, 0);
+
+                if (is_alt_hold) {
+                    if (row == 7) {
+                        rgb_matrix_set_color(index, 250, 0, 0);
+                    }
+                }
+                if (is_ctrl_hold) {
+                    if (row == 8) {
+                        rgb_matrix_set_color(index, 250, 0, 0);
+                    }
+                }
+                if (is_shift_hold) {
+                    if (row >= 9) {
+                        rgb_matrix_set_color(index, 250, 0, 0);
+                    }
+                }
+                if (is_cmd_hold) {
+                    if (row == 9 && col == 1) {
+                        rgb_matrix_set_color(index, 250, 0, 0);
+                    }
+                }
             } else {
-                rgb_matrix_set_color(index, 250, 30, 0);
-            }
-        }
-    }
-
-    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-            uint8_t index = g_led_config.matrix_co[row][col];
-
-            rgb_matrix_set_color(index, 0, 0, 0);
-            if (is_alt_hold == true && row == 7) {
-                rgb_matrix_set_color(index, 250, 0, 0);
-            }
-            if (is_ctrl_hold == true && row == 8) {
-                rgb_matrix_set_color(index, 250, 0, 0);
-            }
-            if (is_shift_hold == true && row >= 9) {
-                rgb_matrix_set_color(index, 250, 0, 0);
-            }
-            if (is_cmd_hold == true && row == 9 && col == 1) {
-                rgb_matrix_set_color(index, 250, 0, 0);
+                if (row == 5 || col == 0) {
+                    rgb_matrix_set_color(index, 250, 0, 250);
+                } else {
+                    rgb_matrix_set_color(index, 250, 30, 0);
+                }
             }
         }
     }
