@@ -201,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // WARN: DON'T TOUCH TILL 22 JUNE 2026
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, Quote,  _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
