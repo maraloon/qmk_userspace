@@ -14,6 +14,7 @@ enum charybdis_keymap_layers {
     NUM,
     SYM,
     PNTR,
+    FN,
 };
 
 enum my_keycodes {
@@ -54,7 +55,7 @@ bool is_cmd_hold      = false;
 
 #define Q KC_Q
 #define W KC_W
-#define F KC_F
+#define F_FN LT(FN, KC_F)
 #define P KC_P
 #define B KC_B
 #define J KC_J
@@ -201,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // WARN: DON'T TOUCH TILL 22 JUNE 2026
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
+    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
@@ -212,7 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [RUS] = LAYOUT(
     _,     _,     _,    _,     _,     _,            _,     _,     _,     _,     _,    _,
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,   _,
+    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y,    rZ,   _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
@@ -255,9 +256,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              _, CARRETM, _,    _, _,
                       _, _,    _
   ),
+
+  [FN] = LAYOUT(
+    _, _, _, _, _, _,          KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18,
+    _, _, _, _, _, _,    KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24,
+    _, _, _, _, _, _,    KC_F11, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,
+    _, _, _, _, _, _,    KC_F12, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,
+
+             _, _, _,    _, _,
+                      _, _,    _
+  ),
 };
 // clang-format on
-
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
         case ESC_OS:
@@ -288,31 +298,96 @@ oneshot_state os_ctrl_state = os_up_unqueued;
 oneshot_state os_alt_state  = os_up_unqueued;
 oneshot_state os_cmd_state  = os_up_unqueued;
 
-void switch_to_english(void) {
+void with_mods_state_recover(void (*callback)(void)) {
     uint8_t mod_state    = get_mods();
     uint8_t os_mod_state = get_oneshot_mods();
     clear_mods();
     clear_oneshot_mods();
-    SEND_STRING(SS_LGUI(SS_TAP(X_Q)));
-    layer_move(ABC);
+
+    callback();
+
     set_mods(mod_state);
     set_oneshot_mods(os_mod_state);
+}
+
+void switch_to_english(void) {
+    SEND_STRING(SS_TAP(X_F13));
+    layer_move(ABC);
+};
+void switch_to_russian(void) {
+    SEND_STRING(SS_TAP(X_F14));
+    layer_move(RUS);
 };
 
-void switch_to_russian(void) {
-    uint8_t mod_state    = get_mods();
-    uint8_t os_mod_state = get_oneshot_mods();
-    clear_mods();
-    clear_oneshot_mods();
-    SEND_STRING(SS_LGUI(SS_TAP(X_Z)));
-    layer_move(RUS);
-    set_mods(mod_state);
-    set_oneshot_mods(os_mod_state);
-};
+void send_os_alt_hold(void) {
+    SEND_STRING(SS_TAP(X_F15));
+}
+void send_os_alt_release(void) {
+    SEND_STRING(SS_TAP(X_F16));
+}
+void send_os_ctrl_hold(void) {
+    SEND_STRING(SS_TAP(X_F17));
+}
+void send_os_ctrl_release(void) {
+    SEND_STRING(SS_TAP(X_F18));
+}
+void send_os_shift_hold(void) {
+    SEND_STRING(SS_TAP(X_F22));
+}
+void send_os_shift_release(void) {
+    SEND_STRING(SS_TAP(X_F23));
+}
+
+void change_osm_state(uint16_t osm_key_state, bool hold) {
+    switch (osm_key_state) {
+        case KC_LALT:
+            is_alt_hold = hold;
+            break;
+        case KC_LCTL:
+            is_ctrl_hold = hold;
+            break;
+        case KC_LSFT:
+            is_shift_hold = hold;
+            break;
+        case KC_LGUI:
+            is_cmd_hold = hold;
+            break;
+        default:
+            break;
+    }
+}
+void send_os_osm_state(uint16_t osm_key_state, bool hold) {
+    switch (osm_key_state) {
+        case KC_LALT:
+            if (hold == true) {
+                with_mods_state_recover(send_os_alt_hold);
+            } else {
+                with_mods_state_recover(send_os_alt_release);
+            }
+            break;
+        case KC_LCTL:
+            if (hold == true) {
+                with_mods_state_recover(send_os_ctrl_hold);
+            } else {
+                with_mods_state_recover(send_os_ctrl_release);
+            }
+            break;
+        case KC_LSFT:
+            if (hold == true) {
+                with_mods_state_recover(send_os_shift_hold);
+            } else {
+                with_mods_state_recover(send_os_shift_release);
+            }
+            break;
+        default:
+            break;
+    }
+}
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case S_PTR:
+        case F_FN:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
@@ -327,22 +402,8 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
             // Trigger keydown
             if (*state == os_up_unqueued) {
                 register_code(mod);
-                switch (mod) {
-                    case KC_LALT:
-                        is_alt_hold = true;
-                        break;
-                    case KC_LCTL:
-                        is_ctrl_hold = true;
-                        break;
-                    case KC_LSFT:
-                        is_shift_hold = true;
-                        break;
-                    case KC_LCMD:
-                        is_cmd_hold = true;
-                        break;
-                    default:
-                        break;
-                }
+                change_osm_state(mod, true);
+                send_os_osm_state(mod, true);
             }
             *state = os_down_unused;
         } else {
@@ -356,22 +417,8 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     // If we did use the mod while trigger was held, unregister it.
                     *state = os_up_unqueued;
                     unregister_code(mod);
-                    switch (mod) {
-                        case KC_LALT:
-                            is_alt_hold = false;
-                            break;
-                        case KC_LCTL:
-                            is_ctrl_hold = false;
-                            break;
-                        case KC_LSFT:
-                            is_shift_hold = false;
-                            break;
-                        case KC_LCMD:
-                            is_cmd_hold = false;
-                            break;
-                        default:
-                            break;
-                    }
+                    send_os_osm_state(mod, false);
+                    change_osm_state(mod, false);
                 default:
                     break;
             }
@@ -382,22 +429,8 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                 // Cancel oneshot on designated cancel keydown.
                 *state = os_up_unqueued;
                 unregister_code(mod);
-                switch (mod) {
-                    case KC_LALT:
-                        is_alt_hold = false;
-                        break;
-                    case KC_LCTL:
-                        is_ctrl_hold = false;
-                        break;
-                    case KC_LSFT:
-                        is_shift_hold = false;
-                        break;
-                    case KC_LCMD:
-                        is_cmd_hold = false;
-                        break;
-                    default:
-                        break;
-                }
+                send_os_osm_state(mod, false);
+                change_osm_state(mod, false);
                 return false;
             }
         } else {
@@ -410,22 +443,8 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     case os_up_queued:
                         *state = os_up_unqueued;
                         unregister_code(mod);
-                        switch (mod) {
-                            case KC_LALT:
-                                is_alt_hold = false;
-                                break;
-                            case KC_LCTL:
-                                is_ctrl_hold = false;
-                                break;
-                            case KC_LSFT:
-                                is_shift_hold = false;
-                                break;
-                            case KC_LCMD:
-                                is_cmd_hold = false;
-                                break;
-                            default:
-                                break;
-                        }
+                        send_os_osm_state(mod, false);
+                        change_osm_state(mod, false);
                         break;
                     default:
                         break;
@@ -495,9 +514,9 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case LANG:
             if (record->event.pressed) {
-                switch_to_russian();
+                with_mods_state_recover(switch_to_russian);
             } else {
-                switch_to_english();
+                with_mods_state_recover(switch_to_english);
             }
             return false;
         case VOLTR:
