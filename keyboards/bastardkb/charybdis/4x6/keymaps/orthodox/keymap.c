@@ -214,12 +214,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
     _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,   _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
-    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  rT,
+    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
-  ExlmNS,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   _,
+    rT,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   ExlmNS,
 
                CommaS, SpaceShift, DotNS,            Enter, _,
-                           Minus, QuesNS,            _
+                           Minus, _,            _
   ),
 
   [NUM] = LAYOUT(
@@ -289,19 +289,25 @@ oneshot_state os_alt_state  = os_up_unqueued;
 oneshot_state os_cmd_state  = os_up_unqueued;
 
 void switch_to_english(void) {
-    uint8_t mod_state = get_mods();
+    uint8_t mod_state    = get_mods();
+    uint8_t os_mod_state = get_oneshot_mods();
     clear_mods();
+    clear_oneshot_mods();
     SEND_STRING(SS_LGUI(SS_TAP(X_Q)));
     layer_move(ABC);
     set_mods(mod_state);
+    set_oneshot_mods(os_mod_state);
 };
 
 void switch_to_russian(void) {
-    uint8_t mod_state = get_mods();
+    uint8_t mod_state    = get_mods();
+    uint8_t os_mod_state = get_oneshot_mods();
     clear_mods();
+    clear_oneshot_mods();
     SEND_STRING(SS_LGUI(SS_TAP(X_Z)));
     layer_move(RUS);
     set_mods(mod_state);
+    set_oneshot_mods(os_mod_state);
 };
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
