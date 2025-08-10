@@ -34,7 +34,6 @@ enum my_keycodes {
     OS_CTRL,
     OS_ALT,
     OS_CMD,
-    ESC_OS,
 };
 
 bool trackball_volume = false;
@@ -203,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
    BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
-    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O, ESC_OS,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,  CtrlZ,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
@@ -270,7 +269,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case ESC_OS:
+        case EscSYM:
             return true;
         default:
             return false;
@@ -425,13 +424,15 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
         }
     } else {
         if (record->event.pressed) {
-            if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
-                // Cancel oneshot on designated cancel keydown.
-                *state = os_up_unqueued;
-                unregister_code(mod);
-                send_os_osm_state(mod, false);
-                change_osm_state(mod, false);
-                return false;
+            if (record->tap.count) { // Need for LT keys
+                if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
+                    // Cancel oneshot on designated cancel keydown.
+                    *state = os_up_unqueued;
+                    unregister_code(mod);
+                    send_os_osm_state(mod, false);
+                    change_osm_state(mod, false);
+                    return false;
+                }
             }
         } else {
             if (!is_oneshot_ignored_key(keycode)) {
@@ -458,10 +459,16 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
 uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
-    if (!update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record)
-     || !update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record)
-     || !update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record)
-     || !update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record)) {
+    bool result1 = update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode,
+  record);
+    bool result2 = update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode,
+  record);
+    bool result3 = update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode,
+  record);
+    bool result4 = update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode,
+  record);
+
+    if (!result1 || !result2 || !result3 || !result4) {
         return false;
     }
     // clang-format on
