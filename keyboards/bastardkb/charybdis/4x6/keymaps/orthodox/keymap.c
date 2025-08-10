@@ -13,6 +13,7 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
+    CODE,
     PNTR,
     FN,
 };
@@ -20,6 +21,7 @@ enum charybdis_keymap_layers {
 enum my_keycodes {
     CODE_ARRAY = SAFE_RANGE,
     CODE_TO,
+    CODE_BR,
     ARM_MICRO,
     DELETE_LINE,
     LANG,
@@ -63,7 +65,7 @@ bool trackball_volume = false;
 #define T KC_T
 #define G KC_G
 #define M KC_M
-#define A KC_A
+#define A_CODE LT(CODE, KC_A)
 #define E KC_E
 #define I KC_I
 #define O KC_O
@@ -198,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
-    Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,  CtrlZ,
+    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,  CtrlZ,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
@@ -210,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y,    rZ,   _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
-    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
+    rF,    N,     R,  KC_S,     T,     G,            M, A_CODE,    E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
 
@@ -241,6 +243,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               BSpace, Tag, tag,     _, _,
                                          _,  _,     _
   ),
+
+  [CODE] = LAYOUT(
+    _, _, _, _, _, _,          _, _, _, _, _, _,
+    _, _, _, _, _, _,    _, _, _, _, _, _,
+    _, _, _, _, CODE_BR, _,    _, _, _, _, _, _,
+    _, _, _, _, _, _,    _, _, _, _, _, _,
+
+             _, _, _,    _, _,
+                      _, _,    _
+  ),
+
 
   [PNTR] = LAYOUT(
     _, _, _, _, _, _,          _, _, _, _, _, _,
@@ -365,6 +378,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case S_PTR:
         case F_FN:
+        case A_CODE:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
@@ -463,6 +477,16 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CODE_TO:
             if (record->event.pressed) {
                 SEND_STRING("->");
+            }
+            return false;
+        case CODE_BR:
+            if (record->event.pressed) {
+                SEND_STRING(" {");
+                SEND_STRING(SS_TAP(X_ENT));
+                SEND_STRING(SS_TAP(X_ENT));
+                SEND_STRING("}");
+                SEND_STRING(SS_TAP(X_UP));
+                SEND_STRING(SS_TAP(X_TAB));
             }
             return false;
         case DELETE_LINE:
