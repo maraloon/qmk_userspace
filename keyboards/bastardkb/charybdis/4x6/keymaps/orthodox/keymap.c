@@ -37,10 +37,6 @@ enum my_keycodes {
 };
 
 bool trackball_volume = false;
-bool is_alt_hold      = false;
-bool is_ctrl_hold     = false;
-bool is_shift_hold    = false;
-bool is_cmd_hold      = false;
 
 #undef _______
 #define _ KC_NO
@@ -200,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // WARN: DON'T TOUCH TILL 22 JUNE 2026
 // WARN: DON'T TOUCH TILL 22 JUNE 2026
   [ABC] = LAYOUT(
-   BSpace, _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,  CtrlZ,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
@@ -216,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
-    rT,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   ExlmNS,
+    rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
 
                CommaS, SpaceShift, DotNS,            Enter, _,
                            Minus, _,            _
@@ -337,24 +333,6 @@ void send_os_shift_release(void) {
     SEND_STRING(SS_TAP(X_F23));
 }
 
-void change_osm_state(uint16_t osm_key_state, bool hold) {
-    switch (osm_key_state) {
-        case KC_LALT:
-            is_alt_hold = hold;
-            break;
-        case KC_LCTL:
-            is_ctrl_hold = hold;
-            break;
-        case KC_LSFT:
-            is_shift_hold = hold;
-            break;
-        case KC_LGUI:
-            is_cmd_hold = hold;
-            break;
-        default:
-            break;
-    }
-}
 void send_os_osm_state(uint16_t osm_key_state, bool hold) {
     switch (osm_key_state) {
         case KC_LALT:
@@ -401,7 +379,6 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
             // Trigger keydown
             if (*state == os_up_unqueued) {
                 register_code(mod);
-                change_osm_state(mod, true);
                 send_os_osm_state(mod, true);
             }
             *state = os_down_unused;
@@ -417,7 +394,6 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     *state = os_up_unqueued;
                     unregister_code(mod);
                     send_os_osm_state(mod, false);
-                    change_osm_state(mod, false);
                 default:
                     break;
             }
@@ -430,7 +406,6 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     *state = os_up_unqueued;
                     unregister_code(mod);
                     send_os_osm_state(mod, false);
-                    change_osm_state(mod, false);
                     return false;
                 }
             }
@@ -445,7 +420,6 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                         *state = os_up_unqueued;
                         unregister_code(mod);
                         send_os_osm_state(mod, false);
-                        change_osm_state(mod, false);
                         break;
                     default:
                         break;
@@ -631,25 +605,25 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (is_alt_hold || is_ctrl_hold || is_shift_hold || is_cmd_hold) {
+            if (os_alt_state == os_up_queued || os_ctrl_state == os_up_queued || os_shft_state == os_up_queued || os_cmd_state == os_up_queued) {
                 rgb_matrix_set_color(index, 0, 0, 0);
 
-                if (is_alt_hold) {
+                if (os_alt_state == os_up_queued) {
                     if (row == 7) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
                 }
-                if (is_ctrl_hold) {
+                if (os_ctrl_state == os_up_queued) {
                     if (row == 8) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
                 }
-                if (is_shift_hold) {
+                if (os_shft_state == os_up_queued) {
                     if (row >= 9) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
                 }
-                if (is_cmd_hold) {
+                if (os_cmd_state == os_up_queued) {
                     if (row == 9 && col == 1) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
