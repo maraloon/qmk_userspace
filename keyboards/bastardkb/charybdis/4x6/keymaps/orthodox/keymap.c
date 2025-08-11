@@ -200,8 +200,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // WARN: DON'T TOUCH TILL 22 JUNE 2026
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,   Tag,   tag,     _,    _,
-    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, Quote,  Grave,
-    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,  CtrlZ,
+    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, Grave,
+    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
@@ -225,9 +225,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     _,     W,     _0,   _,    B,              _,      _,   _9,     _, DQuote, _,
-    _,     _,    _1,     _2,  _3,    _,              _,     _5,   _6,    _8,     Up, _,
-    _,     _,     _,      _,  _4,    _,              _,     _7, PgUp,  PgDn,      _, _,
+    _,     _,     W,     _0,   _,    B,              _,   Left,   _9, Right,    _, _,
+    _,     _,    _1,     _2,  _3,    _,              _,     _5,   _6,    _8,   Up, _,
+    _,     _,     _,      _,  _4,    _,              _,     _7, PgUp,  PgDn,    _, _,
 
                                      _, _, _,        Enter, Down,
                                         _, _,        _
@@ -235,10 +235,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
 
-    QK_BOOT, RGB_TOG, _, _,    _, EE_CLR,            EE_CLR, _, Tag, tag,   RGB_TOG,  QK_BOOT,
+    QK_BOOT, RGB_TOG, Tag,   tag,    _, EE_CLR,            EE_CLR, _, Tag, tag,   RGB_TOG,  QK_BOOT,
 
     _,     Star, Slash, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow, Grave,
-    BSlash, Hash,   At,  Left,  Right,     Amp,     _,     Alt,   Array,  array,  Quest,  Pipe,
+    BSlash, Hash,   At, Quote, DQuote,     Amp,     _,     Alt,   Array,  array,  Quest,  Pipe,
     _,     Equal, Plus,  Unds,  Minus,   Tilda,     _,    Ctrl,   DComm,   DDot,   Exlm,     _,
 
                               BSpace, Space, _,     _, _,
