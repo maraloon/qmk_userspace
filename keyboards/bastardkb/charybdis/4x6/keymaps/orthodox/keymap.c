@@ -22,6 +22,7 @@ enum my_keycodes {
     CODE_ARRAY = SAFE_RANGE,
     CODE_TO,
     CODE_BR,
+    CODEBLOCK,
     ARM_MICRO,
     DELETE_LINE,
     LANG,
@@ -246,7 +247,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [CODE] = LAYOUT(
     _, _, _, _, _, _,          _, _, _, _, _, _,
-    _, _, _, _, _, _,    _, _, _, _, _, _,
+    _, _, _, _, CODEBLOCK, _,    _, _, _, _, _, _,
     _, _, _, _, CODE_BR, _,    _, _, _, _, _, _,
     _, _, _, _, _, _,    _, _, _, _, _, _,
 
@@ -487,6 +488,11 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("}");
                 SEND_STRING(SS_TAP(X_UP));
                 SEND_STRING(SS_TAP(X_TAB));
+            }
+            return false;
+        case CODEBLOCK:
+            if (record->event.pressed) {
+                SEND_STRING("```");
             }
             return false;
         case DELETE_LINE:
