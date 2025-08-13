@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,   Tag,   tag,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, Grave,
     Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,    _,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Comma, Dot, Leader, _,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
                             VOLTR, Shift,            LANG
@@ -237,9 +237,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, Tag,   tag,    _, EE_CLR,            EE_CLR, _, Tag, tag,   RGB_TOG,  QK_BOOT,
 
-    _,     Star, Slash, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow, Grave,
-    BSlash, Hash,   At, Quote, DQuote,     Amp,     _,     Alt,   Array,  array,  Quest,  Pipe,
-    _,     Equal, Plus,  Unds,  Minus,   Tilda,     _,    Ctrl,   DComm,   DDot,   Exlm,     _,
+    _,     Star, Slash, Caret, Dollar, Percent,     CODE_BR, Bracket, bracket, Borrow, borrow, _,
+    BSlash, Hash,   At, Quote, DQuote,     Amp,     Grave,     Dot,   Comma,  Array,  array,  Pipe,
+    _,     Equal, Plus,  Unds,  Minus,   Tilda,     CODEBLOCK,    DDot,   DComm,   Quest,   Exlm,     _,
 
                               BSpace, Space, _,     _, _,
                                          _,  _,     _
