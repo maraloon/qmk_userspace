@@ -239,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _,     Star, Slash, Caret, Dollar, Percent,     CODE_BR, Bracket, bracket, Borrow, borrow, _,
     BSlash, Hash,   At, Quote, DQuote,     Amp,     Grave,     Dot,   Comma,  Array,  array,  Pipe,
-    _,     Equal, Plus,  Unds,  Minus,   Tilda,     CODEBLOCK,    DDot,   DComm,   Quest,   Exlm,     _,
+    _,     Equal, Plus,  Unds,  Minus,   Tilda,     CODEBLOCK,    DDot,   DComm,   Exlm,   Quest,    _,
 
                               BSpace, Space, _,     _, _,
                                          _,  _,     _
