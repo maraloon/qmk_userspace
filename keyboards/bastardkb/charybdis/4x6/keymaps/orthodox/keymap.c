@@ -115,6 +115,7 @@ bool trackball_volume = false;
 #define Ctrl OS_CTRL
 #define Cmd OS_CMD
 #define Alt OS_ALT
+#define Compose KC_RCTL
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -201,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,   Tag,   tag,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, Grave,
-    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,    _,
+    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,    Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
