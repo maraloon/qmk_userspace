@@ -290,7 +290,6 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
         case LANG:
-        case SpaceNUM:
         case EscSYM:
         case EnterCmd:
         case OS_SHFT:
