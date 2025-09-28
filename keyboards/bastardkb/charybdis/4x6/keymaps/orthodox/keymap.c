@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,   Tag,   tag,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, Grave,
-    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,    Compose,
+    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
@@ -345,6 +345,12 @@ void send_os_shift_hold(void) {
 }
 void send_os_shift_release(void) {
     SEND_STRING(SS_TAP(X_F23));
+}
+void send_num_layer_hold(void) {
+    SEND_STRING(SS_TAP(X_F10));
+}
+void send_num_layer_release(void) {
+    SEND_STRING(SS_TAP(X_F11));
 }
 
 void send_os_osm_state(uint16_t osm_key_state, bool hold) {
@@ -500,6 +506,13 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
             }
             return false;
+        case LT(NUM, KC_SPC):
+            if (record->event.pressed) {
+                with_mods_state_recover(send_num_layer_hold);
+            } else {
+                with_mods_state_recover(send_num_layer_release);
+            }
+            return true;
         case CommaS:
             if (record->event.pressed) {
                 SEND_STRING(", ");
