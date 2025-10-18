@@ -178,27 +178,6 @@ bool trackball_volume = false;
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
-// WARN: DON'T TOUCH TILL 22 JUNE 2026
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,   Tag,   tag,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, Grave,
@@ -291,7 +270,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
         case LANG:
         case EscSYM:
-        case EnterCmd:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
