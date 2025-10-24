@@ -13,6 +13,7 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
+    BSYM,
     CODE,
     PNTR,
     FN,
@@ -179,9 +180,9 @@ bool trackball_volume = false;
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,   Tag,   tag,     _,    _,
-    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, Grave,
-    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O,    Compose,
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
+    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
+    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
@@ -189,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [RUS] = LAYOUT(
-    _,     _,     _,    _,     _,     _,            _,     _,     _,     _,     _,    _,
+    _,     _,     _,    _,     _,     _,             _,     _,     _,     _,     _,    _,
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y,    rZ,   _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
@@ -215,16 +216,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
 
-    QK_BOOT, RGB_TOG, Tag,   tag,    _, EE_CLR,            EE_CLR, _, Tag, tag,   RGB_TOG,  QK_BOOT,
+    QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
-    _,     Star, Slash, Caret, Dollar, Percent,     CODE_BR, Bracket, bracket, Borrow, borrow, _,
-    BSlash, Hash,   At, Quote, DQuote,     Amp,     Grave,     Dot,   Comma,  Array,  array,  Pipe,
-    _,     Equal, Plus,  Unds,  Minus,   Tilda,     CODEBLOCK,    DDot,   DComm,   Exlm,   Quest,    _,
+    _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
+    _,     Hash,   At, Quote, DQuote,  _,     _,     Dot,   Comma,  Array,  array,  _,
+    _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Exlm,   Quest, _,
 
                               BSpace, Space, _,     _, _,
-                                         _,  _,     _
+                                   _, MO(BSYM),     _
   ),
 
+  [BSYM] = LAYOUT(
+    _, _, _, _, _, _,    _, _, _, _, _, _,
+    _, _, _, _, _, _,    _, Amp, Pipe, Percent, BSlash, _,
+    _, _, _, _, _, _,    _, Tag, tag, _, _, _,
+    _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
+
+             _, _, _,    _, _,
+                _, _,    _
+  ),
+
+// INFO: not used
   [CODE] = LAYOUT(
     _, _, _, _, _, _,          _, _, _, _, _, _,
     _, _, _, _, CODEBLOCK, _,    _, _, _, _, _, _,
