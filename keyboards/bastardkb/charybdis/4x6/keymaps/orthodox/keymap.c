@@ -220,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
     _,     Hash,   At, Quote, DQuote,  _,     _,     Dot,   Comma,  Array,  array,  _,
-    _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Exlm,   Quest, _,
+    _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Quest,   Exlm, _,
 
                               BSpace, Space, _,     _, _,
                                    _, MO(BSYM),     _
