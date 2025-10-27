@@ -183,10 +183,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
     Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
+    VOLTR, Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
-                            VOLTR, Shift,            LANG
+                         MO(BSYM), Shift,            LANG
   ),
 
   [RUS] = LAYOUT(
