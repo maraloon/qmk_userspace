@@ -229,7 +229,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BSYM] = LAYOUT(
     _, _, _, _, _, _,    _, _, _, _, _, _,
     _, _, _, _, _, _,    _, Amp, Pipe, Percent, BSlash, _,
-    _, _, _, _, _, _,    _, Tag, tag, _, _, _,
+    _, _, _, _, _, _,    _, Tag, tag, _, Tilda, _,
     _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
 
              _, _, _,    _, _,
