@@ -199,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
 
                CommaS, SpaceShift, DotNS,            Enter, _,
-                           Minus, _,            _
+                       Minus, SpaceShift,            _
   ),
 
   [NUM] = LAYOUT(
