@@ -14,7 +14,6 @@ enum charybdis_keymap_layers {
     NUM,
     SYM,
     BSYM,
-    CODE,
     PNTR,
     FN,
 };
@@ -67,7 +66,7 @@ bool trackball_volume = false;
 #define T KC_T
 #define G KC_G
 #define M KC_M
-#define A_CODE LT(CODE, KC_A)
+#define A_CMD MT(MOD_LGUI, KC_A)
 #define E KC_E
 #define I KC_I
 #define O KC_O
@@ -174,7 +173,6 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 #define EscSYM LT(SYM, KC_ESC)
-#define EnterCmd MT(MOD_LGUI, KC_ENT)
 #define CtrlZ LCTL(KC_Z)
 
 // clang-format off
@@ -182,10 +180,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
-    Tab,   N,     R, S_PTR,     T,     G,            M, A_CODE,    E,     I,     O, Compose,
-    VOLTR, Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD,    E,     I,     O, Compose,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
 
-                DelWord, SpaceNUM, DotNS,            EnterCmd, EscSYM,
+                DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
                          MO(BSYM), Shift,            LANG
   ),
 
@@ -194,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y,    rZ,   _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
-    rF,    N,     R,  KC_S,     T,     G,            M, A_CODE,    E,     I,    rH,  QuesNS,
+    rF,    N,     R,  KC_S,     T,     G,            M,  A_CMD,    E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
 
@@ -229,24 +227,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BSYM] = LAYOUT(
     _, _, _, _, _, _,    _, _, _, _, _, _,
     _, _, _, _, _, _,    _, Amp, Pipe, Percent, BSlash, _,
-    _, _, _, _, _, _,    _, Tag, tag, _, Tilda, _,
+    _, _, _, _, _, _,    _, Equal, Tag, tag, Tilda, _,
     _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
 
              _, _, _,    _, _,
                 _, _,    _
   ),
-
-// INFO: not used
-  [CODE] = LAYOUT(
-    _, _, _, _, _, _,          _, _, _, _, _, _,
-    _, _, _, _, CODEBLOCK, _,    _, _, _, _, _, _,
-    _, _, _, _, CODE_BR, _,    _, _, _, _, _, _,
-    _, _, _, _, _, _,    _, _, _, _, _, _,
-
-             _, _, _,    _, _,
-                      _, _,    _
-  ),
-
 
   [PNTR] = LAYOUT(
     _, _, _, _, _, _,          _, _, _, _, _, _,
@@ -369,7 +355,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case S_PTR:
         case F_FN:
-        case A_CODE:
+        case A_CMD:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
