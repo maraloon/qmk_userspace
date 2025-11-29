@@ -180,6 +180,16 @@ bool trackball_volume = false;
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  // [ABC] = LAYOUT(
+  //   _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
+  //   _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
+  //   Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD, E,     I,     O, Compose,
+  //   _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, TG(GRP),
+  //
+  //               DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
+  //                        MO(BSYM), Shift,            LANG
+  // ),
+
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
@@ -192,8 +202,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [GRP] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W,     Z,            Quote, F_FN,  O,     U,     J,   _,
-    Tab,   N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Comma,
+    _,     B,     L,     D,     W,     Z,            _,     F_FN,  O,     U,     J,   _,
+    Tab,   N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I,   _,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, TG(GRP),
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
