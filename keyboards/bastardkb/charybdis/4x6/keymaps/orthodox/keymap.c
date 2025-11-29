@@ -10,6 +10,7 @@ typedef enum {
 
 enum charybdis_keymap_layers {
     ABC = 0,
+    GRP,
     RUS,
     NUM,
     SYM,
@@ -63,10 +64,12 @@ bool trackball_volume = false;
 #define N KC_N
 #define R KC_R
 #define S_PTR LT(PNTR, KC_S)
+#define T_PTR LT(PNTR, KC_T)
 #define T KC_T
 #define G KC_G
 #define M KC_M
 #define A_CMD MT(MOD_LGUI, KC_A)
+#define H_CMD MT(MOD_LGUI, KC_H)
 #define E KC_E
 #define I KC_I
 #define O KC_O
@@ -180,8 +183,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
-    Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD,    E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, _,
+    Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD, E,     I,     O, Compose,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, TG(GRP),
+
+                DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
+                         MO(BSYM), Shift,            LANG
+  ),
+
+  [GRP] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _,     B,     L,     D,     W,     Z,            Quote, F_FN,  O,     U,     J,   _,
+    Tab,   N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Comma,
+    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, TG(GRP),
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
                          MO(BSYM), Shift,            LANG
@@ -354,8 +367,10 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case S_PTR:
+        case T_PTR:
         case F_FN:
         case A_CMD:
+        case H_CMD:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
