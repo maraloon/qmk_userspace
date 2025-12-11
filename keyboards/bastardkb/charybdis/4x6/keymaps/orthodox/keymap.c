@@ -10,7 +10,8 @@ typedef enum {
 
 enum charybdis_keymap_layers {
     ABC = 0,
-    GRP,
+    RTR, // RetroArch
+    GRP, // Graphite
     RUS,
     NUM,
     SYM,
@@ -54,6 +55,8 @@ bool trackball_volume = false;
 
 #define Q KC_Q
 #define W KC_W
+
+#define F KC_F
 #define F_FN LT(FN, KC_F)
 #define P KC_P
 #define B KC_B
@@ -63,11 +66,14 @@ bool trackball_volume = false;
 #define Y KC_Y
 #define N KC_N
 #define R KC_R
+#define St KC_S
+#define F KC_F
 #define S_PTR LT(PNTR, KC_S)
 #define T_PTR LT(PNTR, KC_T)
 #define T KC_T
 #define G KC_G
 #define M KC_M
+#define A KC_A
 #define A_CMD MT(MOD_LGUI, KC_A)
 #define H_CMD MT(MOD_LGUI, KC_H)
 #define E KC_E
@@ -182,11 +188,21 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, _,
+    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, TG(RTR),
     Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD, E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, TG(GRP),
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
+                         MO(BSYM), Shift,            LANG
+  ),
+
+  [RTR] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ, TG(RTR),
+    Tab,   N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, TG(GRP),
+
+                 BSpace, SpaceNUM, VOLTR,            Enter, Esc,
                          MO(BSYM), Shift,            LANG
   ),
 
