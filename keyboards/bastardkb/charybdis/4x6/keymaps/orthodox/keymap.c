@@ -182,6 +182,7 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 #define EscSYM LT(SYM, KC_ESC)
+// #define DelWLayer LCTL(KC_BSPC)
 #define CtrlZ LCTL(KC_Z)
 
 // clang-format off
@@ -259,7 +260,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, _, _, _, _, _,    _, Equal, Tag, tag, Tilda, _,
     _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
 
-             _, _, _,    _, _,
+             _, _, _,    TG(RTR), TG(GRP),
                 _, _,    _
   ),
 
@@ -617,27 +618,6 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    // for (uint8_t i = led_min; i < led_max; i++) {
-    //     if (is_alt == true) {
-    //         rgb_matrix_set_color(i, RGB_RED);
-    //     } else {
-    //         rgb_matrix_set_color(i, 0, 0, 0);
-    //     }
-    // }
-    // return false;
-
-    // for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-    //     for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-    //         uint8_t index = g_led_config.matrix_co[row][col];
-    //
-    //         if (row == 5 || col == 0) {
-    //             rgb_matrix_set_color(index, 250, 0, 250);
-    //         } else {
-    //             rgb_matrix_set_color(index, 250, 30, 0);
-    //         }
-    //     }
-    // }
-
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
@@ -666,12 +646,30 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                     }
                 }
             } else {
-                if (row == 5 || col == 0) {
-                    rgb_matrix_set_color(index, 250, 0, 250);
-                } else {
-                    rgb_matrix_set_color(index, 250, 30, 0);
-                }
-            }
+                // if (row == 5 || col == 0) {
+                //     rgb_matrix_set_color(index, 250, 0, 250);
+                // } else {
+                //     rgb_matrix_set_color(index, 250, 30, 0);
+                // }
+
+                switch(get_highest_layer(layer_state|default_layer_state)) {
+                    case 2:
+                        if (row == 5 || col == 0) {
+                            rgb_matrix_set_color(index, 250, 30, 0);
+                        } else {
+                            rgb_matrix_set_color(index, 250, 0, 250);
+                        }
+                        break;
+                    case 1:
+                        if (row == 5 || col == 0) {
+                            rgb_matrix_set_color(index, 250, 0, 250);
+                        } else {
+                            rgb_matrix_set_color(index, 250, 30, 0);
+                        }
+                        break;
+                    default:
+                        break;
+                    }
         }
     }
     return true;
