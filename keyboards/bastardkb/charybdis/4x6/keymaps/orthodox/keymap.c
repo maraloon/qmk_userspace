@@ -189,9 +189,9 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ, TG(RTR),
+    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
     Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD, E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, TG(GRP),
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
                          MO(BSYM), Shift,            LANG
@@ -199,9 +199,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [RTR] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ, TG(RTR),
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
     Tab,   N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader, TG(GRP),
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
 
                  BSpace, SpaceNUM, VOLTR,            Enter, Esc,
                          MO(BSYM), Shift,            LANG
@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,     B,     L,     D,     W,     Z,            Quote, F_FN,  O,     U,     J,   _,
     Tab,   N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Comma,
-    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, TG(GRP),
+    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
                          MO(BSYM), Shift,            LANG
@@ -626,18 +626,18 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(index, 0, 0, 0);
 
                 if (os_alt_state == os_up_queued) {
-                    if (row == 7) {
+                    if (row == 8) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
                 }
                 if (os_ctrl_state == os_up_queued) {
                     if (row == 8) {
-                        rgb_matrix_set_color(index, 250, 0, 0);
+                        rgb_matrix_set_color(index, 150, 150, 0);
                     }
                 }
                 if (os_shft_state == os_up_queued) {
                     if (row >= 9) {
-                        rgb_matrix_set_color(index, 250, 0, 0);
+                        rgb_matrix_set_color(index, 250, 0, 250);
                     }
                 }
                 if (os_cmd_state == os_up_queued) {
@@ -646,30 +646,30 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                     }
                 }
             } else {
-                // if (row == 5 || col == 0) {
-                //     rgb_matrix_set_color(index, 250, 0, 250);
-                // } else {
-                //     rgb_matrix_set_color(index, 250, 30, 0);
-                // }
-
                 switch(get_highest_layer(layer_state|default_layer_state)) {
-                    case 2:
-                        if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 250, 30, 0);
-                        } else {
-                            rgb_matrix_set_color(index, 250, 0, 250);
-                        }
-                        break;
                     case 1:
                         if (row == 5 || col == 0) {
                             rgb_matrix_set_color(index, 250, 0, 250);
                         } else {
+                            rgb_matrix_set_color(index, RGB_BLUE);
+                        }
+                        break;
+                    case 2:
+                        if (row == 5 || col == 0) {
                             rgb_matrix_set_color(index, 250, 30, 0);
+                        } else {
+                            rgb_matrix_set_color(index, RGB_RED);
                         }
                         break;
                     default:
+                        if (row == 5 || col == 0) {
+                            rgb_matrix_set_color(index, 250, 0, 250);
+                        } else {
+                            rgb_matrix_set_color(index, 250, 30, 0);
+                        }
                         break;
                     }
+            }
         }
     }
     return true;
