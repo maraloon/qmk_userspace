@@ -204,6 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
 
                  BSpace, SpaceNUM, VOLTR,            Enter, Esc,
+
                          MO(BSYM), Shift,            LANG
   ),
 
