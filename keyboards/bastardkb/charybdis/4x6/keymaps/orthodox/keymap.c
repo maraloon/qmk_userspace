@@ -313,6 +313,7 @@ oneshot_state os_shft_state = os_up_unqueued;
 oneshot_state os_ctrl_state = os_up_unqueued;
 oneshot_state os_alt_state  = os_up_unqueued;
 oneshot_state os_cmd_state  = os_up_unqueued;
+bool oneshot_tab_toggle = false;
 
 void with_mods_state_recover(void (*callback)(void)) {
     uint8_t mod_state    = get_mods();
@@ -398,16 +399,19 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16_t keycode, keyrecord_t *record) {
+    // State: pressed mod
     if (keycode == trigger) {
+        // Trigger keydown
         if (record->event.pressed) {
-            // Trigger keydown
             if (*state == os_up_unqueued) {
                 register_code(mod);
                 send_os_osm_state(mod, true);
+                *state = os_down_unused;
+            } else {
+                oneshot_tab_toggle = true;
             }
-            *state = os_down_unused;
+        // Trigger keyup
         } else {
-            // Trigger keyup
             switch (*state) {
                 case os_down_unused:
                     // If we didn't use the mod while trigger was held, queue it.
@@ -422,19 +426,21 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     break;
             }
         }
+    // State: pressed not mod key (a-z or else)
     } else {
         if (record->event.pressed) {
             if (record->tap.count) { // Need for LT keys
                 if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
-                    // Cancel oneshot on designated cancel keydown.
+                    // Cancel oneshot on designated cancel keydown (ESC).
                     *state = os_up_unqueued;
                     unregister_code(mod);
                     send_os_osm_state(mod, false);
+                    oneshot_tab_toggle = false;
                     return false;
                 }
             }
         } else {
-            if (!is_oneshot_ignored_key(keycode)) {
+            if (oneshot_tab_toggle == false && !is_oneshot_ignored_key(keycode)) {
                 // On non-ignored keyup, consider the oneshot used.
                 switch (*state) {
                     case os_down_unused:
