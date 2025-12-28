@@ -189,8 +189,8 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
-    Tab,   N,     R, S_PTR,     T,     G,            M,     A_CMD, E,     I,     O, Compose,
+    Alt,   Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
+    Ctrl,  N,     R, S_PTR,     T,     G,            M,     A_CMD, E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
@@ -199,8 +199,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [RTR] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
-    Tab,   N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
+    Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
+    Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
 
                  BSpace, SpaceNUM, VOLTR,            Enter, Esc,
@@ -210,8 +210,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [GRP] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W,     Z,            Quote, F_FN,  O,     U,     J,   _,
-    Tab,   N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Comma,
+    Alt,   B,     L,     D,     W,     Z,            Quote, F_FN,  O,     U,     J,   _,
+    Ctrl,  N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Comma,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
