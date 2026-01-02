@@ -252,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Quest,   Exlm, _,
 
                               BSpace, Space, _,     _, _,
-                                   _, MO(BSYM),     _
+                                          _, _,     _
   ),
 
   [BSYM] = LAYOUT(
