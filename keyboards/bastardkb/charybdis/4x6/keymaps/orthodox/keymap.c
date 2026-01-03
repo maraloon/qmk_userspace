@@ -210,8 +210,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [GRP] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    Alt,   B,     L,     D,     W,     Z,            Quote, F_FN,  O,     U,     J,   _,
-    Ctrl,  N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Comma,
+    Alt,   B,     L,     D,     W,     Z,            CtrlZ, F_FN,  O,     U,     J,   _,
+    Ctrl,  N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Compose,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
@@ -235,7 +235,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     _,     W,     _0,   _,    B,              _,   Left,   _9, Right,    _, _,
+    _,     _,     W,     _0, LCTL(U), B,             _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3,    _,              _,     _5,   _6,    _8,   Up, _,
     _,     _,     _,    Tab,  _4,    _,              _,     _7, PgUp,  PgDn,    _, _,
 

@@ -6,7 +6,7 @@ colemak:
         • 🄰   🌐
 
 graphite:
-⌃ b l d w z   ' f o u ✧ •
+⌃ b l d w z   ✧ f o u j •
 ⌥ n r t s g   y h a e i •
 • q x m c v   k p ⌥ ⌃ ✦ •
 
