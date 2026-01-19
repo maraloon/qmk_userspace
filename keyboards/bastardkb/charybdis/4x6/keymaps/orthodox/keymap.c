@@ -68,6 +68,7 @@ bool trackball_volume = false;
 #define R KC_R
 #define St KC_S
 #define F KC_F
+#define S_BSYM LT(BSYM, KC_S)
 #define S_PTR LT(PNTR, KC_S)
 #define T_PTR LT(PNTR, KC_T)
 #define T KC_T
@@ -190,11 +191,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     Alt,   Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
-    Ctrl,  N,     R, T_PTR, S_PTR,     G,            M,     A_CMD, E,     I,     O, Compose,
+    Ctrl,  N,     R, T_PTR, S_BSYM,    G,            M,     A_CMD, E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
-                         MO(BSYM), Shift,            LANG
+                                _, Shift,            LANG
   ),
 
   [RTR] = LAYOUT(
@@ -211,11 +212,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [GRP] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     Alt,   B,     L,     D,     W,     Z,            CtrlZ, F_FN,  O,     U,     J,   _,
-    Ctrl,  N,     R, T_PTR,     S_PTR, G,            Y,     H_CMD, A_CMD, E,     I, Compose,
+    Ctrl,  N,     R, T_PTR,    S_BSYM, G,            Y,     H_CMD, A_CMD, E,     I, Compose,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
-                         MO(BSYM), Shift,            LANG
+                                _, Shift,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -386,6 +387,7 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case S_PTR:
+        case S_BSYM:
         case T_PTR:
         case F_FN:
         case A_CMD:
