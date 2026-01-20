@@ -330,7 +330,7 @@ void with_mods_state_recover(void (*callback)(void)) {
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
-    layer_move(ABC);
+    layer_move(GRP);
 };
 void switch_to_russian(void) {
     SEND_STRING(SS_TAP(X_F14));
