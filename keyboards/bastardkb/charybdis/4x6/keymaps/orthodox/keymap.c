@@ -161,7 +161,7 @@ bool trackball_volume = false;
 #define VolUp KC_KB_VOLUME_UP
 #define VolDn KC_KB_VOLUME_DOWN
 
-#define Leader LCMD(KC_L)
+#define Leader LCMD(KC_F)
 // #define WS12 LCMD(KC_1)
 // #define WS04 LCMD(KC_0)
 
@@ -236,12 +236,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     _,     W,     _0, LCTL(U), B,             _,   Left,   _9, Right,    _, _,
-    _,     _,    _1,     _2,  _3,    _,              _,     _5,   _6,    _8,   Up, _,
-    _,     _,     _,    Tab,  _4,    _,              _,     _7, PgUp,  PgDn,    _, _,
+    _,     B,     _,     _0,   W,    _,             _,   Left,   _9, Right,    _, _,
+    _,     _,    _1,     _2,  _3,    _,             _,     _5,   _6,    _8,   Up, _,
+    _,     _,     _,    Tab,  _4,    _,             _,     _7, PgUp,  PgDn,    _, _,
 
                                      _, _, _,        Enter, Down,
-                                        _, _,        _
+                                        _, _,        LCTL(U)
   ),
 
   [SYM] = LAYOUT(
