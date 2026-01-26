@@ -162,15 +162,7 @@ bool trackball_volume = false;
 #define VolDn KC_KB_VOLUME_DOWN
 
 #define Leader LCMD(KC_F)
-// #define WS12 LCMD(KC_1)
-// #define WS04 LCMD(KC_0)
 
-#define WS0 LCMD(KC_0)
-#define WS1 LCMD(KC_1)
-#define WS2 LCMD(KC_2)
-#define WS3 LCMD(KC_3)
-#define WS4 LCMD(KC_4)
-#define WSP LALT(KC_TAB)
 #define NextWin LCMD(KC_GRV)
 #define NextWinStack LCMD(KC_TILD)
 
@@ -384,6 +376,7 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
     }
 }
 
+// TODO: replace it with https://docs.qmk.fm/tap_hold#flow-tap
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case S_PTR:
