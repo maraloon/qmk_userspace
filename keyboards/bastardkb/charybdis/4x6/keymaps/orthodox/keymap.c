@@ -11,7 +11,6 @@ typedef enum {
 enum charybdis_keymap_layers {
     ABC = 0,
     RTR, // RetroArch
-    GRP, // Graphite
     RUS,
     NUM,
     SYM,
@@ -76,6 +75,7 @@ bool trackball_volume = false;
 #define M KC_M
 #define A KC_A
 #define A_CMD MT(MOD_LGUI, KC_A)
+#define A_CG LCG_T(KC_A) // command+control
 #define H_CMD MT(MOD_LGUI, KC_H)
 #define E KC_E
 #define I KC_I
@@ -181,10 +181,10 @@ bool trackball_volume = false;
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Alt,   Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
-    Ctrl,  N,     R, T_PTR, S_BSYM,    G,            M,     A_CMD, E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    Alt,   B,     L,     D,     W,     Z,            CtrlZ, F_FN,  O,     U,     J,   _,
+    Ctrl,  N,     R, T_PTR,    S_BSYM, G,            Y,     H_CMD, A_CMD, E,     I, Compose,
+    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
 
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
                                 _, Shift,            LANG
@@ -199,16 +199,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  BSpace, SpaceNUM, VOLTR,            Enter, Esc,
 
                          MO(BSYM), Shift,            LANG
-  ),
-
-  [GRP] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    Alt,   B,     L,     D,     W,     Z,            CtrlZ, F_FN,  O,     U,     J,   _,
-    Ctrl,  N,     R, T_PTR,    S_BSYM, G,            Y,     H_CMD, A_CMD, E,     I, Compose,
-    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
-
-                DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
-                                _, Shift,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -254,7 +244,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, _, _, _, _, _,    _, Equal, Tag, tag, Tilda, _,
     _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
 
-             _, _, _,    TG(RTR), TG(GRP),
+             _, _, _,    TG(RTR), _,
                 _, _,    _
   ),
 
@@ -322,7 +312,7 @@ void with_mods_state_recover(void (*callback)(void)) {
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
-    layer_move(GRP);
+    layer_move(ABC);
 };
 void switch_to_russian(void) {
     SEND_STRING(SS_TAP(X_F14));
