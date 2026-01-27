@@ -74,7 +74,6 @@ bool trackball_volume = false;
 #define G KC_G
 #define M KC_M
 #define A KC_A
-#define A_CMD MT(MOD_LGUI, KC_A)
 #define A_CG LCG_T(KC_A) // command+control
 #define H_CMD MT(MOD_LGUI, KC_H)
 #define E KC_E
@@ -183,9 +182,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     Alt,   B,     L,     D,     W,     Z,            CtrlZ, F_FN,  O,     U,     J,   _,
-    Ctrl,  N,     R, T_PTR,    S_BSYM, G,            Y,     H_CMD, A_CMD, E,     I, Compose,
+    Ctrl,  N,     R, T_PTR,    S_BSYM, G,            Y,     H_CMD, A,     E,     I, Compose,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
-
                 DelWord, SpaceNUM, VOLTR,            Enter, EscSYM,
                                 _, Shift,            LANG
   ),
@@ -195,21 +193,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
     Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
-
                  BSpace, SpaceNUM, VOLTR,            Enter, Esc,
-
-                         MO(BSYM), Shift,            LANG
+                                _, Shift,            LANG
   ),
 
   [RUS] = LAYOUT(
-    _,     _,     _,    _,     _,     _,             _,     _,     _,     _,     _,    _,
-    //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
-    _,     Q,     W,  F_FN,     P,     B,            J,     L,     U,     Y,    rZ,   _,
+    _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
+    //     Э      Ц     У       К      Е             Н      Г      Ш      Й      З
+    _,     Q,     W,    F,      P,     B,            J,     L,     U,     Y,    rZ,    _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
-    rF,    N,     R,  KC_S,     T,     G,            M,  A_CMD,    E,     I,    rH,  QuesNS,
+    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-
                CommaS, SpaceShift, DotNS,            Enter, _,
                        Minus, SpaceShift,            _
   ),
@@ -221,7 +216,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     _,     _0,   W,    _,             _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3,    _,             _,     _5,   _6,    _8,   Up, _,
     _,     _,     _,    Tab,  _4,    _,             _,     _7, PgUp,  PgDn,    _, _,
-
                                      _, _, _,        Enter, Down,
                                         _, _,        LCTL(U)
   ),
@@ -233,7 +227,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
     _,     Hash,   At,  DQuote, Quote, _,     _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Quest,   Exlm, _,
-
                               BSpace, Space, _,     _, _,
                                           _, _,     _
   ),
@@ -373,7 +366,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case S_BSYM:
         case T_PTR:
         case F_FN:
-        case A_CMD:
         case H_CMD:
             // Do not select the hold action when another key is pressed.
             return false;
@@ -667,21 +659,20 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return true;
 }
 
-// ✅ Control volume using the trackball (Works only in Layer 3)
-static int volume_accumulator = 0; // Accumulate trackball movement for volume control
-#define SCROLL_DIVIDER 15          // 🔥 Higher values slow down volume change (increase for more sensitivity)
+static int volume_accumulator = 0;
+#define SCROLL_DIVIDER 15 // increase for more sensitivity)
 // WARN: function already used
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     // if (get_highest_layer(layer_state) == 3) {
     if (trackball_volume) {
-        volume_accumulator += mouse_report.y; // 🔥 Accumulate trackball movement
+        volume_accumulator += mouse_report.y;
 
-        while (abs(volume_accumulator) >= SCROLL_DIVIDER) { // 🔥 Change volume only when movement exceeds threshold
+        while (abs(volume_accumulator) >= SCROLL_DIVIDER) {
             if (volume_accumulator > 0) {
-                tap_code(VolDn); // Scroll down decreases volume
+                tap_code(VolDn);
                 volume_accumulator -= SCROLL_DIVIDER;
             } else {
-                tap_code(VolUp); // Scroll up increases volume
+                tap_code(VolUp);
                 volume_accumulator += SCROLL_DIVIDER;
             }
         }
