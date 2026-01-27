@@ -45,6 +45,7 @@ bool trackball_volume = false;
 #undef _______
 #define _ KC_NO
 #define _______ KC_NO
+#define _x KC_TRANSPARENT
 
 // WARN: danger
 #undef G
@@ -242,13 +243,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [PNTR] = LAYOUT(
-    _, _, _, _, _, _,          _, _, _, _, _, _,
-    _, _, _, _, KC_BTN3, _,    _, _, _, _, _, _,
-    _, _, _, _, KC_BTN1, _,    _, _, _, _, _, _,
-    _, _, _, _, KC_BTN2, _,    _, _, _, _, _, _,
-
-             _, CARRETM, _,    _, _,
-                      _, _,    _
+    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
+    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
+    SNIPING, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
+    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
+           _x, _x, KC_BTN2,    _x, _x,
+              KC_BTN1,  _x,    _x
   ),
 
   [FN] = LAYOUT(
@@ -536,22 +536,11 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
+static uint16_t auto_pointer_layer_timer = 0;
 #endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
 #define CHARYBDIS_AUTO_SNIPING_ON_LAYER PNTR
-
-#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-static uint16_t auto_pointer_layer_timer = 0;
-
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
-#    endif
-
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
-#    endif
-#endif
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -560,18 +549,43 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    define SNIPING KC_NO
 #endif
 
+
+static int volume_accumulator = 0;
+#define SCROLL_DIVIDER 15 // increase for more sensitivity)
+
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
-        if (auto_pointer_layer_timer == 0) {
-            layer_on(PNTR);
-#        ifdef RGB_MATRIX_ENABLE
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-#        endif // RGB_MATRIX_ENABLE
+
+    if (trackball_volume) {
+        volume_accumulator += mouse_report.y;
+
+        while (abs(volume_accumulator) >= SCROLL_DIVIDER) {
+            if (volume_accumulator > 0) {
+                tap_code(VolDn);
+                volume_accumulator -= SCROLL_DIVIDER;
+            } else {
+                tap_code(VolUp);
+                volume_accumulator += SCROLL_DIVIDER;
+            }
         }
-        auto_pointer_layer_timer = timer_read();
+
+        // Block normal trackball input
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+        mouse_report.h = 0;
+        mouse_report.v = 0;
+    } else {
+        if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
+            if (auto_pointer_layer_timer == 0) {
+                layer_on(PNTR);
+#        ifdef RGB_MATRIX_ENABLE
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+                rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+#        endif // RGB_MATRIX_ENABLE
+            }
+            auto_pointer_layer_timer = timer_read();
+        }
     }
     return mouse_report;
 }
@@ -657,32 +671,4 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
     return true;
-}
-
-static int volume_accumulator = 0;
-#define SCROLL_DIVIDER 15 // increase for more sensitivity)
-// WARN: function already used
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    // if (get_highest_layer(layer_state) == 3) {
-    if (trackball_volume) {
-        volume_accumulator += mouse_report.y;
-
-        while (abs(volume_accumulator) >= SCROLL_DIVIDER) {
-            if (volume_accumulator > 0) {
-                tap_code(VolDn);
-                volume_accumulator -= SCROLL_DIVIDER;
-            } else {
-                tap_code(VolUp);
-                volume_accumulator += SCROLL_DIVIDER;
-            }
-        }
-
-        // Block normal trackball input
-        mouse_report.x = 0;
-        mouse_report.y = 0;
-        mouse_report.h = 0;
-        mouse_report.v = 0;
-    }
-
-    return mouse_report;
 }
