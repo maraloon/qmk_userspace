@@ -69,6 +69,7 @@ bool trackball_volume = false;
 #define F KC_F
 #define S_BSYM LT(BSYM, KC_S)
 #define T KC_T
+
 #define G KC_G
 #define M KC_M
 #define A KC_A
