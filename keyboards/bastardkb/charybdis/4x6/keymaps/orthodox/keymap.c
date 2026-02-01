@@ -1,32 +1,17 @@
 #include QMK_KEYBOARD_H
 
-// Represents the four states a oneshot key can be in
-typedef enum {
-    os_up_unqueued,
-    os_up_queued,
-    os_down_unused,
-    os_down_used,
-} oneshot_state;
-
 enum charybdis_keymap_layers {
     ABC = 0,
-    RTR, // RetroArch
     RUS,
     NUM,
     SYM,
-    BSYM,
-    PNTR,
     FN,
+    CAL,
+    CTL,
 };
 
 enum my_keycodes {
-    CODE_ARRAY = SAFE_RANGE,
-    CODE_TO,
-    CODE_BR,
-    CODEBLOCK,
-    ARM_MICRO,
-    DELETE_LINE,
-    LANG,
+    LANG = SAFE_RANGE,
     VOLTR,
 
     CommaS,
@@ -38,6 +23,8 @@ enum my_keycodes {
     OS_CTRL,
     OS_ALT,
     OS_CMD,
+
+    NUMLOCK,
 };
 
 bool trackball_volume = false;
@@ -45,19 +32,16 @@ bool trackball_volume = false;
 #undef _______
 #define _ KC_NO
 #define _______ KC_NO
-#define _x KC_TRANSPARENT
 
 // WARN: danger
 #undef G
 #undef A
 #undef X
-#undef C
 
 #define Q KC_Q
 #define W KC_W
 
 #define F KC_F
-#define F_FN LT(FN, KC_F)
 #define P KC_P
 #define B KC_B
 #define J KC_J
@@ -67,21 +51,17 @@ bool trackball_volume = false;
 #define N KC_N
 #define R KC_R
 #define St KC_S
-#define F KC_F
-#define S_BSYM LT(BSYM, KC_S)
 #define T KC_T
 
 #define G KC_G
 #define M KC_M
 #define A KC_A
-#define A_CG LCG_T(KC_A) // command+control
-#define H_CMD MT(MOD_LGUI, KC_H)
 #define E KC_E
 #define I KC_I
 #define O KC_O
 #define Z KC_Z
 #define X KC_X
-#define C KC_C
+#define Ct KC_C
 #define D KC_D
 #define V KC_V
 #define K KC_K
@@ -113,10 +93,8 @@ bool trackball_volume = false;
 #define tag KC_GT
 
 #define Space KC_SPC
-#define BSpace KC_BSPC
-#define DelWord LCTL(KC_BSPC)
-#define Enter KC_ENT
 #define Esc KC_ESC
+#define Ent KC_ENT
 #define Tab KC_TAB
 
 #define Shift OS_SHFT
@@ -124,7 +102,6 @@ bool trackball_volume = false;
 #define Ctrl OS_CTRL
 #define Cmd OS_CMD
 #define Alt OS_ALT
-#define Compose KC_RCTL
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -157,13 +134,8 @@ bool trackball_volume = false;
 #define Caret KC_CIRC
 #define Dollar KC_DLR
 
-#define VolUp KC_KB_VOLUME_UP
-#define VolDn KC_KB_VOLUME_DOWN
-
-#define Leader LCMD(KC_F)
-
-#define NextWin LCMD(KC_GRV)
-#define NextWinStack LCMD(KC_TILD)
+#define Lets KC_F12
+#define Type QK_LEAD
 
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
@@ -173,28 +145,16 @@ bool trackball_volume = false;
 #define rU KC_KP_6 // ю
 
 #define SpaceNUM LT(NUM, KC_SPC)
-#define EscSYM LT(SYM, KC_ESC)
-// #define DelWLayer LCTL(KC_BSPC)
-#define CtrlZ LCTL(KC_Z)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W,     Z,            _,     F_FN,  O,     U,     J,   _,
-    Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I, Compose,
-    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
-              DelWord, SpaceNUM, KC_BTN2,            Enter, EscSYM,
-                          KC_BTN1, Shift,            LANG
-  ),
-
-  [RTR] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
-    Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
-                 BSpace, SpaceNUM, VOLTR,            Enter, Esc,
-                                _, Shift,            LANG
+    _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
+    _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
+    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Ctrl,
+    _,     Q,     X,     M,    Ct,     V,            K,     P,     Alt, OSL(CTL), Lets, _,
+                    _, SpaceNUM, KC_BTN2,            Esc, OSL(SYM),
+                        KC_BTN1, KC_LSFT,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -204,20 +164,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
-    rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-               CommaS, SpaceShift, DotNS,            Enter, _,
-                       Minus, SpaceShift,            _
+    rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
+               CommaS, SpaceShift, DotNS,            _, _,
+                          Minus, KC_LSFT,            _
   ),
 
   [NUM] = LAYOUT(
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     B,     _,     _0,   W,    _,             _,   Left,   _9, Right,    _, _,
-    _,     _,    _1,     _2,  _3,    _,             _,     _5,   _6,    _8,   Up, _,
-    _,     _,     _,    Tab,  _4,    _,             _,     _7, PgUp,  PgDn,    _, _,
-                                     _, _, _,        Enter, Down,
-                                        _, _,        LCTL(U)
+    _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
+    _,     _,    _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
+    _,     _,  Left,  Right,  _4,    _,       _,     _7, Down,    Up,    _, _,
+                           _, Space, _,       Esc, Down,
+                                  _, _,       LCTL(U)
   ),
 
   [SYM] = LAYOUT(
@@ -225,82 +185,111 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
-    _,     Hash,   At,  DQuote, Quote, _,     _,     Dot,   Comma,  Array,  array,  _,
-    _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Quest,   Exlm, _,
-                              BSpace, Space, _,     _, _,
-                                          _, _,     _
+   BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
+    _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
+                                  _, _, _,    TG(ABC), _,
+                                     _, _,    _
   ),
 
-  [BSYM] = LAYOUT(
-    _, _, _, _, _, _,    _, _, _, _, _, _,
-    _, _, _, _, _, _,    _, Amp, Pipe, Percent, BSlash, _,
-    _, _, _, _, _, _,    _, Equal, Tag, tag, Tilda, _,
-    _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
-
-             _, _, _,    TG(RTR), _,
-                _, _,    _
+  [CTL] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
+    C(Z), C(N), C(R), KC_TAB, NUMLOCK, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
+    _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
+                    _, _, _,            TG(ABC), _,
+                        _, _,            _
   ),
 
-  [PNTR] = LAYOUT(
-    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-    SNIPING, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-           _x, _x, KC_BTN2,    _x, _x,
-              KC_BTN1,  _x,    _x
+  [CAL] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
+    LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
+    _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
+                    _, _, _,            TG(ABC), _,
+                        _, _,            _
   ),
 
   [FN] = LAYOUT(
-    _, _, _, _, _, _,          KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18,
-    _, _, _, _, _, _,    KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24,
-    _, _, _, _, _, _,    KC_F11, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,
-    _, _, _, _, _, _,    KC_F12, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,
-
+    _, KC_F1,   KC_F2,  KC_F3,  KC_F4, KC_F5,      KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10, _,
+    _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
+    _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
+    _, _, _, _, _, _,    _, _, _, _, _, _,
              _, _, _,    _, _,
-                      _, _,    _
+                _, _,    _
   ),
 };
-// clang-format on
-bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-        case EscSYM:
-            return true;
-        default:
-            return false;
+
+void leader_end_user(void) {
+    if (leader_sequence_two_keys(KC_H, KC_O)) {
+        SEND_STRING("~");
+    } else if (leader_sequence_two_keys(KC_P, KC_R)) {
+        SEND_STRING("%");
+    } else if (leader_sequence_two_keys(KC_G, KC_R)) {
+        SEND_STRING("`");
+    } else if (leader_sequence_two_keys(KC_B, KC_K)) {
+        SEND_STRING("```");
+    } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
+        SEND_STRING("=>");
+    } else if (leader_sequence_two_keys(KC_G, KC_T)) {
+        SEND_STRING(">=");
+    } else if (leader_sequence_two_keys(KC_L, KC_T)) {
+        SEND_STRING("<=");
+    } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
+        SEND_STRING("===");
+    } else if (leader_sequence_three_keys(KC_N, KC_E, KC_Q)) {
+        SEND_STRING("!==");
+    } else if (leader_sequence_two_keys(KC_A, KC_M)) {
+        SEND_STRING("&");
+    } else if (leader_sequence_two_keys(KC_P, KC_I)) {
+        SEND_STRING("|");
+    } else if (leader_sequence_two_keys(KC_A, KC_N)) {
+        SEND_STRING("&&");
+    } else if (leader_sequence_two_keys(KC_O, KC_R)) {
+        SEND_STRING("||");
+    } else if (leader_sequence_two_keys(KC_A, KC_L)) {
+        SEND_STRING("<-");
+    } else if (leader_sequence_two_keys(KC_A, KC_R)) {
+        SEND_STRING("->");
+    } else if (leader_sequence_three_keys(KC_E, KC_A, KC_H)) {
+        SEND_STRING("{");
+        SEND_STRING(SS_TAP(X_ENT));
+        SEND_STRING(SS_TAP(X_ENT));
+        SEND_STRING("}");
+        SEND_STRING(SS_TAP(X_UP));
+        SEND_STRING(SS_TAP(X_TAB));
+    } else if (leader_sequence_two_keys(KC_M, KC_M)) {
+        SEND_STRING("mara@the-witch.ru");
+    } else if (leader_sequence_two_keys(KC_M, KC_Y)) {
+        SEND_STRING("zeroly@ya.ru");
+    } else if (leader_sequence_two_keys(KC_M, KC_S)) {
+        SEND_STRING("sdvk1369@gmail.com");
+    }
+    // else if (leader_sequence_two_keys(KC_A, KC_Z)) {
+    //     // Leader, a, s => GUI+S
+    //     tap_code16(LGUI(KC_S));
+    // }
+}
+
+
+void oneshot_layer_changed_user(uint8_t layer) {
+    if (layer) {
+        tap_code(KC_F17);
+    } else {
+        tap_code(KC_F18);
     }
 }
 
-bool is_oneshot_ignored_key(uint16_t keycode) {
-    switch (keycode) {
-        case LANG:
-        case EscSYM:
-        case OS_SHFT:
-        case OS_CTRL:
-        case OS_ALT:
-        case OS_CMD:
-            return true;
-        default:
-            return false;
-    }
-}
+// Represents the four states a oneshot key can be in
+typedef enum {
+    osm_0,
+    osm_queued,
+} oneshot_state;
 
-oneshot_state os_shft_state = os_up_unqueued;
-oneshot_state os_ctrl_state = os_up_unqueued;
-oneshot_state os_alt_state  = os_up_unqueued;
-oneshot_state os_cmd_state  = os_up_unqueued;
-bool oneshot_tab_toggle = false;
-
-void with_mods_state_recover(void (*callback)(void)) {
-    uint8_t mod_state    = get_mods();
-    uint8_t os_mod_state = get_oneshot_mods();
-    clear_mods();
-    clear_oneshot_mods();
-
-    callback();
-
-    set_mods(mod_state);
-    set_oneshot_mods(os_mod_state);
-}
+oneshot_state os_shft_state = osm_0;
+oneshot_state os_ctrl_state = osm_0;
+oneshot_state os_alt_state  = osm_0;
+oneshot_state os_cmd_state  = osm_0;
+bool          osm_state     = false;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -311,212 +300,53 @@ void switch_to_russian(void) {
     layer_move(RUS);
 };
 
-void send_os_alt_hold(void) {
-    SEND_STRING(SS_TAP(X_F15));
-}
-void send_os_alt_release(void) {
-    SEND_STRING(SS_TAP(X_F16));
-}
-void send_os_ctrl_hold(void) {
-    SEND_STRING(SS_TAP(X_F17));
-}
-void send_os_ctrl_release(void) {
-    SEND_STRING(SS_TAP(X_F18));
-}
-void send_os_shift_hold(void) {
-    SEND_STRING(SS_TAP(X_F22));
-}
-void send_os_shift_release(void) {
-    SEND_STRING(SS_TAP(X_F23));
-}
-
-void send_os_osm_state(uint16_t osm_key_state, bool hold) {
-    switch (osm_key_state) {
-        case KC_LALT:
-            if (hold == true) {
-                with_mods_state_recover(send_os_alt_hold);
-            } else {
-                with_mods_state_recover(send_os_alt_release);
-            }
-            break;
-        case KC_LCTL:
-            if (hold == true) {
-                with_mods_state_recover(send_os_ctrl_hold);
-            } else {
-                with_mods_state_recover(send_os_ctrl_release);
-            }
-            break;
-        case KC_LSFT:
-            if (hold == true) {
-                with_mods_state_recover(send_os_shift_hold);
-            } else {
-                with_mods_state_recover(send_os_shift_release);
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-// TODO: replace it with https://docs.qmk.fm/tap_hold#flow-tap
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case S_BSYM:
-        case F_FN:
-        case H_CMD:
-            // Do not select the hold action when another key is pressed.
-            return false;
-        default:
-            // Immediately select the hold action when another key is pressed.
-            return true;
-    }
-}
-
-bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16_t keycode, keyrecord_t *record) {
-    // State: pressed mod
-    if (keycode == trigger) {
-        // Trigger keydown
-        if (record->event.pressed) {
-            if (*state == os_up_unqueued) {
-                register_code(mod);
-                send_os_osm_state(mod, true);
-                *state = os_down_unused;
-            } else {
-                oneshot_tab_toggle = true;
-            }
-        // Trigger keyup
-        } else {
-            switch (*state) {
-                case os_down_unused:
-                    // If we didn't use the mod while trigger was held, queue it.
-                    *state = os_up_queued;
-                    break;
-                case os_down_used:
-                    // If we did use the mod while trigger was held, unregister it.
-                    *state = os_up_unqueued;
-                    unregister_code(mod);
-                    send_os_osm_state(mod, false);
-                default:
-                    break;
-            }
-        }
-    // State: pressed not mod key (a-z or else)
-    } else {
-        if (record->event.pressed) {
-            if (record->tap.count) { // Need for LT keys
-                if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
-                    // Cancel oneshot on designated cancel keydown (ESC).
-                    *state = os_up_unqueued;
-                    unregister_code(mod);
-                    send_os_osm_state(mod, false);
-                    oneshot_tab_toggle = false;
-                    return false;
-                }
-            }
-        } else {
-            if (oneshot_tab_toggle == false && !is_oneshot_ignored_key(keycode)) {
-                // On non-ignored keyup, consider the oneshot used.
-                switch (*state) {
-                    case os_down_unused:
-                        *state = os_down_used;
-                        break;
-                    case os_up_queued:
-                        *state = os_up_unqueued;
-                        unregister_code(mod);
-                        send_os_osm_state(mod, false);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-uint16_t change_app_timer = 0;
-bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // clang-format off
-    bool result1 = update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode,
-  record);
-    bool result2 = update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode,
-  record);
-    bool result3 = update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode,
-  record);
-    bool result4 = update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode,
-  record);
-
-    if (!result1 || !result2 || !result3 || !result4) {
-        return false;
-    }
-    // clang-format on
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    bool on_keydown = record->event.pressed;
+    bool on_keyup   = !record->event.pressed;
 
     switch (keycode) {
-        case ARM_MICRO:
-            if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_F20));
-            } else {
-                SEND_STRING(SS_TAP(X_F20));
+        case OS_SHFT:
+        case OS_CTRL:
+        case OS_ALT:
+        case OS_CMD:
+            if (on_keydown) {
+                if (!get_oneshot_mods()) {
+                    osm_state = true;
+                    tap_code(KC_F15);
+                }
+                switch (keycode) {
+                    case OS_SHFT:
+                        add_oneshot_mods(MOD_BIT(KC_LSFT));
+                        return false;
+                    case OS_CTRL:
+                        add_oneshot_mods(MOD_BIT(KC_LCTL));
+                        return false;
+                    case OS_ALT:
+                        add_oneshot_mods(MOD_BIT(KC_LALT));
+                        return false;
+                    case OS_CMD:
+                        add_oneshot_mods(MOD_BIT(KC_LCMD));
+                        return false;
+                }
             }
-            return false;
-        case CODE_ARRAY:
-            if (record->event.pressed) {
-                SEND_STRING(" => ");
+        case LANG:
+        case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX - 1:
+            break;
+        case KC_ESC:
+            break;
+        default:
+            if (osm_state == true && on_keyup) {
+                osm_state = false;
+                tap_code(KC_F16);
             }
-            return false;
-        case CODE_TO:
-            if (record->event.pressed) {
-                SEND_STRING("->");
-            }
-            return false;
-        case CODE_BR:
-            if (record->event.pressed) {
-                SEND_STRING(" {");
-                SEND_STRING(SS_TAP(X_ENT));
-                SEND_STRING(SS_TAP(X_ENT));
-                SEND_STRING("}");
-                SEND_STRING(SS_TAP(X_UP));
-                SEND_STRING(SS_TAP(X_TAB));
-            }
-            return false;
-        case CODEBLOCK:
-            if (record->event.pressed) {
-                SEND_STRING("```");
-            }
-            return false;
-        case DELETE_LINE:
-            if (record->event.pressed) {
-                SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
-            }
-            return false;
-        case CommaS:
-            if (record->event.pressed) {
-                SEND_STRING(", ");
-            }
-            return false;
-        case DotNS:
-            if (record->event.pressed) {
-                SEND_STRING(". ");
-                add_oneshot_mods(MOD_BIT(KC_LSFT));
-            }
-            return false;
-        case QuesNS:
-            if (record->event.pressed) {
-                SEND_STRING("? ");
-                add_oneshot_mods(MOD_BIT(KC_LSFT));
-            }
-            return false;
-        case ExlmNS:
-            if (record->event.pressed) {
-                SEND_STRING("! ");
-                add_oneshot_mods(MOD_BIT(KC_LSFT));
-            }
-            return false;
+    }
+
+    switch (keycode) {
         case LANG:
             if (record->event.pressed) {
-                with_mods_state_recover(switch_to_russian);
+                switch_to_russian();
             } else {
-                with_mods_state_recover(switch_to_english);
+                switch_to_english();
             }
             return false;
         case VOLTR:
@@ -526,43 +356,76 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
                 trackball_volume = false;
             }
             return false;
+    }
+
+    if (!record->event.pressed) return true;
+
+    switch (keycode) {
+        case CommaS:
+            SEND_STRING(", ");
+            return false;
+        case DotNS:
+            SEND_STRING(". ");
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
+            return false;
+        case QuesNS:
+            SEND_STRING("? ");
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
+            return false;
+        case ExlmNS:
+            SEND_STRING("! ");
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
+            return false;
+        case KC_ESC:
+            if (osm_state == true) {
+                osm_state = false;
+                clear_oneshot_mods();
+                tap_code(KC_F16);
+                return false;
+            }
+            if (is_layer_locked(NUM)) {
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                tap_code(KC_F23);
+                return false;
+            }
+            return true;
+        case NUMLOCK:
+            tap_code(KC_F22);
+            layer_lock_on(NUM);
+            return false;
+        case KC_UP:
+        case KC_DOWN:
+        case KC_LEFT:
+        case KC_RIGHT:
+        case KC_B:
+        case KC_W:
+            if (is_layer_locked(NUM)) {
+                tap_code(keycode);
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                tap_code(KC_F23);
+                return false;
+            }
+            return true;
         default:
-            return true; // Process all other keycodes normally
+            return true;
     }
 }
-
-#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-#    include "timer.h"
-static uint16_t auto_pointer_layer_timer = 0;
-#endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
-/** \brief Automatically enable sniping-mode on the pointer layer. */
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER PNTR
-
-#ifndef POINTING_DEVICE_ENABLE
-#    define DRGSCRL KC_NO
-#    define DPI_MOD KC_NO
-#    define S_D_MOD KC_NO
-#    define SNIPING KC_NO
-#endif
-
 
 static int volume_accumulator = 0;
 #define SCROLL_DIVIDER 15 // increase for more sensitivity)
 
-#ifdef POINTING_DEVICE_ENABLE
-#    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-
     if (trackball_volume) {
         volume_accumulator += mouse_report.y;
 
         while (abs(volume_accumulator) >= SCROLL_DIVIDER) {
             if (volume_accumulator > 0) {
-                tap_code(VolDn);
+                tap_code(KC_KB_VOLUME_DOWN);
                 volume_accumulator -= SCROLL_DIVIDER;
             } else {
-                tap_code(VolUp);
+                tap_code(KC_KB_VOLUME_UP);
                 volume_accumulator += SCROLL_DIVIDER;
             }
         }
@@ -572,40 +435,14 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         mouse_report.y = 0;
         mouse_report.h = 0;
         mouse_report.v = 0;
-    } else {
-        if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
-            if (auto_pointer_layer_timer == 0) {
-                layer_on(PNTR);
-#        ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-                rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-#        endif // RGB_MATRIX_ENABLE
-            }
-            auto_pointer_layer_timer = timer_read();
-        }
     }
     return mouse_report;
 }
 
-void matrix_scan_user(void) {
-    if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
-        auto_pointer_layer_timer = 0;
-        layer_off(PNTR);
-#        ifdef RGB_MATRIX_ENABLE
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
-#        endif // RGB_MATRIX_ENABLE
-    }
-}
-#    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
-#    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
     charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
     return state;
 }
-#    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
-#endif     // POINTING_DEVICE_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
@@ -617,53 +454,34 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (os_alt_state == os_up_queued || os_ctrl_state == os_up_queued || os_shft_state == os_up_queued || os_cmd_state == os_up_queued) {
-                rgb_matrix_set_color(index, 0, 0, 0);
-
-                if (os_alt_state == os_up_queued) {
-                    if (row == 8) {
-                        rgb_matrix_set_color(index, 250, 0, 0);
-                    }
-                }
-                if (os_ctrl_state == os_up_queued) {
-                    if (row == 8) {
-                        rgb_matrix_set_color(index, 150, 150, 0);
-                    }
-                }
-                if (os_shft_state == os_up_queued) {
-                    if (row >= 9) {
+            switch (get_highest_layer(layer_state | default_layer_state)) {
+                case 1:
+                    if (col == 5) {
                         rgb_matrix_set_color(index, 250, 0, 250);
+                    } else {
+                        rgb_matrix_set_color(index, 0, 0, 0);
                     }
-                }
-                if (os_cmd_state == os_up_queued) {
-                    if (row == 9 && col == 1) {
-                        rgb_matrix_set_color(index, 250, 0, 0);
+                    break;
+                case 2:
+                    if (row == 6) {
+                        rgb_matrix_set_color(index, 250, 250, 250);
                     }
-                }
-            } else {
-                switch(get_highest_layer(layer_state|default_layer_state)) {
-                    case 1:
-                        if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 250, 0, 250);
-                        } else {
-                            rgb_matrix_set_color(index, RGB_BLUE);
-                        }
-                        break;
-                    case 2:
-                        if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 250, 30, 0);
-                        } else {
-                            rgb_matrix_set_color(index, RGB_RED);
-                        }
-                        break;
-                    default:
-                        if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 250, 0, 250);
-                        } else {
-                            rgb_matrix_set_color(index, 250, 30, 0);
-                        }
-                        break;
+                case 3:
+                    if (row == 7) {
+                        rgb_matrix_set_color(index, 250, 250, 250);
                     }
+                case 4:
+                    if (row == 8) {
+                        rgb_matrix_set_color(index, 250, 250, 250);
+                    }
+                    break;
+                default:
+                    if (row == 5 || col == 0) {
+                        rgb_matrix_set_color(index, 75, 0, 75);
+                    } else {
+                        rgb_matrix_set_color(index, 75, 9, 0);
+                    }
+                    break;
             }
         }
     }
