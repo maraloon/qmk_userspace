@@ -235,7 +235,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, _, _, _, _, _,    _, _, _, _, _, _,
     _, _, _, _, _, _,    _, Amp, Pipe, Percent, BSlash, _,
     _, _, _, _, _, _,    _, Equal, Tag, tag, Tilda, _,
-    _, _, _, _, _, _,    _, Grave, CODEBLOCK, CODE_BR, _, _,
+    _, _, _, _, _, _,    _, Minus, Grave, CODEBLOCK, Exlm, _,
 
              _, _, _,    TG(RTR), _,
                 _, _,    _
