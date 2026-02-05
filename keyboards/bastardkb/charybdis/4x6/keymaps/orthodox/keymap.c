@@ -114,7 +114,6 @@ bool trackball_volume = false;
 
 #define Space KC_SPC
 #define BSpace KC_BSPC
-#define DelWord LCTL(KC_BSPC)
 #define Enter KC_ENT
 #define Esc KC_ESC
 #define Tab KC_TAB
@@ -160,7 +159,7 @@ bool trackball_volume = false;
 #define VolUp KC_KB_VOLUME_UP
 #define VolDn KC_KB_VOLUME_DOWN
 
-#define Leader LCMD(KC_F)
+#define Lets LCMD(KC_F)
 
 #define NextWin LCMD(KC_GRV)
 #define NextWinStack LCMD(KC_TILD)
@@ -181,10 +180,10 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W,     Z,            _,     F_FN,  O,     U,     J,   _,
+    _,     B,     L,     D,     W, OSL(SYM),         Shift, F_FN,  O,     U,     J,   _,
     Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I, Compose,
-    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Leader, _,
-              DelWord, SpaceNUM, KC_BTN2,            Enter, EscSYM,
+    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
+               BSpace, SpaceNUM, KC_BTN2,            Enter, EscSYM,
                           KC_BTN1, Shift,            LANG
   ),
 
@@ -192,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
     Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
     Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Leader,  _,
+    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Lets,  _,
                  BSpace, SpaceNUM, VOLTR,            Enter, Esc,
                                 _, Shift,            LANG
   ),
@@ -213,11 +212,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     B,     _,     _0,   W,    _,             _,   Left,   _9, Right,    _, _,
-    _,     _,    _1,     _2,  _3,    _,             _,     _5,   _6,    _8,   Up, _,
-    _,     _,     _,    Tab,  _4,    _,             _,     _7, PgUp,  PgDn,    _, _,
-                                     _, _, _,        Enter, Down,
-                                        _, _,        LCTL(U)
+    _,     B,     _,     _0,   W,    _,       _,   Left,   _9, Right,    _, _,
+    _,     _,    _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
+    _,     _,     _,    Tab,  _4,    _,       _,     _7, PgUp,  PgDn,    _, _,
+                               _, _, _,       Enter, Down,
+                                  _, _,       LCTL(U)
   ),
 
   [SYM] = LAYOUT(
@@ -227,8 +226,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
     _,     Hash,   At,  DQuote, Quote, _,     _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Quest,   Exlm, _,
-                              BSpace, Space, _,     _, _,
-                                          _, _,     _
+                             _, Space, _,     _, _,
+                                    _, _,     _
   ),
 
   [BSYM] = LAYOUT(
