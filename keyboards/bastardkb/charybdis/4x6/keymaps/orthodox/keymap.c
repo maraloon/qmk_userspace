@@ -160,6 +160,7 @@ bool trackball_volume = false;
 #define VolDn KC_KB_VOLUME_DOWN
 
 #define Lets LCMD(KC_F)
+#define Type QK_LEAD
 
 #define NextWin LCMD(KC_GRV)
 #define NextWinStack LCMD(KC_TILD)
@@ -180,8 +181,8 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W, OSL(SYM),         Shift, F_FN,  O,     U,     J,   _,
-    Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I, Compose,
+    _,     B,     L,     D,     W,  Type,            Type,  F_FN,  O,     U,     J,   _,
+    Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I,   _,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                BSpace, SpaceNUM, KC_BTN2,            Enter, EscSYM,
                           KC_BTN1, Shift,            LANG
@@ -259,6 +260,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _, _,    _
   ),
 };
+
+void leader_end_user(void) {
+    if (leader_sequence_two_keys(KC_H, KC_O)) {
+        SEND_STRING("~");
+    } else if (leader_sequence_two_keys(KC_P, KC_R)) {
+        SEND_STRING("%");
+    } else if (leader_sequence_three_keys(KC_C, KC_O, KC_D)) {
+        SEND_STRING("`");
+    } else if (leader_sequence_two_keys(KC_B, KC_K)) {
+        SEND_STRING("```");
+    } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
+        SEND_STRING("=>");
+    } else if (leader_sequence_two_keys(KC_G, KC_T)) {
+        SEND_STRING(">=");
+    } else if (leader_sequence_two_keys(KC_L, KC_T)) {
+        SEND_STRING("<=");
+    } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
+        SEND_STRING("===");
+    } else if (leader_sequence_three_keys(KC_N, KC_E, KC_Q)) {
+        SEND_STRING("!==");
+    } else if (leader_sequence_two_keys(KC_A, KC_N)) {
+        SEND_STRING(" && ");
+    } else if (leader_sequence_two_keys(KC_O, KC_R)) {
+        SEND_STRING(" || ");
+    } else if (leader_sequence_two_keys(KC_A, KC_L)) {
+        SEND_STRING("<-");
+    } else if (leader_sequence_two_keys(KC_A, KC_R)) {
+        SEND_STRING("->");
+    } else if (leader_sequence_three_keys(KC_E, KC_A, KC_H)) {
+        SEND_STRING("{");
+        SEND_STRING(SS_TAP(X_ENT));
+        SEND_STRING(SS_TAP(X_ENT));
+        SEND_STRING("}");
+        SEND_STRING(SS_TAP(X_UP));
+        SEND_STRING(SS_TAP(X_TAB));
+    } else if (leader_sequence_two_keys(KC_M, KC_M)) {
+        SEND_STRING("mara@the-witch.ru");
+    } else if (leader_sequence_two_keys(KC_M, KC_Y)) {
+        SEND_STRING("zeroly@ya.ru");
+    } else if (leader_sequence_two_keys(KC_M, KC_S)) {
+        SEND_STRING("sdvk1369@gmail.com");
+    } else if (leader_sequence_two_keys(KC_A, KC_Z)) {
+        // Leader, a, s => GUI+S
+        tap_code16(LGUI(KC_S));
+    }
+}
 // clang-format on
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {

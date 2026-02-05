@@ -30,3 +30,7 @@
 // jump, it will go to that layer, not double press key
 // ex: ' 1' - space, space button (num layer), 1
 #define QUICK_TAP_TERM 0
+
+#define LEADER_NO_TIMEOUT
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 180
