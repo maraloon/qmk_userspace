@@ -113,7 +113,6 @@ bool trackball_volume = false;
 #define tag KC_GT
 
 #define Space KC_SPC
-#define BSpace KC_BSPC
 #define Enter KC_ENT
 #define Esc KC_ESC
 #define Tab KC_TAB
@@ -184,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,     W,  Type,            Type,  F_FN,  O,     U,     J,   _,
     Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I,   _,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
-               BSpace, SpaceNUM, KC_BTN2,            Enter, EscSYM,
+                    _, SpaceNUM, KC_BTN2,            Enter, EscSYM,
                           KC_BTN1, Shift,            LANG
   ),
 
@@ -193,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
     Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Lets,  _,
-                 BSpace, SpaceNUM, VOLTR,            Enter, Esc,
+                      _, SpaceNUM, VOLTR,            Enter, Esc,
                                 _, Shift,            LANG
   ),
 
