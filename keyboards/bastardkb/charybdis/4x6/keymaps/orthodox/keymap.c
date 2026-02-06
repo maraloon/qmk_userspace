@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,     W,  Type,            Type,  F_FN,  O,     U,     J,   _,
     Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I,   _,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
-                    _, SpaceNUM, KC_BTN2,            _, EscSYM,
+                    _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
                           KC_BTN1, Shift,            LANG
   ),
 
@@ -213,7 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _,     B,     _,     _0,   W,    _,       _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
-    _,     _,     _,    Tab,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
+    _,     _,     _,      _,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
                                _, _, _,       _, Down,
                                   _, _,       LCTL(U)
   ),
