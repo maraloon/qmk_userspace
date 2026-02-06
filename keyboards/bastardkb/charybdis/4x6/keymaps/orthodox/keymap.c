@@ -113,7 +113,6 @@ bool trackball_volume = false;
 #define tag KC_GT
 
 #define Space KC_SPC
-#define Enter KC_ENT
 #define Esc KC_ESC
 #define Tab KC_TAB
 
@@ -183,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,     W,  Type,            Type,  F_FN,  O,     U,     J,   _,
     Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I,   _,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
-                    _, SpaceNUM, KC_BTN2,            Enter, EscSYM,
+                    _, SpaceNUM, KC_BTN2,            _, EscSYM,
                           KC_BTN1, Shift,            LANG
   ),
 
@@ -192,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
     Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Lets,  _,
-                      _, SpaceNUM, VOLTR,            Enter, Esc,
+                      _, SpaceNUM, VOLTR,            _, Esc,
                                 _, Shift,            LANG
   ),
 
@@ -204,7 +203,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-               CommaS, SpaceShift, DotNS,            Enter, _,
+               CommaS, SpaceShift, DotNS,            _, _,
                        Minus, SpaceShift,            _
   ),
 
@@ -215,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     _,     _0,   W,    _,       _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
     _,     _,     _,    Tab,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
-                               _, _, _,       Enter, Down,
+                               _, _, _,       _, Down,
                                   _, _,       LCTL(U)
   ),
 
