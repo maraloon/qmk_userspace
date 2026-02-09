@@ -447,15 +447,13 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
         // State: pressed not mod key (a-z or else)
     } else {
         if (record->event.pressed) {
-            if (record->tap.count) { // Need for LT keys
-                if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
-                    // Cancel oneshot on designated cancel keydown (ESC).
-                    *state = os_up_unqueued;
-                    unregister_code(mod);
-                    send_os_osm_state(mod, false);
-                    oneshot_tab_toggle = false;
-                    return false;
-                }
+            if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
+                // Cancel oneshot on designated cancel keydown (ESC).
+                *state = os_up_unqueued;
+                unregister_code(mod);
+                send_os_osm_state(mod, false);
+                oneshot_tab_toggle = false;
+                return false;
             }
         } else {
             if (oneshot_tab_toggle == false && !is_oneshot_ignored_key(keycode) && !is_oneshot_cancel_key(keycode)) {
