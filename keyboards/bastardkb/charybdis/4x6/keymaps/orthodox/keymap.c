@@ -172,7 +172,6 @@ bool trackball_volume = false;
 #define rU KC_KP_6 // ю
 
 #define SpaceNUM LT(NUM, KC_SPC)
-#define EscSYM LT(SYM, KC_ESC)
 // #define DelWLayer LCTL(KC_BSPC)
 #define CtrlZ LCTL(KC_Z)
 
@@ -318,22 +317,22 @@ bool is_oneshot_cancel_key(uint16_t keycode) {
 bool is_oneshot_ignored_key(uint16_t keycode) {
     switch (keycode) {
         case LANG:
-        case EscSYM:
         case OS_SHFT:
         case OS_CTRL:
         case OS_ALT:
         case OS_CMD:
+        case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX - 1:
             return true;
         default:
             return false;
     }
 }
 
-oneshot_state os_shft_state = os_up_unqueued;
-oneshot_state os_ctrl_state = os_up_unqueued;
-oneshot_state os_alt_state  = os_up_unqueued;
-oneshot_state os_cmd_state  = os_up_unqueued;
-bool oneshot_tab_toggle = false;
+oneshot_state os_shft_state      = os_up_unqueued;
+oneshot_state os_ctrl_state      = os_up_unqueued;
+oneshot_state os_alt_state       = os_up_unqueued;
+oneshot_state os_cmd_state       = os_up_unqueued;
+bool          oneshot_tab_toggle = false;
 
 void with_mods_state_recover(void (*callback)(void)) {
     uint8_t mod_state    = get_mods();
@@ -429,7 +428,7 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
             } else {
                 oneshot_tab_toggle = true;
             }
-        // Trigger keyup
+            // Trigger keyup
         } else {
             switch (*state) {
                 case os_down_unused:
@@ -445,7 +444,7 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     break;
             }
         }
-    // State: pressed not mod key (a-z or else)
+        // State: pressed not mod key (a-z or else)
     } else {
         if (record->event.pressed) {
             if (record->tap.count) { // Need for LT keys
@@ -459,7 +458,7 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                 }
             }
         } else {
-            if (oneshot_tab_toggle == false && !is_oneshot_ignored_key(keycode)) {
+            if (oneshot_tab_toggle == false && !is_oneshot_ignored_key(keycode) && !is_oneshot_cancel_key(keycode)) {
                 // On non-ignored keyup, consider the oneshot used.
                 switch (*state) {
                     case os_down_unused:
@@ -473,6 +472,10 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
                     default:
                         break;
                 }
+            } else if (is_oneshot_cancel_key(keycode) && *state == os_up_queued) {
+                *state = os_up_unqueued;
+                unregister_code(mod);
+                send_os_osm_state(mod, false);
             }
         }
     }
@@ -591,14 +594,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    define SNIPING KC_NO
 #endif
 
-
 static int volume_accumulator = 0;
 #define SCROLL_DIVIDER 15 // increase for more sensitivity)
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-
     if (trackball_volume) {
         volume_accumulator += mouse_report.y;
 
@@ -686,7 +687,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                     }
                 }
             } else {
-                switch(get_highest_layer(layer_state|default_layer_state)) {
+                switch (get_highest_layer(layer_state | default_layer_state)) {
                     case 1:
                         if (row == 5 || col == 0) {
                             rgb_matrix_set_color(index, 250, 0, 250);
@@ -708,7 +709,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                             rgb_matrix_set_color(index, 250, 30, 0);
                         }
                         break;
-                    }
+                }
             }
         }
     }
