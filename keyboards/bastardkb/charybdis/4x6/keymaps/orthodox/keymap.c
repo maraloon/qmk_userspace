@@ -14,7 +14,6 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
-    BSYM,
     PNTR,
     FN,
 };
@@ -69,7 +68,6 @@ bool trackball_volume = false;
 #define R KC_R
 #define St KC_S
 #define F KC_F
-#define S_BSYM LT(BSYM, KC_S)
 #define T KC_T
 
 #define G KC_G
@@ -180,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
     _,     B,     L,     D,     W,  Type,            Shift,  F_FN,  O,     U,     J,   _,
-    Z,     N,     R,     T,    S_BSYM, G,            Y,     H_CMD, A,     E,     I,   MOD_CANCEL,
+    Z,     N,     R,     T,    St, G,            Y,     H_CMD, A,     E,     I,   MOD_CANCEL,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
                           KC_BTN1, Shift,            LANG
@@ -223,20 +221,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
 
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
-    _,     Hash,   At,  DQuote, Quote, _,     _,     Dot,   Comma,  Array,  array,  _,
-    _,     Equal, Plus,  Unds,  Minus, _,     _,    DDot,   DComm,   Quest,   Exlm, _,
+   BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
+    _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
                              _, Space, _,     _, _,
                                     _, _,     _
-  ),
-
-  [BSYM] = LAYOUT(
-    _, _, _, _, _, _,    _, _, _, _, _, _,
-    _, _, _, _, _, _,    _, Amp, Pipe, Percent, BSlash, _,
-    _, _, _, _, _, _,    _, KC_KP_EQUAL, Tag, tag, Tilda, _,
-    _, _, _, _, _, _,    _, KC_KP_MINUS, Grave, CODEBLOCK, Exlm, _,
-
-             _, _, _,    TG(RTR), _,
-                _, _,    _
   ),
 
   [PNTR] = LAYOUT(
@@ -278,10 +266,14 @@ void leader_end_user(void) {
         SEND_STRING("===");
     } else if (leader_sequence_three_keys(KC_N, KC_E, KC_Q)) {
         SEND_STRING("!==");
+    } else if (leader_sequence_two_keys(KC_A, KC_M)) {
+        SEND_STRING("&");
+    } else if (leader_sequence_two_keys(KC_P, KC_I)) {
+        SEND_STRING("|");
     } else if (leader_sequence_two_keys(KC_A, KC_N)) {
-        SEND_STRING(" && ");
+        SEND_STRING("&&");
     } else if (leader_sequence_two_keys(KC_O, KC_R)) {
-        SEND_STRING(" || ");
+        SEND_STRING("||");
     } else if (leader_sequence_two_keys(KC_A, KC_L)) {
         SEND_STRING("<-");
     } else if (leader_sequence_two_keys(KC_A, KC_R)) {
@@ -405,7 +397,6 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
 // TODO: replace it with https://docs.qmk.fm/tap_hold#flow-tap
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case S_BSYM:
         case F_FN:
         case H_CMD:
             // Do not select the hold action when another key is pressed.
