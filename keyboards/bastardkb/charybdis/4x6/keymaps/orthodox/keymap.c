@@ -415,6 +415,7 @@ bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16
             if (*state == os_up_unqueued) {
                 register_code(mod);
                 send_os_osm_state(mod, true);
+
                 *state = os_down_unused;
             } else {
                 oneshot_tab_toggle = true;
