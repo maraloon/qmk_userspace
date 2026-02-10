@@ -252,7 +252,7 @@ void leader_end_user(void) {
         SEND_STRING("~");
     } else if (leader_sequence_two_keys(KC_P, KC_R)) {
         SEND_STRING("%");
-    } else if (leader_sequence_three_keys(KC_C, KC_O, KC_D)) {
+    } else if (leader_sequence_two_keys(KC_G, KC_R)) {
         SEND_STRING("`");
     } else if (leader_sequence_two_keys(KC_B, KC_K)) {
         SEND_STRING("```");
