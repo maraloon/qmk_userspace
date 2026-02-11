@@ -1,13 +1,5 @@
 #include QMK_KEYBOARD_H
 
-// Represents the four states a oneshot key can be in
-typedef enum {
-    os_up_unqueued,
-    os_up_queued,
-    os_down_unused,
-    os_down_used,
-} oneshot_state;
-
 enum charybdis_keymap_layers {
     ABC = 0,
     RTR, // RetroArch
@@ -19,13 +11,7 @@ enum charybdis_keymap_layers {
 };
 
 enum my_keycodes {
-    CODE_ARRAY = SAFE_RANGE,
-    CODE_TO,
-    CODE_BR,
-    CODEBLOCK,
-    ARM_MICRO,
-    DELETE_LINE,
-    LANG,
+    LANG = SAFE_RANGE,
     VOLTR,
 
     CommaS,
@@ -319,11 +305,19 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     }
 }
 
-oneshot_state os_shft_state      = os_up_unqueued;
-oneshot_state os_ctrl_state      = os_up_unqueued;
-oneshot_state os_alt_state       = os_up_unqueued;
-oneshot_state os_cmd_state       = os_up_unqueued;
-bool          oneshot_tab_toggle = false;
+// Represents the four states a oneshot key can be in
+typedef enum {
+    osm_0,
+    osm_queued,
+    osm_holded,
+    osm_used,
+} oneshot_state;
+
+oneshot_state os_shft_state = osm_0;
+oneshot_state os_ctrl_state = osm_0;
+oneshot_state os_alt_state  = osm_0;
+oneshot_state os_cmd_state  = osm_0;
+bool          osm_pinned    = false;
 
 void with_mods_state_recover(void (*callback)(void)) {
     uint8_t mod_state    = get_mods();
@@ -365,6 +359,7 @@ void send_os_shift_release(void) {
     SEND_STRING(SS_TAP(X_F23));
 }
 
+// INFO: тут не удачное название, тут os - operating system. Send to operating system osm state
 void send_os_osm_state(uint16_t osm_key_state, bool hold) {
     switch (osm_key_state) {
         case KC_LALT:
@@ -405,126 +400,80 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-bool update_oneshot(oneshot_state *state, uint16_t mod, uint16_t trigger, uint16_t keycode, keyrecord_t *record) {
-    // State: pressed mod
-    if (keycode == trigger) {
-        // Trigger keydown
-        if (record->event.pressed) {
-            if (*state == os_up_unqueued) {
-                register_code(mod);
-                send_os_osm_state(mod, true);
+static inline void reset_osm(oneshot_state *state, uint16_t mod) {
+    *state = osm_0;
+    unregister_code(mod);
+    send_os_osm_state(mod, false);
+}
 
-                *state = os_down_unused;
-            } else {
-                oneshot_tab_toggle = true;
-            }
-            // Trigger keyup
-        } else {
-            switch (*state) {
-                case os_down_unused:
-                    // If we didn't use the mod while trigger was held, queue it.
-                    *state = os_up_queued;
-                    break;
-                case os_down_used:
-                    // If we did use the mod while trigger was held, unregister it.
-                    *state = os_up_unqueued;
-                    unregister_code(mod);
-                    send_os_osm_state(mod, false);
-                default:
-                    break;
-            }
+void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16_t keycode, keyrecord_t *record) {
+    bool on_keydown = record->event.pressed;
+    bool on_keyup   = !record->event.pressed;
+    bool is_osm     = keycode == osm_key;
+
+    // OSM keydown - init
+    if (is_osm && on_keydown && *state == osm_0) {
+        register_code(mod);
+        send_os_osm_state(mod, true);
+        *state = osm_holded;
+        return;
+    }
+    // OSM keydown-keyup. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
+    if (is_osm && on_keyup && *state == osm_holded) {
+        *state = osm_queued;
+        return;
+    }
+    // OSM double keydown - регистрируем "залипший" mod
+    if (is_osm && on_keydown && *state != osm_0) {
+        osm_pinned = true;
+        return;
+    }
+    // Нажали OSM cancel-key. Сбрасываем до дефолтных
+    if (is_oneshot_cancel_key(keycode)) {
+        if (on_keydown && *state != osm_0) {
+            reset_osm(state, mod);
+            osm_pinned = false;
         }
-        // State: pressed not mod key (a-z or else)
-    } else {
-        if (record->event.pressed) {
-            if (is_oneshot_cancel_key(keycode) && *state != os_up_unqueued) {
-                // Cancel oneshot on designated cancel keydown (ESC).
-                *state = os_up_unqueued;
-                unregister_code(mod);
-                send_os_osm_state(mod, false);
-                oneshot_tab_toggle = false;
-                return false;
-            }
-        } else {
-            if (oneshot_tab_toggle == false && !is_oneshot_ignored_key(keycode) && !is_oneshot_cancel_key(keycode)) {
-                // On non-ignored keyup, consider the oneshot used.
-                switch (*state) {
-                    case os_down_unused:
-                        *state = os_down_used;
-                        break;
-                    case os_up_queued:
-                        *state = os_up_unqueued;
-                        unregister_code(mod);
-                        send_os_osm_state(mod, false);
-                        break;
-                    default:
-                        break;
-                }
-            } else if (is_oneshot_cancel_key(keycode) && *state == os_up_queued) {
-                *state = os_up_unqueued;
-                unregister_code(mod);
-                send_os_osm_state(mod, false);
-            }
+        return;
+    }
+
+    // Нажали a-z
+    if (!is_osm && on_keyup) {
+        if (is_oneshot_ignored_key(keycode) || osm_pinned) {
+            return;
+        }
+
+        // Если osm зажат, то говорим, что он отработал и ждем когда его отожмут
+        if (*state == osm_holded) {
+            *state = osm_used;
+            return;
+        }
+        // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
+        if (*state == osm_queued) {
+            reset_osm(state, mod);
+            return;
         }
     }
-    return true;
+
+    // Когда был hold OSM, потом нажали a-z, потом палец с OSM убрали. Сбрасываем до дефолтного состояния
+    if (is_osm && on_keyup && *state == osm_used) {
+        reset_osm(state, mod);
+        return;
+    }
+
+    return;
 }
 
 uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
-    bool result1 = update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode,
-  record);
-    bool result2 = update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode,
-  record);
-    bool result3 = update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode,
-  record);
-    bool result4 = update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode,
-  record);
-
-    if (!result1 || !result2 || !result3 || !result4) {
-        return false;
-    }
+    update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
+    update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
+    update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
+    update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
 
     switch (keycode) {
-        case ARM_MICRO:
-            if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_F20));
-            } else {
-                SEND_STRING(SS_TAP(X_F20));
-            }
-            return false;
-        case CODE_ARRAY:
-            if (record->event.pressed) {
-                SEND_STRING(" => ");
-            }
-            return false;
-        case CODE_TO:
-            if (record->event.pressed) {
-                SEND_STRING("->");
-            }
-            return false;
-        case CODE_BR:
-            if (record->event.pressed) {
-                SEND_STRING(" {");
-                SEND_STRING(SS_TAP(X_ENT));
-                SEND_STRING(SS_TAP(X_ENT));
-                SEND_STRING("}");
-                SEND_STRING(SS_TAP(X_UP));
-                SEND_STRING(SS_TAP(X_TAB));
-            }
-            return false;
-        case CODEBLOCK:
-            if (record->event.pressed) {
-                SEND_STRING("```");
-            }
-            return false;
-        case DELETE_LINE:
-            if (record->event.pressed) {
-                SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
-            }
-            return false;
         case CommaS:
             if (record->event.pressed) {
                 SEND_STRING(", ");
@@ -651,25 +600,25 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (os_alt_state == os_up_queued || os_ctrl_state == os_up_queued || os_shft_state == os_up_queued || os_cmd_state == os_up_queued) {
+            if (os_alt_state == osm_queued || os_ctrl_state == osm_queued || os_shft_state == osm_queued || os_cmd_state == osm_queued) {
                 rgb_matrix_set_color(index, 0, 0, 0);
 
-                if (os_alt_state == os_up_queued) {
+                if (os_alt_state == osm_queued) {
                     if (row == 8) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
                 }
-                if (os_ctrl_state == os_up_queued) {
+                if (os_ctrl_state == osm_queued) {
                     if (row == 8) {
                         rgb_matrix_set_color(index, 150, 150, 0);
                     }
                 }
-                if (os_shft_state == os_up_queued) {
+                if (os_shft_state == osm_queued) {
                     if (row >= 9) {
                         rgb_matrix_set_color(index, 250, 0, 250);
                     }
                 }
-                if (os_cmd_state == os_up_queued) {
+                if (os_cmd_state == osm_queued) {
                     if (row == 9 && col == 1) {
                         rgb_matrix_set_color(index, 250, 0, 0);
                     }
