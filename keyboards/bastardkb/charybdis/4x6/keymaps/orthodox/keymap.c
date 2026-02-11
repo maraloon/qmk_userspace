@@ -74,7 +74,6 @@ bool trackball_volume = false;
 #define M KC_M
 #define A KC_A
 #define A_CG LCG_T(KC_A) // command+control
-#define H_CMD MT(MOD_LGUI, KC_H)
 #define E KC_E
 #define I KC_I
 #define O KC_O
@@ -178,7 +177,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
     _,     B,     L,     D,     W,  Type,            Shift,  F_FN,  O,     U,     J,   _,
-    Z,     N,     R,     T,    St, G,            Y,     H_CMD, A,     E,     I,   MOD_CANCEL,
+    Z,     N,     R,     T,    St, G,                Y,     H,      A,     E,     I,   MOD_CANCEL,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
                           KC_BTN1, Shift,            LANG
@@ -398,7 +397,6 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case F_FN:
-        case H_CMD:
             // Do not select the hold action when another key is pressed.
             return false;
         default:
