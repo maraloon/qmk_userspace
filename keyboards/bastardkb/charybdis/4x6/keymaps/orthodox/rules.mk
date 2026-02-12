@@ -1,2 +1,3 @@
 VIA_ENABLE = yes
 LEADER_ENABLE = yes
+LAYER_LOCK_ENABLE = yes

@@ -2,6 +2,7 @@
 
 enum charybdis_keymap_layers {
     ABC = 0,
+    ABC_S,
     RTR, // RetroArch
     RUS,
     NUM,
@@ -171,10 +172,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC_S] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  S(B),  S(L),  S(D),  S(W),     _,            _,  S(F),  S(O),  S(U),  S(J),   _,
- S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I), LT(ABC),
+ S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I), TG(ABC),
     _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),  Alt,   Ctrl,     _,   _,
                           _, SpaceNUM, _,         _, OSL(SYM),
-                            _, LT(ABC_S),         _
+                              _, QK_LLCK,         _
   ),
 
   [RTR] = LAYOUT(
