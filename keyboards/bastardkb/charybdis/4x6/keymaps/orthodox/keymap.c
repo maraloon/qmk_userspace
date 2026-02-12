@@ -389,7 +389,7 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
 static inline void reset_osm(oneshot_state *state, uint16_t mod) {
     *state = osm_0;
     unregister_code(mod);
-    send_os_osm_state(mod, false);
+    // send_os_osm_state(mod, false);
 }
 
 void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16_t keycode, keyrecord_t *record) {
@@ -400,7 +400,7 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     // OSM keydown - init
     if (is_osm && on_keydown && *state == osm_0) {
         register_code(mod);
-        send_os_osm_state(mod, true);
+        // send_os_osm_state(mod, true);
         *state = osm_holded;
         return;
     }
