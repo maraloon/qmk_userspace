@@ -30,7 +30,6 @@ bool trackball_volume = false;
 #undef _______
 #define _ KC_NO
 #define _______ KC_NO
-#define _x KC_TRANSPARENT
 
 // WARN: danger
 #undef G
