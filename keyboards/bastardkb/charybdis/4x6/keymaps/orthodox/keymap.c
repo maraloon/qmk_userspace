@@ -470,16 +470,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
                 if (os_alt_state == osm_queued) {
                     if (row == 8) {
-                        rgb_matrix_set_color(index, 250, 0, 0);
+                        rgb_matrix_set_color(index, RGB_RED);
                     }
                 }
                 if (os_ctrl_state == osm_queued) {
-                    if (row == 8) {
+                    if (row == 7) {
                         rgb_matrix_set_color(index, 150, 150, 0);
                     }
                 }
                 if (os_shft_state == osm_queued) {
-                    if (row >= 9) {
+                    if (row == 6) {
                         rgb_matrix_set_color(index, 250, 0, 250);
                     }
                 }
@@ -491,24 +491,17 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             } else {
                 switch (get_highest_layer(layer_state | default_layer_state)) {
                     case 1:
-                        if (row == 5 || col == 0) {
+                        if (col == 5) {
                             rgb_matrix_set_color(index, 250, 0, 250);
                         } else {
-                            rgb_matrix_set_color(index, RGB_BLUE);
-                        }
-                        break;
-                    case 2:
-                        if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 250, 30, 0);
-                        } else {
-                            rgb_matrix_set_color(index, RGB_RED);
+                            rgb_matrix_set_color(index, 0, 0, 0);
                         }
                         break;
                     default:
                         if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 250, 0, 250);
+                            rgb_matrix_set_color(index, 75, 0, 75);
                         } else {
-                            rgb_matrix_set_color(index, 250, 30, 0);
+                            rgb_matrix_set_color(index, 75, 9, 0);
                         }
                         break;
                 }
