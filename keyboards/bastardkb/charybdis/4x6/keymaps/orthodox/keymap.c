@@ -22,7 +22,7 @@ enum my_keycodes {
     OS_CTRL,
     OS_ALT,
     OS_CMD,
-    MOD_CANCEL,
+    OSM_RST,
 };
 
 bool trackball_volume = false;
@@ -154,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,     W,  Type,       OSL(UPPER), F,     O,     U,     J,   _,
-    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, MOD_CANCEL,
+    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM_RST,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
                           KC_BTN1, Shift,            LANG
@@ -266,7 +266,7 @@ void leader_end_user(void) {
 // clang-format on
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case MOD_CANCEL:
+        case OSM_RST:
             return true;
         default:
             return false;
