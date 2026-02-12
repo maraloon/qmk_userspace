@@ -158,7 +158,7 @@ const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_t_o,
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
+    _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,     W,  Type,       OSL(UPPER), F,     O,     U,     J,   _,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, MOD_CANCEL,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
@@ -219,13 +219,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [FN] = LAYOUT(
-    _, _, _, _, _, _,          KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18,
-    _, _, _, _, _, _,    KC_F19, KC_F20, KC_F21, KC_F22, KC_F23, KC_F24,
-    _, _, _, _, _, _,    KC_F11, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,
-    _, _, _, _, _, _,    KC_F12, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,
-
+    _, KC_F1,   KC_F2,  KC_F3,  KC_F4, KC_F5,      KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10, _,
+    _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
+    _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
+    _, _, _, _, _, _,    _, _, _, _, _, _,
              _, _, _,    _, _,
-                      _, _,    _
+                _, _,    _
   ),
 };
 
