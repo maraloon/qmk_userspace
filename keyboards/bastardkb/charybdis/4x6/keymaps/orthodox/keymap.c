@@ -23,11 +23,9 @@ enum my_keycodes {
     OS_ALT,
     OS_CMD,
     OSM_RST,
-    KO_TOGG,
 };
 
 bool trackball_volume = false;
-bool overrides_paused = false;
 
 #undef _______
 #define _ KC_NO
@@ -143,6 +141,14 @@ bool overrides_paused = false;
 #define rU KC_KP_6 // ю
 
 #define SpaceNUM LT(NUM, KC_SPC)
+
+const key_override_t c_h_o = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
+const key_override_t c_w_o = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
+const key_override_t c_m_o = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
+const key_override_t c_s_o = ko_make_basic(MOD_MASK_CTRL, KC_S, KC_ESC);
+const key_override_t c_ar_o = ko_make_basic(MOD_MASK_CTRL, Array, KC_ESC);
+const key_override_t c_t_o = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
+const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_ar_o, &c_t_o, NULL};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -367,44 +373,7 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     return;
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Обработка переключателя overrides (one-shot)
-    if (keycode == KO_TOGG && record->event.pressed) {
-        overrides_paused = true;
-        return false;
-    }
-
-    // Если overrides приостановлены и нажали любую клавишу (не модификатор) - сбрасываем
-    if (overrides_paused && record->event.pressed) {
-        if (!IS_MODIFIER(keycode) && keycode != KO_TOGG) {
-            overrides_paused = false;
-        }
-    }
-
-    // Применяем overrides только если они не приостановлены
-    if (!overrides_paused && record->event.pressed && (get_mods() & MOD_MASK_CTRL)) {
-        switch (keycode) {
-            case KC_H:
-                tap_code(KC_BSPC);
-                return false;
-            case KC_W:
-                tap_code16(LCTL(KC_BSPC));
-                return false;
-            case KC_M:
-                tap_code(KC_ENTER);
-                return false;
-            case KC_S:
-                tap_code(KC_ESC);
-                return false;
-            case Array:
-                tap_code(KC_ESC);
-                return false;
-            case KC_T:
-                tap_code(KC_TAB);
-                return false;
-        }
-    }
-
+bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
     update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
     update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
