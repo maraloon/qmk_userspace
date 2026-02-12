@@ -302,18 +302,6 @@ oneshot_state os_alt_state  = osm_0;
 oneshot_state os_cmd_state  = osm_0;
 bool          osm_pinned    = false;
 
-void with_mods_state_recover(void (*callback)(void)) {
-    uint8_t mod_state    = get_mods();
-    uint8_t os_mod_state = get_oneshot_mods();
-    clear_mods();
-    clear_oneshot_mods();
-
-    callback();
-
-    set_mods(mod_state);
-    set_oneshot_mods(os_mod_state);
-}
-
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
     layer_move(ABC);
@@ -323,58 +311,9 @@ void switch_to_russian(void) {
     layer_move(RUS);
 };
 
-void send_os_alt_hold(void) {
-    SEND_STRING(SS_TAP(X_F15));
-}
-void send_os_alt_release(void) {
-    SEND_STRING(SS_TAP(X_F16));
-}
-void send_os_ctrl_hold(void) {
-    SEND_STRING(SS_TAP(X_F17));
-}
-void send_os_ctrl_release(void) {
-    SEND_STRING(SS_TAP(X_F18));
-}
-void send_os_shift_hold(void) {
-    SEND_STRING(SS_TAP(X_F22));
-}
-void send_os_shift_release(void) {
-    SEND_STRING(SS_TAP(X_F23));
-}
-
-// INFO: тут не удачное название, тут os - operating system. Send to operating system osm state
-void send_os_osm_state(uint16_t osm_key_state, bool hold) {
-    switch (osm_key_state) {
-        case KC_LALT:
-            if (hold == true) {
-                with_mods_state_recover(send_os_alt_hold);
-            } else {
-                with_mods_state_recover(send_os_alt_release);
-            }
-            break;
-        case KC_LCTL:
-            if (hold == true) {
-                with_mods_state_recover(send_os_ctrl_hold);
-            } else {
-                with_mods_state_recover(send_os_ctrl_release);
-            }
-            break;
-        case KC_LSFT:
-            if (hold == true) {
-                with_mods_state_recover(send_os_shift_hold);
-            } else {
-                with_mods_state_recover(send_os_shift_release);
-            }
-            break;
-        default:
-            break;
-    }
-}
-
 static inline void reset_osm(oneshot_state *state, uint16_t mod) {
     *state = osm_0;
     unregister_code(mod);
-    // send_os_osm_state(mod, false);
 }
 
 void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16_t keycode, keyrecord_t *record) {
@@ -385,7 +324,6 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     // OSM keydown - init
     if (is_osm && on_keydown && *state == osm_0) {
         register_code(mod);
-        // send_os_osm_state(mod, true);
         *state = osm_holded;
         return;
     }
@@ -470,9 +408,9 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case LANG:
             if (record->event.pressed) {
-                with_mods_state_recover(switch_to_russian);
+                switch_to_russian();
             } else {
-                with_mods_state_recover(switch_to_english);
+                switch_to_english();
             }
             return false;
         case VOLTR:
