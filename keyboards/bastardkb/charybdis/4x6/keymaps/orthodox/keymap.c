@@ -44,7 +44,6 @@ bool trackball_volume = false;
 #define W KC_W
 
 #define F KC_F
-#define F_FN LT(FN, KC_F)
 #define P KC_P
 #define B KC_B
 #define J KC_J
@@ -162,7 +161,7 @@ bool trackball_volume = false;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W,  Type,            Shift,  F_FN,  O,     U,     J,   _,
+    _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
     Z,     N,     R,     T,    St, G,                Y,     H,      A,     E,     I,   MOD_CANCEL,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
@@ -394,18 +393,6 @@ void send_os_osm_state(uint16_t osm_key_state, bool hold) {
             break;
         default:
             break;
-    }
-}
-
-// TODO: replace it with https://docs.qmk.fm/tap_hold#flow-tap
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case F_FN:
-            // Do not select the hold action when another key is pressed.
-            return false;
-        default:
-            // Immediately select the hold action when another key is pressed.
-            return true;
     }
 }
 
