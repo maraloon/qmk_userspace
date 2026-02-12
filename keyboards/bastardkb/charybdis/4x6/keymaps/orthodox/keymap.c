@@ -3,7 +3,6 @@
 enum charybdis_keymap_layers {
     ABC = 0,
     ABC_S,
-    RTR, // RetroArch
     RUS,
     NUM,
     SYM,
@@ -95,7 +94,6 @@ bool trackball_volume = false;
 #define tag KC_GT
 
 #define Space KC_SPC
-#define Esc KC_ESC
 #define Tab KC_TAB
 
 #define Shift OS_SHFT
@@ -103,7 +101,6 @@ bool trackball_volume = false;
 #define Ctrl OS_CTRL
 #define Cmd OS_CMD
 #define Alt OS_ALT
-#define Compose KC_RCTL
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -169,15 +166,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),  Alt,   Ctrl,     _,   _,
                           _, SpaceNUM, _,         _, OSL(SYM),
                               _, QK_LLCK,         _
-  ),
-
-  [RTR] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,     _,    _,
-    Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
-    _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Lets,  _,
-                      _, SpaceNUM, VOLTR,            _, Esc,
-                                _, Shift,            LANG
   ),
 
   [RUS] = LAYOUT(
