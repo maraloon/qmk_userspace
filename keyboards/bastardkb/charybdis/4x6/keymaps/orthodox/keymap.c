@@ -142,16 +142,20 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 
-const key_override_t c_h_o = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
-const key_override_t c_w_o = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
-const key_override_t c_m_o = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
-const key_override_t c_s_o = ko_make_basic(MOD_MASK_CTRL, KC_S, KC_ESC);
+const key_override_t c_h_o  = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
+const key_override_t c_w_o  = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
+const key_override_t c_m_o  = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
+const key_override_t c_c_o  = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_ESC);
 const key_override_t c_ar_o = ko_make_basic(MOD_MASK_CTRL, Array, KC_ESC);
-const key_override_t c_t_o = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
+const key_override_t c_t_o  = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
 
-const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_T));
+const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_H, LCTL(KC_H));
+const key_override_t cm_w_o = ko_make_basic(MOD_MASK_GUI, KC_W, LCTL(KC_W));
+const key_override_t cm_m_o = ko_make_basic(MOD_MASK_GUI, KC_M, LCTL(KC_M));
+const key_override_t cm_c_o = ko_make_basic(MOD_MASK_GUI, KC_C, LCTL(KC_C));
+const key_override_t cm_t_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_T));
 
-const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_ar_o, &c_t_o, &cm_h_o, NULL};
+const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_t_o, &c_ar_o, &c_t_o, &cm_h_o, &cm_w_o, &cm_m_o, &cm_t_o, &cm_t_o,  NULL};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -376,7 +380,7 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     return;
 }
 
-bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
     update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
     update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
