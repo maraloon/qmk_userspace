@@ -373,7 +373,6 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     return;
 }
 
-uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
     update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
