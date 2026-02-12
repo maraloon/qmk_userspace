@@ -307,7 +307,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
 typedef enum {
     osm_0,
     osm_queued,
-    osm_holded,
+    // osm_holded,
     osm_used,
 } oneshot_state;
 
@@ -397,18 +397,26 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     bool on_keyup   = !record->event.pressed;
     bool is_osm     = keycode == osm_key;
 
-    // OSM keydown - init
-    if (is_osm && on_keydown && *state == osm_0) {
+    // OSM tap. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
+    if (is_osm && on_keyup && *state == osm_0) {
         register_code(mod);
         // send_os_osm_state(mod, true);
-        *state = osm_holded;
-        return;
-    }
-    // OSM keydown-keyup. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
-    if (is_osm && on_keyup && *state == osm_holded) {
         *state = osm_queued;
         return;
     }
+    // INFO: убрал вообще возможность зажимать mod'ы, т.к. хочу отучиться от зажимов
+    // OSM keydown - init
+    // if (is_osm && on_keydown && *state == osm_0) {
+    //     register_code(mod);
+    //     // send_os_osm_state(mod, true);
+    //     *state = osm_holded;
+    //     return;
+    // }
+    // OSM keydown-keyup. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
+    // if (is_osm && on_keyup && *state == osm_holded) {
+    //     *state = osm_queued;
+    //     return;
+    // }
     // OSM double keydown - регистрируем "залипший" mod
     if (is_osm && on_keydown && *state != osm_0) {
         osm_pinned = true;
@@ -430,10 +438,10 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
         }
 
         // Если osm зажат, то говорим, что он отработал и ждем когда его отожмут
-        if (*state == osm_holded) {
-            *state = osm_used;
-            return;
-        }
+        // if (*state == osm_holded) {
+        //     *state = osm_used;
+        //     return;
+        // }
         // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
         if (*state == osm_queued) {
             reset_osm(state, mod);
@@ -442,10 +450,10 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     }
 
     // Когда был hold OSM, потом нажали a-z, потом палец с OSM убрали. Сбрасываем до дефолтного состояния
-    if (is_osm && on_keyup && *state == osm_used) {
-        reset_osm(state, mod);
-        return;
-    }
+    // if (is_osm && on_keyup && *state == osm_used) {
+    //     reset_osm(state, mod);
+    //     return;
+    // }
 
     return;
 }
