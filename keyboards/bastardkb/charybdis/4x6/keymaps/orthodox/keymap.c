@@ -53,7 +53,6 @@ bool trackball_volume = false;
 #define N KC_N
 #define R KC_R
 #define St KC_S
-#define F KC_F
 #define T KC_T
 
 #define G KC_G
@@ -166,7 +165,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Z,     N,     R,     T,    St, G,                Y,     H,      A,     E,     I,   MOD_CANCEL,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
-                          KC_BTN1, Shift,            LANG
+                     KC_BTN1, OSL(ABC_S),            LANG
+  ),
+
+  [ABC_S] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _,  S(B),  S(L),  S(D),  S(W),     _,            _,  S(F),  S(O),  S(U),  S(J),   _,
+ S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I), LT(ABC),
+    _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),  Alt,   Ctrl,     _,   _,
+                          _, SpaceNUM, _,         _, OSL(SYM),
+                            _, LT(ABC_S),         _
   ),
 
   [RTR] = LAYOUT(
