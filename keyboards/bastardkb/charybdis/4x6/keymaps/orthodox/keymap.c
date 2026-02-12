@@ -150,6 +150,7 @@ const key_override_t c_m_o  = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
 const key_override_t c_c_o  = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_ESC);
 const key_override_t c_ar_o = ko_make_basic(MOD_MASK_CTRL, Array, KC_ESC);
 const key_override_t c_t_o  = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
+const key_override_t c_n_o  = ko_make_basic(MOD_MASK_CTRL, KC_N, LOCK_NUM);
 
 const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_H, LCTL(KC_H));
 const key_override_t cm_w_o = ko_make_basic(MOD_MASK_GUI, KC_W, LCTL(KC_W));
@@ -197,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _,     B,     _,     _0,   W,    _,       _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
-    _,     _,     _,   Down,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
+    _,     _,    Up,   Down,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
                                _, _, _,       _, Down,
                                   _, _,       LCTL(U)
   ),
