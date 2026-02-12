@@ -156,7 +156,7 @@ const key_override_t cm_w_o = ko_make_basic(MOD_MASK_GUI, KC_W, LCTL(KC_W));
 const key_override_t cm_m_o = ko_make_basic(MOD_MASK_GUI, KC_M, LCTL(KC_M));
 const key_override_t cm_c_o = ko_make_basic(MOD_MASK_GUI, KC_C, LCTL(KC_C));
 const key_override_t cm_t_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_T));
-const key_override_t cm_n_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_N));
+const key_override_t cm_n_o = ko_make_basic(MOD_MASK_GUI, KC_N, LCTL(KC_N));
 
 const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_c_o, &c_t_o, &c_ar_o, &c_t_o, &cm_h_o, &cm_c_o, &cm_w_o, &cm_m_o, &cm_t_o, &cm_t_o, &cm_n_o, NULL};
 
