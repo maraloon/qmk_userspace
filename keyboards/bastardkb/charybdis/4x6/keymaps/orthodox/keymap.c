@@ -58,7 +58,6 @@ bool trackball_volume = false;
 #define G KC_G
 #define M KC_M
 #define A KC_A
-#define A_CG LCG_T(KC_A) // command+control
 #define E KC_E
 #define I KC_I
 #define O KC_O
@@ -143,9 +142,6 @@ bool trackball_volume = false;
 #define Lets LCMD(KC_F)
 #define Type QK_LEAD
 
-#define NextWin LCMD(KC_GRV)
-#define NextWinStack LCMD(KC_TILD)
-
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
 #define rZ KC_KP_3 // з
@@ -154,8 +150,6 @@ bool trackball_volume = false;
 #define rU KC_KP_6 // ю
 
 #define SpaceNUM LT(NUM, KC_SPC)
-// #define DelWLayer LCTL(KC_BSPC)
-#define CtrlZ LCTL(KC_Z)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -179,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [RTR] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,    _,
-    Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y, CtrlZ,    _,
+    Alt,   Q,     W,     F,     P,     B,            J,     L,     U,     Y,     _,    _,
     Ctrl,  N,     R,    St,     T,     G,            M,     A,     E,     I,     O, Compose,
     _,     Z,     X,     C,     D,     V,            K,     H,     Alt, Ctrl, Lets,  _,
                       _, SpaceNUM, VOLTR,            _, Esc,
@@ -284,10 +278,11 @@ void leader_end_user(void) {
         SEND_STRING("zeroly@ya.ru");
     } else if (leader_sequence_two_keys(KC_M, KC_S)) {
         SEND_STRING("sdvk1369@gmail.com");
-    } else if (leader_sequence_two_keys(KC_A, KC_Z)) {
-        // Leader, a, s => GUI+S
-        tap_code16(LGUI(KC_S));
     }
+    // else if (leader_sequence_two_keys(KC_A, KC_Z)) {
+    //     // Leader, a, s => GUI+S
+    //     tap_code16(LGUI(KC_S));
+    // }
 }
 // clang-format on
 bool is_oneshot_cancel_key(uint16_t keycode) {
@@ -463,10 +458,10 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
 uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
-    update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
+    // update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
     update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
     update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
-    update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
+    // update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
 
     switch (keycode) {
