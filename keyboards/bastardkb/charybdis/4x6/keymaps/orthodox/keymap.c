@@ -431,7 +431,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_UP:
         case KC_DOWN:
             if (record->event.pressed && layer_state_is(NUM)) {
-                if (layer_lock_is_locked(NUM)) {
+                if (is_layer_locked(NUM)) {
                     tap_code(keycode);
                     layer_lock_off(NUM);
                     layer_move(ABC);
