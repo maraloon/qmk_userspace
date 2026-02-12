@@ -148,7 +148,10 @@ const key_override_t c_m_o = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
 const key_override_t c_s_o = ko_make_basic(MOD_MASK_CTRL, KC_S, KC_ESC);
 const key_override_t c_ar_o = ko_make_basic(MOD_MASK_CTRL, Array, KC_ESC);
 const key_override_t c_t_o = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
-const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_ar_o, &c_t_o, NULL};
+
+const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_T));
+
+const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_ar_o, &c_t_o, &cm_h_o, NULL};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -157,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,     W,  Type,       OSL(UPPER), F,     O,     U,     J,   _,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM_RST,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
-                    _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
+                    _, SpaceNUM, KC_BTN2,            Cmd, OSL(SYM),
                           KC_BTN1, Shift,            LANG
   ),
 
@@ -378,7 +381,7 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
     update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
     update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
-    // update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
+    update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
 
     switch (keycode) {
