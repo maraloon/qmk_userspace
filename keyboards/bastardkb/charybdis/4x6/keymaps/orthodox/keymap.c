@@ -23,6 +23,8 @@ enum my_keycodes {
     OS_ALT,
     OS_CMD,
     OSM_RST,
+
+    LOCK_NUM,
 };
 
 bool trackball_volume = false;
@@ -207,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                              _, TO(NUM), _,     _, _,
+                              _, LOCK_NUM, _,     _, _,
                                     _, _,     _
   ),
 
@@ -429,11 +431,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_UP:
         case KC_DOWN:
             if (record->event.pressed && layer_state_is(NUM)) {
-                tap_code(keycode);
-                layer_move(ABC);
-                return false;
+                if (layer_lock_is_locked(NUM)) {
+                    tap_code(keycode);
+                    layer_lock_off(NUM);
+                    layer_move(ABC);
+                    return false;
+                }
             }
             return true;
+        case LOCK_NUM:
+            if (record->event.pressed) {
+                layer_on(NUM);
+                layer_lock_on(NUM);
+            }
+            return false;
         default:
             return true; // Process all other keycodes normally
     }
