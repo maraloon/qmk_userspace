@@ -148,6 +148,13 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 
+const key_override_t c_h_o = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
+const key_override_t c_w_o = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
+const key_override_t c_m_o = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
+const key_override_t c_s_o = ko_make_basic(MOD_MASK_CTRL, KC_S, KC_ESC);
+const key_override_t c_t_o = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
+const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_t_o, NULL};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
