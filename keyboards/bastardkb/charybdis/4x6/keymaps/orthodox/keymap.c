@@ -2,7 +2,7 @@
 
 enum charybdis_keymap_layers {
     ABC = 0,
-    ABC_S,
+    UPPER,
     RUS,
     NUM,
     SYM,
@@ -96,7 +96,7 @@ bool trackball_volume = false;
 #define Space KC_SPC
 #define Tab KC_TAB
 
-#define Shift OSL(ABC_S)
+#define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
 #define Ctrl OS_CTRL
 #define Cmd OS_CMD
@@ -159,20 +159,20 @@ const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_s_o, &c_t_o,
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
-    Z,     N,     R,     T,    St, G,                Y,     H,      A,     E,     I, MOD_CANCEL,
-    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
+    _,     B,     L,     D,     W,  Type,       OSL(UPPER), F,     O,     U,     J,   _,
+    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, MOD_CANCEL,
+Shift,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
                           KC_BTN1, Shift,            LANG
   ),
 
-  [ABC_S] = LAYOUT(
+  [UPPER] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,  S(B),  S(L),  S(D),  S(W),     _,            _,  S(F),  S(O),  S(U),  S(J),   _,
+    _,  S(B),  S(L),  S(D),  S(W),     _,      QK_LLCK,  S(F),  S(O),  S(U),  S(J),   _,
  S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I),   _,
-    _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),  Alt,   Ctrl,     _,   _,
-                          _, SpaceNUM, _,         _, OSL(SYM),
-                              _, QK_LLCK,         _
+    _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),     _,     _,     _,   _,
+                          _, SpaceNUM, _,         _, _,
+                                    _, _,         _
   ),
 
   [RUS] = LAYOUT(
@@ -453,7 +453,7 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
 uint16_t change_app_timer = 0;
 bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
-    // update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
+    update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
     update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
     update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
     // update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
