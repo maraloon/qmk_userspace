@@ -155,7 +155,7 @@ const key_override_t cm_m_o = ko_make_basic(MOD_MASK_GUI, KC_M, LCTL(KC_M));
 const key_override_t cm_c_o = ko_make_basic(MOD_MASK_GUI, KC_C, LCTL(KC_C));
 const key_override_t cm_t_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_T));
 
-const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_t_o, &c_ar_o, &c_t_o, &cm_h_o, &cm_w_o, &cm_m_o, &cm_t_o, &cm_t_o,  NULL};
+const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_t_o, &c_ar_o, &c_t_o, &cm_h_o, &cm_w_o, &cm_m_o, &cm_t_o, &cm_t_o, NULL};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -207,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                             _, Space, _,     _, _,
+                              _, TO(NUM), _,     _, _,
                                     _, _,     _
   ),
 
@@ -426,6 +426,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 trackball_volume = false;
             }
             return false;
+        case KC_UP:
+        case KC_DOWN:
+            if (record->event.pressed && layer_state_is(NUM)) {
+                tap_code(keycode);
+                layer_move(ABC);
+                return false;
+            }
+            return true;
         default:
             return true; // Process all other keycodes normally
     }
