@@ -195,9 +195,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
-    _,     _,     _,     _0,   _,    _,       _,   Left,   _9, Right,    _, _,
+    _,     B,     _,     _0,   W,    _,       _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
-    _,     _,     _,      _,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
+    _,     _,     _,   Down,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
                                _, _, _,       _, Down,
                                   _, _,       LCTL(U)
   ),
@@ -430,13 +430,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case KC_UP:
         case KC_DOWN:
-            if (record->event.pressed && layer_state_is(NUM)) {
-                if (is_layer_locked(NUM)) {
-                    tap_code(keycode);
-                    layer_lock_off(NUM);
-                    layer_move(ABC);
-                    return false;
-                }
+        case KC_LEFT:
+        case KC_RIGHT:
+        case KC_W:
+        case KC_B:
+            if (record->event.pressed && layer_state_is(NUM) && is_layer_locked(NUM)) {
+                tap_code(keycode);
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                return false;
             }
             return true;
         case LOCK_NUM:
