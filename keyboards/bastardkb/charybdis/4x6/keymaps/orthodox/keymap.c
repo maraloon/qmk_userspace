@@ -6,7 +6,6 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
-    PNTR,
     FN,
 };
 
@@ -94,7 +93,6 @@ bool trackball_volume = false;
 #define tag KC_GT
 
 #define Space KC_SPC
-#define Tab KC_TAB
 
 #define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
@@ -132,9 +130,6 @@ bool trackball_volume = false;
 #define DComm KC_SCLN
 #define Caret KC_CIRC
 #define Dollar KC_DLR
-
-#define VolUp KC_KB_VOLUME_UP
-#define VolDn KC_KB_VOLUME_DOWN
 
 #define Lets LCMD(KC_F)
 #define Type QK_LEAD
@@ -207,15 +202,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
                              _, Space, _,     _, _,
                                     _, _,     _
-  ),
-
-  [PNTR] = LAYOUT(
-    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-    SNIPING, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-    _x, _x, _x, _x, _x, _x,    _x, _x, _x, _x, _x, _x,
-           _x, _x, KC_BTN2,    _x, _x,
-              KC_BTN1,  _x,    _x
   ),
 
   [FN] = LAYOUT(
@@ -506,9 +492,6 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
 static uint16_t auto_pointer_layer_timer = 0;
 #endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-/** \brief Automatically enable sniping-mode on the pointer layer. */
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER PNTR
-
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
 #    define DPI_MOD KC_NO
@@ -527,10 +510,10 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
         while (abs(volume_accumulator) >= SCROLL_DIVIDER) {
             if (volume_accumulator > 0) {
-                tap_code(VolDn);
+                tap_code(KC_KB_VOLUME_DOWN);
                 volume_accumulator -= SCROLL_DIVIDER;
             } else {
-                tap_code(VolUp);
+                tap_code(KC_KB_VOLUME_UP);
                 volume_accumulator += SCROLL_DIVIDER;
             }
         }
@@ -540,17 +523,6 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         mouse_report.y = 0;
         mouse_report.h = 0;
         mouse_report.v = 0;
-    } else {
-        if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
-            if (auto_pointer_layer_timer == 0) {
-                layer_on(PNTR);
-#        ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-                rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-#        endif // RGB_MATRIX_ENABLE
-            }
-            auto_pointer_layer_timer = timer_read();
-        }
     }
     return mouse_report;
 }
@@ -566,13 +538,16 @@ void matrix_scan_user(void) {
 }
 #    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-#    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
+/** \brief Automatically enable sniping-mode on the pointer layer. */
+// #define CHARYBDIS_AUTO_SNIPING_ON_LAYER PNTR
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
+// #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
+    // charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
+// #    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
     charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
     return state;
 }
-#    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
 #endif     // POINTING_DEVICE_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
