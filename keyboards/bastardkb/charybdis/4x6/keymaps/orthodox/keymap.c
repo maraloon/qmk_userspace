@@ -96,7 +96,7 @@ bool trackball_volume = false;
 #define Space KC_SPC
 #define Tab KC_TAB
 
-#define Shift OS_SHFT
+#define Shift OSL(ABC_S)
 #define SpaceShift SFT_T(KC_SPC)
 #define Ctrl OS_CTRL
 #define Cmd OS_CMD
@@ -153,16 +153,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   _,
     _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
-    Z,     N,     R,     T,    St, G,                Y,     H,      A,     E,     I,   MOD_CANCEL,
+    Z,     N,     R,     T,    St, G,                Y,     H,      A,     E,     I, MOD_CANCEL,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            _, OSL(SYM),
-                     KC_BTN1, OSL(ABC_S),            LANG
+                          KC_BTN1, Shift,            LANG
   ),
 
   [ABC_S] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  S(B),  S(L),  S(D),  S(W),     _,            _,  S(F),  S(O),  S(U),  S(J),   _,
- S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I), TG(ABC),
+ S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I),   _,
     _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),  Alt,   Ctrl,     _,   _,
                           _, SpaceNUM, _,         _, OSL(SYM),
                               _, QK_LLCK,         _
