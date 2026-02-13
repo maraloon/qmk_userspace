@@ -144,6 +144,7 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 
+// TODO: ctrl+alt+n пропускать
 const key_override_t c_h_o  = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
 const key_override_t c_w_o  = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
 const key_override_t c_m_o  = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
@@ -197,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
     _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
-    _, TG(NUM),  _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
+    _,     _,    _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, TG(NUM),
     _,     _,    Up,   Down,  _4,    _,       _,     _7, PgDn,  PgUp,    _, _,
                            _, Space, _,       _, Down,
                                   _, _,       LCTL(U)
@@ -531,6 +532,19 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                             rgb_matrix_set_color(index, 250, 0, 250);
                         } else {
                             rgb_matrix_set_color(index, 0, 0, 0);
+                        }
+                        break;
+                    case 3:
+                        if (row == 6) {
+                            rgb_matrix_set_color(index, 250, 250, 250);
+                        }
+                    case 4:
+                        if (row == 7) {
+                            rgb_matrix_set_color(index, 250, 250, 250);
+                        }
+                    case 5:
+                        if (row == 8) {
+                            rgb_matrix_set_color(index, 250, 250, 250);
                         }
                         break;
                     default:
