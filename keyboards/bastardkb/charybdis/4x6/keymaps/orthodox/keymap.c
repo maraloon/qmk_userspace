@@ -144,7 +144,6 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 
-// TODO: ctrl+alt+n пропускать
 const key_override_t c_h_o  = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
 const key_override_t c_w_o  = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
 const key_override_t c_m_o  = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
@@ -445,6 +444,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
         case KC_N:
             if (record->event.pressed && (get_mods() & MOD_MASK_CTRL)) {
+                if (get_mods() & ~MOD_MASK_CTRL) {
+                    return true;
+                }
                 layer_on(NUM);
                 layer_lock_on(NUM);
                 return false;
