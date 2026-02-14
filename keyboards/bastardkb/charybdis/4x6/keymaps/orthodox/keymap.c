@@ -269,6 +269,14 @@ void leader_end_user(void) {
 }
 // clang-format on
 
+void oneshot_mods_changed_user(uint8_t mods) {
+    if (mods) {
+        SEND_STRING(SS_TAP(X_F15));
+    } else {
+        SEND_STRING(SS_TAP(X_F16));
+    }
+}
+
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
     layer_move(ABC);
