@@ -144,11 +144,11 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 
-const key_override_t c_h_o  = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
-const key_override_t c_w_o  = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
-const key_override_t c_m_o  = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
-const key_override_t c_c_o  = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_ESC);
-const key_override_t c_t_o  = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
+const key_override_t c_h_o = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
+const key_override_t c_w_o = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
+const key_override_t c_m_o = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
+const key_override_t c_c_o = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_ESC);
+const key_override_t c_t_o = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
 
 const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_H, LCTL(KC_H));
 const key_override_t cm_w_o = ko_make_basic(MOD_MASK_GUI, KC_W, LCTL(KC_W));
@@ -382,6 +382,16 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     return;
 }
 
+static bool process_layer_lock(uint16_t keycode) {
+    if (layer_state_is(NUM) && is_layer_locked(NUM)) {
+        tap_code(keycode);
+        layer_lock_off(NUM);
+        layer_move(ABC);
+        return false;
+    }
+    return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
     update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
@@ -390,87 +400,61 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
 
+    if (!record->event.pressed) return true;
+
     switch (keycode) {
         case CommaS:
-            if (record->event.pressed) {
-                SEND_STRING(", ");
-            }
+            SEND_STRING(", ");
             return false;
         case DotNS:
-            if (record->event.pressed) {
-                SEND_STRING(". ");
-                add_oneshot_mods(MOD_BIT(KC_LSFT));
-            }
+            SEND_STRING(". ");
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
         case QuesNS:
-            if (record->event.pressed) {
-                SEND_STRING("? ");
-                add_oneshot_mods(MOD_BIT(KC_LSFT));
-            }
+            SEND_STRING("? ");
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
         case ExlmNS:
-            if (record->event.pressed) {
-                SEND_STRING("! ");
-                add_oneshot_mods(MOD_BIT(KC_LSFT));
-            }
+            SEND_STRING("! ");
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
         case LANG:
-            if (record->event.pressed) {
-                switch_to_russian();
-            } else {
-                switch_to_english();
-            }
+            switch_to_russian();
             return false;
         case VOLTR:
-            if (record->event.pressed) {
-                trackball_volume = true;
-            } else {
-                trackball_volume = false;
-            }
+            trackball_volume = true;
             return false;
         case KC_D:
-            if (record->event.pressed && (get_mods() == MOD_MASK_CTRL)) {
+            if ((get_mods() == MOD_MASK_CTRL)) {
                 tap_code(KC_PGDN);
                 return false;
             }
             return true;
         case KC_B:
-            if (record->event.pressed && layer_state_is(NUM) && is_layer_locked(NUM)) {
-                tap_code(keycode);
-                layer_lock_off(NUM);
-                layer_move(ABC);
-                return false;
-            } else if (record->event.pressed && (get_mods() == MOD_MASK_CTRL)) {
+            if ((get_mods() == MOD_MASK_CTRL)) {
                 tap_code(KC_PGUP);
                 return false;
             }
+            return process_layer_lock(keycode);
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
         case KC_W:
-            if (record->event.pressed && layer_state_is(NUM) && is_layer_locked(NUM)) {
-                tap_code(keycode);
-                layer_lock_off(NUM);
-                layer_move(ABC);
-                return false;
-            }
-            return true;
+            return process_layer_lock(keycode);
         case KC_S:
-            if (record->event.pressed && (get_mods() & MOD_MASK_CTRL) && !(get_mods() & ~MOD_MASK_CTRL)) {
+            if ((get_mods() & MOD_MASK_CTRL) && !(get_mods() & ~MOD_MASK_CTRL)) {
                 layer_on(NUM);
                 layer_lock_on(NUM);
                 return false;
             }
             return true;
         case LOCK_NUM:
-            if (record->event.pressed) {
-                layer_on(NUM);
-                layer_lock_on(NUM);
-            }
+            layer_on(NUM);
+            layer_lock_on(NUM);
             return false;
         default:
-            return true; // Process all other keycodes normally
+            return true;
     }
 }
 
