@@ -18,12 +18,6 @@ enum my_keycodes {
     QuesNS,
     ExlmNS,
 
-    OS_SHFT,
-    OS_CTRL,
-    OS_ALT,
-    OS_CMD,
-    OSM_RST,
-
     LOCK_NUM,
 };
 
@@ -95,11 +89,11 @@ bool trackball_volume = false;
 
 #define Space KC_SPC
 
-#define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
-#define Ctrl OS_CTRL
-#define Cmd OS_CMD
-#define Alt OS_ALT
+#define Shift OSM(MOD_LSFT)
+#define Ctrl OSM(MOD_LCTL)
+#define Cmd OSM(MOD_LGUI)
+#define Alt OSM(MOD_LALT)
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -163,10 +157,10 @@ const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_c_o, &c_t_o,
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,     B,     L,     D,     W,  Type,       OSL(UPPER), F,     O,     U,     J,   _,
+    _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Cmd,
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
-                    _, SpaceNUM, KC_BTN2,            OSM_RST, OSL(SYM),
+                    _, SpaceNUM, KC_BTN2,            OSL(NUM), OSL(SYM),
                           KC_BTN1, Shift,            LANG
   ),
 
