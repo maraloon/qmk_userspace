@@ -383,7 +383,7 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
 }
 
 static bool process_layer_lock(uint16_t keycode) {
-    if (layer_state_is(NUM) && is_layer_locked(NUM)) {
+    if (is_layer_locked(NUM)) {
         tap_code(keycode);
         layer_lock_off(NUM);
         layer_move(ABC);
@@ -444,13 +444,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return process_layer_lock(keycode);
         case KC_S:
             if ((get_mods() & MOD_MASK_CTRL) && !(get_mods() & ~MOD_MASK_CTRL)) {
-                layer_on(NUM);
                 layer_lock_on(NUM);
                 return false;
             }
             return true;
         case LOCK_NUM:
-            layer_on(NUM);
             layer_lock_on(NUM);
             return false;
         default:
