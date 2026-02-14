@@ -442,15 +442,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_lock_off(NUM);
                 layer_move(ABC);
                 return false;
+            } else if (record->event.pressed && (get_mods() == MOD_MASK_CTRL)) {
+                tap_code(KC_PGUP);
+                return false;
             }
             return true;
         case KC_S:
-            if (record->event.pressed && (get_mods() & MOD_MASK_CTRL)) {
-                if (get_mods() & ~MOD_MASK_CTRL) {
-                    return true;
-                }
+            if (record->event.pressed && (get_mods() == MOD_MASK_CTRL)) {
                 layer_on(NUM);
                 layer_lock_on(NUM);
+                return false;
+            }
+            return true;
+        case KC_D:
+            if (record->event.pressed && (get_mods() == MOD_MASK_CTRL)) {
+                tap_code(KC_PGDN);
                 return false;
             }
             return true;
