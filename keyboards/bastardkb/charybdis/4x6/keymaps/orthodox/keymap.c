@@ -301,7 +301,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
 typedef enum {
     osm_0,
     osm_queued,
-    osm_holded,
     osm_used,
 } oneshot_state;
 
@@ -309,7 +308,6 @@ oneshot_state os_shft_state = osm_0;
 oneshot_state os_ctrl_state = osm_0;
 oneshot_state os_alt_state  = osm_0;
 oneshot_state os_cmd_state  = osm_0;
-bool          osm_pinned    = false;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -320,63 +318,43 @@ void switch_to_russian(void) {
     layer_move(RUS);
 };
 
-static inline void reset_osm(oneshot_state *state, uint16_t mod) {
-    *state = osm_0;
-    unregister_code(mod);
-}
-
 void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16_t keycode, keyrecord_t *record) {
     bool on_keydown = record->event.pressed;
     bool on_keyup   = !record->event.pressed;
     bool is_osm     = keycode == osm_key;
 
-    // OSM keydown - init
+    // OSM tap. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
     if (is_osm && on_keydown && *state == osm_0) {
-        register_code(mod);
-        *state = osm_holded;
-        return;
-    }
-    // OSM keydown-keyup. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
-    if (is_osm && on_keyup && *state == osm_holded) {
+        if (!get_oneshot_mods()) {
+            tap_code(KC_F15);
+        }
+        add_oneshot_mods(MOD_BIT(mod));
         *state = osm_queued;
-        return;
-    }
-    // OSM double keydown - регистрируем "залипший" mod
-    if (is_osm && on_keydown && *state != osm_0) {
-        osm_pinned = true;
         return;
     }
     // Нажали OSM cancel-key. Сбрасываем до дефолтных
     if (is_oneshot_cancel_key(keycode)) {
         if (on_keydown && *state != osm_0) {
-            reset_osm(state, mod);
-            osm_pinned = false;
+            *state = osm_0;
+            clear_oneshot_mods();
+            tap_code(KC_F16);
         }
         return;
     }
 
     // Нажали a-z
     if (!is_osm && on_keyup) {
-        if (is_oneshot_ignored_key(keycode) || osm_pinned) {
+        if (is_oneshot_ignored_key(keycode)) {
             return;
         }
 
-        // Если osm зажат, то говорим, что он отработал и ждем когда его отожмут
-        if (*state == osm_holded) {
-            *state = osm_used;
-            return;
-        }
         // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
         if (*state == osm_queued) {
-            reset_osm(state, mod);
+            *state = osm_0;
+            clear_oneshot_mods();
+            tap_code(KC_F16);
             return;
         }
-    }
-
-    // Когда был hold OSM, потом нажали a-z, потом палец с OSM убрали. Сбрасываем до дефолтного состояния
-    if (is_osm && on_keyup && *state == osm_used) {
-        reset_osm(state, mod);
-        return;
     }
 
     return;
