@@ -148,7 +148,6 @@ const key_override_t c_h_o  = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
 const key_override_t c_w_o  = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
 const key_override_t c_m_o  = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
 const key_override_t c_c_o  = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_ESC);
-const key_override_t c_ar_o = ko_make_basic(MOD_MASK_CTRL, Array, KC_ESC);
 const key_override_t c_t_o  = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
 
 const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_H, LCTL(KC_H));
@@ -446,7 +445,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return true;
         case KC_S:
-            if (record->event.pressed && (get_mods() == MOD_MASK_CTRL)) {
+            if (record->event.pressed && (get_mods() & MOD_MASK_CTRL) && !(get_mods() & ~MOD_MASK_CTRL)) {
                 layer_on(NUM);
                 layer_lock_on(NUM);
                 return false;
