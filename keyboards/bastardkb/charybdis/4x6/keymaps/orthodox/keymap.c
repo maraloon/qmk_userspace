@@ -18,7 +18,6 @@ enum my_keycodes {
     QuesNS,
     ExlmNS,
 
-    LOCK_NUM,
 };
 
 bool trackball_volume = false;
@@ -277,6 +276,24 @@ void oneshot_mods_changed_user(uint8_t mods) {
     }
 }
 
+void oneshot_layer_changed_user(uint8_t layer) {
+    if (layer) {
+        SEND_STRING(SS_TAP(X_F15));
+    } else {
+        SEND_STRING(SS_TAP(X_F16));
+    }
+}
+
+static void layer_lock_on_with_feedback(uint8_t layer) {
+    layer_lock_on(layer);
+    SEND_STRING(SS_TAP(X_F15));
+}
+
+static void layer_lock_off_with_feedback(uint8_t layer) {
+    layer_lock_off(layer);
+    SEND_STRING(SS_TAP(X_F16));
+}
+
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
     layer_move(ABC);
@@ -289,7 +306,7 @@ void switch_to_russian(void) {
 static bool process_layer_lock(uint16_t keycode) {
     if (is_layer_locked(NUM)) {
         tap_code(keycode);
-        layer_lock_off(NUM);
+        layer_lock_off_with_feedback(NUM);
         layer_move(ABC);
         return false;
     }
@@ -351,13 +368,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return process_layer_lock(keycode);
         case KC_S:
             if (((get_oneshot_mods() | get_mods()) & MOD_MASK_CTRL) && !((get_oneshot_mods() | get_mods()) & ~MOD_MASK_CTRL)) {
-                layer_lock_on(NUM);
+                layer_lock_on_with_feedback(NUM);
                 return false;
             }
             return true;
-        case LOCK_NUM:
-            layer_lock_on(NUM);
-            return false;
         default:
             return true;
     }
