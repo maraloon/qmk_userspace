@@ -386,59 +386,34 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (os_alt_state == osm_queued || os_ctrl_state == osm_queued || os_shft_state == osm_queued || os_cmd_state == osm_queued) {
-                rgb_matrix_set_color(index, 0, 0, 0);
-
-                if (os_alt_state == osm_queued) {
-                    if (row == 8) {
-                        rgb_matrix_set_color(index, RGB_RED);
-                    }
-                }
-                if (os_ctrl_state == osm_queued) {
-                    if (row == 7) {
-                        rgb_matrix_set_color(index, 150, 150, 0);
-                    }
-                }
-                if (os_shft_state == osm_queued) {
-                    if (row == 6) {
+            switch (get_highest_layer(layer_state | default_layer_state)) {
+                case 1:
+                    if (col == 5) {
                         rgb_matrix_set_color(index, 250, 0, 250);
+                    } else {
+                        rgb_matrix_set_color(index, 0, 0, 0);
                     }
-                }
-                if (os_cmd_state == osm_queued) {
-                    if (row == 9 && col == 1) {
-                        rgb_matrix_set_color(index, 250, 0, 0);
+                    break;
+                case 3:
+                    if (row == 6) {
+                        rgb_matrix_set_color(index, 250, 250, 250);
                     }
-                }
-            } else {
-                switch (get_highest_layer(layer_state | default_layer_state)) {
-                    case 1:
-                        if (col == 5) {
-                            rgb_matrix_set_color(index, 250, 0, 250);
-                        } else {
-                            rgb_matrix_set_color(index, 0, 0, 0);
-                        }
-                        break;
-                    case 3:
-                        if (row == 6) {
-                            rgb_matrix_set_color(index, 250, 250, 250);
-                        }
-                    case 4:
-                        if (row == 7) {
-                            rgb_matrix_set_color(index, 250, 250, 250);
-                        }
-                    case 5:
-                        if (row == 8) {
-                            rgb_matrix_set_color(index, 250, 250, 250);
-                        }
-                        break;
-                    default:
-                        if (row == 5 || col == 0) {
-                            rgb_matrix_set_color(index, 75, 0, 75);
-                        } else {
-                            rgb_matrix_set_color(index, 75, 9, 0);
-                        }
-                        break;
-                }
+                case 4:
+                    if (row == 7) {
+                        rgb_matrix_set_color(index, 250, 250, 250);
+                    }
+                case 5:
+                    if (row == 8) {
+                        rgb_matrix_set_color(index, 250, 250, 250);
+                    }
+                    break;
+                default:
+                    if (row == 5 || col == 0) {
+                        rgb_matrix_set_color(index, 75, 0, 75);
+                    } else {
+                        rgb_matrix_set_color(index, 75, 9, 0);
+                    }
+                    break;
             }
         }
     }
