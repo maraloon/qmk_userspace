@@ -289,8 +289,24 @@ static bool process_layer_lock(uint16_t keycode) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!record->event.pressed) return true;
+    switch (keycode) {
+        case LANG:
+            if (record->event.pressed) {
+                switch_to_russian();
+            } else {
+                switch_to_english();
+            }
+            return false;
+        case VOLTR:
+            if (record->event.pressed) {
+                trackball_volume = true;
+            } else {
+                trackball_volume = false;
+            }
+            return false;
+    }
 
+    if (!record->event.pressed) return true;
     switch (keycode) {
         case CommaS:
             SEND_STRING(", ");
@@ -306,12 +322,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case ExlmNS:
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
-            return false;
-        case LANG:
-            switch_to_russian();
-            return false;
-        case VOLTR:
-            trackball_volume = true;
             return false;
         case KC_D:
             if ((get_mods() == MOD_MASK_CTRL)) {
