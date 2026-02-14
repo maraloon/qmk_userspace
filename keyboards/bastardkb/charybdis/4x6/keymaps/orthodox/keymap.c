@@ -368,6 +368,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return process_layer_lock(keycode);
         case KC_S:
             if (((get_oneshot_mods() | get_mods()) & MOD_MASK_CTRL) && !((get_oneshot_mods() | get_mods()) & ~MOD_MASK_CTRL)) {
+                clear_oneshot_mods();
                 layer_lock_on_with_feedback(NUM);
                 return false;
             }
