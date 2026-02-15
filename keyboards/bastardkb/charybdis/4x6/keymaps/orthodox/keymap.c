@@ -318,35 +318,6 @@ void switch_to_russian(void) {
     layer_move(RUS);
 };
 
-void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16_t keycode, keyrecord_t *record) {
-    bool on_keydown = record->event.pressed;
-    bool on_keyup   = !record->event.pressed;
-    bool is_osm     = keycode == osm_key;
-
-    // OSM tap. Регистрируем mod как нажатый one-shot, ожидающий нажатия a-z
-    if (is_osm && on_keydown && *state == osm_0) {
-        if (!get_oneshot_mods()) {
-            tap_code(KC_F15);
-        }
-        add_oneshot_mods(MOD_BIT(mod));
-        *state = osm_queued;
-        return;
-    }
-
-    // Нажали a-z
-    if (!is_osm && !is_oneshot_ignored_key(keycode) && on_keyup) {
-        // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
-        if (*state == osm_queued) {
-            *state = osm_0;
-            // clear_oneshot_mods();
-            tap_code(KC_F16);
-            // return;
-        }
-    }
-
-    return;
-}
-
 static bool on_num_lock(uint16_t keycode) {
     if (is_layer_locked(NUM)) {
         tap_code(keycode);
@@ -367,13 +338,6 @@ static bool on_ctrl(uint16_t keycode) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // clang-format off
-    // update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
-    // update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
-    // update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
-    // update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
-    // clang-format on
-
     bool on_keydown = record->event.pressed;
     bool on_keyup   = !record->event.pressed;
 
@@ -403,7 +367,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
         default:
-            // Нажали OSM cancel-key. Сбрасываем до дефолтных
             if (is_oneshot_cancel_key(keycode)) {
                 if (on_keydown && get_oneshot_mods()) {
                     clear_oneshot_mods();
@@ -411,15 +374,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 return false;
             }
-            // Нажали a-z
             if (!is_oneshot_ignored_key(keycode) && on_keyup) {
-                // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
-                // if (!get_oneshot_mods()) {
-                // osm_state = osm_0;
-                // clear_oneshot_mods();
                 tap_code(KC_F16);
-                // return;
-                // }
             }
     }
 
