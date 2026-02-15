@@ -387,23 +387,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     osm_state = osm_queued;
                     tap_code(KC_F15);
                 }
-                add_oneshot_mods(MOD_BIT(mod));
-                return;
+                // add_oneshot_mods(MOD_BIT(mod));
+                switch (keycode) {
+                    case OS_SHFT:
+                        add_oneshot_mods(MOD_BIT(KC_LSFT));
+                    case OS_CTRL:
+                        add_oneshot_mods(MOD_BIT(KC_LCTL));
+                    case OS_ALT:
+                        add_oneshot_mods(MOD_BIT(KC_LALT));
+                    case OS_CMD:
+                        add_oneshot_mods(MOD_BIT(KC_LCMD));
+                }
+                return false;
             }
         default:
             // Нажали OSM cancel-key. Сбрасываем до дефолтных
             if (is_oneshot_cancel_key(keycode)) {
-                if (on_keydown && *state != osm_0) {
+                if (on_keydown && osm_state != osm_0) {
                     osm_state = osm_0;
                     clear_oneshot_mods();
                     tap_code(KC_F16);
                 }
-                return;
+                return false;
             }
             // Нажали a-z
             if (!is_oneshot_ignored_key(keycode) && on_keyup) {
                 // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
-                if (*state == osm_queued) {
+                if (osm_state == osm_queued) {
                     osm_state = osm_0;
                     // clear_oneshot_mods();
                     tap_code(KC_F16);
@@ -456,13 +466,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_D:
             return on_ctrl(KC_PGDN);
         case KC_B:
-            return on_ctrl(KC_PGUP) || process_layer_lock(keycode);
+            return on_ctrl(KC_PGUP) || on_num_lock(keycode);
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
         case KC_W:
-            return process_layer_lock(keycode);
+            return on_num_lock(keycode);
         case KC_S:
             if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
                 layer_lock_on(NUM);
