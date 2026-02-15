@@ -99,8 +99,7 @@ bool trackball_volume = false;
 #define SpaceShift SFT_T(KC_SPC)
 #define Ctrl OS_CTRL
 #define Cmd OS_CMD
-// #define Alt OS_ALT
-#define Alt OSM(MOD_LALT)
+#define Alt OS_ALT
 
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
@@ -289,7 +288,7 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
         case LANG:
         case OS_SHFT:
         case OS_CTRL:
-        case Alt:
+        case OS_ALT:
         case OS_CMD:
         case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX - 1:
             return true;
@@ -345,7 +344,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case OS_SHFT:
         case OS_CTRL:
-        case Alt:
+        case OS_ALT:
         case OS_CMD:
             if (on_keydown) {
                 if (!get_oneshot_mods()) {
@@ -359,9 +358,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     case OS_CTRL:
                         add_oneshot_mods(MOD_BIT(KC_LCTL));
                         return false;
-                    case Alt:
-                        // add_oneshot_mods(MOD_BIT(KC_LALT));
-                        return true;
+                    case OS_ALT:
+                        add_oneshot_mods(MOD_BIT(KC_LALT));
+                        return false;
                     case OS_CMD:
                         add_oneshot_mods(MOD_BIT(KC_LCMD));
                         return false;
