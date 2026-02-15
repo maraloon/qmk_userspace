@@ -355,7 +355,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
         default:
             if (is_oneshot_cancel_key(keycode)) {
-                if (on_keydown && get_oneshot_mods()) {
+                if (on_keydown && osm_state == true) {
                     osm_state = false;
                     clear_oneshot_mods();
                     tap_code(KC_F16);
