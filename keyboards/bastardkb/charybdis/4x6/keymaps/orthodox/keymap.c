@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
     _,     _,  Left,  Right,  _4,    _,       _,     _7, Down,    Up,    _, _,
-                           _, Space, _,       TG(NUM), Down,
+                           _, Space, _,       TG(ABC), Down,
                                   _, _,       LCTL(U)
   ),
 
@@ -404,7 +404,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
         case NUMLOCK:
-            tap_code(KC_F17);
+            tap_code(KC_F22);
             layer_lock_on(NUM);
             return false;
         case KC_UP:
@@ -417,7 +417,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
-                tap_code(KC_F18);
+                tap_code(KC_F23);
                 return false;
             }
             return true;
