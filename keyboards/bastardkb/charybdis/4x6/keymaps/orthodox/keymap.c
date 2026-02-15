@@ -22,8 +22,6 @@ enum my_keycodes {
     OS_ALT,
     OS_CMD,
     OSM_RST,
-
-    LOCK_NUM,
 };
 
 bool trackball_volume = false;
@@ -419,9 +417,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;
-        case LOCK_NUM:
-            layer_lock_on(NUM);
-            return false;
         default:
             return true;
     }
