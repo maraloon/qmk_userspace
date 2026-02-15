@@ -457,12 +457,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
-        case LANG:
-            switch_to_russian();
-            return false;
-        case VOLTR:
-            trackball_volume = true;
-            return false;
         case KC_D:
             return on_ctrl(KC_PGDN);
         case KC_B:
