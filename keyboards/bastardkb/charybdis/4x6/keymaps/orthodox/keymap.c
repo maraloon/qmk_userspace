@@ -403,13 +403,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             trackball_volume = true;
             return false;
         case KC_D:
-            if ((get_mods() == MOD_MASK_CTRL)) {
+            if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
+                clear_oneshot_mods();
                 tap_code(KC_PGDN);
                 return false;
             }
             return true;
         case KC_B:
-            if ((get_mods() == MOD_MASK_CTRL)) {
+            if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
+                clear_oneshot_mods();
                 tap_code(KC_PGUP);
                 return false;
             }
@@ -421,7 +423,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_W:
             return process_layer_lock(keycode);
         case KC_S:
-            if ((get_mods() & MOD_MASK_CTRL) && !(get_mods() & ~MOD_MASK_CTRL)) {
+            if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
                 layer_lock_on(NUM);
                 return false;
             }
