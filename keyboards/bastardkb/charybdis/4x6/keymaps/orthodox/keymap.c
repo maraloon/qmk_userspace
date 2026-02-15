@@ -391,14 +391,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch (keycode) {
                     case OS_SHFT:
                         add_oneshot_mods(MOD_BIT(KC_LSFT));
+                        return false;
                     case OS_CTRL:
                         add_oneshot_mods(MOD_BIT(KC_LCTL));
+                        return false;
                     case OS_ALT:
                         add_oneshot_mods(MOD_BIT(KC_LALT));
+                        return false;
                     case OS_CMD:
                         add_oneshot_mods(MOD_BIT(KC_LCMD));
+                        return false;
                 }
-                return false;
             }
         default:
             // Нажали OSM cancel-key. Сбрасываем до дефолтных
