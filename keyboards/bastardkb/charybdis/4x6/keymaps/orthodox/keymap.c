@@ -274,9 +274,9 @@ void leader_end_user(void) {
 
 void oneshot_layer_changed_user(uint8_t layer) {
     if (layer) {
-        tap_code(X_F17);
+        tap_code(KC_F17);
     } else {
-        tap_code(X_F18);
+        tap_code(KC_F18);
     }
 }
 
@@ -371,7 +371,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 return true;
             }
-            if (!is_oneshot_ignored_key(keycode) && on_keyup) {
+            if (!is_oneshot_ignored_key(keycode) && get_oneshot_mods() && on_keyup) {
                 tap_code(KC_F16);
             }
     }
