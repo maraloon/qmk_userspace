@@ -301,7 +301,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
 typedef enum {
     osm_0,
     osm_queued,
-    osm_used,
 } oneshot_state;
 
 oneshot_state os_shft_state = osm_0;
@@ -330,15 +329,6 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
         }
         add_oneshot_mods(MOD_BIT(mod));
         *state = osm_queued;
-        return;
-    }
-    // Нажали OSM cancel-key. Сбрасываем до дефолтных
-    if (is_oneshot_cancel_key(keycode)) {
-        if (on_keydown && *state != osm_0) {
-            *state = osm_0;
-            clear_oneshot_mods();
-            tap_code(KC_F16);
-        }
         return;
     }
 
@@ -386,6 +376,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
     update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
+
+
+    bool on_keydown = record->event.pressed;
+    bool on_keyup   = !record->event.pressed;
+
+    // Нажали OSM cancel-key. Сбрасываем до дефолтных
+    if (is_oneshot_cancel_key(keycode)) {
+        if (on_keydown && *state != osm_0) {
+            *state = osm_0;
+            clear_oneshot_mods();
+            tap_code(KC_F16);
+        }
+        return;
+    }
 
     switch (keycode) {
         case LANG:
