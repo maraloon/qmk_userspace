@@ -135,7 +135,7 @@ bool trackball_volume = false;
 #define Caret KC_CIRC
 #define Dollar KC_DLR
 
-#define Lets LCMD(KC_F)
+#define Lets KC_F12
 #define Type QK_LEAD
 
 #define rF KC_KP_1 // ф
