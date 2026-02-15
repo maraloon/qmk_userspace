@@ -350,21 +350,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (!get_oneshot_mods()) {
                     tap_code(KC_F15);
                 }
-                // add_oneshot_mods(MOD_BIT(mod));
                 switch (keycode) {
-                    case OS_SHFT:
-                        add_oneshot_mods(MOD_BIT(KC_LSFT));
-                        return false;
-                    case OS_CTRL:
-                        add_oneshot_mods(MOD_BIT(KC_LCTL));
-                        return false;
-                    case OS_ALT:
-                        add_oneshot_mods(MOD_BIT(KC_LALT));
-                        return false;
-                    case OS_CMD:
-                        add_oneshot_mods(MOD_BIT(KC_LCMD));
-                        return false;
+                        // clang-format off
+                    case OS_SHFT: add_oneshot_mods(MOD_BIT(KC_LSFT));
+                    case OS_CTRL: add_oneshot_mods(MOD_BIT(KC_LCTL));
+                    case OS_ALT: add_oneshot_mods(MOD_BIT(KC_LALT));
+                    case OS_CMD: add_oneshot_mods(MOD_BIT(KC_LCMD));
+                        // clang-format on
                 }
+                return false;
             }
         default:
             if (is_oneshot_cancel_key(keycode)) {
