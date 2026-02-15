@@ -307,7 +307,7 @@ oneshot_state os_shft_state = osm_0;
 oneshot_state os_ctrl_state = osm_0;
 oneshot_state os_alt_state  = osm_0;
 oneshot_state os_cmd_state  = osm_0;
-oneshot_state osm_state     = osm_0;
+// oneshot_state osm_state     = osm_0;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -382,9 +382,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_CTRL:
         case OS_ALT:
         case OS_CMD:
-            if (on_keydown && osm_state == osm_0) {
+            if (on_keydown) {
                 if (!get_oneshot_mods()) {
-                    osm_state = osm_queued;
                     tap_code(KC_F15);
                 }
                 // add_oneshot_mods(MOD_BIT(mod));
@@ -406,8 +405,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             // Нажали OSM cancel-key. Сбрасываем до дефолтных
             if (is_oneshot_cancel_key(keycode)) {
-                if (on_keydown && osm_state != osm_0) {
-                    osm_state = osm_0;
+                if (on_keydown && get_oneshot_mods()) {
                     clear_oneshot_mods();
                     tap_code(KC_F16);
                 }
@@ -416,12 +414,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // Нажали a-z
             if (!is_oneshot_ignored_key(keycode) && on_keyup) {
                 // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
-                if (osm_state == osm_queued) {
-                    osm_state = osm_0;
-                    // clear_oneshot_mods();
-                    tap_code(KC_F16);
-                    // return;
-                }
+                // if (!get_oneshot_mods()) {
+                // osm_state = osm_0;
+                // clear_oneshot_mods();
+                tap_code(KC_F16);
+                // return;
+                // }
             }
     }
 
