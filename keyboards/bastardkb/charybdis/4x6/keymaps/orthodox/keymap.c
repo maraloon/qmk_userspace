@@ -97,7 +97,6 @@ bool trackball_volume = false;
 #define Ent KC_ENT
 #define Tab KC_TAB
 
-
 #define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
 #define Ctrl OS_CTRL
@@ -314,7 +313,7 @@ oneshot_state os_shft_state = osm_0;
 oneshot_state os_ctrl_state = osm_0;
 oneshot_state os_alt_state  = osm_0;
 oneshot_state os_cmd_state  = osm_0;
-// oneshot_state osm_state     = osm_0;
+bool          osm_state     = false;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -346,6 +345,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_CMD:
             if (on_keydown) {
                 if (!get_oneshot_mods()) {
+                    osm_state = true;
                     tap_code(KC_F15);
                 }
                 switch (keycode) {
@@ -366,12 +366,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             if (is_oneshot_cancel_key(keycode)) {
                 if (on_keydown && get_oneshot_mods()) {
+                    osm_state = false;
                     clear_oneshot_mods();
                     tap_code(KC_F16);
                 }
                 return true;
             }
-            if (!is_oneshot_ignored_key(keycode) && get_oneshot_mods() && on_keyup) {
+            if (!is_oneshot_ignored_key(keycode) && osm_state == true && on_keyup) {
+                osm_state = false;
                 tap_code(KC_F16);
             }
     }
