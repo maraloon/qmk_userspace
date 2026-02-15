@@ -6,6 +6,8 @@ enum charybdis_keymap_layers {
     NUM,
     SYM,
     FN,
+    CAL,
+    CTL,
 };
 
 enum my_keycodes {
@@ -22,6 +24,8 @@ enum my_keycodes {
     OS_ALT,
     OS_CMD,
     OSM_RST,
+
+    NUMLOCK,
 };
 
 bool trackball_volume = false;
@@ -34,7 +38,6 @@ bool trackball_volume = false;
 #undef G
 #undef A
 #undef X
-#undef C
 
 #define Q KC_Q
 #define W KC_W
@@ -59,7 +62,7 @@ bool trackball_volume = false;
 #define O KC_O
 #define Z KC_Z
 #define X KC_X
-#define C KC_C
+#define Ct KC_C
 #define D KC_D
 #define V KC_V
 #define K KC_K
@@ -146,8 +149,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
-    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Cmd,
-    _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
+    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Ctrl,
+    _,     Q,     X,     M,    Ct,     V,            K,     P,     Alt, OSL(CTL), Lets, _,
                     _, SpaceNUM, KC_BTN2,            OSM_RST, OSL(SYM),
                         KC_BTN1, KC_LSFT,            LANG
   ),
@@ -159,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
-    rT,    Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
+    rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
                CommaS, SpaceShift, DotNS,            _, _,
                           Minus, KC_LSFT,            _
   ),
@@ -184,6 +187,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
                                   _, _, _,    _, _,
                                      _, _,    _
+  ),
+
+  [CTL] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
+    C(Z), C(N), C(R), KC_TAB, NUMLOCK, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
+    _,   C(Q),  C(X), KC_ENTER, KC_ESC, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
+                    _, _, _,            TG(CTL), _,
+                        _, _,            _
+  ),
+
+  [CAL] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
+    LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
+    _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
+                    _, _, _,            TG(CAL), _,
+                        _, _,            _
   ),
 
   [FN] = LAYOUT(
@@ -390,6 +411,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;
+        case NUMLOCK:
+            layer_lock_on(NUM);
+            return false;
         default:
             return true;
     }
