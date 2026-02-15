@@ -387,6 +387,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
 
+    switch (keycode) {
+        case LANG:
+            if (record->event.pressed) {
+                switch_to_russian();
+            } else {
+                switch_to_english();
+            }
+            return false;
+        case VOLTR:
+            if (record->event.pressed) {
+                trackball_volume = true;
+            } else {
+                trackball_volume = false;
+            }
+            return false;
+    }
+
+
     if (!record->event.pressed) return true;
 
     switch (keycode) {
