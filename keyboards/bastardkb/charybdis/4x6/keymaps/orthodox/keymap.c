@@ -307,6 +307,7 @@ oneshot_state os_shft_state = osm_0;
 oneshot_state os_ctrl_state = osm_0;
 oneshot_state os_alt_state  = osm_0;
 oneshot_state os_cmd_state  = osm_0;
+oneshot_state osm_state     = osm_0;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -333,17 +334,13 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     }
 
     // Нажали a-z
-    if (!is_osm && on_keyup) {
-        if (is_oneshot_ignored_key(keycode)) {
-            return;
-        }
-
+    if (!is_osm && !is_oneshot_ignored_key(keycode) && on_keyup) {
         // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
         if (*state == osm_queued) {
             *state = osm_0;
             // clear_oneshot_mods();
             tap_code(KC_F16);
-            return;
+            // return;
         }
     }
 
@@ -371,24 +368,48 @@ static bool on_ctrl(uint16_t keycode) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // clang-format off
-    update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
-    update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
-    update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
-    update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
+    // update_oneshot(&os_shft_state, KC_LSFT, OS_SHFT, keycode, record);
+    // update_oneshot(&os_ctrl_state, KC_LCTL, OS_CTRL, keycode, record);
+    // update_oneshot(&os_alt_state, KC_LALT, OS_ALT, keycode, record);
+    // update_oneshot(&os_cmd_state, KC_LCMD, OS_CMD, keycode, record);
     // clang-format on
-
 
     bool on_keydown = record->event.pressed;
     bool on_keyup   = !record->event.pressed;
 
-    // Нажали OSM cancel-key. Сбрасываем до дефолтных
-    if (is_oneshot_cancel_key(keycode)) {
-        if (on_keydown && *state != osm_0) {
-            *state = osm_0;
-            clear_oneshot_mods();
-            tap_code(KC_F16);
-        }
-        return;
+    switch (keycode) {
+        case OS_SHFT:
+        case OS_CTRL:
+        case OS_ALT:
+        case OS_CMD:
+            if (on_keydown && osm_state == osm_0) {
+                if (!get_oneshot_mods()) {
+                    osm_state = osm_queued;
+                    tap_code(KC_F15);
+                }
+                add_oneshot_mods(MOD_BIT(mod));
+                return;
+            }
+        default:
+            // Нажали OSM cancel-key. Сбрасываем до дефолтных
+            if (is_oneshot_cancel_key(keycode)) {
+                if (on_keydown && *state != osm_0) {
+                    osm_state = osm_0;
+                    clear_oneshot_mods();
+                    tap_code(KC_F16);
+                }
+                return;
+            }
+            // Нажали a-z
+            if (!is_oneshot_ignored_key(keycode) && on_keyup) {
+                // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
+                if (*state == osm_queued) {
+                    osm_state = osm_0;
+                    // clear_oneshot_mods();
+                    tap_code(KC_F16);
+                    // return;
+                }
+            }
     }
 
     switch (keycode) {
@@ -407,7 +428,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
     }
-
 
     if (!record->event.pressed) return true;
 
