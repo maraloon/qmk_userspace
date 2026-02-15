@@ -141,21 +141,6 @@ bool trackball_volume = false;
 
 #define SpaceNUM LT(NUM, KC_SPC)
 
-const key_override_t c_h_o = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
-const key_override_t c_w_o = ko_make_basic(MOD_MASK_CTRL, KC_W, LCTL(KC_BSPC));
-const key_override_t c_m_o = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENTER);
-const key_override_t c_c_o = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_ESC);
-const key_override_t c_t_o = ko_make_basic(MOD_MASK_CTRL, KC_T, KC_TAB);
-
-const key_override_t cm_h_o = ko_make_basic(MOD_MASK_GUI, KC_H, LCTL(KC_H));
-const key_override_t cm_w_o = ko_make_basic(MOD_MASK_GUI, KC_W, LCTL(KC_W));
-const key_override_t cm_m_o = ko_make_basic(MOD_MASK_GUI, KC_M, LCTL(KC_M));
-const key_override_t cm_c_o = ko_make_basic(MOD_MASK_GUI, KC_C, LCTL(KC_C));
-const key_override_t cm_t_o = ko_make_basic(MOD_MASK_GUI, KC_T, LCTL(KC_T));
-const key_override_t cm_n_o = ko_make_basic(MOD_MASK_GUI, KC_N, LCTL(KC_N));
-
-const key_override_t *key_overrides[] = {&c_h_o, &c_w_o, &c_m_o, &c_c_o, &c_t_o, &c_t_o, &cm_h_o, &cm_c_o, &cm_w_o, &cm_m_o, &cm_t_o, &cm_t_o, &cm_n_o, NULL};
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
@@ -316,10 +301,24 @@ static bool on_num_lock(uint16_t keycode) {
     return true;
 }
 
+static bool only_oneshot_mod(uint8_t mod_mask) {
+    uint8_t mods = get_oneshot_mods();
+    return (mods & mod_mask) && !(mods & ~mod_mask);
+}
+
 static bool on_ctrl(uint16_t keycode) {
-    if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
+    if (only_oneshot_mod(MOD_MASK_CTRL)) {
         clear_oneshot_mods();
-        tap_code(keycode);
+        tap_code16(keycode);
+        return false;
+    }
+    return true;
+}
+
+static bool on_cmd(uint16_t keycode) {
+    if (only_oneshot_mod(MOD_MASK_GUI)) {
+        clear_oneshot_mods();
+        tap_code16(keycode);
         return false;
     }
     return true;
@@ -386,6 +385,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) return true;
 
     switch (keycode) {
+        // Key overrides via process_record_user (only pure oneshot mods)
+        case KC_H:
+            return on_ctrl(KC_BSPC) || on_cmd(LCTL(KC_H));
+        case KC_W:
+            return on_ctrl(LCTL(KC_BSPC)) || on_cmd(LCTL(KC_W)) || on_num_lock(keycode);
+        case KC_M:
+            return on_ctrl(KC_ENTER) || on_cmd(LCTL(KC_M));
+        case KC_C:
+            return on_ctrl(KC_ESC) || on_cmd(LCTL(KC_C));
+        case KC_T:
+            return on_ctrl(KC_TAB) || on_cmd(LCTL(KC_T));
+        case KC_N:
+            return on_cmd(LCTL(KC_N));
         case CommaS:
             SEND_STRING(", ");
             return false;
@@ -409,7 +421,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
-        case KC_W:
             return on_num_lock(keycode);
         case KC_S:
             if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
