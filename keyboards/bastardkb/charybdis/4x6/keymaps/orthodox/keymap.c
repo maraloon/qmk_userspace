@@ -360,11 +360,20 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
     return;
 }
 
-static bool process_layer_lock(uint16_t keycode) {
+static bool on_num_lock(uint16_t keycode) {
     if (is_layer_locked(NUM)) {
         tap_code(keycode);
         layer_lock_off(NUM);
         layer_move(ABC);
+        return false;
+    }
+    return true;
+}
+
+static bool on_ctrl(uint16_t keycode) {
+    if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
+        clear_oneshot_mods();
+        tap_code(keycode);
         return false;
     }
     return true;
@@ -403,19 +412,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             trackball_volume = true;
             return false;
         case KC_D:
-            if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
-                clear_oneshot_mods();
-                tap_code(KC_PGDN);
-                return false;
-            }
-            return true;
+            return on_ctrl(KC_PGDN);
         case KC_B:
-            if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
-                clear_oneshot_mods();
-                tap_code(KC_PGUP);
-                return false;
-            }
-            return process_layer_lock(keycode);
+            return on_ctrl(KC_PGUP) || process_layer_lock(keycode);
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
