@@ -270,6 +270,16 @@ void leader_end_user(void) {
     //     tap_code16(LGUI(KC_S));
     // }
 }
+
+
+void oneshot_layer_changed_user(uint8_t layer) {
+    if (layer) {
+        tap_code(X_F17);
+    } else {
+        tap_code(X_F18);
+    }
+}
+
 // clang-format on
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
