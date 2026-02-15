@@ -23,7 +23,6 @@ enum my_keycodes {
     OS_CTRL,
     OS_ALT,
     OS_CMD,
-    OSM_RST,
 
     NUMLOCK,
 };
@@ -94,6 +93,10 @@ bool trackball_volume = false;
 #define tag KC_GT
 
 #define Space KC_SPC
+#define Esc KC_ESC
+#define Ent KC_ENT
+#define Tab KC_TAB
+
 
 #define Shift OS_SHFT
 #define SpaceShift SFT_T(KC_SPC)
@@ -151,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Ctrl,
     _,     Q,     X,     M,    Ct,     V,            K,     P,     Alt, OSL(CTL), Lets, _,
-                    _, SpaceNUM, KC_BTN2,            OSM_RST, OSL(SYM),
+                    _, SpaceNUM, KC_BTN2,            KC_ESC, OSL(SYM),
                         KC_BTN1, KC_LSFT,            LANG
   ),
 
@@ -193,8 +196,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), KC_TAB, NUMLOCK, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
-    _,   C(Q),  C(X), KC_ENTER, KC_ESC, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-                    _, _, _,            TG(CTL), _,
+    _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
+                    _, _, _,            TG(ABC), _,
                         _, _,            _
   ),
 
@@ -203,7 +206,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                    _, _, _,            TG(CAL), _,
+                    _, _, _,            TG(ABC), _,
                         _, _,            _
   ),
 
@@ -270,7 +273,7 @@ void leader_end_user(void) {
 // clang-format on
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
-        case OSM_RST:
+        case KC_ESC:
             return true;
         default:
             return false;
@@ -356,7 +359,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     clear_oneshot_mods();
                     tap_code(KC_F16);
                 }
-                return false;
+                return true;
             }
             if (!is_oneshot_ignored_key(keycode) && on_keyup) {
                 tap_code(KC_F16);
