@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Ctrl,
     _,     Q,     X,     M,    Ct,     V,            K,     P,     Alt, OSL(CTL), Lets, _,
-                    _, SpaceNUM, KC_BTN2,            KC_ESC, OSL(SYM),
+                    _, SpaceNUM, KC_BTN2,            Esc, OSL(SYM),
                         KC_BTN1, KC_LSFT,            LANG
   ),
 
@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
     _,     _,    _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
     _,     _,  Left,  Right,  _4,    _,       _,     _7, Down,    Up,    _, _,
-                           _, Space, _,       TG(ABC), Down,
+                           _, Space, _,       Esc, Down,
                                   _, _,       LCTL(U)
   ),
 
@@ -187,7 +187,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                                  _, _, _,    _, _,
+                                  _, _, _,    TG(ABC), _,
                                      _, _,    _
   ),
 
@@ -353,16 +353,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         return false;
                 }
             }
+        case LANG:
+        case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX - 1:
+            break;
+        case KC_ESC:
+            break;
         default:
-            if (is_oneshot_cancel_key(keycode)) {
-                if (on_keydown && osm_state == true) {
-                    osm_state = false;
-                    clear_oneshot_mods();
-                    tap_code(KC_F16);
-                }
-                return true;
-            }
-            if (!is_oneshot_ignored_key(keycode) && osm_state == true && on_keyup) {
+            if (osm_state == true && on_keyup) {
                 osm_state = false;
                 tap_code(KC_F16);
             }
@@ -403,6 +400,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
+        case KC_ESC:
+            if (osm_state == true) {
+                osm_state = false;
+                clear_oneshot_mods();
+                tap_code(KC_F16);
+                return false;
+            }
+            if (is_layer_locked(NUM)) {
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                tap_code(KC_F23);
+                return false;
+            }
+            return true;
         case NUMLOCK:
             tap_code(KC_F22);
             layer_lock_on(NUM);
