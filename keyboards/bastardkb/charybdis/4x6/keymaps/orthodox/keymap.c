@@ -2,7 +2,6 @@
 
 enum charybdis_keymap_layers {
     ABC = 0,
-    UPPER,
     RUS,
     NUM,
     SYM,
@@ -168,15 +167,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Q,     X,     M,     C,     V,            K,     P,     Alt, Ctrl, Lets, _,
                     _, SpaceNUM, KC_BTN2,            OSM_RST, OSL(SYM),
                         KC_BTN1, KC_LSFT,            LANG
-  ),
-
-  [UPPER] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,  S(B),  S(L),  S(D),  S(W),     _,            _,  S(F),  S(O),  S(U),  S(J),   _,
- S(Z),  S(N),  S(R),  S(T), S(St),  S(G),         S(Y),  S(H),  S(A),  S(E),  S(I),   _,
-    _,  S(Q),  S(X),  S(M), S(C),   S(V),         S(K),  S(P),     _,     _,     _,   _,
-                                 _, _, _,         _, _,
-                                    _, _,         _
   ),
 
   [RUS] = LAYOUT(
@@ -505,15 +495,15 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                             rgb_matrix_set_color(index, 0, 0, 0);
                         }
                         break;
-                    case 3:
+                    case 2:
                         if (row == 6) {
                             rgb_matrix_set_color(index, 250, 250, 250);
                         }
-                    case 4:
+                    case 3:
                         if (row == 7) {
                             rgb_matrix_set_color(index, 250, 250, 250);
                         }
-                    case 5:
+                    case 4:
                         if (row == 8) {
                             rgb_matrix_set_color(index, 250, 250, 250);
                         }
