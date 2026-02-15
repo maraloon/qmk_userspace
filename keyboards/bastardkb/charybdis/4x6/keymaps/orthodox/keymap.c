@@ -324,16 +324,6 @@ void switch_to_russian(void) {
     layer_move(RUS);
 };
 
-static bool on_num_lock(uint16_t keycode) {
-    if (is_layer_locked(NUM)) {
-        tap_code(keycode);
-        layer_lock_off(NUM);
-        layer_move(ABC);
-        return false;
-    }
-    return true;
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     bool on_keydown = record->event.pressed;
     bool on_keyup   = !record->event.pressed;
@@ -398,8 +388,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) return true;
 
     switch (keycode) {
-        case KC_W:
-            return on_num_lock(keycode);
         case CommaS:
             SEND_STRING(", ");
             return false;
@@ -415,20 +403,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
+        case NUMLOCK:
+            tap_code(KC_F17);
+            layer_lock_on(NUM);
+            return false;
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
-            return on_num_lock(keycode);
-        case KC_S:
-            if ((get_oneshot_mods() & MOD_MASK_CTRL) && !(get_oneshot_mods() & ~MOD_MASK_CTRL)) {
-                layer_lock_on(NUM);
+        case KC_B:
+        case KC_W:
+            if (is_layer_locked(NUM)) {
+                tap_code(keycode);
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                tap_code(KC_F18);
                 return false;
             }
             return true;
-        case NUMLOCK:
-            layer_lock_on(NUM);
-            return false;
         default:
             return true;
     }
