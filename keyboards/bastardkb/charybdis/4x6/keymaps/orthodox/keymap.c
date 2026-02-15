@@ -347,27 +347,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case OS_ALT:
         case OS_CMD:
             if (on_keydown) {
-                if (!get_mods()) {
-                    tap_code(KC_F15);
-                }
-                switch (keycode) {
-                    case OS_SHFT:
-                        add_mods(MOD_BIT(KC_LSFT));
-                        return false;
-                    case OS_CTRL:
-                        add_mods(MOD_BIT(KC_LCTL));
-                        return false;
-                    case OS_ALT:
-                        add_mods(MOD_BIT(KC_LALT));
-                        return false;
-                    case OS_CMD:
-                        add_mods(MOD_BIT(KC_LCMD));
-                        return false;
-                }
-            } else {
                 if (!get_oneshot_mods()) {
                     tap_code(KC_F15);
                 }
+                // add_oneshot_mods(MOD_BIT(mod));
                 switch (keycode) {
                     case OS_SHFT:
                         add_oneshot_mods(MOD_BIT(KC_LSFT));
