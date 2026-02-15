@@ -351,7 +351,7 @@ void update_oneshot(oneshot_state *state, uint16_t mod, uint16_t osm_key, uint16
         // Если osm был тапнут как one-shot, то сбрасываем до дефолтных
         if (*state == osm_queued) {
             *state = osm_0;
-            clear_oneshot_mods();
+            // clear_oneshot_mods();
             tap_code(KC_F16);
             return;
         }
