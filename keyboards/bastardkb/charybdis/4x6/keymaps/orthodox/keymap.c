@@ -144,17 +144,15 @@ bool trackball_volume = false;
 #define rH KC_KP_5 // х
 #define rU KC_KP_6 // ю
 
-#define SpaceNUM LT(NUM, KC_SPC)
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,     B,     L,     D,     W,  Type,            Shift, F,     O,     U,     J,   _,
-    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, Ctrl,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,     Alt, OSL(CTL), Lets, _,
-                    _, SpaceNUM, KC_BTN2,            Esc, OSL(SYM),
-                        KC_BTN1, KC_LSFT,            LANG
+KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
+    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
+    _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
+                       NUMLOCK, Space, _,            _, OSL(SYM),
+                  KC_BTN1, OSM(MOD_LSFT),            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -166,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
                CommaS, SpaceShift, DotNS,            _, _,
-                          Minus, KC_LSFT,            _
+                    Minus, OSM(MOD_LSFT),            _
   ),
 
   [NUM] = LAYOUT(
@@ -174,10 +172,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
     _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
-    _,     _,    _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
+    _,     Left, _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
     _,     _,  Left,  Right,  _4,    _,       _,     _7, Down,    Up,    _, _,
-                           _, Space, _,       Esc, Down,
-                                  _, _,       LCTL(U)
+                         Esc, Space, _,       _, Down,
+                                  _, _,       _
   ),
 
   [SYM] = LAYOUT(
@@ -187,16 +185,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                                  _, _, _,    TG(ABC), _,
+                                  _, _, _,    _, _,
                                      _, _,    _
   ),
 
   [CTL] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
-    C(Z), C(N), C(R), KC_TAB, NUMLOCK, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
+    C(Z), C(N), C(R), KC_TAB, Type, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-                    _, _, _,            TG(ABC), _,
+                    _, _, _,            _, _,
                         _, _,            _
   ),
 
@@ -205,7 +203,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                    _, _, _,            TG(ABC), _,
+                    _, _, _,            _, _,
                         _, _,            _
   ),
 
@@ -219,6 +217,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case OSM(MOD_LSFT):
+            return TAPPING_TERM + 1250;
+        default:
+            return TAPPING_TERM;
+    }
+}
 void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_H, KC_O)) {
         SEND_STRING("~");
@@ -270,14 +276,34 @@ void leader_end_user(void) {
     // }
 }
 
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
 
-void oneshot_layer_changed_user(uint8_t layer) {
-    if (layer) {
-        tap_code(KC_F17);
-    } else {
-        tap_code(KC_F18);
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case C(KC_BSPC):
+        case KC_DEL:
+        case KC_UNDS:
+        case KC_MINS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
     }
 }
+
+// void oneshot_layer_changed_user(uint8_t layer) {
+//     if (layer) {
+//         tap_code(KC_F17);
+//     } else {
+//         tap_code(KC_F18);
+//     }
+// }
 
 // Represents the four states a oneshot key can be in
 typedef enum {
@@ -312,7 +338,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (on_keydown) {
                 if (!get_oneshot_mods()) {
                     osm_state = true;
-                    tap_code(KC_F15);
+                    // tap_code(KC_F15);
                 }
                 switch (keycode) {
                     case OS_SHFT:
@@ -337,7 +363,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             if (osm_state == true && on_keyup) {
                 osm_state = false;
-                tap_code(KC_F16);
+                // tap_code(KC_F16);
             }
     }
 
@@ -380,18 +406,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (osm_state == true) {
                 osm_state = false;
                 clear_oneshot_mods();
-                tap_code(KC_F16);
+                // tap_code(KC_F16);
                 return false;
             }
             if (is_layer_locked(NUM)) {
                 layer_lock_off(NUM);
                 layer_move(ABC);
-                tap_code(KC_F23);
+                // tap_code(KC_F23);
                 return false;
             }
             return true;
         case NUMLOCK:
-            tap_code(KC_F22);
+            // tap_code(KC_F22);
             layer_lock_on(NUM);
             return false;
         case KC_UP:
@@ -404,7 +430,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
-                tap_code(KC_F23);
+                // tap_code(KC_F23);
                 return false;
             }
             return true;
@@ -455,32 +481,15 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
             switch (get_highest_layer(layer_state | default_layer_state)) {
-                case 1:
-                    if (col == 5) {
-                        rgb_matrix_set_color(index, 250, 0, 250);
-                    } else {
-                        rgb_matrix_set_color(index, 0, 0, 0);
-                    }
-                    break;
-                case 2:
-                    if (row == 6) {
-                        rgb_matrix_set_color(index, 250, 250, 250);
-                    }
-                case 3:
-                    if (row == 7) {
-                        rgb_matrix_set_color(index, 250, 250, 250);
-                    }
-                case 4:
-                    if (row == 8) {
-                        rgb_matrix_set_color(index, 250, 250, 250);
-                    }
-                    break;
-                default:
-                    if (row == 5 || col == 0) {
+                case 0:
+                    if (row == 5 || row == 1 || col == 0) {
                         rgb_matrix_set_color(index, 75, 0, 75);
                     } else {
                         rgb_matrix_set_color(index, 75, 9, 0);
                     }
+                    break;
+                default:
+                    rgb_matrix_set_color(index, 75, 0, 75);
                     break;
             }
         }

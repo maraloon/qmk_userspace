@@ -16,17 +16,19 @@
 #endif // POINTING_DEVICE_ENABLE
 
 #define TAPPING_TERM 150
-/*#define TAPPING_TERM_PER_KEY*/
+#define TAPPING_TERM_PER_KEY
 // #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
-#define ONESHOT_TAP_TOGGLE 2  /* Tapping this number of times holds the key until tapped once again. */
+#define ONESHOT_TAP_TOGGLE 20  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 10000  /* Time (in ms) before the one shot key is released */
 // INFO: breaks ONESHOT_TAP_TOGGLE
 // INFO: need to: when press key on first layer, then hold same key for layer
 // jump, it will go to that layer, not double press key
 // ex: ' 1' - space, space button (num layer), 1
-// #define QUICK_TAP_TERM 0
+#define QUICK_TAP_TERM 0
 
 #define LEADER_NO_TIMEOUT
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 180
+
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
