@@ -168,20 +168,16 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
   ),
 
   [NUM] = LAYOUT(
-
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
-
     _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
     _,     Left, _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
-    _,     _,  Left,  Right,  _4,    _,       _,     _7, Down,    Up,    _, _,
+    _,     _,  Left,  Right,  _4,    _,       _,     _7, Down, OSL(CTL), _, _,
                          Esc, Space, _,       _, OSL(SYM),
                                   _, _,       _
   ),
 
   [SYM] = LAYOUT(
-
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
-
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Quote, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Minus, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
@@ -426,6 +422,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_RIGHT:
         case KC_B:
         case KC_W:
+        case KC_SPC:
+        case KC_ENT:
             if (is_layer_locked(NUM)) {
                 tap_code(keycode);
                 layer_lock_off(NUM);
