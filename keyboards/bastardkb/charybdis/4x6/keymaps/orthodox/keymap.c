@@ -172,9 +172,9 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
 
     _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
-    _,     Left, _1,     _2,  _3, OSL(SYM), OSL(SYM), _5,  _6,    _8,   Up, _,
+    _,     Left, _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
     _,     _,  Left,  Right,  _4,    _,       _,     _7, Down,    Up,    _, _,
-                         Esc, Space, _,       _, Down,
+                         Esc, Space, _,       _, OSL(SYM),
                                   _, _,       _
   ),
 
