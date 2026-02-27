@@ -24,7 +24,8 @@ enum my_keycodes {
     OS_ALT,
     OS_CMD,
 
-    NUMLOCK,
+    SNL, // smart num lock
+    SNL_OFF,
 };
 
 bool trackball_volume = false;
@@ -151,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
     _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
-                       NUMLOCK, Space, _,            _, OSL(SYM),
+                           SNL, Space, _,            _, OSL(SYM),
                   KC_BTN1, OSM(MOD_LSFT),            LANG
   ),
 
@@ -169,10 +170,10 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
-    _,     B,     _,     _0,   W,    Type,    _,   Left,   _9, Right,    _, _,
+    _,     B,     _,     _0,   W,    _,       _,   _,      _9,     _,    _, _,
     _,     Left, _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
-    _,     _,  Left,  Right,  _4,    _,       _,     _7, Down, OSL(CTL), _, _,
-                         Esc, Space, _,       _, OSL(SYM),
+    _,     _,     _,  Right,  _4,    _,       _,     _7, Down, OSL(CTL), _, _,
+                   Esc, Space, SNL_OFF,       _, OSL(SYM),
                                   _, _,       _
   ),
 
@@ -181,7 +182,7 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Minus, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Quote, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                                  _, _, _,    _, _,
+                     OSL(NUM), _, QK_LLCK,    _, _,
                                      _, _,    _
   ),
 
@@ -190,7 +191,7 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), KC_TAB, Type, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-                    _, _, _,            _, _,
+                    _, _, QK_LLCK,            _, _,
                         _, _,            _
   ),
 
@@ -199,7 +200,7 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                    _, _, _,            _, _,
+                    _, _, QK_LLCK,            _, _,
                         _, _,            _
   ),
 
@@ -307,6 +308,9 @@ typedef enum {
     osm_queued,
 } oneshot_state;
 
+
+bool          snl_on     = true;
+
 oneshot_state os_shft_state = osm_0;
 oneshot_state os_ctrl_state = osm_0;
 oneshot_state os_alt_state  = osm_0;
@@ -408,14 +412,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (is_layer_locked(NUM)) {
                 layer_lock_off(NUM);
                 layer_move(ABC);
+
+                snl_on = true;
                 // tap_code(KC_F23);
                 return false;
             }
             return true;
-        case NUMLOCK:
+        case SNL:
             // tap_code(KC_F22);
             layer_lock_on(NUM);
             return false;
+        case SNL_OFF:
+            snl_on = false;
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
@@ -424,7 +432,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_W:
         case KC_SPC:
         case KC_ENT:
-            if (is_layer_locked(NUM)) {
+            if (is_layer_locked(NUM) && snl_on) {
                 tap_code(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
