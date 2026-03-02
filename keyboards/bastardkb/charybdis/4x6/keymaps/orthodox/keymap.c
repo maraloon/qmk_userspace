@@ -146,12 +146,13 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _, VOLTR,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
-KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   OSL(FN),
+    _,
+    B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
     _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
-                           SNL, Space, _,            _, OSL(SYM),
-                  KC_BTN1, OSM(MOD_LSFT),            LANG
+                     SNL, Space, KC_BTN2,            _, OSL(SYM),
+                          KC_BTN1, VOLTR,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -180,8 +181,8 @@ KC_BTN2,   B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Minus, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Quote, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                     OSL(NUM), _, QK_LLCK,    _, _,
-                                     _, _,    _
+                  OSL(NUM), DotNS, QK_LLCK,    _, _,
+                            QuesNS, ExlmNS,    _
   ),
 
   [CTL] = LAYOUT(
