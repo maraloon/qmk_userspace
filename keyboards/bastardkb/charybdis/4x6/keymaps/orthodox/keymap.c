@@ -28,8 +28,6 @@ enum my_keycodes {
     SNL_OFF,
 };
 
-bool trackball_volume = false;
-
 #undef _______
 #define _ KC_NO
 #define _______ KC_NO
@@ -310,6 +308,7 @@ typedef enum {
 
 
 bool          snl_on     = true;
+bool trackball_volume = false;
 
 oneshot_state os_shft_state = osm_0;
 oneshot_state os_ctrl_state = osm_0;
@@ -375,18 +374,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch_to_english();
             }
             return false;
-        case VOLTR:
-            if (record->event.pressed) {
-                trackball_volume = true;
-            } else {
-                trackball_volume = false;
-            }
-            return false;
     }
 
     if (!record->event.pressed) return true;
 
     switch (keycode) {
+        case VOLTR:
+            trackball_volume = !trackball_volume;
+            return false;
         case CommaS:
             SEND_STRING(", ");
             return false;
