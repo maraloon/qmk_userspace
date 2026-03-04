@@ -19,13 +19,8 @@ enum my_keycodes {
     QuesNS,
     ExlmNS,
 
-    OS_SHFT,
-    OS_CTRL,
-    OS_ALT,
-    OS_CMD,
-
-    SNL, // smart num lock
-    SNL_OFF,
+    SMART_NUM, // smart num lock
+    DUMB_NUM,
 };
 
 #undef _______
@@ -96,12 +91,6 @@ enum my_keycodes {
 #define Ent KC_ENT
 #define Tab KC_TAB
 
-#define Shift OS_SHFT
-#define SpaceShift SFT_T(KC_SPC)
-#define Ctrl OS_CTRL
-#define Cmd OS_CMD
-#define Alt OS_ALT
-
 #define PgDn KC_PGDN
 #define PgUp KC_PGUP
 #define Home KC_HOME
@@ -151,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
     _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
-                     SNL, Space, KC_BTN2,            _, OSL(SYM),
+               SMART_NUM, Space, KC_BTN2,            _, OSL(SYM),
                           KC_BTN1, VOLTR,            LANG
   ),
 
@@ -163,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-               CommaS, SpaceShift, DotNS,            _, _,
+                    CommaS, Space, DotNS,            _, _,
                     Minus, OSM(MOD_LSFT),            _
   ),
 
@@ -172,8 +161,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     _,     _0,   W,    _,       _,   _,      _9,     _,    _, _,
     _,     Left, _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
     _,     _,     _,  Right,  _4,    _,       _,     _7, Down, OSL(CTL), _, _,
-                   Esc, Space, SNL_OFF,       _, OSL(SYM),
-                                  _, _,       _
+                  Esc, Space, DUMB_NUM,       Esc, OSL(SYM),
+                                  _, _,       DUMB_NUM
   ),
 
   [SYM] = LAYOUT(
@@ -181,17 +170,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Minus, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Quote, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                  OSL(NUM), DotNS, QK_LLCK,    _, _,
-                            QuesNS, ExlmNS,    _
+                  DotNS, OSL(NUM), QK_LLCK,    _, _,
+                           QK_LLCK, ExlmNS,    _
   ),
 
   [CTL] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
-    C(Z), C(N), C(R), KC_TAB, Type, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
+    C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-                    _, _, QK_LLCK,            _, _,
-                        _, _,            _
+                            _, _, _,            _, _,
+                         QK_LLCK, _,            _
   ),
 
   [CAL] = LAYOUT(
@@ -199,8 +188,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                    _, _, QK_LLCK,            _, _,
-                        _, _,            _
+                            _, _, _,            _, _,
+                         QK_LLCK, _,            _
   ),
 
   [FN] = LAYOUT(
@@ -208,8 +197,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
     _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
     _, _, _, _, _, _,    _, _, _, _, _, _,
-             _, _, _,    _, _,
-                _, _,    _
+                            _, _, _,            _, _,
+                         QK_LLCK, _,            _
   ),
 };
 
@@ -293,29 +282,8 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-// void oneshot_layer_changed_user(uint8_t layer) {
-//     if (layer) {
-//         tap_code(KC_F17);
-//     } else {
-//         tap_code(KC_F18);
-//     }
-// }
-
-// Represents the four states a oneshot key can be in
-typedef enum {
-    osm_0,
-    osm_queued,
-} oneshot_state;
-
-
-bool          snl_on     = true;
+bool          smart_num_on     = true;
 bool trackball_volume = false;
-
-oneshot_state os_shft_state = osm_0;
-oneshot_state os_ctrl_state = osm_0;
-oneshot_state os_alt_state  = osm_0;
-oneshot_state os_cmd_state  = osm_0;
-bool          osm_state     = false;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -327,46 +295,6 @@ void switch_to_russian(void) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    bool on_keydown = record->event.pressed;
-    bool on_keyup   = !record->event.pressed;
-
-    switch (keycode) {
-        case OS_SHFT:
-        case OS_CTRL:
-        case OS_ALT:
-        case OS_CMD:
-            if (on_keydown) {
-                if (!get_oneshot_mods()) {
-                    osm_state = true;
-                    // tap_code(KC_F15);
-                }
-                switch (keycode) {
-                    case OS_SHFT:
-                        add_oneshot_mods(MOD_BIT(KC_LSFT));
-                        return false;
-                    case OS_CTRL:
-                        add_oneshot_mods(MOD_BIT(KC_LCTL));
-                        return false;
-                    case OS_ALT:
-                        add_oneshot_mods(MOD_BIT(KC_LALT));
-                        return false;
-                    case OS_CMD:
-                        add_oneshot_mods(MOD_BIT(KC_LCMD));
-                        return false;
-                }
-            }
-        case LANG:
-        case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX - 1:
-            break;
-        case KC_ESC:
-            break;
-        default:
-            if (osm_state == true && on_keyup) {
-                osm_state = false;
-                // tap_code(KC_F16);
-            }
-    }
-
     switch (keycode) {
         case LANG:
             if (record->event.pressed) {
@@ -378,7 +306,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     if (!record->event.pressed) return true;
-
     switch (keycode) {
         case VOLTR:
             trackball_volume = !trackball_volume;
@@ -399,27 +326,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
         case KC_ESC:
-            if (osm_state == true) {
-                osm_state = false;
-                clear_oneshot_mods();
-                // tap_code(KC_F16);
-                return false;
-            }
             if (is_layer_locked(NUM)) {
                 layer_lock_off(NUM);
                 layer_move(ABC);
 
-                snl_on = true;
-                // tap_code(KC_F23);
+                smart_num_on = true;
                 return false;
             }
             return true;
-        case SNL:
-            // tap_code(KC_F22);
+        case SMART_NUM:
             layer_lock_on(NUM);
             return false;
-        case SNL_OFF:
-            snl_on = false;
+        case DUMB_NUM:
+            smart_num_on = false;
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
@@ -428,11 +347,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_W:
         case KC_SPC:
         case KC_ENT:
-            if (is_layer_locked(NUM) && snl_on) {
+            if (is_layer_locked(NUM) && smart_num_on) {
                 tap_code(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
-                // tap_code(KC_F23);
                 return false;
             }
             return true;
