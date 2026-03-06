@@ -217,7 +217,7 @@ void leader_end_user(void) {
         SEND_STRING("%");
     } else if (leader_sequence_two_keys(KC_G, KC_R)) {
         SEND_STRING("`");
-    } else if (leader_sequence_two_keys(KC_B, KC_K)) {
+    } else if (leader_sequence_two_keys(KC_C, KC_B)) {
         SEND_STRING("```");
     } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
         SEND_STRING("=>");
