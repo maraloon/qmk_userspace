@@ -13,6 +13,7 @@ enum charybdis_keymap_layers {
 enum my_keycodes {
     LANG = SAFE_RANGE,
     VOLTR,
+    SCALE,
 
     CommaS,
     DotNS,
@@ -135,9 +136,8 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _,     VOLTR, _,     _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,
-    B,     L,     D,     W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
+    _,     _,     _,     VOLTR, SCALE,     _,            _,     _,     _,     _,     _,   OSL(FN),
+    _,     B,     L,     D,    W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
     _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
                SMART_NUM, Space, KC_BTN2,            _, OSL(SYM),
@@ -284,6 +284,7 @@ bool caps_word_press_user(uint16_t keycode) {
 
 bool          smart_num_on     = true;
 bool trackball_volume = false;
+bool trackball_scale = false;
 
 void switch_to_english(void) {
     SEND_STRING(SS_TAP(X_F13));
@@ -309,6 +310,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case VOLTR:
             trackball_volume = !trackball_volume;
+            return false;
+        case SCALE:
+            trackball_scale = !trackball_scale;
             return false;
         case CommaS:
             SEND_STRING(", ");
@@ -360,6 +364,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 static int volume_accumulator = 0;
+static int scale_accumulator = 0;
 #define SCROLL_DIVIDER 15 // increase for more sensitivity)
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
@@ -373,6 +378,25 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
             } else {
                 tap_code(KC_KB_VOLUME_UP);
                 volume_accumulator += SCROLL_DIVIDER;
+            }
+        }
+
+        // Block normal trackball input
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+        mouse_report.h = 0;
+        mouse_report.v = 0;
+    }
+    if (trackball_scale) {
+        scale_accumulator += mouse_report.y;
+
+        while (abs(scale_accumulator) >= SCROLL_DIVIDER) {
+            if (scale_accumulator > 0) {
+                SEND_STRING(SS_LCTL("-"));
+                scale_accumulator -= SCROLL_DIVIDER;
+            } else {
+                SEND_STRING(SS_LCTL("="));
+                scale_accumulator += SCROLL_DIVIDER;
             }
         }
 
