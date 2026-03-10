@@ -22,6 +22,7 @@ enum my_keycodes {
 
     SMART_NUM, // smart num lock
     DUMB_NUM,
+    TO_ABC,
 };
 
 #undef _______
@@ -159,9 +160,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
     _,     B,     _,     _0,   W,    _,       _,   _,      _9,     _,    _, _,
-    _,     Left, _1,     _2,  _3,    _,       _,     _5,   _6,    _8,   Up, _,
+    _,     Left, _1,     _2,  _3,    G,       _,     _5,   _6,    _8,   Up, _,
     _,     _, DUMB_NUM, Right, _4,   _,      _,     _7, Down, OSL(CTL), _, _,
-                         Esc, Space, _,       _, OSL(SYM),
+                      TO_ABC, Space, _,       _, OSL(SYM),
                                   _, _,       _
   ),
 
@@ -329,28 +330,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
-        case KC_ESC:
-            if (is_layer_locked(NUM)) {
-                layer_lock_off(NUM);
-                layer_move(ABC);
-
-                smart_num_on = true;
-                return false;
-            }
-            return true;
         case SMART_NUM:
             layer_lock_on(NUM);
             return false;
         case DUMB_NUM:
             smart_num_on = false;
+            return false;
+        case TO_ABC:
+            if (is_layer_locked(NUM)) {
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                smart_num_on = true;
+                return false;
+            }
+            layer_move(ABC);
+            return false;
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
         case KC_B:
         case KC_W:
+        case KC_G:
         case KC_SPC:
         case KC_ENT:
+        case KC_ESC:
             if (is_layer_locked(NUM) && smart_num_on) {
                 tap_code(keycode);
                 layer_lock_off(NUM);
