@@ -289,6 +289,7 @@ bool trackball_volume = false;
 bool trackball_scale = false;
 
 void switch_to_english(void) {
+    clear_oneshot_mods(); // In case shift is osm'ed (see DotNS, etc)
     SEND_STRING(SS_TAP(X_F13));
     layer_move(ABC);
 };
