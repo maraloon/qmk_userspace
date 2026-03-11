@@ -22,7 +22,8 @@ enum my_keycodes {
 
     SMART_NUM, // smart num lock
     DUMB_NUM,
-    TO_ABC,
+
+    RST_ST,
 };
 
 #undef _______
@@ -141,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
     Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
     _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
-               SMART_NUM, Space, KC_BTN2,            _, OSL(SYM),
+               SMART_NUM, Space, KC_BTN2,            RST_ST, OSL(SYM),
                               KC_BTN1, _,            LANG
   ),
 
@@ -153,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-                    CommaS, Space, DotNS,            _, _,
+                    CommaS, Space, DotNS,            RST_ST, _,
                     Minus, OSM(MOD_LSFT),            _
   ),
 
@@ -162,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     _,     _0,   W,    _,       _,   _,      _9,     _,    _, _,
     _,     Left, _1,     _2,  _3,    G,       _,     _5,   _6,    _8,   Up, _,
     _,     _, DUMB_NUM, Right, _4,   _,      _,     _7, Down, OSL(CTL), _, _,
-                      TO_ABC, Space, _,       _, OSL(SYM),
+                      RST_ST, Space, _,       RST_ST, OSL(SYM),
                                   _, _,       _
   ),
 
@@ -171,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Minus, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Quote, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                  DotNS, OSL(NUM), QK_LLCK,    _, _,
+                  DotNS, OSL(NUM), QK_LLCK,   RST_ST, _,
                            QK_LLCK, ExlmNS,    _
   ),
 
@@ -180,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-                            _, _, _,            _, _,
+                            _, _, _,            RST_ST, _,
                          QK_LLCK, _,            _
   ),
 
@@ -189,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                            _, _, _,            _, _,
+                            _, _, _,            RST_ST, _,
                          QK_LLCK, _,            _
   ),
 
@@ -198,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
     _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
     _, _, _, _, _, _,    _, _, _, _, _, _,
-                            _, _, _,            _, _,
+                            _, _, _,            RST_ST, _,
                          QK_LLCK, _,            _
   ),
 };
@@ -336,13 +337,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DUMB_NUM:
             smart_num_on = false;
             return false;
-        case TO_ABC:
+        case RST_ST:
+            if (is_layer_locked(RUS)) {
+                layer_lock_off(RUS);
+            }
             if (is_layer_locked(NUM)) {
                 layer_lock_off(NUM);
-                layer_move(ABC);
-                smart_num_on = true;
-                return false;
             }
+            if (is_layer_locked(SYM)) {
+                layer_lock_off(SYM);
+            }
+            if (is_layer_locked(FN)) {
+                layer_lock_off(FN);
+            }
+            if (is_layer_locked(CAL)) {
+                layer_lock_off(CAL);
+            }
+            if (is_layer_locked(CTL)) {
+                layer_lock_off(CTL);
+            }
+            reset_oneshot_layer();
+            clear_oneshot_mods();
+            leader_end();
+            smart_num_on = true;
+            trackball_volume = false;
+            trackball_scale = false;
             layer_move(ABC);
             return false;
         case KC_UP:
