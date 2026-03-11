@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
-    _,     B,     _,     _0,   W,    _,       _,   _,      _9,     _,    _, _,
+    _,     _,     _,     _0,   _,    _,       _,   _,      _9,     _,    _, _,
     _,     Left, _1,     _2,  _3,    G,       _,     _5,   _6,    _8,   Up, _,
     _,     _, DUMB_NUM, Right, _4,   _,      _,     _7, Down, OSL(CTL), _, _,
                       RST_ST, Space, _,       RST_ST, OSL(SYM),
@@ -181,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-                            _, _, _,            RST_ST, _,
+              SMART_NUM, KC_BSPC, _,            RST_ST, _,
                          QK_LLCK, _,            _
   ),
 
@@ -369,8 +369,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
-        case KC_B:
-        case KC_W:
         case KC_G:
         case KC_SPC:
         case KC_ENT:
