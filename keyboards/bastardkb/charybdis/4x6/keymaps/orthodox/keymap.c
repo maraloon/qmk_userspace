@@ -23,7 +23,7 @@ enum my_keycodes {
     SMART_NUM, // smart num lock
     DUMB_NUM,
 
-    RST_ST,
+    RESET,
 };
 
 #undef _______
@@ -135,15 +135,19 @@ enum my_keycodes {
 #define rH KC_KP_5 // х
 #define rU KC_KP_6 // ю
 
+#define oS OSM(MOD_LSFT)
+#define oC OSM(MOD_LCTL)
+#define oA OSM(MOD_LALT)
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _,     VOLTR, SCALE,     _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,     B,     L,     D,    W, OSM(MOD_LSFT), OSM(MOD_LSFT), F,     O,     U,     J,   QuesNS,
-    Z,     N,     R,     T,    St,     G,            Y,     H,     A,     E,     I, OSM(MOD_LCTL),
-    _,     Q,     X,     M,    Ct,     V,            K,     P,     OSM(MOD_LALT), OSL(CTL), Lets, ExlmNS,
-               SMART_NUM, Space, KC_BTN2,            RST_ST, OSL(SYM),
-                              KC_BTN1, _,            LANG
+    _,     _,     _, VOLTR, SCALE,     _,            _,     _,     _,     _,     _,   OSL(FN),
+    _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   QuesNS,
+    oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
+    _,     Q,     X,     M,    Ct,     V,            K,     P,    oA, OSL(CTL), Lets, ExlmNS,
+               SMART_NUM, Space, KC_BTN2,            RESET, OSL(SYM),
+                              KC_BTN1, Z,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -154,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-                    CommaS, Space, DotNS,            RST_ST, _,
+                    CommaS, Space, DotNS,            RESET, _,
                     Minus, OSM(MOD_LSFT),            _
   ),
 
@@ -162,9 +166,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Home, End, RGB_TOG,  QK_BOOT,
     _,     _,     _,     _0,   _,    _,       _,   _,      _9,     _,    _, _,
     _,     Left, _1,     _2,  _3,    G,       _,     _5,   _6,    _8,   Up, _,
-    _,     _, DUMB_NUM, Right, _4,   _,      _,     _7, Down, OSL(CTL), _, _,
-                      RST_ST, Space, _,       RST_ST, OSL(SYM),
-                                  _, _,       _
+    _,     _,     _,    Right, _4,   _,       _,     _7, Down, OSL(CTL), _, _,
+                       RESET, Space, _,       RESET, OSL(SYM),
+                                  _, _,       DUMB_NUM
   ),
 
   [SYM] = LAYOUT(
@@ -172,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Minus, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Quote, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                  DotNS, OSL(NUM), QK_LLCK,   RST_ST, _,
+                  DotNS, OSL(NUM), QK_LLCK,   RESET, _,
                            QK_LLCK, ExlmNS,    _
   ),
 
@@ -180,8 +184,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
-    _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  _, _, _,
-              SMART_NUM, KC_BSPC, _,            RST_ST, _,
+    _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  oC, _, _,
+              SMART_NUM, KC_BSPC, _,            RESET, _,
                          QK_LLCK, _,            _
   ),
 
@@ -190,7 +194,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                            _, _, _,            RST_ST, _,
+                            _, _, _,            RESET, _,
                          QK_LLCK, _,            _
   ),
 
@@ -199,7 +203,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
     _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
     _, _, _, _, _, _,    _, _, _, _, _, _,
-                            _, _, _,            RST_ST, _,
+                            _, _, _,            RESET, _,
                          QK_LLCK, _,            _
   ),
 };
@@ -298,6 +302,34 @@ void switch_to_russian(void) {
     layer_move(RUS);
 };
 
+void reset_kb_state(void) {
+    if (is_layer_locked(RUS)) {
+        layer_lock_off(RUS);
+    }
+    if (is_layer_locked(NUM)) {
+        layer_lock_off(NUM);
+    }
+    if (is_layer_locked(SYM)) {
+        layer_lock_off(SYM);
+    }
+    if (is_layer_locked(FN)) {
+        layer_lock_off(FN);
+    }
+    if (is_layer_locked(CAL)) {
+        layer_lock_off(CAL);
+    }
+    if (is_layer_locked(CTL)) {
+        layer_lock_off(CTL);
+    }
+    reset_oneshot_layer();
+    clear_oneshot_mods();
+    leader_end();
+    smart_num_on = true;
+    trackball_volume = false;
+    trackball_scale = false;
+    layer_move(ABC);
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LANG:
@@ -336,34 +368,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_lock_on(NUM);
             return false;
         case DUMB_NUM:
-            smart_num_on = false;
+            if (smart_num_on == false) {
+                reset_kb_state();
+            } else {
+                smart_num_on = false;
+            }
             return false;
-        case RST_ST:
-            if (is_layer_locked(RUS)) {
-                layer_lock_off(RUS);
-            }
-            if (is_layer_locked(NUM)) {
-                layer_lock_off(NUM);
-            }
-            if (is_layer_locked(SYM)) {
-                layer_lock_off(SYM);
-            }
-            if (is_layer_locked(FN)) {
-                layer_lock_off(FN);
-            }
-            if (is_layer_locked(CAL)) {
-                layer_lock_off(CAL);
-            }
-            if (is_layer_locked(CTL)) {
-                layer_lock_off(CTL);
-            }
-            reset_oneshot_layer();
-            clear_oneshot_mods();
-            leader_end();
-            smart_num_on = true;
-            trackball_volume = false;
-            trackball_scale = false;
-            layer_move(ABC);
+        case RESET:
+            reset_kb_state();
             return false;
         case KC_UP:
         case KC_DOWN:
@@ -380,6 +392,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;
+        case oC:
+            reset_oneshot_layer();
+            layer_move(ABC);
+            set_oneshot_mods(MOD_LCTL);
+            return false;
         default:
             return true;
     }
