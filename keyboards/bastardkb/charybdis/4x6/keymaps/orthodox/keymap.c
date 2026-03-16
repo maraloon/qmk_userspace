@@ -323,6 +323,7 @@ void reset_kb_state(void) {
     }
     reset_oneshot_layer();
     clear_oneshot_mods();
+    caps_word_off();
     leader_end();
     smart_num_on = true;
     trackball_volume = false;
