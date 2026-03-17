@@ -324,7 +324,7 @@ void reset_kb_state(void) {
     reset_oneshot_layer();
     clear_oneshot_mods();
     caps_word_off();
-    leader_end();
+    // leader_end(); // BUG: it's not for cancel leader seq
     smart_num_on = true;
     trackball_volume = false;
     trackball_scale = false;
