@@ -6,6 +6,7 @@ enum charybdis_keymap_layers {
     NUM,
     SYM,
     FN,
+    ALT,
     CAL,
     CTL,
 };
@@ -137,7 +138,6 @@ enum my_keycodes {
 
 #define oS OSM(MOD_LSFT)
 #define oC OSM(MOD_LCTL)
-#define oA OSM(MOD_LALT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -145,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,    oA, OSL(CTL), Lets, _,
+    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(ALT), OSL(CTL), Lets, _,
                 OSL(NUM), Space, KC_BTN2,            RESET, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
@@ -180,13 +180,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             QK_LLCK, SCALE,    _
   ),
 
+  [ALT] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
+    LALT(Z), LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   _,
+    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), LALT(P),   _,   _, _, _,
+              SMART_NUM, KC_BSPC, _,            RESET, _,
+                   QK_LLCK, LALT(Z),            _
+  ),
+
   [CTL] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  oC, _, _,
               SMART_NUM, KC_BSPC, _,            RESET, _,
-                         QK_LLCK, _,            _
+                      QK_LLCK, C(Z),            _
   ),
 
   [CAL] = LAYOUT(
@@ -195,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LCA(Z), LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),   _,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
                             _, _, _,            RESET, _,
-                         QK_LLCK, _,            _
+                    QK_LLCK, LCA(Z),            _
   ),
 
   [FN] = LAYOUT(
