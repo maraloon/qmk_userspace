@@ -194,7 +194,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
     _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  oC, _, _,
-              SMART_NUM, KC_BSPC, _,            RESET, _,
+              SMART_NUM, KC_BSPC, _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            _
   ),
 
