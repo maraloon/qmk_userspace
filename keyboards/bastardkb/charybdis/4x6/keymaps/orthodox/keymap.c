@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,    oA, OSL(CTL), Lets, _,
-               SMART_NUM, Space, KC_BTN2,            RESET, OSL(SYM),
+                OSL(NUM), Space, KC_BTN2,            RESET, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash,   At,  DQuote, Minus, Tag,   _,     Dot,   Comma,  Array,  array,  _,
     _,     Equal, Plus,  Unds,  Quote, tag,   _,    DDot,   DComm,  Quest,   Exlm,  _,
-                        _, OSL(NUM), VOLTR,   RESET, _,
+                OSL(NUM), SMART_NUM, VOLTR,   RESET, _,
                             QK_LLCK, SCALE,    _
   ),
 
