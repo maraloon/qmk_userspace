@@ -473,12 +473,8 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (trackball_volume || trackball_scale) {
-                if (row == 5 || row == 1 || col == 0) {
-                    rgb_matrix_set_color(index, 75, 0, 75);
-                } else {
-                    rgb_matrix_set_color(index, 75, 9, 0);
-                }
+            if (trackball_volume || trackball_scale || get_oneshot_mods() || is_caps_word_on()) {
+                rgb_matrix_set_color(index, 75, 0, 75);
                 return true;
             }
             switch (get_highest_layer(layer_state | default_layer_state)) {
