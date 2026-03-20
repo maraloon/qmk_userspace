@@ -5,10 +5,10 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
-    FN,
+    CTL,
     ALT,
     CAL,
-    CTL,
+    FN,
 };
 
 enum my_keycodes {
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(ALT), OSL(CTL), Lets, _,
-                OSL(NUM), Space, KC_BTN2,            RESET, OSL(SYM),
+                 KC_BSPC, Space, KC_BTN2,            RESET, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -459,7 +459,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, CTL));
     return state;
 }
 
