@@ -185,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
     LALT(Z), LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   _,
     _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), LALT(P),   _,   _, _, _,
-              SMART_NUM, KC_BSPC, _,            RESET, _,
+                  _, LALT(Space), _,            RESET, _,
                    QK_LLCK, LALT(Z),            _
   ),
 
