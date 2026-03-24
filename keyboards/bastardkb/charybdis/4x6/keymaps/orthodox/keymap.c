@@ -107,10 +107,10 @@ enum my_keycodes {
 #define Hash KC_HASH
 #define Tilda KC_TILD
 #define Grave KC_GRV
-#define Equal KC_EQL
+#define Equal KC_KP_EQUAL
 #define Unds KC_UNDS
-#define Minus KC_MINS
-#define Plus KC_PLUS
+#define Minus KC_KP_MINUS
+#define Plus KC_KP_PLUS
 
 #define Exlm KC_EXLM
 #define Quest KC_QUES
@@ -234,28 +234,28 @@ void leader_end_user(void) {
         SEND_STRING("`");
     } else if (leader_sequence_two_keys(KC_C, KC_B)) {
         SEND_STRING("```");
-    } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
-        SEND_STRING("=>");
-    } else if (leader_sequence_two_keys(KC_G, KC_T)) {
-        SEND_STRING(">=");
-    } else if (leader_sequence_two_keys(KC_L, KC_T)) {
-        SEND_STRING("<=");
-    } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
-        SEND_STRING("===");
-    } else if (leader_sequence_three_keys(KC_N, KC_E, KC_Q)) {
-        SEND_STRING("!==");
+    // } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
+    //     SEND_STRING("=>");
+    // } else if (leader_sequence_two_keys(KC_G, KC_T)) {
+    //     SEND_STRING(">=");
+    // } else if (leader_sequence_two_keys(KC_L, KC_T)) {
+    //     SEND_STRING("<=");
+    // } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
+    //     SEND_STRING("===");
+    // } else if (leader_sequence_three_keys(KC_N, KC_E, KC_Q)) {
+    //     SEND_STRING("!==");
     } else if (leader_sequence_two_keys(KC_A, KC_M)) {
         SEND_STRING("&");
     } else if (leader_sequence_two_keys(KC_P, KC_I)) {
         SEND_STRING("|");
     } else if (leader_sequence_two_keys(KC_A, KC_N)) {
-        SEND_STRING("&&");
+        SEND_STRING("&& ");
     } else if (leader_sequence_two_keys(KC_O, KC_R)) {
-        SEND_STRING("||");
-    } else if (leader_sequence_two_keys(KC_A, KC_L)) {
-        SEND_STRING("<-");
-    } else if (leader_sequence_two_keys(KC_A, KC_R)) {
-        SEND_STRING("->");
+        SEND_STRING("|| ");
+    // } else if (leader_sequence_two_keys(KC_A, KC_L)) {
+    //     SEND_STRING("<-");
+    // } else if (leader_sequence_two_keys(KC_A, KC_R)) {
+    //     SEND_STRING("->");
     } else if (leader_sequence_three_keys(KC_E, KC_A, KC_H)) {
         SEND_STRING("{");
         SEND_STRING(SS_TAP(X_ENT));
