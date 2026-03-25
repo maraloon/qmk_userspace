@@ -219,8 +219,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    // Immediately select the hold action when another key is pressed.
-    return true;
+    switch (keycode) {
+        case OSL(CTL):
+        case OSL(ALT):
+        case OSL(CAL):
+        case LCA(P):
+            // Do not select the hold action when another key is pressed.
+            return false;
+        default:
+            // Immediately select the hold action when another key is pressed.
+            return true;
+    }
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -390,6 +399,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 smart_num_on = false;
             }
             return false;
+        case LCA(P):
+            reset_kb_state();
+            tap_code16(LCA(KC_P));
+            return false;
         case RESET:
             reset_kb_state();
             return false;
@@ -402,7 +415,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_ENT:
         case KC_ESC:
             if (is_layer_locked(NUM) && smart_num_on) {
-                tap_code(keycode);
+            tap_code16(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
                 return false;
