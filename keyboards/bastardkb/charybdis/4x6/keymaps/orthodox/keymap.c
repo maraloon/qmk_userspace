@@ -138,6 +138,7 @@ enum my_keycodes {
 
 #define oS OSM(MOD_LSFT)
 #define oC OSM(MOD_LCTL)
+#define SpaceNUM LT(NUM, Space)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -146,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(ALT), OSL(CTL), Lets, _,
-                 KC_BSPC, Space, KC_BTN2,            RESET, OSL(SYM),
+              KC_BSPC, SpaceNUM, KC_BTN2,            RESET, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -167,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,    _, Left,  _0, Right, _,       _, Left,   _9, Right, _, _,
     Left, Left, _1, _2,   _3,  G,       Left,  _5, _6, _8, Up, Right,
     _, Left, Left, Right, _4, Right,    Right, _7, Down, Up, Right, _,
-                   RESET, Right, Space,       RESET, Down,
+                   RESET, Space, Right,       RESET, OSL(SYM),
                                   _, _,       DUMB_NUM
   ),
 
@@ -193,8 +194,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
     C(Z), C(N), C(R), Type, KC_TAB, C(G),      C(Y),  KC_BSPC,  C(A),  C(E),  C(I),   _,
-    _,   C(Q),  C(X), Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  oC, _, _,
-              SMART_NUM, KC_BSPC, _,            RESET, OSL(SYM),
+    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  C(P),   OSL(CAL),  oC, _, _,
+             SMART_NUM, C(Space), _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            _
   ),
 
@@ -216,6 +217,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          QK_LLCK, _,            _
   ),
 };
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    // Immediately select the hold action when another key is pressed.
+    return true;
+}
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
