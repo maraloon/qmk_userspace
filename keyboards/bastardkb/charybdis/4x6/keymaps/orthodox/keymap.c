@@ -174,9 +174,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
-    _,     Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
-   BSlash, Hash, At,   Unds, Minus, Equal,    _,     Dot,   Comma,  Array,  array,  _,
-    _,     Tag, tag, DQuote, Quote, Plus,     _,    DDot,   DComm,  Quest,   Exlm,  _,
+  Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
+   BSlash, Hash, At,   Unds, Minus, Equal,    Pipe, Dot,   Comma,  Array,  array,  Amp,
+    _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
                 OSL(NUM), SMART_NUM, VOLTR,   RESET, _,
                             QK_LLCK, SCALE,    _
   ),
@@ -243,22 +243,26 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_H, KC_O)) {
         SEND_STRING("~");
+    } else if (leader_sequence_two_keys(KC_H, KC_M)) {
+        SEND_STRING("~");
     } else if (leader_sequence_two_keys(KC_P, KC_R)) {
         SEND_STRING("%");
     } else if (leader_sequence_two_keys(KC_G, KC_R)) {
         SEND_STRING("`");
-    } else if (leader_sequence_two_keys(KC_C, KC_B)) {
+    } else if (leader_sequence_two_keys(KC_C, KC_M)) {
         SEND_STRING("```");
-    // } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
-    //     SEND_STRING("=>");
-    // } else if (leader_sequence_two_keys(KC_G, KC_T)) {
-    //     SEND_STRING(">=");
-    // } else if (leader_sequence_two_keys(KC_L, KC_T)) {
-    //     SEND_STRING("<=");
-    // } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
-    //     SEND_STRING("===");
-    // } else if (leader_sequence_three_keys(KC_N, KC_E, KC_Q)) {
-    //     SEND_STRING("!==");
+    } else if (leader_sequence_three_keys(KC_A, KC_R, KC_R)) {
+        SEND_STRING("=> ");
+    } else if (leader_sequence_two_keys(KC_G, KC_E)) {
+        SEND_STRING(">= ");
+    } else if (leader_sequence_two_keys(KC_L, KC_E)) {
+        SEND_STRING("<= ");
+    } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
+        SEND_STRING("== ");
+    } else if (leader_sequence_three_keys(KC_P, KC_E, KC_Q)) {
+        SEND_STRING("=== ");
+    } else if (leader_sequence_four_keys(KC_P, KC_N, KC_E, KC_Q)) {
+        SEND_STRING("!== ");
     } else if (leader_sequence_two_keys(KC_A, KC_M)) {
         SEND_STRING("&");
     } else if (leader_sequence_two_keys(KC_P, KC_I)) {
@@ -267,10 +271,10 @@ void leader_end_user(void) {
         SEND_STRING("&& ");
     } else if (leader_sequence_two_keys(KC_O, KC_R)) {
         SEND_STRING("|| ");
-    // } else if (leader_sequence_two_keys(KC_A, KC_L)) {
-    //     SEND_STRING("<-");
-    // } else if (leader_sequence_two_keys(KC_A, KC_R)) {
-    //     SEND_STRING("->");
+    } else if (leader_sequence_two_keys(KC_A, KC_L)) {
+        SEND_STRING("<-");
+    } else if (leader_sequence_two_keys(KC_A, KC_R)) {
+        SEND_STRING("->");
     } else if (leader_sequence_three_keys(KC_E, KC_A, KC_H)) {
         SEND_STRING("{");
         SEND_STRING(SS_TAP(X_ENT));
