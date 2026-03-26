@@ -259,9 +259,11 @@ void leader_end_user(void) {
         SEND_STRING("<= ");
     } else if (leader_sequence_two_keys(KC_E, KC_Q)) {
         SEND_STRING("== ");
-    } else if (leader_sequence_three_keys(KC_P, KC_E, KC_Q)) {
+    } else if (leader_sequence_two_keys(KC_N, KC_E)) {
+        SEND_STRING("!= ");
+    } else if (leader_sequence_two_keys(KC_E, KC_T)) {
         SEND_STRING("=== ");
-    } else if (leader_sequence_four_keys(KC_P, KC_N, KC_E, KC_Q)) {
+    } else if (leader_sequence_two_keys(KC_N, KC_T)) {
         SEND_STRING("!== ");
     } else if (leader_sequence_two_keys(KC_A, KC_M)) {
         SEND_STRING("&");
@@ -282,7 +284,7 @@ void leader_end_user(void) {
         SEND_STRING("}");
         SEND_STRING(SS_TAP(X_UP));
         SEND_STRING(SS_TAP(X_TAB));
-    } else if (leader_sequence_two_keys(KC_M, KC_M)) {
+    } else if (leader_sequence_two_keys(KC_M, KC_A)) {
         SEND_STRING("mara@the-witch.ru");
     } else if (leader_sequence_two_keys(KC_M, KC_Y)) {
         SEND_STRING("zeroly@ya.ru");
