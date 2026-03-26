@@ -240,6 +240,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM;
     }
 }
+// TODO: better use layer
 void leader_end_user(void) {
     if (leader_sequence_two_keys(KC_H, KC_O)) {
         SEND_STRING("~");
