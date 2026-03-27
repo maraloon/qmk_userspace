@@ -17,7 +17,7 @@
 
 #define TAPPING_TERM 150
 #define TAPPING_TERM_PER_KEY
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+// #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 #define ONESHOT_TAP_TOGGLE 20  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 0  /* Time (in ms) before the one shot key is released */
@@ -26,7 +26,7 @@
 // jump, it will go to that layer, not double press key
 // ex: ' 1' - space, space button (num layer), 1
 // INFO: works only in paer with 'hold on other key press' setted to true for needed keys
-#define QUICK_TAP_TERM 0
+// #define QUICK_TAP_TERM 0
 
 #define LEADER_NO_TIMEOUT
 #define LEADER_PER_KEY_TIMING
