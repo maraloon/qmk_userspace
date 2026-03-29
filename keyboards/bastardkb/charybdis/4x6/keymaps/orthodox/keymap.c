@@ -249,7 +249,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    return true;
+    switch (keycode) {
+        case SpaceNUM:
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
