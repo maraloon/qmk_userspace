@@ -27,7 +27,9 @@ enum my_keycodes {
     cP,
     cOR,
     cNE,
+    cLE,
     cLM,
+    cGE,
     cDE,
     cMR,
     cEE,
@@ -203,10 +205,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     // &   &&    ||   |
     _, cA, cAND, cOR, cP, _, _, _, _, _, _, _,
-    // !=   <-   :=   ->   ==
-    _, cNE, cLM, cDE, cMR, cEE, _, _, _, _, _, _,
-    // //         --   ++
-    _, cCC, _, _, cMM, cPP, _, _, _, _, _, _,
+    // !=   <=   :=   >=   ==
+    _, cNE, cLE, cDE, cGE, cEE, _, _, _, _, _, _,
+    // //   <-   ->   --   ++
+    _, cCC, cLM, cMR, cMM, cPP, _, _, _, _, _, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
@@ -458,6 +460,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case cNE:
             SEND_STRING(" != ");
+            reset_kb_state();
+            return false;
+        case cGE:
+            SEND_STRING(" >= ");
+            reset_kb_state();
+            return false;
+        case cLE:
+            SEND_STRING(" <= ");
             reset_kb_state();
             return false;
         case cLM:
