@@ -5,6 +5,7 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
+    SYM2,
     CODE,
     CODE2,
     CONTROL,
@@ -199,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
-    _, End, _1, _2, _3,    G,       _, _5, _6, _8, _, _,
+    _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
     _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
              RESET, Space, _,       RESET, OSL(SYM),
                         _, _,       DUMB_NUM
@@ -210,9 +211,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                      Left, Right, VOLTR,   RESET, _,
+                      Left, Right, VOLTR,   RESET, OSL(SYM2),
                           QK_LLCK, SCALE,    _
   ),
+
+  [SYM2] = LAYOUT(
+    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
+    _ , Amp , BSlash , Grave, Pipe , _ , _ , _ , _ , _ , _ , _ ,
+    _ , Percent , _ , _ , Tilda , _ , _ , _ , _ , _ , _ , _ ,
+    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
+               _, _, _,   RESET, _,
+                  _, _,    _
+          ),
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
@@ -250,9 +260,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [CONTROL] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
- OS_LCS, C(N), C(R), KC_TAB, C(S), C(G),     C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
+ OS_LCS, C(N), C(R), KC_TAB, C(St), C(G),    C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
     _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE),   OSL(CODE2),  oC, _, _,
-             SMART_NUM, C(Space), _,            RESET, OSL(SYM),
+                     _, C(Space), _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            KC_LGUI
   ),
 
@@ -380,6 +390,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 reset_kb_state();
                 set_oneshot_layer(CODE2, ONESHOT_START);
+            } else {
+                clear_oneshot_layer_state(ONESHOT_PRESSED);
+            }
+            return true;
+        case OSL(SYM2):
+            if (record->event.pressed) {
+                reset_kb_state();
+                set_oneshot_layer(SYM2, ONESHOT_START);
             } else {
                 clear_oneshot_layer_state(ONESHOT_PRESSED);
             }
