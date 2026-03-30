@@ -6,6 +6,7 @@ enum charybdis_keymap_layers {
     NUM,
     SYM,
     CODE,
+    CODE2,
     CONTROL,
     TMUX,
     CAL,
@@ -36,6 +37,19 @@ enum my_keycodes {
     cCC,
     cMM,
     cPP,
+
+    cCode,
+    cSAA,
+    cNEE,
+    cL,
+    cE,
+    cG,
+    cEEE,
+    cTag,
+    cArr,
+    cBorrow,
+    cBorrow2,
+    cBracket,
 
     SMART_NUM, // smart num lock
     DUMB_NUM,
@@ -202,13 +216,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [CODE] = LAYOUT(
-    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
+    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
     // &   &&    ||   |
     _, cA, cAND, cOR, cP, _, _, _, _, _, _, _,
     // !=   <=   :=   >=   ==
     _, cNE, cLE, cDE, cGE, cEE, _, _, _, _, _, _,
     // //   <-   ->   --   ++
     _, cCC, cLM, cMR, cMM, cPP, _, _, _, _, _, _,
+               _, _, _,   RESET, _,
+                  _, _,    _
+   ),
+
+  [CODE2] = LAYOUT(
+    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
+    //       ```   - [ ]
+    _, _, _, cCode, cSAA, _, _, _, _, _, _, _,
+    // !==  <    =    >   ===
+    _, cNEE, cL, cE, cG, cEEE, _, _, _, _, _, _,
+    // <>    []    {}       ()
+    _, cTag, cArr, cBorrow, cBracket, _, _, cBorrow2, _, _, _, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
@@ -226,9 +252,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
  OS_LCS, C(N), C(R), Type, KC_TAB, C(G),      C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
-    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE),   KC_LGUI,  oC, _, _,
+    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE),   OSL(CODE2),  oC, _, _,
              SMART_NUM, C(Space), _,            RESET, OSL(SYM),
-                      QK_LLCK, C(Z),            _
+                      QK_LLCK, C(Z),            KC_LGUI
   ),
 
   [CAL] = LAYOUT(
@@ -374,6 +400,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 clear_oneshot_layer_state(ONESHOT_PRESSED);
             }
             return true;
+        case OSL(CODE2):
+            if (record->event.pressed) {
+                reset_kb_state();
+                set_oneshot_layer(CODE2, ONESHOT_START);
+            } else {
+                clear_oneshot_layer_state(ONESHOT_PRESSED);
+            }
+            return true;
     }
 
     if (!record->event.pressed) return true;
@@ -496,6 +530,67 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case cPP:
             SEND_STRING("++");
+            reset_kb_state();
+            return false;
+        case cCode:
+            SEND_STRING("```");
+            reset_kb_state();
+            return false;
+        case cSAA:
+            SEND_STRING("- [ ] ");
+            reset_kb_state();
+            return false;
+        case cNEE:
+            SEND_STRING(" !== ");
+            reset_kb_state();
+            return false;
+        case cEEE:
+            SEND_STRING(" === ");
+            reset_kb_state();
+            return false;
+        case cL:
+            SEND_STRING(" < ");
+            reset_kb_state();
+            return false;
+        case cG:
+            SEND_STRING(" > ");
+            reset_kb_state();
+            return false;
+        case cE:
+            SEND_STRING(" = ");
+            reset_kb_state();
+            return false;
+        case cTag:
+            SEND_STRING("<");
+            SEND_STRING(">");
+            SEND_STRING(SS_TAP(X_LEFT));
+            reset_kb_state();
+            return false;
+        case cArr:
+            SEND_STRING("[");
+            SEND_STRING("]");
+            SEND_STRING(SS_TAP(X_LEFT));
+            reset_kb_state();
+            return false;
+        case cBorrow:
+            SEND_STRING("{");
+            SEND_STRING("}");
+            SEND_STRING(SS_TAP(X_LEFT));
+            reset_kb_state();
+            return false;
+        case cBracket:
+            SEND_STRING("(");
+            SEND_STRING(")");
+            SEND_STRING(SS_TAP(X_LEFT));
+            reset_kb_state();
+            return false;
+        case cBorrow2:
+            SEND_STRING(" {");
+            SEND_STRING(SS_TAP(X_ENT));
+            SEND_STRING(SS_TAP(X_ENT));
+            SEND_STRING("}");
+            SEND_STRING(SS_TAP(X_UP));
+            SEND_STRING(SS_TAP(X_TAB));
             reset_kb_state();
             return false;
         default:
