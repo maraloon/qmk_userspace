@@ -394,14 +394,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 clear_oneshot_layer_state(ONESHOT_PRESSED);
             }
             return true;
-        case OSL(SYM2):
-            if (record->event.pressed) {
-                reset_kb_state();
-                set_oneshot_layer(SYM2, ONESHOT_START);
-            } else {
-                clear_oneshot_layer_state(ONESHOT_PRESSED);
-            }
-            return true;
     }
 
     if (!record->event.pressed) return true;
