@@ -243,7 +243,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // !==  <    =    >   ===
     _, cNEE, cL, cE, cG, cEEE, _, _, _, _, _, _,
     // <>    []    {}       ()
-    _, cTag, cArr, cBorrow, cBracket, _, _, cBorrow2, _, _, _, _,
+    _, cTag, cArr, cBorrow, cBracket, cBorrow2, _, cBorrow2, _, _, _, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
