@@ -157,7 +157,6 @@ enum my_keycodes {
 #define Dollar KC_DLR
 
 #define Lets KC_F12
-#define Type QK_LEAD
 
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
@@ -251,7 +250,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [CONTROL] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
- OS_LCS, C(N), C(R), Type, KC_TAB, C(G),      C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
+ OS_LCS, C(N), C(R), KC_TAB, C(S), C(G),     C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
     _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE),   OSL(CODE2),  oC, _, _,
              SMART_NUM, C(Space), _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            KC_LGUI
@@ -294,29 +293,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         default:
             return TAPPING_TERM;
     }
-}
-// TODO: better use layer
-void leader_end_user(void) {
-    if (leader_sequence_two_keys(KC_C, KC_M)) {
-        SEND_STRING("```");
-    } else if (leader_sequence_three_keys(KC_E, KC_A, KC_H)) {
-        SEND_STRING("{");
-        SEND_STRING(SS_TAP(X_ENT));
-        SEND_STRING(SS_TAP(X_ENT));
-        SEND_STRING("}");
-        SEND_STRING(SS_TAP(X_UP));
-        SEND_STRING(SS_TAP(X_TAB));
-    } else if (leader_sequence_two_keys(KC_M, KC_A)) {
-        SEND_STRING("mara@the-witch.ru");
-    } else if (leader_sequence_two_keys(KC_M, KC_Y)) {
-        SEND_STRING("zeroly@ya.ru");
-    } else if (leader_sequence_two_keys(KC_M, KC_S)) {
-        SEND_STRING("sdvk1369@gmail.com");
-    }
-    // else if (leader_sequence_two_keys(KC_A, KC_Z)) {
-    //     // Leader, a, s => GUI+S
-    //     tap_code16(LGUI(KC_S));
-    // }
 }
 
 bool caps_word_press_user(uint16_t keycode) {
