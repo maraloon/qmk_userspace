@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
     _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
-    _, Home, Down, Up, _4,    _,    _, _7, Down, Up, _, _,
+    _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
                  _, Space, _,       RESET, OSL(SYM),
                         _, _,       DUMB_NUM
   ),
@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
     _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
-    _, Home, Down, Up, _4,    _,    _, _7, Down, Up, _, _,
+    _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
                      _, _, _,       _, Down,
                         _, _,       _
   ),
