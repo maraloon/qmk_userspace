@@ -217,9 +217,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM2] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    _ , Amp , BSlash , Grave, Pipe , _ , _ , _ , _ , _ , _ , _ ,
+    _ , Amp , BSlash , _ , Pipe , _ , _ , _ , _ , _ , _ , _ ,
     _ , Percent , _ , _ , Tilda , _ , _ , _ , _ , _ , _ , _ ,
-    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
+    _ , _ , _ , _ , Grave , _ , _ , _ , _ , _ , _ , _ ,
                _, _, _,   RESET, _,
                   _, _,    _
           ),
