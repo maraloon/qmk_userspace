@@ -4,6 +4,7 @@ enum charybdis_keymap_layers {
     ABC = 0,
     RUS,
     NUM,
+    NUMD,
     SYM,
     SYM2,
     CODE,
@@ -172,7 +173,7 @@ enum my_keycodes {
 #define OS_LCS OSM(MOD_LCTL | MOD_LSFT)
 #define OS_LSA OSM(MOD_LALT | MOD_LSFT)
 #define OS_MEH OSM(MOD_LALT | MOD_LCTL | MOD_LSFT)
-#define SpaceNUM LT(NUM, Space)
+#define SpaceNUM LT(NUMD, Space)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -202,8 +203,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
     _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
     _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
-             RESET, Space, _,       RESET, OSL(SYM),
+                 _, Space, _,       RESET, OSL(SYM),
                         _, _,       DUMB_NUM
+  ),
+
+  [NUMD] = LAYOUT(
+    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
+    _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
+    _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
+    _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
+                     _, _, _,       _, Down,
+                        _, _,       _
   ),
 
   [SYM] = LAYOUT(
@@ -320,7 +330,6 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_UNDS:
         case KC_MINS:
             return true;
-
         default:
             return false;  // Deactivate Caps Word.
     }
