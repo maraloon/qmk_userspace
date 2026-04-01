@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
     _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
-    _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
+    _, Home, Up, Down, _4,    _,    _, _7, Down, OSL(CONTROL), _, _,
                  _, Space, _,       RESET, OSL(SYM),
                         _, _,       DUMB_NUM
   ),
@@ -459,6 +459,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_lock_off(NUM);
                 layer_move(ABC);
                 return false;
+            }
+            return true;
+        case OSL(CONTROL):
+            if (is_layer_locked(NUM) && smart_num_on) {
+                layer_lock_off(NUM);
             }
             return true;
         case oC:
