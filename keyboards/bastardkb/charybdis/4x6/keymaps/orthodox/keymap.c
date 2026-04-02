@@ -585,12 +585,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             reset_kb_state();
             return false;
         case cBorrow2:
-            SEND_STRING(" {");
-            SEND_STRING(SS_TAP(X_ENT));
-            SEND_STRING(SS_TAP(X_ENT));
-            SEND_STRING("}");
-            SEND_STRING(SS_TAP(X_UP));
-            SEND_STRING(SS_TAP(X_TAB));
+            send_string_with_delay("{\n}\eOa", 20);
             reset_kb_state();
             return false;
         default:
