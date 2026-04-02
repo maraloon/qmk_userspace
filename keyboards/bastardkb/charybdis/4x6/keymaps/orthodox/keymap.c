@@ -561,31 +561,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             reset_kb_state();
             return false;
         case cTag:
-            SEND_STRING("<");
-            SEND_STRING(">");
-            SEND_STRING(SS_TAP(X_LEFT));
+            SEND_STRING("<>" SS_TAP(X_LEFT));
             reset_kb_state();
             return false;
         case cArr:
-            SEND_STRING("[");
-            SEND_STRING("]");
-            SEND_STRING(SS_TAP(X_LEFT));
+            SEND_STRING("[]" SS_TAP(X_LEFT));
             reset_kb_state();
             return false;
         case cBorrow:
-            SEND_STRING("{");
-            SEND_STRING("}");
-            SEND_STRING(SS_TAP(X_LEFT));
+            SEND_STRING("{}" SS_TAP(X_LEFT));
             reset_kb_state();
             return false;
         case cBracket:
-            SEND_STRING("(");
-            SEND_STRING(")");
-            SEND_STRING(SS_TAP(X_LEFT));
+            SEND_STRING("()" SS_TAP(X_LEFT));
             reset_kb_state();
             return false;
         case cBorrow2:
-            send_string_with_delay("{\n}\eOa", 20);
+            send_string_with_delay(" {\n}\eOa", 20);
             reset_kb_state();
             return false;
         default:
