@@ -236,11 +236,11 @@ LT(CODE2, Left), LT(NUMD, Space), LT(CODE, KC_BTN2),   LT(SYM2, RESET), OSL(SYM)
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
     // &   &&    ||   |
-    _, cA, cAND, cOR, cP, _, _, _, _, _, _, _,
-    // !=   <=   :=   >=   ==
-    _, cNE, cLE, cDE, cGE, cEE, _, _, _, _, _, _,
+    _, cA, cAND, cOR, cP, _, _, cBracket, cBorrow2, cBorrow, cTag, _,
+    //   !=   <=   :=   >=   ==
+    cCC, cNE, cLE, cDE, cGE, cEE, cSAA, cL, cE, cG, cArr, _,
     // //   <-   ->   --   ++
-    _, cCC, cLM, cMR, cMM, cPP, _, _, _, _, _, _,
+    _, cCC, cLM, cMR, cMM, cPP, _, cCode, _, _, _, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
