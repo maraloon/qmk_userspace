@@ -270,7 +270,7 @@ LT(CODE2, Left), LT(NUMD, Space), LT(CODE, KC_BTN2),   LT(SYM2, RESET), OSL(SYM)
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
  OS_LCS, C(N), C(R), KC_TAB, C(St), C(G),    C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
-    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE),   OSL(CODE2),  oC, _, _,
+    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE2),   OSL(CODE),  oC, _, _,
                      _, C(Space), _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            KC_LGUI
   ),
