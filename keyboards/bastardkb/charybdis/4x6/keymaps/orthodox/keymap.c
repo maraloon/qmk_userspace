@@ -173,7 +173,6 @@ enum my_keycodes {
 #define OS_LCS OSM(MOD_LCTL | MOD_LSFT)
 #define OS_LSA OSM(MOD_LALT | MOD_LSFT)
 #define OS_MEH OSM(MOD_LALT | MOD_LCTL | MOD_LSFT)
-#define SpaceNUM LT(NUMD, Space)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -182,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), OSL(CONTROL), Lets, _,
-                 Left, SpaceNUM, KC_BTN2,            RESET, OSL(SYM),
+LT(CODE2, Left), LT(NUMD, Space), LT(CODE, KC_BTN2),   LT(SYM2, RESET), OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -297,7 +296,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case SpaceNUM:
+        case LT(CODE2, Left):
+        case LT(NUMD, Space):
+        case LT(CODE, KC_BTN2):
+        case LT(SYM2, RESET):
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
