@@ -178,10 +178,10 @@ enum my_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,     B,     L,     D,    W,      _,            _,     F,     O,     U,     J,   _,
+    _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), OSL(CONTROL), Lets, _,
-LT(CODE2, Left), LT(NUMD, Space), LT(CODE, KC_BTN2),   LT(SYM2, RESET), OSL(SYM),
+Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -220,7 +220,7 @@ LT(CODE2, Left), LT(NUMD, Space), LT(CODE, KC_BTN2),   LT(SYM2, RESET), OSL(SYM)
   Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                      Left, Right, VOLTR,   RESET, OSL(SYM2),
+                      Left, Right, End,   RESET, OSL(SYM2),
                           QK_LLCK, SCALE,    _
   ),
 
@@ -235,12 +235,12 @@ LT(CODE2, Left), LT(NUMD, Space), LT(CODE, KC_BTN2),   LT(SYM2, RESET), OSL(SYM)
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    // &   &&    ||   |
-    _, cA, cAND, cOR, cP, _, _, cBracket, cBorrow2, cBorrow, cTag, _,
-    //   !=   <=   :=   >=   ==
-    cCC, cNE, cLE, cDE, cGE, cEE, cSAA, cL, cE, cG, cArr, _,
-    // //   <-   ->   --   ++
-    _, cCC, cLM, cMR, cMM, cPP, _, cCode, _, _, _, _,
+    // []    &&    ||   ()
+    _, cArr, cAND, cOR, cBracket, _,   _, _, _, _, _, _,
+    //   !=   <=   :=   >=    ++      ```
+    cCC, cNE, cLE, cDE, cGE, cPP, _,  cCode, _, _, _, _,
+    //   --     <-   ==   ->          - [ ] {   }     {}           <>
+    _,   cMM, cLM, cEE, cMR, _,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
