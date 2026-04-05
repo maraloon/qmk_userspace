@@ -6,7 +6,6 @@ enum charybdis_keymap_layers {
     NUM,
     NUMD,
     SYM,
-    SYM2,
     CODE,
     CODE2,
     CONTROL,
@@ -54,9 +53,13 @@ enum my_keycodes {
     cBracket,
 
     SMART_NUM, // smart num lock
-    DUMB_NUM,
 
-    RESET,
+    Up_Bs,
+    Down_Ent,
+    Down_CodeL,
+    Up_Ctl,
+
+    RESTE,
 };
 
 #undef _______
@@ -180,8 +183,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), OSL(CONTROL), Lets, _,
-Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
+    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, _,
+Left, LT(NUMD, Space), LT(CODE, KC_BTN2),            RESTE, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -193,45 +196,47 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-                    CommaS, Space, DotNS,            RESET, _,
+                    CommaS, Space, DotNS,            RESTE, _,
                     Minus, OSM(MOD_LSFT),            _
   ),
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
-    _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
-    _, Home, Up, Down, _4,    _,    _, _7, Down, OSL(CONTROL), _, _,
-                 _, Space, _,       RESET, OSL(SYM),
-                        _, _,       DUMB_NUM
+    _, PgUp, PgDn, _0, C(KC_BSPC), _,   _, B, _9, W, _, _,
+OS_LCS, Esc, _1, _2, _3, G,             _, _5, _6, _8, Up, OS_LCS,
+   _, Tab, Up_Bs, Down_Ent, _4, _,      _, _7, Down_CodeL, Up_Ctl, OSL(SYM), _,
+                 _, Space, _,       RESTE, Down,
+                        _, _,       _
   ),
 
+  // TODO: maybe delete
+  [CONTROL] = LAYOUT(
+    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
+    _,  C(B),  C(L),  C(D), C(W), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
+ OS_LCS, C(N), C(R), C(T), C(St), C(G),    C(Y),  C(H),  C(A),  C(E),  C(I),   OS_LCS,
+    _,   C(Q),  C(X), C(M), C(Ct), C(V),     C(K),  C(P),   _,  oC, _, _,
+                     _, C(Space), _,            RESTE, OSL(SYM),
+                      QK_LLCK, C(Z),            KC_LGUI
+  ),
+
+  // TODO: try to delete this layer
   [NUMD] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, B,    B, _0,     W, _,       _,    B, _9,     W, _, _,
     _, End, _1, _2, _3,    G,       _, _5, _6, _8, Up, _,
-    _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
-                     _, _, _,       _, Down,
-                        _, _,       _
+    _, Home, Up, Down, _4,    _,    _, _7, Left, Right, _, _,
+                  _, _, _,       _, Down,
+                     _, _,       _
   ),
 
   [SYM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
-  Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
+    _, Star, Slash, Caret, Dollar, Percent,    _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                      Left, Right, End,   RESET, OSL(SYM2),
+                      Left, Right, End,   RESTE, _,
                           QK_LLCK, SCALE,    _
   ),
-
-  [SYM2] = LAYOUT(
-    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    _ , Amp , BSlash , _ , Pipe , _ , _ , _ , _ , _ , _ , _ ,
-    _ , Percent , _ , _ , Tilda , _ , _ , _ , _ , _ , _ , _ ,
-    _ , _ , _ , _ , Grave , _ , _ , _ , _ , _ , _ , _ ,
-               _, _, _,   RESET, _,
-                  _, _,    _
-          ),
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
@@ -241,10 +246,11 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     cCC, cNE, cLE, cDE, cGE, cPP, _,  cCode, _, _, _, _,
     //   --     <-   ==   ->          - [ ] {   }     {}           <>
     _,   cMM, cLM, cEE, cMR, _,       cSAA, cBorrow2, cBorrow, _, cTag, _,
-               _, _, _,   RESET, _,
+               _, _, _,   RESTE, _,
                   _, _,    _
    ),
 
+  // TODO: try to delete this layer
   [CODE2] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
     //       ```   - [ ]
@@ -253,7 +259,7 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     _, cNEE, cL, cE, cG, cEEE, _, _, _, _, _, _,
     // <>    []    {}       ()
     _, cTag, cArr, cBorrow, cBracket, cBorrow2, _, cBorrow2, _, _, _, _,
-               _, _, _,   RESET, _,
+               _, _, _,   RESTE, _,
                   _, _,    _
    ),
 
@@ -262,17 +268,8 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
     _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CAL),   oA,   _, _, _,
-                  _, LALT(Space), _,            RESET, _,
+                  _, LALT(Space), _,            RESTE, _,
                    QK_LLCK, LALT(Z),            _
-  ),
-
-  [CONTROL] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
- OS_LCS, C(N), C(R), KC_TAB, C(St), C(G),    C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
-    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  OSL(CODE2),   OSL(CODE),  oC, _, _,
-                     _, C(Space), _,            RESET, OSL(SYM),
-                      QK_LLCK, C(Z),            KC_LGUI
   ),
 
   [CAL] = LAYOUT(
@@ -280,7 +277,7 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
     OS_MEH, LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),  OS_MEH,
     _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                            _, _, _,            RESET, _,
+                            _, _, _,            RESTE, _,
                     QK_LLCK, LCA(Z),            _
   ),
 
@@ -289,7 +286,7 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
     _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
     _, _, _, _, _, _,    _, _, _, _, _, _,
-                            _, _, _,            RESET, _,
+                            _, _, _,            RESTE, _,
                          QK_LLCK, _,            _
   ),
 };
@@ -299,7 +296,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case LT(CODE2, Left):
         case LT(NUMD, Space):
         case LT(CODE, KC_BTN2):
-        case LT(SYM2, RESET):
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
@@ -337,7 +333,7 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-bool          smart_num_on     = true;
+bool num_pressed = false;
 bool trackball_volume = false;
 bool trackball_scale = false;
 
@@ -374,13 +370,90 @@ void reset_kb_state(void) {
     clear_oneshot_mods();
     caps_word_off();
     // leader_end(); // BUG: it's not for cancel leader seq
-    smart_num_on = true;
     trackball_volume = false;
     trackball_scale = false;
     layer_move(ABC);
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (is_layer_locked(NUM)) {
+        switch (keycode) {
+            case _0:
+            case _1:
+            case _2:
+            case _3:
+            case _4:
+            case _5:
+            case _6:
+            case _7:
+            case _8:
+            case _9:
+                if (!record->event.pressed) return true;
+                num_pressed = true;
+                return true;
+            case RESTE:
+                reset_kb_state();
+                return false;
+            case OSM(SYM):
+               // INFO: not work
+               reset_kb_state();
+               if (record->event.pressed) {
+                   set_oneshot_layer(SYM, ONESHOT_START);
+               } else {
+                   clear_oneshot_layer_state(ONESHOT_PRESSED);
+               }
+               return false;
+            case Up_Ctl:
+                if (!record->event.pressed) return true;
+                reset_kb_state();
+                if (num_pressed) {
+                    tap_code16(KC_UP);
+                } else {
+                    // WARN: maybe OCL(CONTROL) will be better
+                    set_oneshot_mods(MOD_LCTL);
+                }
+                return false;
+            case Down_CodeL:
+                reset_kb_state();
+                if (num_pressed) {
+                    tap_code16(KC_DOWN);
+                } else {
+                    if (record->event.pressed) {
+                        set_oneshot_layer(CODE, ONESHOT_START);
+                    } else {
+                        clear_oneshot_layer_state(ONESHOT_PRESSED);
+                    }
+                }
+                return false;
+            case Up_Bs:
+                if (!record->event.pressed) return true;
+                if (num_pressed) {
+                    tap_code16(KC_UP);
+                } else {
+                    tap_code16(KC_BSPC);
+                }
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                return false;
+            case Down_Ent:
+                if (!record->event.pressed) return true;
+                if (num_pressed) {
+                    tap_code16(KC_DOWN);
+                } else {
+                    tap_code16(KC_ENT);
+                }
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                return false;
+            default:
+                if (!record->event.pressed) return true;
+                layer_lock_off(NUM);
+                layer_move(ABC);
+                tap_code16(keycode);
+                return false;
+        }
+    }
+
     switch (keycode) {
         case LANG:
             if (record->event.pressed) {
@@ -389,22 +462,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch_to_english();
             }
             return false;
-        case OSL(CODE):
-            if (record->event.pressed) {
-                reset_kb_state();
-                set_oneshot_layer(CODE, ONESHOT_START);
-            } else {
-                clear_oneshot_layer_state(ONESHOT_PRESSED);
-            }
-            return true;
-        case OSL(CODE2):
-            if (record->event.pressed) {
-                reset_kb_state();
-                set_oneshot_layer(CODE2, ONESHOT_START);
-            } else {
-                clear_oneshot_layer_state(ONESHOT_PRESSED);
-            }
-            return true;
+
     }
 
     if (!record->event.pressed) return true;
@@ -415,6 +473,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case SCALE:
             trackball_scale = !trackball_scale;
             return false;
+
         case CommaS:
             SEND_STRING(", ");
             return false;
@@ -430,49 +489,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
+
         case SMART_NUM:
             reset_kb_state();
             layer_lock_on(NUM);
+            num_pressed = false;
             return false;
-        case DUMB_NUM:
-            if (smart_num_on == false) {
-                reset_kb_state();
-            } else {
-                smart_num_on = false;
-            }
-            return false;
-        case RESET:
+
+        case RESTE:
             reset_kb_state();
             return false;
-        case KC_B:
-        case KC_W:
-        case KC_HOME:
-        case KC_END:
-        case KC_UP:
-        case KC_DOWN:
-        case KC_LEFT:
-        case KC_RIGHT:
-        case KC_G:
-        case KC_SPC:
-        case KC_ENT:
-        case KC_ESC:
-            if (is_layer_locked(NUM) && smart_num_on) {
-            tap_code16(keycode);
-                layer_lock_off(NUM);
-                layer_move(ABC);
-                return false;
-            }
-            return true;
-        case OSL(CONTROL):
-            if (is_layer_locked(NUM) && smart_num_on) {
-                layer_lock_off(NUM);
-            }
-            return true;
-        case oC:
-            reset_oneshot_layer();
-            layer_move(ABC);
-            set_oneshot_mods(MOD_LCTL);
-            return false;
+
         case oA:
             reset_oneshot_layer();
             layer_move(ABC);
@@ -634,7 +661,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, CONTROL));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
     return state;
 }
 
