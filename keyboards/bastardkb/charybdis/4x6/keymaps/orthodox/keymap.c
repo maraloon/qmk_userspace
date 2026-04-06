@@ -35,6 +35,7 @@ enum my_keycodes {
     cGE,
     cDE,
     cMR,
+    cQQ,
     cEE,
     cCC,
     cMM,
@@ -238,11 +239,11 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
     // []    &&    ||   ()
-    _, cArr, cAND, cOR, cBracket, _,   _, _, _, _, _, _,
-    //   !=   <=   :=   >=    ++      ```
-    cCC, cNE, cLE, cDE, cGE, cPP, _,  cCode, _, _, _, _,
-    //   --     <-   ==   ->          - [ ] {   }     {}           <>
-    _,   cMM, cLM, cEE, cMR, _,       cSAA, cBorrow2, cBorrow, _, cTag, _,
+    _, cArr, cAND, cOR, cBracket, _,    _, _, _, _, _, _,
+    //   !=   <=   :=   >=    ++        ```
+    cCC, cNE, cLE, cDE, cGE, cPP, _,    cCode, _, _, _, _,
+    //   --   <-   ==   ->   ""       - [ ] {   }     {}           <>
+    _,   cMM, cLM, cEE, cMR, cQQ,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
@@ -521,6 +522,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case cMR:
             SEND_STRING("->");
+            reset_kb_state();
+            return false;
+        case cQQ:
+            SEND_STRING("\"\"" SS_TAP(X_LEFT));
             reset_kb_state();
             return false;
         case cEE:
