@@ -201,9 +201,9 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, PgUp,   _9, _0,     PgDn, _,       _,  B, _9, W,   _, _,
-  Tab, Esc, _1, _2, _3,       G,    _, _5, _6, _8, _0, _,
-  _, OSL(CODE), Up, Down, _4, _,    _, _7, Down, Up, _, _,
+    _, PgUp, _9, _0, PgDn, _,   _,  B, _9, W,   _, _,
+  Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, _0, _,
+  _, oC, Up, Down, _4, _,       _, _7, Down, Up, _, _,
               Left, Right, _,       RESET, RESET,
                  DUMB_NUM, _,       DUMB_NUM
   ),
@@ -445,6 +445,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 smart_num_on = false;
             }
             return false;
+        case Esc:
+            reset_kb_state();
+            return true;
         case RESET:
             reset_kb_state();
             return false;
