@@ -203,7 +203,7 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
   Tab, Esc, _1, _2, _3,       G,    _, _5, _6, _8, _0, _,
   _, OSL(CODE), Up, Down, _4, _,    _, _7, Down, Up, _, _,
               Left, Right, _,       RESET, RESET,
-                        _, _,       DUMB_NUM
+                 DUMB_NUM, _,       DUMB_NUM
   ),
 
   // TODO: delete
@@ -457,6 +457,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_SPC:
         case KC_ENT:
         case KC_ESC:
+        case PgUp:
+        case PgDn:
             if (is_layer_locked(NUM) && smart_num_on) {
             tap_code16(keycode);
                 layer_lock_off(NUM);
@@ -635,7 +637,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, CONTROL));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
     return state;
 }
 
