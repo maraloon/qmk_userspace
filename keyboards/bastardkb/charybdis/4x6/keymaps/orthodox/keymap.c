@@ -170,6 +170,7 @@ enum my_keycodes {
 #define oS OSM(MOD_LSFT)
 #define oC OSM(MOD_LCTL)
 #define oA OSM(MOD_LALT)
+#define oCA OSM(MOD_LCTL | MOD_LALT)
 #define OS_LCS OSM(MOD_LCTL | MOD_LSFT)
 #define OS_LSA OSM(MOD_LALT | MOD_LSFT)
 #define OS_MEH OSM(MOD_LALT | MOD_LCTL | MOD_LSFT)
@@ -247,13 +248,13 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
    ),
 
   [CODE2] = LAYOUT(
-    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    //       ```   - [ ]
-    _, _, _, cCode, cSAA, _, _, _, _, _, _, _,
-    // !==  <    =    >   ===
-    _, cNEE, cL, cE, cG, cEEE, _, _, _, _, _, _,
-    // <>    []    {}       ()
-    _, cTag, cArr, cBorrow, cBracket, cBorrow2, _, cBorrow2, _, _, _, _,
+    _, _, _, _, _, _, _, _, _, _, _, _,
+    //
+    _, _, _, _, _, _, _, _, _, _, _, _,
+    //
+    _, _, _, _, _, _, _, _, _, _, _, _,
+    //
+    _, _, _, _, _, _, _, _, _, _, _, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
@@ -272,7 +273,7 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _,  C(B),  C(L),  C(D), C(W), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
  OS_LCS, C(N), C(R), C(T), C(St), C(G),    C(Y),  C(H),  C(A),  C(E),  C(I),   OS_LCS,
-    _,   C(Q),  C(X), C(M), C(C), C(V),    C(K),  C(P),  oC,  _, _, _,
+    _,   C(Q),  C(X), C(M), C(Ct), C(V),    C(K),  C(P),  oC,  _, _, _,
                      _, C(Space), _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            KC_LGUI
   ),
