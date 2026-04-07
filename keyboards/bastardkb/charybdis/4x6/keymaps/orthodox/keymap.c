@@ -180,7 +180,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), OSL(CONTROL), Lets, _,
+    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, _,
 Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
@@ -262,7 +262,7 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
-    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CAL),   oA,   _, _, _,
+    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CONTROL), OSL(CAL), _, _, _,
                   _, LALT(Space), _,            RESET, _,
                    QK_LLCK, LALT(Z),            _
   ),
