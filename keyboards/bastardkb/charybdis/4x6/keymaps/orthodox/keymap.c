@@ -181,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, _,
-Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
+C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -199,10 +199,10 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, B,   _9, _0,     W, _,       _,  B, _9, W,   _, _,
- Home, End, _1, _2, _3,       G,    _, _5, _6, _8, _0, _,
+    _, PgUp,   _9, _0,     PgDn, _,       _,  B, _9, W,   _, _,
+  Tab, Esc, _1, _2, _3,       G,    _, _5, _6, _8, _0, _,
   _, OSL(CODE), Up, Down, _4, _,    _, _7, Down, Up, _, _,
-                 _, Space, _,       RESET, OSL(SYM),
+              Left, Right, _,       RESET, RESET,
                         _, _,       DUMB_NUM
   ),
 
@@ -221,7 +221,7 @@ Left, LT(NUMD, Space), LT(CODE, KC_BTN2),   RESET, OSL(SYM),
   Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                      Left, Right, End,   RESET, OSL(SYM2),
+                     KC_BSPC, Ent, End,   RESET, OSL(SYM2),
                           QK_LLCK, SCALE,    _
   ),
 
