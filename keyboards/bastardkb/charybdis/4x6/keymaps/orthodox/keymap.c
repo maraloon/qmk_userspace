@@ -262,16 +262,17 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
-    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CONTROL), OSL(CAL), _, _, _,
+    // _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CONTROL), OSL(CAL), _, _, _,
+    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), oC, oCA, _, _, _,
                   _, LALT(Space), _,            RESET, _,
                    QK_LLCK, LALT(Z),            _
   ),
 
   [CONTROL] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,  PgUp,  C(L),  PgDn, C(KC_BSPC), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
- OS_LCS, C(N), C(R), KC_TAB, C(St), C(G),    C(Y),  SMART_NUM,  C(A),  C(E),  C(I),   OS_LCS,
-    _,   C(Q),  KC_BSPC, Ent, Esc, C(V),     C(K),  oC,  OSL(CODE),  oC, _, _,
+    _,  C(B),  C(L),  C(D), C(W), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
+ OS_LCS, C(N), C(R), C(T), C(St), C(G),    C(Y),  C(H),  C(A),  C(E),  C(I),   OS_LCS,
+    _,   C(Q),  C(X), C(M), C(C), C(V),    C(K),  C(P),  oC,  _, _, _,
                      _, C(Space), _,            RESET, OSL(SYM),
                       QK_LLCK, C(Z),            KC_LGUI
   ),
