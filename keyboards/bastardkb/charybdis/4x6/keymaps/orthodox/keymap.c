@@ -182,8 +182,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, _,
-C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
+    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, KC_BTN2,
+C(KC_BSPC), LT(NUM, Space), LT(CODE, Ent),   Esc, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -204,7 +204,7 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
     _, PgUp, _9, _0, PgDn, _,   _,  B, _9, W,   _, _,
   Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, _0, _,
   _, oC, Up, Down, _4, _,       _, _7, Down, Up, _, _,
-              Left, Right, _,       RESET, RESET,
+           KC_BSPC, Ent, End,       RESET, RESET,
                  DUMB_NUM, _,       DUMB_NUM
   ),
 
@@ -223,7 +223,7 @@ C(KC_BSPC), LT(NUMD, Space), LT(CODE, KC_BTN2),   Esc, OSL(SYM),
   Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                     KC_BSPC, Ent, End,   RESET, OSL(SYM2),
+                        Left, Right, End,   RESET, OSL(SYM2),
                           QK_LLCK, SCALE,    _
   ),
 
@@ -461,8 +461,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_RIGHT:
         case KC_G:
         case KC_SPC:
-        case KC_ENT:
-        case KC_ESC:
+        // case KC_ENT:
+        // case KC_ESC:
         case PgUp:
         case PgDn:
             if (is_layer_locked(NUM) && smart_num_on) {
