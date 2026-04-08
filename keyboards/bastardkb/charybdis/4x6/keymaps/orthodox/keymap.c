@@ -203,7 +203,7 @@ C(KC_BSPC), LT(NUM, Space), LT(CODE, Ent),   Esc, OSL(SYM),
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, PgUp, _9, _0, PgDn, _,   _,  B, _9, W,   _, _,
   Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, _0, _,
-  _, oC, Up, Down, _4, _,       _, _7, Down, Up, _, _,
+  _, KC_BSPC, Up, Down, _4, _,       _, _7, Down, Up, _, _,
            KC_BSPC, Ent, End,       RESET, RESET,
                  DUMB_NUM, _,       DUMB_NUM
   ),
@@ -461,6 +461,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_RIGHT:
         case KC_G:
         case KC_SPC:
+        case KC_BSPC:
         // case KC_ENT:
         // case KC_ESC:
         case PgUp:
