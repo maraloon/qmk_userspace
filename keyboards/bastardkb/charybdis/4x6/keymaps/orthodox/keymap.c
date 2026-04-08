@@ -4,14 +4,9 @@ enum charybdis_keymap_layers {
     ABC = 0,
     RUS,
     NUM,
-    NUMD,
     SYM,
-    SYM2,
     CODE,
-    CODE2,
-    CONTROL,
     TMUX,
-    CAL,
     FN,
 };
 
@@ -126,7 +121,7 @@ enum my_keycodes {
 #define Space KC_SPC
 #define Bs KC_BSPC
 #define Esc KC_ESC
-#define Ent KC_ENT
+#define Enter KC_ENT
 #define Tab KC_TAB
 
 #define PgDn KC_PGDN
@@ -184,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, KC_BTN2,
-    C(Bs), LT(NUM, Space), LT(CODE, Ent),            Esc, OSL(SYM),
+    C(Bs), LT(NUM, Space), LT(CODE, Enter),            Esc, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -209,33 +204,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  DUMB_NUM, _,       DUMB_NUM
   ),
 
-  // TODO: delete
-  [NUMD] = LAYOUT(
-    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, B,   _9, _0,     W, _,       _,  B, _9, W,   _, _,
-    _, End, _1, _2, _3,    G,       _, _5, _6, _8, _0, _,
-    _, Home, Up, Down, _4,    _,    _, _7, Down, Up, _, _,
-                     _, _, _,       _, Down,
-                        _, _,       _
-  ),
-
   [SYM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
   Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                          Bs, Enter, End,   RESET, OSL(SYM2),
+                            Bs, Enter, End,   RESET, _,
                           QK_LLCK, SCALE,    _
   ),
-
-  [SYM2] = LAYOUT(
-    _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    _ , Amp , BSlash , _ , Pipe , _ , _ , _ , _ , _ , _ , _ ,
-    _ , Percent , _ , _ , Tilda , _ , _ , _ , _ , _ , _ , _ ,
-    _ , _ , _ , _ , Grave , _ , _ , _ , _ , _ , _ , _ ,
-               _, _, _,   RESET, _,
-                  _, _,    _
-          ),
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
@@ -249,44 +225,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   _, _,    _
    ),
 
-  [CODE2] = LAYOUT(
-    _, _, _, _, _, _, _, _, _, _, _, _,
-    //
-    _, _, _, _, _, _, _, _, _, _, _, _,
-    //
-    _, _, _, _, _, _, _, _, _, _, _, _,
-    //
-    _, _, _, _, _, _, _, _, _, _, _, _,
-               _, _, _,   RESET, _,
-                  _, _,    _
-   ),
-
   [TMUX] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
-    // _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CONTROL), OSL(CAL), _, _, _,
     _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CODE), oCA, _, _, _,
                  _, oC, LALT(Space),            RESET, _,
                    QK_LLCK, LALT(Z),            _
-  ),
-
-  [CONTROL] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _,  C(B),  C(L),  C(D), C(W), _,           _,  C(F),  C(O),  C(U),  C(J),   _,
- OS_LCS, C(N), C(R), C(T), C(St), C(G),    C(Y),  C(H),  C(A),  C(E),  C(I),   OS_LCS,
-    _,   C(Q),  C(X), C(M), C(Ct), C(V),    C(K),  C(P),  oC,  _, _, _,
-                     _, C(Space), _,            RESET, OSL(SYM),
-                      QK_LLCK, C(Z),            KC_LGUI
-  ),
-
-  [CAL] = LAYOUT(
-    _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
-    _, LCA(B), LCA(L), LCA(D), LCA(W),     _,            _, LCA(F), LCA(O), LCA(U), LCA(J),   _,
-    OS_MEH, LCA(N), LCA(R), LCA(T), LCA(St), LCA(G),   LCA(Y), LCA(H), LCA(A), LCA(E), LCA(I),  OS_MEH,
-    _, LCA(Q), LCA(X), LCA(M), LCA(Ct), LCA(V),       LCA(K), LCA(P),   _,   _, _, _,
-                            _, _, _,            RESET, _,
-                    QK_LLCK, LCA(Z),            _
   ),
 
   [FN] = LAYOUT(
@@ -301,10 +246,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(CODE2, Left):
-        case LT(NUMD, Space):
         case LT(CODE, KC_BTN2):
-        case LT(SYM2, RESET):
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
@@ -369,12 +311,6 @@ void reset_kb_state(void) {
     if (is_layer_locked(FN)) {
         layer_lock_off(FN);
     }
-    if (is_layer_locked(CAL)) {
-        layer_lock_off(CAL);
-    }
-    if (is_layer_locked(CONTROL)) {
-        layer_lock_off(CONTROL);
-    }
     reset_oneshot_layer();
     clear_oneshot_mods();
     caps_word_off();
@@ -398,14 +334,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 reset_kb_state();
                 set_oneshot_layer(CODE, ONESHOT_START);
-            } else {
-                clear_oneshot_layer_state(ONESHOT_PRESSED);
-            }
-            return true;
-        case OSL(CODE2):
-            if (record->event.pressed) {
-                reset_kb_state();
-                set_oneshot_layer(CODE2, ONESHOT_START);
             } else {
                 clear_oneshot_layer_state(ONESHOT_PRESSED);
             }
@@ -463,7 +391,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_G:
         case KC_SPC:
         case Bs:
-        case Ent:
+        case Enter:
         // case KC_ESC:
         case PgUp:
         case PgDn:
@@ -472,11 +400,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_lock_off(NUM);
                 layer_move(ABC);
                 return false;
-            }
-            return true;
-        case OSL(CONTROL):
-            if (is_layer_locked(NUM) && smart_num_on) {
-                layer_lock_off(NUM);
             }
             return true;
         case oC:
