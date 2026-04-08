@@ -124,6 +124,7 @@ enum my_keycodes {
 #define tag KC_GT
 
 #define Space KC_SPC
+#define Bs KC_BSPC
 #define Esc KC_ESC
 #define Ent KC_ENT
 #define Tab KC_TAB
@@ -183,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, KC_BTN2,
-C(KC_BSPC), LT(NUM, Space), LT(CODE, Ent),   Esc, OSL(SYM),
+    C(Bs), LT(NUM, Space), LT(CODE, Ent),            Esc, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -203,8 +204,8 @@ C(KC_BSPC), LT(NUM, Space), LT(CODE, Ent),   Esc, OSL(SYM),
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, PgUp, _9, _0, PgDn, _,   _,  B, _9, W,   _, _,
   Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, _0, _,
-  _, KC_BSPC, Up, Down, _4, _,       _, _7, Down, Up, _, _,
-           KC_BSPC, Ent, End,       RESET, RESET,
+  _, Bs, Up, Down, _4, _,       _, _7, Down, Up, _, _,
+            Left, Right, End,       RESET, RESET,
                  DUMB_NUM, _,       DUMB_NUM
   ),
 
@@ -223,7 +224,7 @@ C(KC_BSPC), LT(NUM, Space), LT(CODE, Ent),   Esc, OSL(SYM),
   Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                        Left, Right, End,   RESET, OSL(SYM2),
+                          Bs, Enter, End,   RESET, OSL(SYM2),
                           QK_LLCK, SCALE,    _
   ),
 
@@ -330,8 +331,8 @@ bool caps_word_press_user(uint16_t keycode) {
 
         // Keycodes that continue Caps Word, without shifting.
         case KC_1 ... KC_0:
-        case KC_BSPC:
-        case C(KC_BSPC):
+        case Bs:
+        case C(Bs):
         case KC_DEL:
         case KC_UNDS:
         case KC_MINS:
@@ -461,8 +462,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_RIGHT:
         case KC_G:
         case KC_SPC:
-        case KC_BSPC:
-        // case KC_ENT:
+        case Bs:
+        case Ent:
         // case KC_ESC:
         case PgUp:
         case PgDn:
