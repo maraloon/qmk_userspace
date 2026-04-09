@@ -30,6 +30,7 @@ enum my_keycodes {
     cGE,
     cDE,
     cMR,
+    cSS,
     cQQ,
     cEE,
     cCC,
@@ -206,21 +207,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
-  Percent, Star, Slash, Caret, Dollar, _,     _, Bracket, bracket, Borrow, borrow,  _,
+  Percent, Star, Slash, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow,  _,
    BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
                           Bs, Enter, End,    RESET, _,
-                          QK_LLCK, SCALE,    _
+                        QK_LLCK, Percent,    _
   ),
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
     // []    &&    ||   ()
-    _, cArr, cAND, cOR, cBracket, _,    _, _, _, _, _, _,
+    _, cArr, cAND, cOR, cBracket, cQQ,    _, _, _, _, _, _,
     //   !=   <=   :=   >=    ++        ```
     cCC, cNE, cLE, cDE, cGE, cPP, _,    cCode, _, _, _, _,
-    //   --   <-   ==   ->   ""       - [ ] {   }     {}           <>
-    _,   cMM, cLM, cEE, cMR, cQQ,       cSAA, cBorrow2, cBorrow, _, cTag, _,
+    //   --   <-   ==   ->   ''       - [ ] {   }     {}           <>
+    _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   RESET, _,
                   _, _,    _
    ),
@@ -450,6 +451,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case cMR:
             SEND_STRING("->");
+            reset_kb_state();
+            return false;
+        case cSS:
+            SEND_STRING("''" SS_TAP(X_LEFT));
             reset_kb_state();
             return false;
         case cQQ:
