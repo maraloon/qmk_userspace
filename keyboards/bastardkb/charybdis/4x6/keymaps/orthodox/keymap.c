@@ -36,6 +36,7 @@ enum my_keycodes {
     cCC,
     cMM,
     cPP,
+    cDDD,
 
     cCode,
     cSAA,
@@ -216,10 +217,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    // []    &&    ||   ()
+    // []    &&    ||   ()        ""
     _, cArr, cAND, cOR, cBracket, cQQ,    _, _, _, _, _, _,
-    //   !=   <=   :=   >=    ++        ```
-    cCC, cNE, cLE, cDE, cGE, cPP, _,    cCode, _, _, _, _,
+    //   !=   <=   :=   >=    ++                ...   ```
+    cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, _, _,
     //   --   <-   ==   ->   ''       - [ ] {   }     {}           <>
     _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   RESET, _,
@@ -475,6 +476,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case cPP:
             SEND_STRING("++");
+            reset_kb_state();
+            return false;
+        case cDDD:
+            SEND_STRING("...");
             reset_kb_state();
             return false;
         case cCode:
