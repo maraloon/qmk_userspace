@@ -201,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, PgUp, _9, _0, PgDn, _,   _,  B, _9, W,   _, _,
   Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, _0, _,
   _, Bs, Up, Down, _4, _,       _, _7, Down, Up, _, _,
-            Left, Right, End,       RESET, RESET,
+            Left, Right, End,       Esc, RESET,
                  DUMB_NUM, _,       DUMB_NUM
   ),
 
@@ -229,7 +229,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [TMUX] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
-    OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
+    OS_LSA, LALT(N), oCA, LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
     _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CODE), oCA, _, _, _,
                  _, oC, LALT(Space),            RESET, _,
                    QK_LLCK, LALT(Z),            _
