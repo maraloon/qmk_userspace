@@ -208,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [SYM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
   Percent, Star, Slash, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow,  _,
-   BSlash, Hash, At,   Unds, Minus, Equal,     Amp, Dot,   Comma,  Array,  array, Pipe,
+   BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
                           Bs, Enter, End,    RESET, _,
                         QK_LLCK, Percent,    _
