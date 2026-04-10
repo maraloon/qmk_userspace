@@ -5,6 +5,7 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
+    NAV,
     CODE,
     TMUX,
     FN,
@@ -180,8 +181,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, _,
-          C(Bs), LT(NUM, Space), KC_BTN2,            Esc, OSL(SYM),
+    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, KC_BTN2,
+         C(Bs), LT(NUM, Space), OSL(NAV),            Esc, OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -214,6 +215,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           Bs, Enter, End,    RESET, _,
                         QK_LLCK, Percent,    _
   ),
+
+  [NAV] = LAYOUT(
+    _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
+    _,     _,     _,    _,      _,     _,            _,     _,     _,     PgUp,     _,    _,
+    _,     _,     _,    _,      _,     _,            _,     Left,     Up,     Right,    _,    _,
+    _,     _,     _,    _,      _,     _,            _,     PgDn,     Down,     _,     _,    _,
+                           _, _, KC_BTN2,            Esc, Down,
+                              KC_BTN1, _,            _
+   ),
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
