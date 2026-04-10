@@ -223,7 +223,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, _, _,
     //   --   <-   ==   ->   ''       - [ ] {   }     {}           <>
     _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
-               _, _, _,   RESET, _,
+               _, _, _,   RESET, RESET,
                   _, _,    _
    ),
 
@@ -376,6 +376,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 smart_num_on = false;
             }
             return false;
+        case OSL(SYM):
+            if (is_caps_word_on() || trackball_scale || trackball_volume) {
+                caps_word_off();
+                trackball_volume = false;
+                trackball_scale = false;
+                return false;
+            }
+            return true;
         case Esc:
             reset_kb_state();
             return true;
