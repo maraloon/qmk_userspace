@@ -20,6 +20,9 @@ enum my_keycodes {
     QuesNS,
     ExlmNS,
 
+    oA,
+    oC,
+    oCA,
     cA,
     cAND,
     cP,
@@ -167,12 +170,9 @@ enum my_keycodes {
 #define rU KC_KP_6 // ю
 
 #define oS OSM(MOD_LSFT)
-#define oC OSM(MOD_LCTL)
-#define oA OSM(MOD_LALT)
-#define oCA OSM(MOD_LCTL | MOD_LALT)
-#define OS_LCS OSM(MOD_LCTL | MOD_LSFT)
+// #define OS_LCS OSM(MOD_LCTL | MOD_LSFT)
 #define OS_LSA OSM(MOD_LALT | MOD_LSFT)
-#define OS_MEH OSM(MOD_LALT | MOD_LCTL | MOD_LSFT)
+// #define OS_MEH OSM(MOD_LALT | MOD_LCTL | MOD_LSFT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -413,6 +413,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             reset_oneshot_layer();
             layer_move(ABC);
             set_oneshot_mods(MOD_LALT);
+            return false;
+        case oCA:
+            reset_oneshot_layer();
+            layer_move(ABC);
+            set_oneshot_mods(MOD_LCTL | MOD_LALT);
             return false;
         case cA:
             SEND_STRING(" & ");
