@@ -200,8 +200,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, Left, _9, _0, Right, _,  _,  B, _9, W,   _, _,
-  Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, _0, _,
+    _, _8, _9, _0, _, _,        _,  _, _9, _0,   _, _,
+  Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, RESET, _,
   _, _, Up, Down, _4, _,       _, _7, Down, Up, _, _,
             PgUp, PgDn, End,       Esc, RESET,
                  DUMB_NUM, _,       _
@@ -218,11 +218,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NAV] = LAYOUT(
     _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
-    _,     _,     _,    _,      _,     _,            _,     _,     _,     PgUp,     _,    _,
-    _,     _,     _,    _,      _,     _,            _,     Left,     Up,     Right,    _,    _,
-    _,     _,     _,    _,      _,     _,            _,     PgDn,     Down,     _,     _,    _,
-                           _, _, KC_BTN2,            Esc, Down,
-                              KC_BTN1, _,            _
+    _,     _,     _,    _,      _,     _,            _,     _,     Up,    PgUp,     _,    _,
+    _,     _,     _,    _,      _,     _,            _,     Left,  Down,  Right,    _,    _,
+    _,     _,     _,    _,      _,     _,            _,     PgDn,   _,     _,     _,    _,
+                       _, RESET, QK_LLCK,            Esc, Down,
+                        KC_BTN1, KC_BTN2,            _
    ),
 
   [CODE] = LAYOUT(
