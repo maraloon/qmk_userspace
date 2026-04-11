@@ -221,7 +221,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,    _,      _,     _,            _,     _,     Up,    PgUp,     _,    _,
     _,     _,     _,    _,      _,     _,            _,     Left,  Down,  Right,    _,    _,
     _,     _,     _,    _,      _,     _,            _,     PgDn,   _,     _,     _,    _,
-                       _, RESET, QK_LLCK,            Esc, Down,
+                     _, QK_LLCK, QK_LLCK,            QK_LLCK, QK_LLCK,
                         KC_BTN1, KC_BTN2,            _
    ),
 
@@ -387,8 +387,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case OSL(SYM):
-            if (is_caps_word_on() || trackball_scale || trackball_volume) {
-                caps_word_off();
+            if (trackball_scale || trackball_volume) {
                 trackball_volume = false;
                 trackball_scale = false;
                 return false;
