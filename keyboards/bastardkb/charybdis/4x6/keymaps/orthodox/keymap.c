@@ -203,7 +203,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, _8, _9, _0, _, _,        _,  _, _9, _0,   _, _,
   Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, RESET, _,
   _, _, Up, Down, _4, _,       _, _7, Down, Up, _, _,
-            PgUp, PgDn, End,       Esc, RESET,
+                   _, _, End,       Esc, RESET,
                  DUMB_NUM, _,       _
   ),
 
