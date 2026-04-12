@@ -386,13 +386,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 smart_num_on = false;
             }
             return false;
-        case OSL(SYM):
-            if (trackball_scale || trackball_volume) {
-                trackball_volume = false;
-                trackball_scale = false;
-                return false;
-            }
-            return true;
+        // case OSL(SYM):
+        //     if (trackball_scale || trackball_volume) {
+        //         trackball_volume = false;
+        //         trackball_scale = false;
+        //         return false;
+        //     }
+        //     return true;
         case Esc:
             reset_kb_state();
             return true;
