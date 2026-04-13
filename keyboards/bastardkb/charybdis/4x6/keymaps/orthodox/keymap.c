@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     Tab,   Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, KC_BTN2,
-         C(Bs), LT(NUM, Space), OSL(NAV),            Esc, OSL(SYM),
+                  C(Bs), Space, OSL(NAV),            OSL(NAV), OSL(SYM),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -218,9 +218,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NAV] = LAYOUT(
     _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
-    _,     _,     _,    _,      _,     _,            _,     _,     Up,    PgUp,     _,    _,
-    _,     _,     _,    _,      _,     _,            _,     Left,  Down,  Right,    _,    _,
-    _,     _,     _,    _,      _,     _,            _,     PgDn,   _,     _,     _,    _,
+    _,     _,    _, Up,       _,       _,            _,     _,     Up,    PgUp,     _,    _,
+    _,     _, Left, Down, Right,       _,            _,     Left,  Down,  Right,    _,    _,
+    _,     _,     _,    PgDn, PgUp,    _,            _,     PgDn,   _,     _,     _,    _,
                      _, QK_LLCK, QK_LLCK,            QK_LLCK, QK_LLCK,
                         KC_BTN1, KC_BTN2,            _
    ),
