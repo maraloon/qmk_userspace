@@ -178,8 +178,8 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _,     _,    _,      _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,     B,     L,     D,    W,  VOLTR,            SCALE, F,     O,     U,     J,   _,
+    _,     _,     _,     VOLTR,    SCALE,      _,            _,     _,     _,     _,     _,   OSL(FN),
+    _,     B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     J,   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
     Tab,   Q,     X,     M,    Ct,     V,            K,     P,  OSL(TMUX), SMART_NUM, Lets, KC_BTN2,
                   C(Bs), Space, OSL(NAV),            OSL(NAV), OSL(SYM),
@@ -200,27 +200,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, _8, _9, _0, _, _,        _,  _, _9, _0,   _, _,
+    _, _8, _9, _0, _, Esc,        Enter,  _, _9, _0,   _, _,
   Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, RESET, _,
-  _, _, Up, Down, _4, _,       _, _7, Down, Up, _, _,
-                   _, _, End,       Esc, RESET,
+  _, Esc, Up, Down, _4, _,       _, _7, Down, Up, _, _,
+                   _, Esc, End,       Esc, RESET,
                  DUMB_NUM, _,       _
   ),
 
   [SYM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
-  Percent, Star, Slash, Caret, Dollar, Percent,     _, Bracket, bracket, Borrow, borrow,  _,
-   BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
-    _,     Tag, tag, DQuote, Quote, Plus,    Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                          Bs, Enter, End,    RESET, _,
-                        QK_LLCK, Percent,    _
+      _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  _,
+    BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
+    _,     Tag, tag, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
+                          Bs, Enter, End,     RESET, _,
+                        QK_LLCK, Percent,     _
   ),
 
   [NAV] = LAYOUT(
     _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
-    _,     _,    _, Up,       _,       _,            _,     _,     Up,    PgUp,     _,    _,
+    _,     _,    _, Up,       _,     Esc,            Enter, _,     Up,    PgUp,     _,    _,
     _,     _, Left, Down, Right,       _,            _,     Left,  Down,  Right,    _,    _,
-    _,     _,     _,    PgDn, PgUp,    _,            _,     PgDn,   _,     _,     _,    _,
+    _,     _,     _,    PgUp, PgDn,    _,            _,     PgDn,   _,     _,     _,    _,
                      _, QK_LLCK, QK_LLCK,            QK_LLCK, QK_LLCK,
                         KC_BTN1, KC_BTN2,            _
    ),
