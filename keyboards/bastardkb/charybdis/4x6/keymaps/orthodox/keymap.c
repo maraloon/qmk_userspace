@@ -181,8 +181,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,     _,     VOLTR,    SCALE,      _,            _,     _,     _,     _,     _,   OSL(FN),
     _,     B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   _,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    Tab,   Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, KC_BTN2,
-                  C(Bs), Space, J,            OSL(NAV), OSL(SYM),
+    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, KC_BTN2,
+                  C(Bs), Space, J,                   Tab, OSL(NAV),
                               KC_BTN1, Z,            LANG
   ),
 
@@ -212,16 +212,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  _,
     BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                          Bs, Enter, End,     RESET, _,
-                        QK_LLCK, Percent,     _
+                           _, QK_LLCK, _,     _, RESET,
+                              _, Percent,     _
   ),
 
   [NAV] = LAYOUT(
-    _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
-    _,     _,    _, Up,       _,     Esc,            Enter, _,     Up,    PgUp,     _,    _,
+    QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
+    _,     _,  Tab,   Up,  End,      Esc,            Enter, _,     Up,    PgUp,     _,    _,
     _,     _, Left, Down, Right,       _,            _,     Left,  Down,  Right,    _,    _,
     _,     _,     _,    PgUp, PgDn,    _,            _,     PgDn,   _,     _,     _,    _,
-                     _, QK_LLCK, QK_LLCK,            QK_LLCK, QK_LLCK,
+                          Bs, QK_LLCK, _,            _, RESET,
                         KC_BTN1, KC_BTN2,            _
    ),
 
@@ -240,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [TMUX] = LAYOUT(
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
-    OS_LSA, LALT(N), oCA, LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
+    OS_LSA, LALT(N), LALT(R), oCA, LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
     _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CODE), oCA, _, _, _,
                  _, oC, LALT(Space),            RESET, _,
                    QK_LLCK, LALT(Z),            _
@@ -604,7 +604,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NAV));
     return state;
 }
 
