@@ -58,7 +58,7 @@ enum my_keycodes {
     SMART_NUM, // smart num lock
     DUMB_NUM,
 
-    RESET,
+    STRES,
 };
 
 #undef _______
@@ -194,16 +194,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-                    CommaS, Space, DotNS,            RESET, _,
+                    CommaS, Space, DotNS,            STRES, _,
                     Minus, OSM(MOD_LSFT),            _
   ),
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
     _, _8, _9, _0, _, Esc,        Enter,  _, _9, _0,   _, _,
-  Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, RESET, _,
+  Tab, oC, _1, _2, _3, G,       _, _5, _6, _8, STRES, _,
   _, Esc, Up, Down, _4, _,       _, _7, Down, Up, _, _,
-                   _, Esc, End,       Esc, RESET,
+                   _, Esc, End,       Esc, STRES,
                  DUMB_NUM, _,       _
   ),
 
@@ -212,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  _,
     BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
     _,     Tag, tag, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
-                           _, QK_LLCK, _,     _, RESET,
+                           _, QK_LLCK, _,     _, STRES,
                               _, Percent,     _
   ),
 
@@ -221,7 +221,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _,     _,  Tab,   Up,  End,      Esc,            Enter, _,     Up,    PgUp,     _,    _,
     _,     _, Left, Down, Right,       _,            _,     Left,  Down,  Right,    _,    _,
     _,     _,     _,    PgUp, PgDn,    _,            _,     PgDn,   _,     _,     _,    _,
-                          Bs, QK_LLCK, _,            _, RESET,
+                          Bs, QK_LLCK, _,            _, STRES,
                         KC_BTN1, KC_BTN2,            _
    ),
 
@@ -233,7 +233,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, _, _,
     //   --   <-   ==   ->   ''       - [ ] {   }     {}           <>
     _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
-               _, _, _,   RESET, RESET,
+               _, _, _,   STRES, STRES,
                   _, _,    _
    ),
 
@@ -242,7 +242,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, LALT(F), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), oCA, LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
     _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CODE), oCA, _, _, _,
-                 _, oC, LALT(Space),            RESET, _,
+                 _, oC, LALT(Space),            STRES, _,
                    QK_LLCK, LALT(Z),            _
   ),
 
@@ -251,7 +251,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,    KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _,
     _, KC_F21, KC_F22, KC_F23, KC_F24, _,         _, _, _, _, _, _,
     _, _, _, _, _, _,    _, _, _, _, _, _,
-                            _, _, _,            RESET, _,
+                            _, _, _,            STRES, _,
                          QK_LLCK, _,            _
   ),
 };
@@ -396,7 +396,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case Esc:
             reset_kb_state();
             return true;
-        case RESET:
+        case STRES:
             reset_kb_state();
             return false;
         case KC_B:
