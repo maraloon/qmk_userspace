@@ -179,9 +179,9 @@ enum my_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     VOLTR,    SCALE,      _,            _,     _,     _,     _,     _,   OSL(FN),
-    _,     B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   _,
+    _,     B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   Lets,
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-    _,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, KC_BTN2,
+  KC_BTN2, Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, Lets,
                   C(Bs), Space, J,                   Tab, OSL(NAV),
                               KC_BTN1, Z,            LANG
   ),
