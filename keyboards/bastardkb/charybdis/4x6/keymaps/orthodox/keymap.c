@@ -200,11 +200,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
-    _, _, Left, _0, Right, Esc,        Enter,  _, _9, _, _, _,
-  Tab, oC, _1, _2, _3, G,              _, _5, _6, _8, STRES, _,
-  _, Esc, Up, Down, _4, _,             _, _7, _, _, _, _,
-                   _, Esc, End,       Esc, STRES,
-                 DUMB_NUM, _,       _
+_, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, _, _,
+  Tab, oC, _1, _2, _3, G,            PgUp,   _5, _6, _8, STRES, _,
+  _, PgDn, Up, Down, _4, End,        PgDn, _7, OSL(SYM), oC, _, _,
+            Bs, DUMB_NUM, _,         _, STRES,
+                       _, _,         _
   ),
 
   [SYM] = LAYOUT(
@@ -270,7 +270,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case OSM(MOD_LSFT):
-            return TAPPING_TERM + 1250;
+            return TAPPING_TERM + 300;
         default:
             return TAPPING_TERM;
     }
