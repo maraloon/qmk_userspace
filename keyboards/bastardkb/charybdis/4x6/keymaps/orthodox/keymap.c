@@ -201,8 +201,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
 _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), _,
-  Tab, oC, _1, _2, _3, G,            PgUp,   _5, _6, _8, STRES, _,
-  _, PgDn, Up, Down, _4, End,        PgDn, _7, OSL(SYM), oC, _, _,
+  _, _, _1, _2,      _3,  End,       _, _5, _6, _8, STRES, _,
+  _, PgDn, Up, Down, _4, _,          _, _7, OSL(SYM), oC, _, _,
             Bs, DUMB_NUM, _,         _, STRES,
                        _, _,         _
   ),
