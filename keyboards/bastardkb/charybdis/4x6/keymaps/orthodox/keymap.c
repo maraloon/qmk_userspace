@@ -161,7 +161,7 @@ enum my_keycodes {
 #define Caret KC_CIRC
 #define Dollar KC_DLR
 
-#define Lets KC_F12
+#define Lets LGUI(KC_F)
 
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
