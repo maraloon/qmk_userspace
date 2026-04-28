@@ -604,7 +604,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, NUM));
+    charybdis_set_pointer_dragscroll_enabled(layer_state_cmp(state, SYM));
     return state;
 }
 
