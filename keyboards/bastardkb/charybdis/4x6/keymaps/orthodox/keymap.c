@@ -208,10 +208,10 @@ _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), _,
   ),
 
   [SYM] = LAYOUT(
-    QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
+    _, _, Array,  array, _, _,            _, _, _, _,   _,  _,
       _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  _,
     BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
-    _,     Tag, tag, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Quest,  Exlm,  Grave,
+    _,     Quest,  Exlm, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Tag, tag,  Grave,
                            _, QK_LLCK, _,     _, STRES,
                               _, Percent,     _
   ),
