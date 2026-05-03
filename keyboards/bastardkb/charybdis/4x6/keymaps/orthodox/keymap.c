@@ -210,9 +210,9 @@ _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), _,
   [SYM] = LAYOUT(
     _, _, Array,  array, _, _,            _, _, _, _,   _,  _,
       _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  _,
-    BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  array, Pipe,
+    BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  STRES, Pipe,
     _,     Quest,  Exlm, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Tag, tag,  Grave,
-                           _, QK_LLCK, _,     _, STRES,
+                           _, QK_LLCK, _,     STRES, STRES,
                               _, Percent,     _
   ),
 
