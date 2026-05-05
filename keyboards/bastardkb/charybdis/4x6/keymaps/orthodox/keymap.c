@@ -179,7 +179,7 @@ enum my_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     _,     _,     _,     VOLTR,    SCALE,      _,            _,     _,     _,     _,     _,   OSL(FN),
-    Bs,    B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   End,
+    Bs,    B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   OSL(CODE),
     oS,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
   KC_BTN2, Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, End,
                   C(Bs), Space, J,                   Tab, _,
@@ -230,7 +230,7 @@ _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), _,
     // []    &&    ||   ()        ""
     _, cArr, cAND, cOR, cBracket, cQQ,    _, _, _, _, _, _,
     //   !=   <=   :=   >=    ++                ...   ```
-    cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, _, _,
+    cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, STRES, _,
     //   --   <-   ==   ->   ''       - [ ] {   }     {}           <>
     _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   STRES, STRES,
