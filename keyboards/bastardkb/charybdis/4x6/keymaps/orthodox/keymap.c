@@ -39,6 +39,8 @@ enum my_keycodes {
     cEE,
     cCC,
     cMM,
+    cLL,
+    cRR,
     cPP,
     cDDD,
 
@@ -227,11 +229,11 @@ _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), _,
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
-    // []    &&    ||   ()        ""
-    _, cArr, cAND, cOR, cBracket, cQQ,    _, _, _, _, _, _,
-    //   !=   <=   :=   >=    ++                ...   ```
+//     []    &&    ||   ()        ""         <<   >>
+    _, cArr, cAND, cOR, cBracket, cQQ,    _, cLL, cRR, _, _, _,
+//  //   !=   <=   :=   >=   ++                 ...   ```
     cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, STRES, _,
-    //   --   <-   ==   ->   ''       - [ ] {   }     {}           <>
+//       --   <-   ==   ->   ''         -[]   { }       {}           <>
     _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   STRES, STRES,
                   _, _,    _
@@ -494,6 +496,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case cMM:
             SEND_STRING("--");
+            reset_kb_state();
+            return false;
+        case cLL:
+            SEND_STRING("<<");
+            reset_kb_state();
+            return false;
+        case cRR:
+            SEND_STRING(">>");
             reset_kb_state();
             return false;
         case cPP:
