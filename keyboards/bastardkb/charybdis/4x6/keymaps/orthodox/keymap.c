@@ -231,10 +231,10 @@ _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), OSL(CODE),
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
 //     []    &&    ||   ()        ""         <<   >>
     _, cArr, cAND, cOR, cBracket, cQQ,    _, cLL, cRR, _, _, _,
-//  //   !=   <=   :=   >=   ++                 ...   ```
-    cCC, cNE, cLE, cDE, cGE, cPP,         _,    cDDD, cCode, _, STRES, _,
-//       --   <-   ==   ->   ''         -[]   { }       {}           <>
-    _,   cMM, cLM, cEE, cMR, cSS,       cSAA, cBorrow2, cBorrow, _, cTag, _,
+//  //   !=   <=   :=   >=   ''                 ...   ```
+    cCC, cNE, cLE, cDE, cGE, cSS,         _,    cDDD, cCode, _, STRES, _,
+//       --   <-   ==   ->   ++         -[]   { }       {}           <>
+    _,   cMM, cLM, cEE, cMR, cPP,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   STRES, STRES,
                   _, _,    _
    ),
