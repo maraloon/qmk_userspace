@@ -181,9 +181,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
     VOLTR, Z,         _, _,    _,  SCALE,            _,     J,     _,     DUMB_NUM,  oC,   OSL(FN),
     Tab,   B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   OSL(CODE),
-    Bs,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
+ C(Bs),    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
   KC_BTN2, Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, End,
-                       C(Bs), Space, Tab,            _, _,
+                          Bs, Space, Tab,            _, _,
                         KC_BTN1, KC_LSFT,            LANG
   ),
 
