@@ -5,7 +5,6 @@ enum charybdis_keymap_layers {
     RUS,
     NUM,
     SYM,
-    NAV,
     CODE,
     TMUX,
     FN,
@@ -180,12 +179,12 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    _,     _,     _,     VOLTR,    SCALE,      _,            _,     _,     _,     _,     _,   OSL(FN),
+    VOLTR, Z,         _, _,    _,  SCALE,            _,     J,     _,     DUMB_NUM,  oC,   OSL(FN),
     Tab,   B,     L,     D,    W,    Esc,            Enter, F,     O,     U,     OSL(TMUX),   OSL(CODE),
     Bs,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
   KC_BTN2, Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, End,
-                         C(Bs), Space, J,            oS, _,
-                              KC_BTN1, Z,            LANG
+                       C(Bs), Space, Tab,            _, _,
+                        KC_BTN1, KC_LSFT,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -203,29 +202,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUM] = LAYOUT(
     QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, _, _, RGB_TOG,  QK_BOOT,
 _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), OSL(CODE),
-  _, _, _1, _2,      _3,  End,       _, _5, _6, _8, STRES, _,
+_, DUMB_NUM, _1, _2,      _3,  End,       _, _5, _6, _8, STRES, _,
   _, PgDn, Up, Down, _4, _,          _, _7, OSL(SYM), oC, _, _,
-            Bs, DUMB_NUM, _,         _, STRES,
+            _, DUMB_NUM, _,         _, STRES,
                        _, _,         _
   ),
 
   [SYM] = LAYOUT(
-    _, _, Array,  array, _, _,            _, _, _, _,   _,  _,
+    _, _, Array,  array, Percent, _,            _, _, _, _,   _,  _,
       _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  OSL(CODE),
     BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  STRES, Pipe,
     _,     Quest,  Exlm, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Tag, tag,  Grave,
                            _, QK_LLCK, _,     STRES, STRES,
-                              _, Percent,     _
+                              _, _,     _
   ),
-
-  [NAV] = LAYOUT(
-    QK_BOOT, RGB_TOG, _,   _,    _, EE_CLR,            EE_CLR, _, _, _,   RGB_TOG,  QK_BOOT,
-    _,     _,  Tab,   Up,  End,      Esc,            Enter, _,     Up,    PgUp,     _,    _,
-    _,     _, Left, Down, Right,       _,            _,     Left,  Down,  Right,    _,    _,
-    _,     _,     _,    PgUp, PgDn,    _,            _,     PgDn,   _,     _,     _,    _,
-                          Bs, QK_LLCK, _,            _, STRES,
-                        KC_BTN1, KC_BTN2,            _
-   ),
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ , _ ,
@@ -243,7 +233,7 @@ _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), OSL(CODE),
     _,     _,     _,     _,     _,     _,            _,     _,     _,     _,     _,   _,
     _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, OSL(CODE), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), oCA, LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
-    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), OSL(CODE), oCA, _, _, _,
+    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), LALT(P), oCA, _, _, _,
                  _, oC, LALT(Space),            STRES, _,
                    QK_LLCK, LALT(Z),            _
   ),
@@ -282,6 +272,7 @@ bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
         case KC_A ... KC_Z:
+        case KC_TAB:
             add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
             return true;
 
