@@ -179,8 +179,8 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    VOLTR, _,         _, _,    Z,  SCALE,            _,     J,     Enter,    oC,    oC,   OSL(FN),
-    Tab,   B,     L,     D,    W,    Esc,            Minus, F,     O,     U,     OSL(TMUX),   OSL(CODE),
+    VOLTR, _,         _, Esc,  Z,  SCALE,            _,     J,     Enter,    oC,    oC,   OSL(FN),
+    Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   OSL(CODE),
  C(Bs),    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
   KC_BTN2, Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, End,
                           Bs, Space, Tab,            Enter, _,
@@ -200,8 +200,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NUM] = LAYOUT(
-    QK_BOOT, RGB_TOG, _,      _,     _, EE_CLR,           EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
-_, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), OSL(CODE),
+    QK_BOOT, RGB_TOG, _, Esc, _, EE_CLR,           EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
+_, PgUp, Left, _0, Right, Dot,       Minus, _,   _9, _, OSL(TMUX), OSL(CODE),
 _, DUMB_NUM, _1, _2,      _3,  End,       _, _5, _6, _8, STRES, _,
   _, PgDn, Up, Down, _4, _,          _, _7, OSL(SYM), oC, _, _,
                 Bs, Space, _,         _, _,
@@ -209,8 +209,8 @@ _, DUMB_NUM, _1, _2,      _3,  End,       _, _5, _6, _8, STRES, _,
   ),
 
   [SYM] = LAYOUT(
-    _, _, Array,  array, Percent, _,            _, _, Enter, _,   _,  _,
-      _, Star, Slash, Caret, Dollar, Esc,     Enter, Bracket, bracket, Borrow, borrow,  OSL(CODE),
+    _, _, Array,  array, Esc, _,            _, _, Enter, _,   _,  _,
+      _, Star, Slash, Caret, Dollar, Percent,     Enter, Bracket, bracket, Borrow, borrow,  OSL(CODE),
     BSlash, Equal, At, Unds, Minus, Hash,     Amp, Dot,   Comma,  Array,  STRES, Pipe,
     _,     Quest,  Exlm, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  Tag, tag,  Grave,
                            _, QK_LLCK, _,     STRES, STRES,
