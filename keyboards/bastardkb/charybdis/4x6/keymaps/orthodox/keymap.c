@@ -204,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 _, PgUp, Left, _0, Right, Esc,       Enter, _,   _9, _, OSL(TMUX), OSL(CODE),
 _, DUMB_NUM, _1, _2,      _3,  End,       _, _5, _6, _8, STRES, _,
   _, PgDn, Up, Down, _4, _,          _, _7, OSL(SYM), oC, _, _,
-            _, DUMB_NUM, _,         _, STRES,
+                Bs, Space, _,         _, _,
                        _, _,         _
   ),
 
@@ -401,8 +401,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_LEFT:
         case KC_RIGHT:
         case KC_G:
-        case KC_SPC:
-        case Bs:
         case Enter:
         // case KC_ESC:
         case PgUp:
