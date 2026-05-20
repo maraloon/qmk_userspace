@@ -292,6 +292,7 @@ bool caps_word_press_user(uint16_t keycode) {
 bool          smart_num_on     = true;
 bool trackball_volume = false;
 bool trackball_scale = false;
+bool lang_ru = false;
 
 void switch_to_english(void) {
     clear_oneshot_mods(); // In case shift is osm'ed (see DotNS, etc)
@@ -323,18 +324,12 @@ void reset_kb_state(void) {
     smart_num_on = true;
     trackball_volume = false;
     trackball_scale = false;
+    lang_ru = false;
     layer_move(ABC);
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LANG:
-            if (record->event.pressed) {
-                switch_to_russian();
-            } else {
-                switch_to_english();
-            }
-            return false;
         case OSL(CODE):
             if (record->event.pressed) {
                 reset_kb_state();
@@ -347,6 +342,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if (!record->event.pressed) return true;
     switch (keycode) {
+        case LANG:
+            lang_ru = !lang_ru;
+            if (lang_ru) {
+                switch_to_russian();
+            } else {
+                switch_to_english();
+            }
+            return false;
         case VOLTR:
             trackball_volume = !trackball_volume;
             return false;
