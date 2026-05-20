@@ -18,6 +18,10 @@ enum my_keycodes {
     DELETE_LINE,
     LANG,
     VOLTR,
+    CommaS,
+    DotNS,
+    QuesNS,
+    ExlmNS,
 
     OS_SHFT,
     OS_CTRL,
@@ -168,21 +172,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   N,     R, S_PTR,     T,     G,            M,     A,     E,     I,     O,    _,
     _,     Z,     X,     C,     D,     V,            K,     H,     Dot, Comma, Leader, _,
 
-                    DelWord, SpaceNUM, _,            EnterNAV, EscSYM,
+                DelWord, SpaceNUM, DotNS,            EnterNAV, EscSYM,
                                 VOLTR, _,            LANG
   ),
 
   [RUS] = LAYOUT(
     _,     _,     _,    _,     _,     _,            _,     _,     _,     _,     _,    _,
     //     Э      Ц      У      К      Е             Р      Г      Ш      Й      З
-    Enter, Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,   _,
+    _,     Q,     W,     F,     P,     B,            J,     L,     U,     Y,    rZ,   _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
     rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  rT,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
-    Exlm,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ, Question,
+  ExlmNS,  Z,     X,     C,     D,     V,            K,     H,     O,    rU,    rJ,   _,
 
-                  Comma, SpaceShift, Dot,            _, _,
-                                 Dash, _,            _
+               CommaS, SpaceShift, DotNS,            Enter, _,
+                            Dash, QuesNS,            _
   ),
 
   [NUM] = LAYOUT(
@@ -316,6 +320,29 @@ bool     process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DELETE_LINE:
             if (record->event.pressed) {
                 SEND_STRING(SS_LSFT(SS_TAP(X_HOME)) SS_TAP(X_BSPC));
+            }
+            return false;
+        case CommaS:
+            if (record->event.pressed) {
+                SEND_STRING(", ");
+            }
+            return false;
+        case DotNS:
+            if (record->event.pressed) {
+                SEND_STRING(". ");
+                add_oneshot_mods(MOD_BIT(KC_LSFT));
+            }
+            return false;
+        case QuesNS:
+            if (record->event.pressed) {
+                SEND_STRING("? ");
+                add_oneshot_mods(MOD_BIT(KC_LSFT));
+            }
+            return false;
+        case ExlmNS:
+            if (record->event.pressed) {
+                SEND_STRING("! ");
+                add_oneshot_mods(MOD_BIT(KC_LSFT));
             }
             return false;
         case LANG:
