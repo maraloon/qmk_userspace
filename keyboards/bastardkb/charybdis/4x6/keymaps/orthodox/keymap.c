@@ -220,9 +220,9 @@ _, DUMB_NUM, _1, _2,      _3,  _,       _, _5, _6, _8, STRES, _,
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , Enter , _ , _ , _ ,
 //     []    &&    ||   ()        ""         <<   >>
-    _, cArr, cAND, cOR, cBracket, cQQ,    _, cLL, cRR, _, _, _,
+    _, cArr, cAND, cOR, cBracket, cQQ,   cBorrow2, cLL, cRR, _, _, _,
 //  //   !=   <=   :=   >=   ''                 ...   ```
-    cCC, cNE, cLE, cDE, cGE, cSS,         _,    cDDD, cCode, _, STRES, _,
+    cCC, cNE, cLE, cDE, cGE, cSS,       cSAA,    cDDD, cCode, _, STRES, _,
 //       --   <-   ==   ->   ++         -[]   { }       {}           <>
     _,   cMM, cLM, cEE, cMR, cPP,       cSAA, cBorrow2, cBorrow, _, cTag, _,
                _, _, _,   STRES, STRES,
