@@ -290,6 +290,7 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 bool          smart_num_on     = true;
+bool number_not_pressed = true;
 bool trackball_volume = false;
 bool trackball_scale = false;
 
@@ -392,23 +393,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case STRES:
             reset_kb_state();
             return false;
-        case KC_B:
-        case KC_W:
         case KC_HOME:
         case KC_END:
-        case KC_UP:
-        case KC_DOWN:
-        case KC_LEFT:
-        case KC_RIGHT:
         case KC_G:
         case Enter:
         // case KC_ESC:
         case PgUp:
         case PgDn:
             if (is_layer_locked(NUM) && smart_num_on) {
-            tap_code16(keycode);
+                tap_code16(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
+                return false;
+            }
+            return true;
+        case KC_UP:
+        case KC_DOWN:
+        case KC_LEFT:
+        case KC_RIGHT:
+            if (is_layer_locked(NUM) && smart_num_on) {
+                tap_code16(keycode);
+                if (!number_not_pressed) {
+                    number_not_pressed = true;
+                    layer_lock_off(NUM);
+                    layer_move(ABC);
+                }
+                return false;
+            }
+            return true;
+        case KC_0:
+        case KC_1:
+        case KC_2:
+        case KC_3:
+        case KC_4:
+        case KC_5:
+        case KC_6:
+        case KC_7:
+        case KC_8:
+        case KC_9:
+            if (is_layer_locked(NUM) && smart_num_on && number_not_pressed) {
+                number_not_pressed = false;
+                tap_code16(keycode);
                 return false;
             }
             return true;
