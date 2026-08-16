@@ -180,11 +180,11 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    Hash, Percent,  Slash, Comma, Unds,  Star,       VOLTR, Exlm,  Enter, Quest,     SCALE,   End,
+    Hash, Percent,  Slash, Esc, Unds,  Star,         VOLTR, Exlm,  Enter, Quest,     SCALE,   End,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
  C(Bs),    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
-                   Bs, LT(NUM, Space), J,            LT(SYM, Esc), KC_BTN2,
+                   Bs, LT(NUM, Space), J,            Comma, KC_BTN2,
                              KC_BTN1, oS,            LANG
   ),
 
@@ -201,11 +201,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NUM] = LAYOUT(
-    Hash, Percent,  Slash, Comma, Unds,  Star,       _, Exlm,  Enter, Quest,    _,   OSL(FN),
+    Hash, Percent,  Slash, Esc, Unds,  Star,       _, Exlm,  Enter, Quest,    _,   OSL(FN),
     Tab, Left, Up, _0, Down, Dot,                    Minus, _, _9, _, OSL(TMUX), OSL(CODE),
     C(Bs), DUMB_NUM, _1, _2, _3, Right,              _, _5, _6, _8, Right, DDot,
     _, Left, PgUp, PgDn, _4, STRES,                  _, _7, OSL(SYM), _, Win, End,
-                           Bs, Space, oS,            Esc, STRES,
+                           Bs, Space, oS,            Comma, STRES,
                                     _, _,            _
   ),
 
