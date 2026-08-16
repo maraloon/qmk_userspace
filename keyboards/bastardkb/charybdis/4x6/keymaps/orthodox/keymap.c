@@ -162,7 +162,8 @@ enum my_keycodes {
 #define Caret KC_CIRC
 #define Dollar KC_DLR
 
-#define Lets LGUI(KC_F)
+#define Win LGUI(KC_W)
+#define Lets LGUI(KC_L)
 
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
@@ -179,16 +180,16 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    VOLTR, Unds,  Slash, Esc,  Z,  SCALE,          RGB_TOG, J,     Enter, Comma,    oC,   OSL(FN),
-    Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   OSL(CODE),
- C(Bs),    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   oS,
-  KC_BTN2, Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Lets, End,
-                          Bs, Space, Tab,            Enter, _,
-                        KC_BTN1, KC_LSFT,            LANG
+    Hash, Percent,  Slash, Comma, Unds,  Star,       VOLTR, Exlm,  Enter, Quest,     SCALE,   End,
+    Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
+ C(Bs),    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
+    Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
+                   Bs, LT(NUM, Space), J,            LT(SYM, Esc), KC_BTN2,
+                             KC_BTN1, oS,            LANG
   ),
 
   [RUS] = LAYOUT(
-    _,     _,     _,    _,      _,     _,            _,     _,     _,     _,     _,    _,
+    QK_BOOT, RGB_TOG, _, Esc, _, EE_CLR,           EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
     //     Э      Ц     У       К      Е             Н      Г      Ш      Й      З
     _,     Q,     W,    F,      P,     B,            J,     L,     U,     Y,    rZ,    _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
@@ -200,21 +201,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NUM] = LAYOUT(
-    QK_BOOT, RGB_TOG, _, Esc, _, EE_CLR,           EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
-_, PgUp, Left, _0, Right, Dot,       Minus, _,   _9, _, OSL(TMUX), OSL(CODE),
-C(Bs), DUMB_NUM, _1, _2,      _3,  _,       _, _5, _6, _8, STRES, _,
-  _, PgDn, Up, Down, _4, _,          _, _7, OSL(SYM), _, _, End,
-                Bs, Space, _,         _, _,
-                       _, _,         _
+    Hash, Percent,  Slash, Comma, Unds,  Star,       _, Exlm,  Enter, Quest,    _,   OSL(FN),
+    Tab, Left, Up, _0, Down, Dot,                    Minus, _, _9, _, OSL(TMUX), OSL(CODE),
+    C(Bs), DUMB_NUM, _1, _2, _3, Right,              _, _5, _6, _8, Right, DDot,
+    _, Left, PgUp, PgDn, _4, STRES,                  _, _7, OSL(SYM), _, Win, End,
+                           Bs, Space, oS,            Esc, STRES,
+                                    _, _,            _
   ),
 
   [SYM] = LAYOUT(
-    _, Star, Tag, tag, Esc, _,                   _, _, Enter, _,   _,  _,
-_, Borrow, borrow, Caret, Dollar, Percent,    Pipe, _, _, _, _,  OSL(CODE),
-BSlash, Equal, At, Bracket, bracket, Hash,    Amp, Array,  array,  Star,  STRES, _,
- Grave, Quest,  Exlm, DQuote, Quote, Plus,     Tilda, DDot,  DComm,  OSL(NUM), _,  _,
-                           _, QK_LLCK, _,     STRES, STRES,
-                              _, _,     _
+    _, _, Tag, tag, _, _,                            _, _, _, _,   _,  _,
+Tilda, Borrow, borrow, Caret, Dollar, _,             _, _, _, _, KC_LALT,  OSL(CODE),
+BSlash, Equal, At, Bracket, bracket, Pipe,           _, _,  _,  _,  STRES, _,
+ Grave, Array,  array, DQuote, Quote, Plus,          _, DComm,  _,  OSL(NUM), _,  _,
+                          Bs, QK_LLCK, Amp,          LANG, STRES,
+                                      _, _,          _
   ),
 
   [CODE] = LAYOUT(
@@ -231,10 +232,10 @@ BSlash, Equal, At, Bracket, bracket, Hash,    Amp, Array,  array,  Star,  STRES,
 
   [TMUX] = LAYOUT(
     _,     LALT(Left),     LALT(Up),     LALT(Down),     LALT(Right),     _,            _,     LSA(Left),     LSA(Up),     LSA(Down),     LSA(Right),   _,
-    _, LALT(B), LALT(L), LALT(D), LALT(W),     _,            _, OSL(CODE), LALT(O), LALT(U), LALT(J),   _,
+    _, LALT(B), LALT(L), LALT(D), LALT(W),     _,           oCA, OSL(CODE), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
-    _, LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),       LALT(K), oCA, LALT(P), _, _, _,
-                 _, QK_LLCK, LALT(Space),            STRES, _,
+    LALT(Z), LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),        LALT(K), oCA, LALT(P), _, _, _,
+                 LALT(Space), oCA, QK_LLCK,             STRES, _,
                    QK_LLCK, LALT(Z),            _
   ),
 
