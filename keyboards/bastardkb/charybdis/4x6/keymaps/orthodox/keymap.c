@@ -201,10 +201,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NUM] = LAYOUT(
-    Hash, Percent,  Slash, Esc, Unds,  Star,       _, Exlm,  Enter, Quest,    _,   OSL(FN),
+    Hash, Percent,  Slash, Esc, Unds,  Star,         _, Exlm,  Enter, Quest,    _,   OSL(FN),
     Tab, Left, Up, _0, Down, Dot,                    Minus, _, _9, _, OSL(TMUX), OSL(CODE),
-    C(Bs), DUMB_NUM, _1, _2, _3, Right,              _, _5, _6, _8, Right, DDot,
-    _, Left, PgUp, PgDn, _4, STRES,                  _, _7, OSL(SYM), _, Win, End,
+    C(Bs), Left, _1, _2, _3, Right,                  STRES, _5, _6, _8, STRES, DDot,
+    _, STRES, PgUp, PgDn, _4, STRES,                 _, _7, OSL(SYM), _, Win, End,
                            Bs, Space, oS,            STRES, STRES,
                                     _, _,            _
   ),
