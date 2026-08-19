@@ -200,12 +200,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     Minus, OSM(MOD_LSFT),            _
   ),
 
+  // [NUM] = LAYOUT(
+  //   Hash, Percent,  Slash, Esc, Unds,  Star,         _, Exlm,  Enter, Quest,    _,   OSL(FN),
+  //   Tab, Left, Up, _0, Down, Dot,                    Minus, _, _9, _, OSL(TMUX), OSL(CODE),
+  //   C(Bs), Left, _1, _2, _3, Right,                  STRES, _5, _6, _8, STRES, DDot,
+  //   _, STRES, PgUp, PgDn, _4, STRES,                 _, _7, OSL(SYM), _, Win, End,
+  //                          Bs, Space, oS,            STRES, STRES,
+  //                                   _, _,            _
+  // ),
+
   [NUM] = LAYOUT(
     Hash, Percent,  Slash, Esc, Unds,  Star,         _, Exlm,  Enter, Quest,    _,   OSL(FN),
-    Tab, Left, Up, _0, Down, Dot,                    Minus, _, _9, _, OSL(TMUX), OSL(CODE),
-    C(Bs), Left, _1, _2, _3, Right,                  STRES, _5, _6, _8, STRES, DDot,
-    _, STRES, PgUp, PgDn, _4, STRES,                 _, _7, OSL(SYM), _, Win, End,
-                           Bs, Space, oS,            STRES, STRES,
+    Tab, _, _, Up, _, Dot,                           Minus, _1, _2, _3, OSL(TMUX), OSL(CODE),
+    C(Bs), _, Left, Down, Right, _,                  STRES, _4, _5, _6, _0, DDot,
+    _, STRES, PgUp, PgDn, _, _,                      OSL(SYM), _7, _8, _9, Win, End,
+                           Bs, Space, oS,            STRES, _,
                                     _, _,            _
   ),
 
