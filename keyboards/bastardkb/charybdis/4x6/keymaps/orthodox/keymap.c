@@ -202,7 +202,7 @@ Hash, Percent, Slash, Caret, Dollar, Star,           Bs, Exlm, KC_BTN2, Quest, J
 
   [NUM] = LAYOUT(
     Hash, Percent,  Slash, Esc, Unds,  Star,         _, Exlm,  Enter, Quest,    _,   OSL(FN),
-    Tab, _, _, _0, _, Dot,                           Minus, _, _9, _, OSL(TMUX), OSL(CODE),
+    Tab, _, _, _0, _, Dot,                           Minus, _, _9, _, OSL(TMUX), oC,
     C(Bs), DUMB_NUM, _1, _2, _3, _,                  STRES, _5, _6, _8, STRES, DDot,
     _, _, PgUp, PgDn, _4, _,                         _, _7, OSL(SYM), _, Win, End,
                           Bs, Space, oS,             Enter, Esc,
