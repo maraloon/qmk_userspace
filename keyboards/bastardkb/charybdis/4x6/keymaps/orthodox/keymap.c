@@ -232,9 +232,9 @@ Grave, Array, array, Left, Right, Plus,              _, Quote, DQuote,  OSL(NUM)
 
   [TMUX] = LAYOUT(
     _,     LALT(Left),     LALT(Up),     LALT(Down),     LALT(Right),     _,            _,     LSA(Left),     LSA(Up),     LSA(Down),     LSA(Right),   _,
-    _, LALT(B), LALT(L), LALT(D), LALT(W),     _,           oCA, OSL(CODE), LALT(O), LALT(U), LALT(J),   _,
+    _, LALT(B), LALT(L), LALT(D), LALT(W),     _,           _, OSL(CODE), LALT(O), LALT(U), LALT(J),   _,
     OS_LSA, LALT(N), LALT(R), LALT(T), LALT(St), LALT(G),   LALT(Y), LALT(H), LALT(A), LALT(E), LALT(I),   OS_LSA,
-    LALT(Z), LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),        LALT(K), oCA, LALT(P), _, _, _,
+    LALT(Z), LALT(Q), LALT(X), LALT(M), LALT(Ct), LALT(V),        LALT(K), LALT(P), LALT(P), _, _, _,
                  LALT(Space), oCA, QK_LLCK,             STRES, _,
                    QK_LLCK, LALT(Z),            _
   ),
