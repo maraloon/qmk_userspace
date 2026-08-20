@@ -197,7 +197,7 @@ Hash, Percent, Slash, Caret, Dollar, Star,           Bs, Exlm, KC_BTN2, Quest, J
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
     rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
                     CommaS, Space, DotNS,            STRES, _,
-                    Minus, OSM(MOD_LSFT),            _
+                    Minus, OSM(MOD_LSFT),            LANG
   ),
 
   [NUM] = LAYOUT(
@@ -219,7 +219,7 @@ Grave, Array, array, Left, Right, Plus,              _, Quote, DQuote,  OSL(NUM)
   ),
 
   [CODE] = LAYOUT(
-    _ , _ , _ , _ , _ , _ , _ , _ , Enter , _ , _ , _ ,
+    QK_BOOT, RGB_TOG, _, Esc, _, EE_CLR,           EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
 //     []    &&    ||   ()        ""         <<   >>
     _, cArr, cAND, cOR, cBracket, cQQ,   cBorrow2, cLL, cRR, _, _, _,
 //  //   !=   <=   :=   >=   ''                 ...   ```
@@ -331,13 +331,6 @@ void reset_kb_state(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LANG:
-            if (record->event.pressed) {
-                switch_to_russian();
-            } else {
-                switch_to_english();
-            }
-            return false;
         case OSL(CODE):
             if (record->event.pressed) {
                 reset_kb_state();
@@ -350,6 +343,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if (!record->event.pressed) return true;
     switch (keycode) {
+        case LANG:
+            if (is_layer_locked(RUS)) { // to ENG
+                clear_oneshot_mods(); // In case shift is osm'ed (see DotNS, etc)
+                SEND_STRING(SS_TAP(X_F13));
+                layer_lock_off(RUS);
+            } else { // to RUS
+                SEND_STRING(SS_TAP(X_F14));
+                layer_lock_on(RUS);
+            }
         case VOLTR:
             trackball_volume = !trackball_volume;
             return false;
