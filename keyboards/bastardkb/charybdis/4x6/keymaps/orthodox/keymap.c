@@ -180,11 +180,11 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-Hash, Percent, Slash, Caret, Dollar, Star,           Bs, Exlm, KC_BTN2, Quest, J, End,
+Hash, Percent, Slash, Caret, Dollar, Star,           KC_BTN2, Exlm, Unds, Quest, J, End,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
-  Unds,    N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
+    C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
-                     C(Bs), Space, Comma,            Enter, Esc,
+                     Bs, Space, Comma,            Enter, Esc,
                              KC_BTN1, oS,            LANG
   ),
 
