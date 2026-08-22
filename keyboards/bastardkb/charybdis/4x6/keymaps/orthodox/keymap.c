@@ -184,7 +184,7 @@ Hash, Percent, Slash, Caret, Dollar, Star,           KC_BTN2, Exlm, Unds, Quest,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
-                     Bs, Space, Comma,            Enter, Esc,
+                        Bs, Space, Comma,            Enter, Esc,
                              KC_BTN1, oS,            LANG
   ),
 
@@ -193,10 +193,10 @@ Hash, Percent, Slash, Caret, Dollar, Star,           KC_BTN2, Exlm, Unds, Quest,
     //     Э      Ц     У       К      Е             Н      Г      Ш      Й      З
     _,     Q,     W,    F,      P,     B,            J,     L,     U,     Y,    rZ,    _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
-    rF,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
+CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    rH,  QuesNS,
     //     Я      Ч      С      М      И             Т      Ь      Б      Ю      Ж
-    rT,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
-                    CommaS, Space, DotNS,            STRES, _,
+ DotNS,    Z,     X,    Ct,     D,     V,            K,     H,     O,    rU,    rJ,  ExlmNS,
+                           rF, Space, rT,            STRES, _,
                     Minus, OSM(MOD_LSFT),            _
   ),
 
