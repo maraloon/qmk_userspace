@@ -180,12 +180,12 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-Hash, Percent, Slash, Caret, Dollar, Star,           KC_BTN2, Exlm, Unds, Quest, J, End,
+    Hash, Percent, Slash, KC_BTN1, Unds, Star,       KC_BTN2, Exlm, Enter, Quest, J, End,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
-               Bs, LT(NUM, Space), Comma,            LT(SYM, Enter), Esc,
-                             KC_BTN1, oS,            LANG
+               Bs, LT(NUM, Space), Comma,            LT(SYM, Enter), _,
+                                 Esc, oS,            LANG
   ),
 
   [RUS] = LAYOUT(
@@ -206,16 +206,16 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
     C(Bs), DUMB_NUM, _1, _2, _3, _,                  STRES, _5, _6, _8, STRES, DDot,
     _, _, PgUp, PgDn, _4, _,                         _, _7, OSL(SYM), _, Win, End,
                           Bs, Space, oS,             Enter, Esc,
-                           VOLTR, SCALE,             _
+                             Esc, SCALE,             _
   ),
 
   [SYM] = LAYOUT(
     _, BSlash, Tag, tag, _, _,                       _, _, _, _,   _,  _,
-Tilda, Borrow, borrow, Bracket, bracket, Amp,        _, _, _, _, KC_LALT,  OSL(CODE),
-DComm, Equal, At, Up, Down, Pipe,                    _, _, _,  _,  STRES, _,
-Grave, Array, array, Left, Right, Plus,              _, Quote, DQuote,  OSL(NUM), _,  _,
+Tilda, Borrow, borrow, Caret, Dollar, Amp,           _, _, _, _, KC_LALT,  OSL(CODE),
+DComm, Equal, At, Up, Down, Pipe,                    _, VOLTR, SCALE,  _,  STRES, _,
+Grave, Array, array, Bracket, bracket, Plus,         _, Quote, DQuote,  OSL(NUM), _,  _,
                             Bs, QK_LLCK, _,          Enter, Esc,
-                              VOLTR, SCALE,          _
+                               Left, Right,          _
   ),
 
   [CODE] = LAYOUT(
