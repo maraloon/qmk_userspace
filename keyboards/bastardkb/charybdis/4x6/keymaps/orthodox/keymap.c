@@ -184,7 +184,7 @@ Hash, Percent, Slash, Caret, Dollar, Star,           KC_BTN2, Exlm, Unds, Quest,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
-                        Bs, Space, Comma,            Enter, Esc,
+               Bs, LT(NUM, Space), Comma,            LT(SYM, Enter), Esc,
                              KC_BTN1, oS,            LANG
   ),
 
