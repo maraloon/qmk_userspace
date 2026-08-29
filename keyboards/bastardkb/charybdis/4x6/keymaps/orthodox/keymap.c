@@ -202,9 +202,9 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
 
   [NUM] = LAYOUT(
     Hash, Percent,  Slash, _, Unds,  Star,           _, Exlm, Enter, Quest, _, OSL(FN),
-    Tab, _, _, _0, _, Dot,                           Minus, _, _9, _, OSL(TMUX), oC,
+    Tab, _, Left, _0, Right, Dot,                    Minus, _, _9, _, OSL(TMUX), oC,
     C(Bs), DUMB_NUM, _1, _2, _3, _,                  STRES, _5, _6, _8, STRES, DDot,
-    _, _, Up, Down, _4, _,                           _, _7, OSL(SYM), _, Win, End,
+    _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), _, Win, End,
                           Bs, Space, oS,             Esc, _,
                             Left, Right,             _
   ),
