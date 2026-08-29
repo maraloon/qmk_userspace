@@ -180,11 +180,11 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    Hash, Percent, Slash, Unds, _, Star,             KC_BTN2, Exlm, Enter, Quest, J, End,
+    Hash, Percent, Slash, Unds, _, Star,             DUMB_NUM, Exlm, Enter, Quest, J, KC_BTN2,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
-               Bs, LT(NUM, Space), Comma,            LT(SYM, Esc), _,
+               Bs, LT(NUM, Space), Comma,            LT(SYM, Esc), End,
                              KC_BTN1, oS,            LANG
   ),
 
@@ -203,7 +203,7 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
   [NUM] = LAYOUT(
     Hash, Percent,  Slash, _, Unds,  Star,           _, Exlm, Enter, Quest, _, OSL(FN),
     Tab, _, Left, _0, Right, Dot,                    Minus, _, _9, _, OSL(TMUX), oC,
-    C(Bs), DUMB_NUM, _1, _2, _3, _,                  STRES, _5, _6, _8, STRES, DDot,
+    C(Bs), DUMB_NUM, _1, _2, _3, DUMB_NUM,           STRES, _5, _6, _8, STRES, DDot,
     _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), _, Win, End,
                           Bs, Space, oS,             Esc, _,
                             Left, Right,             _
@@ -376,9 +376,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_lock_on(NUM);
             return false;
         case DUMB_NUM:
-            if (smart_num_on == false) {
+            if (!is_layer_locked(NUM)) {
                 reset_kb_state();
-            } else {
+                layer_lock_on(NUM);
+            }
+            if (smart_num_on == true) {
                 smart_num_on = false;
             }
             return false;
@@ -392,7 +394,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LT(SYM, Esc):
         case Esc:
             reset_kb_state();
-            return true;
+            tap_code16(keycode);
+            return false;
         case STRES:
             reset_kb_state();
             return false;
