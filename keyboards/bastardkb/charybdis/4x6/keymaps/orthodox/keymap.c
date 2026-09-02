@@ -163,7 +163,6 @@ enum my_keycodes {
 #define Dollar KC_DLR
 
 #define Win LGUI(KC_W)
-#define Lets LGUI(KC_L)
 
 #define rF KC_KP_1 // ф
 #define rJ KC_KP_2 // ж
@@ -183,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Hash, Percent, Slash, Unds, _, Star,             DUMB_NUM, Exlm, Enter, Quest, J, KC_BTN2,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
-    Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, Lets,
+    Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, _,
                Bs, LT(NUM, Space), Comma,            LT(SYM, Esc), End,
                              KC_BTN1, oS,            LANG
   ),
