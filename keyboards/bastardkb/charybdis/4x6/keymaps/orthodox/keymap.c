@@ -179,7 +179,7 @@ enum my_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ABC] = LAYOUT(
-    Hash, Percent, Slash, Unds, _, Star,             _, Exlm, Enter, Quest, J, KC_BTN2,
+    Hash, Percent, Slash, Unds, Equal, Star,         Tilda, Exlm, Enter, Quest, J, KC_BTN2,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, DQuote,
@@ -201,20 +201,20 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
 
   [NUM] = LAYOUT(
     Hash, Percent,  Slash, _, Unds,  Star,           _, Exlm, Enter, Quest, _, OSL(FN),
-    Tab, PgUp, Left, _0, Right, Dot,                 Minus, _, _9, _, OSL(TMUX), oC,
-    C(Bs), PgDn, _1, _2, _3, _,                      STRES, _5, _6, _8, _, DDot,
-    _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), DUMB_NUM, Win, End,
-                          Bs, Space, oS,             Esc, _,
-                            Left, Right,             _
+    Tab, PgUp, _, _0, _, Dot,                        Minus, _, _9, _, OSL(TMUX), oC,
+    C(Bs), PgDn, _1, _2, _3, G,                      STRES, _5, _6, _8, _, DDot,
+    _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), DUMB_NUM, Win, DQuote,
+                       Bs, Space, Comma,             Esc, Quote,
+                                   _, _,             End
   ),
 
   [SYM] = LAYOUT(
-    _, BSlash, Tag, tag, _, _,                       _, Exlm,  Enter, Quest,   _,  _,
-Tilda, Borrow, borrow, Caret, Dollar, Amp,           _, _, _, _, KC_LALT,  _,
-DComm, Equal, _, Up, Down, _,                        STRES, Pipe, _,  _,  _, _,
-Grave, Array, array, Bracket, bracket, Plus,         _, At, DQuote,  OSL(NUM), _,  _,
-                            Bs, QK_LLCK, _,          Esc, _,
-                              VOLTR, SCALE,          _
+    Hash, Percent, Slash, Unds, Equal, Star,         Tilda, Exlm, Enter, Quest, J, KC_BTN2,
+    _, Tag, tag, Amp, Pipe, _,                       _, _, _, _, KC_LALT,  _,
+BSlash, Borrow, borrow, Caret, Dollar, DComm,        STRES, _, _,  _,  _, _,
+Grave, Array, array, Bracket, bracket, Plus,         _, At, QK_LLCK,  OSL(NUM), _,  DQuote,
+                       Bs, Space, Comma,             Esc, Quote,
+                           VOLTR, SCALE,             _
   ),
 
   [CODE] = LAYOUT(
