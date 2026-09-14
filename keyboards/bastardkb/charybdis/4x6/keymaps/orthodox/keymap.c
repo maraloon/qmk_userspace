@@ -56,8 +56,9 @@ enum my_keycodes {
     cBorrow2,
     cBracket,
 
-    SMART_NUM, // smart num lock
-    DUMB_NUM,
+    MIXED_NUM, // enter NUM layer in mixed mode
+    NUM_LCK_RST, // double-tap to lock NUM in dumb mode, or exit it
+    SYM_LCK_RST, // double-tap OSL(SYM) to lock SYM, or exit it
 
     STRES,
 };
@@ -182,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Hash, Percent, Slash, Unds, Equal, Star,         Tilda, Exlm, Enter, Quest, J, KC_BTN2,
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
-    Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), SMART_NUM, Win, DQuote,
+    Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), MIXED_NUM, Win, DQuote,
                Bs, LT(NUM, Space), Comma,            LT(SYM, Esc), Quote,
                              KC_BTN1, oS,            LANG
   ),
@@ -202,8 +203,8 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
   [NUM] = LAYOUT(
     Hash, Percent,  Slash, _, Unds,  Star,           _, Exlm, Enter, Quest, _, OSL(FN),
     Tab, PgUp, _, _0, _, Dot,                        Minus, _, _9, _, OSL(TMUX), oC,
-    C(Bs), PgDn, _1, _2, _3, G,                      STRES, _5, _6, _8, _, DDot,
-    _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), DUMB_NUM, Win, DQuote,
+    C(Bs), PgDn, _1, _2, _3, G,                      _, _5, _6, _8, _, DDot,
+    _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), NUM_LCK_RST, Win, DQuote,
                        Bs, Space, Comma,             Esc, Quote,
                                    _, _,             End
   ),
@@ -211,8 +212,8 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
   [SYM] = LAYOUT(
     Hash, Percent, Slash, Unds, Equal, Star,         Tilda, Exlm, Enter, Quest, J, KC_BTN2,
     _, Tag, tag, Amp, Pipe, _,                       _, _, _, _, KC_LALT,  _,
-BSlash, Borrow, borrow, Caret, Dollar, DComm,        STRES, _, _,  _,  _, _,
-Grave, Array, array, Bracket, bracket, Plus,         _, At, QK_LLCK,  OSL(NUM), _,  DQuote,
+BSlash, Borrow, borrow, Caret, Dollar, DComm,        _, _, _,  _,  _, _,
+Grave, Array, array, Bracket, bracket, Plus,         _, At, SYM_LCK_RST, OSL(NUM), _,  DQuote,
                        Bs, Space, Comma,             Esc, Quote,
                            VOLTR, SCALE,             _
   ),
@@ -268,6 +269,14 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+static uint16_t sym_osl_press_time = 0;
+
+void oneshot_layer_changed_user(uint8_t layer) {
+    if (layer == SYM) {
+        sym_osl_press_time = timer_read();
+    }
+}
+
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
@@ -289,10 +298,14 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-bool          smart_num_on     = true;
+bool          mixed_num_on     = true;
 bool number_pressed = false;
 bool trackball_volume = false;
 bool trackball_scale = false;
+
+#define DOUBLE_TAP_TERM 400
+static uint16_t num_lck_rst_press_time    = 0;
+static bool     num_lck_rst_press_pending = false;
 
 void switch_to_english(void) {
     clear_oneshot_mods(); // In case shift is osm'ed (see DotNS, etc)
@@ -321,7 +334,7 @@ void reset_kb_state(void) {
     clear_oneshot_mods();
     caps_word_off();
     // leader_end(); // BUG: it's not for cancel leader seq
-    smart_num_on = true;
+    mixed_num_on = true;
     trackball_volume = false;
     trackball_scale = false;
     number_pressed = false;
@@ -347,6 +360,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
     }
 
+    if (record->event.pressed && num_lck_rst_press_pending && keycode != MIXED_NUM && keycode != NUM_LCK_RST) {
+        num_lck_rst_press_pending = false;
+    }
+
     if (!record->event.pressed) return true;
     switch (keycode) {
         case VOLTR:
@@ -370,17 +387,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("! ");
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return false;
-        case SMART_NUM:
+        case MIXED_NUM:
             reset_kb_state();
             layer_lock_on(NUM);
+            num_lck_rst_press_time    = timer_read();
+            num_lck_rst_press_pending = true;
             return false;
-        case DUMB_NUM:
-            if (!is_layer_locked(NUM)) {
+        case NUM_LCK_RST:
+            if (num_lck_rst_press_pending && timer_elapsed(num_lck_rst_press_time) <= DOUBLE_TAP_TERM) {
+                mixed_num_on = false;
+            } else {
                 reset_kb_state();
-                layer_lock_on(NUM);
             }
-            if (smart_num_on == true) {
-                smart_num_on = false;
+            num_lck_rst_press_pending = false;
+            return false;
+        case SYM_LCK_RST:
+            if (get_oneshot_layer() == SYM && is_oneshot_layer_active()
+                && !is_layer_locked(SYM)
+                && timer_elapsed(sym_osl_press_time) <= DOUBLE_TAP_TERM) {
+                layer_lock_on(SYM);
+            } else {
+                reset_kb_state();
             }
             return false;
         // case OSL(SYM):
@@ -409,7 +436,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // case Esc:
         // case PgUp:
         // case PgDn:
-            if (is_layer_locked(NUM) && smart_num_on) {
+            if (is_layer_locked(NUM) && mixed_num_on) {
                 tap_code16(keycode);
                 layer_lock_off(NUM);
                 layer_move(ABC);
@@ -420,7 +447,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // case KC_DOWN:
         // case KC_LEFT:
         // case KC_RIGHT:
-        //     if (is_layer_locked(NUM) && smart_num_on) {
+        //     if (is_layer_locked(NUM) && mixed_num_on) {
         //         tap_code16(keycode);
         //         if (number_pressed) {
         //             number_pressed = false;
@@ -441,7 +468,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_8:
         case KC_9:
             number_pressed = true;
-            if (is_layer_locked(NUM) && smart_num_on && !number_pressed) {
+            if (is_layer_locked(NUM) && mixed_num_on && !number_pressed) {
                 number_pressed = true;
                 tap_code16(keycode);
                 return false;
