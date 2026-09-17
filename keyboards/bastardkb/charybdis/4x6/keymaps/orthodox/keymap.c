@@ -220,8 +220,8 @@ Grave, Array, array, Bracket, bracket, Plus,         _, At, SYM_LCK_RST, OSL(NUM
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , Enter , _ , _ , _ ,
-//     []    &&    ||   ()        ""         <<   >>
-    _, cArr, cAND, cOR, cBracket, cQQ,   cBorrow2, cLL, cRR, _, _, _,
+//     []    &&    ||   ""        ()         <<   >>
+    _, cArr, cAND, cOR, cQQ, cBracket,   cBorrow2, cLL, cRR, _, _, _,
 //  //   !=   <=   :=   >=   ''                 ...   ```
     cCC, cNE, cLE, cDE, cGE, cSS,       cSAA,    cDDD, cCode, _, STRES, _,
 //       --   <-   ==   ->   ++         -[]   { }       {}           <>
@@ -426,12 +426,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             reset_kb_state();
             return false;
         case KC_HOME:
-        case KC_END:
+        // case KC_END:
         case KC_UP:
         case KC_DOWN:
         case KC_LEFT:
         case KC_RIGHT:
-        // case KC_G:
+        case KC_G:
         case Enter:
         // case Esc:
         // case PgUp:
