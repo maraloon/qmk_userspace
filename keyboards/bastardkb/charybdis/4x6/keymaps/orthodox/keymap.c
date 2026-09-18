@@ -206,7 +206,7 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
     C(Bs), PgDn, _1, _2, _3, G,                      _, _5, _6, _8, _, DDot,
     _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), NUM_LCK_RST, Win, DQuote,
                        Bs, Space, Comma,             Esc, Quote,
-                                   _, _,             End
+                           VOLTR, SCALE,             _
   ),
 
   [SYM] = LAYOUT(
@@ -220,12 +220,12 @@ Grave, Array, array, Bracket, bracket, Plus,         _, At, SYM_LCK_RST, OSL(NUM
 
   [CODE] = LAYOUT(
     _ , _ , _ , _ , _ , _ , _ , _ , Enter , _ , _ , _ ,
-//     []    &&    ||   ""        ()         <<   >>
-    _, cArr, cAND, cOR, cQQ, cBracket,   cBorrow2, cLL, cRR, _, _, _,
-//  //   !=   <=   :=   >=   ''                 ...   ```
+//      &&    ||   ()        ""   []      {\n}      <<   >>
+    _, cAND, cOR, cBracket, cQQ, cArr,   cBorrow2, cLL, cRR, _, _, _,
+//   //   !=   <=  :=    >=  ''         - [ ]    ...   ```
     cCC, cNE, cLE, cDE, cGE, cSS,       cSAA,    cDDD, cCode, _, STRES, _,
-//       --   <-   ==   ->   ++         -[]   { }       {}           <>
-    _,   cMM, cLM, cEE, cMR, cPP,       cSAA, cBorrow2, cBorrow, _, cTag, _,
+//       --   <-   ==   ->   ++          <>    {\n}      {}
+    _,   cMM, cLM, cEE, cMR, cPP,       cTag, cBorrow2, cBorrow, _, _, _,
                _, _, _,   STRES, STRES,
                   _, _,    _
    ),
