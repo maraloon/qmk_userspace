@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [RUS] = LAYOUT(
-    QK_BOOT, RGB_TOG, _, _, _, EE_CLR,               EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
+    QK_BOOT, RGB_TOG, VOLTR, SCALE, _, EE_CLR,       EE_CLR, _, Enter, _, RGB_TOG,  QK_BOOT,
     //     Э      Ц     У       К      Е             Н      Г      Ш      Й      З
     _,     Q,     W,    F,      P,     B,            J,     L,     U,     Y,    rZ,    _,
     //     Щ      Ы      В      А      П             Р      О      Л      Д      Х
