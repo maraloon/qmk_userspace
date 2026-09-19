@@ -206,7 +206,7 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
     C(Bs), PgDn, _1, _2, _3, G,                      _, _5, _6, _8, _, DDot,
     _, Left, Up, Down, _4, Right,                    _, _7, OSL(SYM), NUM_LCK_RST, Win, DQuote,
                        Bs, Space, Comma,             Esc, Quote,
-                           VOLTR, SCALE,             _
+                           VOLTR, SCALE,             End
   ),
 
   [SYM] = LAYOUT(
