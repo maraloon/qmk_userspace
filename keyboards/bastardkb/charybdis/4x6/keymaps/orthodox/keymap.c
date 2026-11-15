@@ -201,12 +201,12 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
   ),
 
   [NUM] = LAYOUT(
-    Hash, Percent,  Slash, _, Unds,  Star,           _, Exlm, Enter, Quest, _, OSL(FN),
+    Hash, Percent, Slash, Unds, Equal, Star,         Tilda, Exlm, Enter, Quest, J, OSL(FN),
     Tab,   PgUp,  _, _0, _4, Dot,                    Minus, _, _9, _, OSL(TMUX), oC,
     C(Bs), PgDn, _1, _2, _3, G,                      _, _5, _6, _8, _, DDot,
     _, Left, Up, Down, Right, _,                     _, _7, OSL(SYM), NUM_LCK_RST, Win, DQuote,
                        Bs, Space, Comma,             Esc, Quote,
-                           VOLTR, SCALE,             End
+                           VOLTR, SCALE,             LANG
   ),
 
   [SYM] = LAYOUT(
@@ -215,7 +215,7 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
 BSlash, Borrow, borrow, Caret, Dollar, DComm,        _, _, _,  _,  _, _,
 Grave, Array, array, Bracket, bracket, Plus,         _, At, SYM_LCK_RST, OSL(NUM), _,  DQuote,
                        Bs, Space, Comma,             Esc, Quote,
-                           VOLTR, SCALE,             _
+                           VOLTR, SCALE,             LANG
   ),
 
   [CODE] = LAYOUT(
