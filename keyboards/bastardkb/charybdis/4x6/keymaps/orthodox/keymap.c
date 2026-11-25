@@ -184,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     Tab,   B,     L,     D,    W,    Dot,            Minus, F,     O,     U,     OSL(TMUX),   oC,
     C(Bs), N,     R,     T,    St,     G,            Y,     H,     A,     E,     I,   DDot,
     Z,     Q,     X,     M,    Ct,     V,            K,     P,  OSL(SYM), MIXED_NUM, Win, DQuote,
-               Bs, LT(NUM, Space), Comma,            LT(SYM, Esc), Quote,
+                        Bs, Space, Comma,            LT(SYM, Esc), Quote,
                              KC_BTN1, oS,            LANG
   ),
 
@@ -204,7 +204,7 @@ CommaS,    N,     R,  KC_S,     T,     G,            M,     A,     E,     I,    
     Hash, Percent, Slash, Unds, Equal, Star,         Tilda, Exlm, Enter, Quest, J, OSL(FN),
     Tab,   PgUp,  _, _0, _4, Dot,                    Minus, _, _9, _, OSL(TMUX), oC,
     C(Bs), PgDn, _1, _2, _3, G,                      _, _5, _6, _8, _, DDot,
-    _, Left, Up, Down, Right, _,                     _, _7, OSL(SYM), NUM_LCK_RST, Win, DQuote,
+    End, Left, Up, Down, Right, _,                   _, _7, OSL(SYM), NUM_LCK_RST, Win, DQuote,
                        Bs, Space, Comma,             Esc, Quote,
                            VOLTR, SCALE,             LANG
   ),
